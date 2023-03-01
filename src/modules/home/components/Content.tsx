@@ -38,7 +38,7 @@ function Content() {
       <div>
           <Image src={Hand} width={60} className="absolute left-[57%] top-[69%]" alt=""/>
         </div>
-       <h1 className='text-4xl font-bold absolute top-[70%] left-[40%] '>Here's how it works</h1>
+       <h1 className='text-4xl font-bold absolute top-[70%] left-[40%] '>Here&apos;s how it works</h1>
       </div> 
     
       </>
