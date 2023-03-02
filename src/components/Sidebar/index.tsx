@@ -32,7 +32,7 @@ const Sidebar = () => {
 
 			<div className="w-full pb-[15px] px-[25px] mt-auto flex items-center justify-between">
 				<button
-					onClick={() => router.replace("/settings")}
+					onClick={() => router.replace("/setting")}
 					className="flex items-start"
 				>
 					<Image
