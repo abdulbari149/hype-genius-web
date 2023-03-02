@@ -1,5 +1,6 @@
 
 import {Header,Content,HowItWorks,Footer} from "@/modules/home"
+import {Login,Signin} from "@/modules/auth"
 import Head from "next/head";
 
 export default function Home() {
@@ -13,11 +14,14 @@ export default function Home() {
 			</Head>
 			<main className="w-screen">
 				<Header/>
-				<Content/>
-				<HowItWorks />
-				<Footer/>
+				 <Content/>
+				<HowItWorks/>
+				<Footer/> 
+				
+				
        
       </main>
+	 
 		</>
 	);
 }
