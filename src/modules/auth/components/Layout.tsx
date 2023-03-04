@@ -18,7 +18,7 @@ const Layout: React.FC<AuthLayoutProps> = ({ title, subTitle, children }) => {
 			style={poppins.style}
 		>
 			<div className="bg-[#EF539E]  w-1/2 h-screen"></div>
-			<div className="bg-[#F2F6FA] flex flex-col py-[50px] items-center gap-5 w-1/2 h-screen ">
+			<div className="bg-[#F2F6FA] flex flex-col py-[50px] items-center gap-5 w-1/2 h-screen justify-center ">
 				<div className="">
 					<Image src={Logo} width={250} alt="logo" />
 				</div>
