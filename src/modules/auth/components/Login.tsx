@@ -4,9 +4,25 @@ import { MdOutlineAlternateEmail } from "react-icons/md";
 import { RiLockPasswordLine } from "react-icons/ri";
 import AuthButton from "./AuthButton";
 import Link from "next/link";
+import { useFormik } from 'formik'
+import { toFormikValidationSchema } from 'zod-formik-adapter'
+import { loginSchema } from "../core/schema";
+import { LoginData } from "../core/types";
 
 interface LoginProps {}
 const Login: React.FC<LoginProps> = () => {
+
+  const formik = useFormik<LoginData>({
+    initialValues: {
+      email: "",
+      password: ""
+    },
+    validationSchema: toFormikValidationSchema(loginSchema),
+    onSubmit(values, formikHelpers) {
+      console.log(values)
+    }
+  })
+
 	return (
 		<>
 			<div className="flex flex-col gap-2">
@@ -17,6 +33,8 @@ const Login: React.FC<LoginProps> = () => {
 					type={"email"}
 					placeholder="Email"
 					icon={<MdOutlineAlternateEmail size={18} />}
+          value={formik.values.email}
+          onChange={formik.handleChange}
 				/>
 				<Field
 					label=""
@@ -25,6 +43,8 @@ const Login: React.FC<LoginProps> = () => {
 					type={"password"}
 					placeholder="Password"
 					icon={<RiLockPasswordLine size={18} />}
+          value={formik.values.password}
+          onChange={formik.handleChange}
 				/>
 			</div>
 			<AuthButton content="Login" />
