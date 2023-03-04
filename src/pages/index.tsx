@@ -11,7 +11,7 @@ export default function Home() {
 			</Head>
 			<main className="grid place-content-center w-screen h-screen">
         <p className="mx-auto text-[100px] text-bold">HypeGenius</p>
-      </main>
+      </main> 
 		</>
 	);
 }
