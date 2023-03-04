@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from "react";
-import Sidebar from "./Sidebar";
+import Sidebar from "../Sidebar";
 
 const DashboardLayout: React.FC<PropsWithChildren> = ({ children }) => {
 	return (

@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import DashboardLayout from "@/components/DashboardLayout";
+import {DashboardLayout} from "@/components/Layout";
 import Head from "next/head";
 
 const InfluencerPage: NextPage = () => {
