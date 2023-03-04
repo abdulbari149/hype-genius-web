@@ -1,6 +1,12 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import { DashboardLayout } from "@/components/Layout";
+import DashboardDatePicker from "@/modules/dashboard/components/DashboardDatePicker";
+import AnalyticsList from "@/modules/dashboard/components/AnalyticsList";
+import AnalyticsTable from "@/modules/dashboard/components/AnalyticsTable";
+import DashboardCharts from "@/modules/dashboard/components/DashboardCharts";
+import UploadsList from "@/modules/dashboard/components/UploadsList";
+import Tag from "@/components/Tag";
 
 const DashboardPage: NextPage = () => {
 	return (
@@ -12,7 +18,20 @@ const DashboardPage: NextPage = () => {
 				<link rel="icon" href={"/hype-genius-logo.png"} />
 			</Head>
 
-			<DashboardLayout></DashboardLayout>
+			<DashboardLayout>
+				<main className="flex flex-row w-full px-4 gap-7 overflow-y-scroll">
+					<div className="flex flex-col max-w-[60%] w-full space-y-[20px]">
+						<DashboardDatePicker />
+						<AnalyticsList />
+						<DashboardCharts />
+						<AnalyticsTable />
+					</div>
+					<div className="flex flex-col items-start gap-2 max-w-[40%] w-full pr-3">
+						<Tag tagType="danger" text="2 Payments Due" />
+						<UploadsList />
+					</div>
+				</main>
+			</DashboardLayout>
 		</>
 	);
 };
