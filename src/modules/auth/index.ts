@@ -1,4 +1,3 @@
-export {default as Layout} from "../auth/components/Layout"
-
-// export {default as Login} from "../auth/components/Login"
-// export {default as Signin} from "../auth/components/signin"
+export { default as BusinessSignup } from "./components/BusinessSignup";
+export { default as ChannelSignup } from "./components/ChannelSignup";
+export { default as Login } from "./components/Login";

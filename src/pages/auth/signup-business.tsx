@@ -1,5 +1,5 @@
-import { Layout } from "@/modules/auth";
-import BusinessSignup from "@/modules/auth/components/BusinessSignup";
+import { AuthLayout } from "@/components/Layout";
+import {BusinessSignup} from "@/modules/auth";
 import type { NextPage } from "next";
 import Head from "next/head";
 
@@ -13,12 +13,12 @@ const SignupBusiness: NextPage = () => {
 				<link rel="icon" href={"/hype-genius-logo.png"} />
 			</Head>
 
-			<Layout
+			<AuthLayout
 				title="Hey! Let's get started"
 				subTitle="Fill out the information below :)"
 			>
 				<BusinessSignup />
-			</Layout>
+			</AuthLayout>
 		</>
 	);
 };

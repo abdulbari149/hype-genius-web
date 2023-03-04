@@ -1,70 +1,125 @@
 import Field from "@/components/Field";
 import React from "react";
+import AuthButton from "./AuthButton";
+import Link from "next/link";
+import { ChannelSignupData } from "../core/types";
+import { channelSignupSchema } from "../core/schema";
+import { useFormik } from "formik";
+import { toFormikValidationSchema } from "zod-formik-adapter";
 
-interface ChannelSignupProps {
-
-}
+interface ChannelSignupProps {}
 
 const ChannelSignup: React.FC<ChannelSignupProps> = () => {
+	const formik = useFormik<ChannelSignupData>({
+		initialValues: {
+			firstName: "",
+			lastName: "",
+			email: "",
+			phoneNumber: "",
+			password: "",
+			passwordAgain: "",
+			channelName: "",
+			channelLink: "",
+		},
+		validationSchema: toFormikValidationSchema(channelSignupSchema),
+		onSubmit(values, formikHelpers) {
+			console.log(values);
+		},
+	});
 	return (
 		<>
 			<div className="grid grid-cols-2 gap-y-7 gap-x-6">
 				<Field
 					label="First Name"
 					type="text"
-					id="first_name"
-					placeholder="Name"
+					id="firstName"
+					placeholder="Elon"
+					value={formik.values.firstName}
+					onChange={formik.handleChange}
 				/>
-				<Field label="Email" type="email" id="email" placeholder="email" />
 
 				<Field
-					label="Password:"
+					label="Last Name"
+					type="text"
+					id="last_name"
+					name="lastName"
+					placeholder="Musk"
+					value={formik.values.lastName}
+					onChange={formik.handleChange}
+				/>
+
+				<Field
+					label="Email"
+					type="email"
+					id="email"
+					name="email"
+					placeholder={"elonmusk@tesla.com"}
+					value={formik.values.email}
+					onChange={formik.handleChange}
+				/>
+
+				<Field
+					label="Phone Number"
+					type="text"
+					id="phone_number"
+					name="phoneNumber"
+					placeholder="123-456-7890"
+					value={formik.values.phoneNumber}
+					onChange={formik.handleChange}
+				/>
+
+				<Field
+					label="Password"
 					type="password"
 					id="password"
 					name="password"
 					placeholder="password"
+					value={formik.values.password}
+					onChange={formik.handleChange}
 				/>
 
 				<Field
-					label="Business Name"
-					type="text"
-					id="business_name"
-					name="business_name"
-					placeholder={"Tesla"}
-				/>
-
-				<Field
-					label="First Name"
-					type="text"
-					id="first_name"
-					placeholder="Name"
-				/>
-				<Field label="Email" type="email" id="email" placeholder="email" />
-
-				<Field
-					label="Password:"
+					label="Password Again"
 					type="password"
-					id="password"
-					name="password"
+					id="passwordAgain"
+					name="passwordAgain"
 					placeholder="password"
-          containerClassName="col-span-2"
+					value={formik.values.passwordAgain}
+					onChange={formik.handleChange}
 				/>
 				<Field
-					label="Business Name"
+					label="Channel Name"
 					type="text"
-					id="business_name"
-					name="business_name"
-					placeholder={"Tesla"}
-          containerClassName="max-w-[500px] w-full col-span-2"
+					id="channelName"
+					name="channelName"
+					placeholder="Mr.Beast"
+					containerClassName="col-span-2"
+					value={formik.values.channelName}
+					onChange={formik.handleChange}
+				/>
+
+				<Field
+					label="Channel Link"
+					type="text"
+					id="channelLink"
+					name="channelLink"
+					placeholder={"youtube.com/fgdhersdq"}
+					value={formik.values.channelLink}
+					onChange={formik.handleChange}
+					containerClassName="max-w-[520px] w-full col-span-2"
 				/>
 			</div>
 
-			<button className=" mt-[25px] font-bold text-white w-[120px] h-[50px] text-lg bg-pink-500  rounded-xl py-1 pr-1">
-				Signup
-			</button>
+			<AuthButton content="Signup" />
+
 			<p className="text-lg">
-				Already have an account?{" "}
-				<span className="text-pink-600 text-lg font-bold">Sign In</span>
+				Already have an account?
+				<Link
+					href={"/auth/login"}
+					className="pl-1 text-pink-600 text-lg font-bold cursor-pointer"
+				>
+					Sign In
+				</Link>
 			</p>
 		</>
 	);

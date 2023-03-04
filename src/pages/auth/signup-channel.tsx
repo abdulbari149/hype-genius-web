@@ -1,7 +1,14 @@
-import { Layout } from "@/modules/auth";
-import ChannelSignup from "@/modules/auth/components/ChannelSignup";
+import { AuthLayout } from "@/components/Layout";
+import { ChannelSignup } from "@/modules/auth";
 import type { NextPage } from "next";
 import Head from "next/head";
+
+const title = (
+	<>
+		Join <span className="text-[#EF539E]">TraderEdge&apos;s</span> Partner
+		Program!
+	</>
+);
 
 const SignupChanel: NextPage = () => {
 	return (
@@ -12,17 +19,9 @@ const SignupChanel: NextPage = () => {
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<link rel="icon" href={"/hype-genius-logo.png"} />
 			</Head>
-			<Layout
-				title={
-					<>
-						Join <span className="text-[#EF539E]">TraderEdge&apos;s</span>{" "}
-						Partner Program!
-					</>
-				}
-				subTitle="Fill out the information below :)"
-			>
+			<AuthLayout title={title} subTitle={`Fill out the information below :)`}>
 				<ChannelSignup />
-			</Layout>
+			</AuthLayout>
 		</>
 	);
 };
