@@ -1,8 +1,14 @@
+import React from "react";
 import { DashboardLayout } from "@/components/Layout";
 import type { NextPage } from "next";
 import Head from "next/head";
-
-const ReportPage: NextPage = () => {
+import {
+	SettingsOnboarding,
+	CustomerSettings,
+	BillingsSettings,
+} from "@/modules/settings";
+import AccountSettings from "@/modules/settings/components/AccountSettings";
+const SettingsPage: NextPage = () => {
 	return (
 		<>
 			<Head>
@@ -13,10 +19,14 @@ const ReportPage: NextPage = () => {
 			</Head>
 
 			<DashboardLayout>
-				<div></div>
+				<div className="grid mt-3 grid-cols-[1.5fr_1fr_1fr] grid-rows-[170px_280px_170px] gap-5 w-full grid-flow-col-dense">
+					<CustomerSettings />
+					<AccountSettings />
+					<BillingsSettings />
+					<SettingsOnboarding />
+				</div>
 			</DashboardLayout>
 		</>
 	);
 };
-
-export default ReportPage;
+export default SettingsPage;

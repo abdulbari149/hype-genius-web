@@ -4,10 +4,11 @@ import { MdOutlineAlternateEmail } from "react-icons/md";
 import { RiLockPasswordLine } from "react-icons/ri";
 import AuthButton from "./AuthButton";
 import Link from "next/link";
-import { useFormik } from 'formik'
+import { useFormik } from "formik"
 import { toFormikValidationSchema } from 'zod-formik-adapter'
 import { loginSchema } from "../core/schema";
 import { LoginData } from "../core/types";
+
 
 interface LoginProps {}
 const Login: React.FC<LoginProps> = () => {

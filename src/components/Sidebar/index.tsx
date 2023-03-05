@@ -30,10 +30,12 @@ const Sidebar = () => {
 				text="Reports"
 			/>
 
-			<div className="w-full pb-[15px] px-[25px] mt-auto flex items-center justify-between">
+			<div className="w-full pb-[10px] pl-[16px] pr-[25px] mt-auto flex items-center justify-between">
 				<button
-					onClick={() => router.replace("/setting")}
-					className="flex items-start"
+					onClick={() => router.replace("/settings")}
+					className={`flex items-start  px-4 py-3 rounded-xl ${
+						router.route.startsWith("/settings") ? "bg-[#EEF2F7]" : ""
+					}`}
 				>
 					<Image
 						src={require("@/assets/icons/setting-icon.png")}
