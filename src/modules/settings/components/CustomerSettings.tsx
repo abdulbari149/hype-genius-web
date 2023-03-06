@@ -36,7 +36,7 @@ const CustomerSettings: React.FC<{}> = () => {
 				<p className="px-9 py-4 font-normal">
 					Customer LTV(used to track ROAS)
 				</p>
-				<div className="flex items-center max-w-[150px] w-full gap-2 justify-center px-3 py-2  w-[110px] rounded-xl h-fit bg-[#EAEEF3] ">
+				<div className="flex items-center max-w-[150px]  gap-2 justify-center px-3 py-2  w-[110px] rounded-xl h-fit bg-[#EAEEF3] ">
 					<span className="">$</span>
 					<input
 						placeholder="enter here"

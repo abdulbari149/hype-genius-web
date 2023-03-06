@@ -4,7 +4,7 @@ interface SubscriptionBillingProps {}
 const SubscriptionBilling: React.FC<SubscriptionBillingProps> = () => {
 	return (
 		<div
-			className="bg-[#FFFFFF]/50 shadow-xl rounded-lg px-3 py-[40px] flex flex-col px-9 gap-2"
+			className="bg-[#FFFFFF]/50 shadow-xl rounded-lg py-[40px] flex flex-col px-9 gap-2"
 			style={{
 				boxShadow:
 					"0px 4px 103px rgba(50, 50, 71, 0.01), 0px 4px 59px rgba(50, 50, 71, 0.06)",

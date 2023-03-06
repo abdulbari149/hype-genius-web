@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import { DashboardLayout } from "@/components/Layout";
+import EditInfluencerModal from "@/modules/modal/EditInfluencerModal";
 
 const DashboardPage: NextPage = () => {
 	return (
@@ -12,7 +13,9 @@ const DashboardPage: NextPage = () => {
 				<link rel="icon" href={"/hype-genius-logo.png"} />
 			</Head>
 
-			<DashboardLayout></DashboardLayout>
+			{/* <DashboardLayout></DashboardLayout> */}
+			{/* For Checking Purpose */}
+			<EditInfluencerModal/>
 		</>
 	);
 };
