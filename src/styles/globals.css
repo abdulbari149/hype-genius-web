@@ -7,3 +7,22 @@
   padding: 0;
   box-sizing: border-box;
 }
+
+#influencer-wrapper::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+#influencer-wrapper::-webkit-scrollbar-track {
+  background: #afafaf;
+  
+}
+/* Handle */
+#influencer-wrapper::-webkit-scrollbar-thumb {
+  background: #f1efef;
+}
+
+/* Handle on hover */
+#influencer-wrapper::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

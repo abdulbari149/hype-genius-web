@@ -2,7 +2,7 @@ import React from "react";
 import greenEllipse from "@/assets/icons/greenEllipse.png";
 import tick from "@/assets/icons/tick.png";
 import Image from "next/image";
-import InvoiceStatus from "./InvoiceStatus";
+import PaymentStatus from "./PaymentStatus";
 
 const invoiceDates = ["June 29th, 2022", "June 29th, 2022"];
 
@@ -20,27 +20,27 @@ const InvoiceHistory = () => {
 				<div className="flex flex-col mt-[15px] gap-3">
 					<div className="flex flex-row items-center max-w-[50%] justify-between">
 						<p>June 29th, 2022</p>
-						<InvoiceStatus />
+						<PaymentStatus />
 					</div>
 					<div className="flex flex-row items-center max-w-[50%] justify-between">
 						<p>June 29th, 2022</p>
-						<InvoiceStatus />
+						<PaymentStatus />
 					</div>
           <div className="flex flex-row items-center max-w-[50%] justify-between">
 						<p>June 29th, 2022</p>
-						<InvoiceStatus />
+						<PaymentStatus />
 					</div>
           <div className="flex flex-row items-center max-w-[50%] justify-between">
 						<p>June 29th, 2022</p>
-						<InvoiceStatus />
+						<PaymentStatus />
 					</div>
           <div className="flex flex-row items-center max-w-[50%] justify-between">
 						<p>June 29th, 2022</p>
-						<InvoiceStatus />
+						<PaymentStatus />
 					</div>
           <div className="flex flex-row items-center max-w-[50%] justify-between">
 						<p>June 29th, 2022</p>
-						<InvoiceStatus />
+						<PaymentStatus />
 					</div>
 				</div>
 			</div>
