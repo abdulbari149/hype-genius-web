@@ -52,7 +52,7 @@ const Uploads = () => {
 	return (
 		<div className="flex flex-col w-full">
 			<div className="flex items-center gap-2 mb-[3px]">
-				<p className="text-[18px] text-[#272830] font-600">Uploads</p>
+				<p className="text-[18px] text-[#272830] font-[600]">Uploads</p>
 				<DateSelector />
 			</div>
 			<span className="inline-block w-full opacity-50 bg-stone-400 h-[2px]"></span>

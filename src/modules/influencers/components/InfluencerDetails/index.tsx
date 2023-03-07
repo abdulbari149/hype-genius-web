@@ -36,7 +36,7 @@ const InfluencersDetail: React.FC<InfluencerDetailProps> = ({
 		>
 			<Close onClose={() => setSelectedInfluencer(null)} />
 
-			<div className="flex flex-col items-center h-full gap-6 px-[45px] mt-[50px] mb-[90px] overflow-y-scroll" id="influencer-wrapper">
+			<div className="flex flex-col items-center h-full gap-6 px-[45px] mt-[50px] mb-[90px] overflow-y-scroll custom-scroll">
 				<Header influencer={influencer} />
 				<FollowUp />
 				<Channel />

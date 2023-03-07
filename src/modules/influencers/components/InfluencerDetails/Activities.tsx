@@ -38,7 +38,7 @@ const Activities = () => {
 	const sortedNotes = notes.sort((a, b) => Number(b.pinned) - Number(a.pinned));
 	return (
 		<div className="flex flex-col w-full">
-			<p className="text-[18px] text-[#272830] font-600">Activities</p>
+			<p className="text-[18px] text-[#272830] font-[600]">Activities</p>
 			<span className="inline-block w-full opacity-50 bg-stone-400 h-[2px]"></span>
 			<div className="flex items-center justify-between my-2">
 				<button

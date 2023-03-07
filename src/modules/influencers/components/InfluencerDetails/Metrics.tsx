@@ -6,7 +6,7 @@ const Metrics = () => {
 	return (
 		<div className="flex flex-col w-full">
 			<div className="flex items-center gap-2 mb-[3px]">
-				<p className="text-[18px] text-[#272830] font-600">Metrics</p>
+				<p className="text-[18px] text-[#272830] font-[600]">Metrics</p>
 
 				<DateSelector />
 
