@@ -1,4 +1,5 @@
 import { DashboardLayout } from "@/components/Layout";
+import { ReportsHeader, ReportsTable } from "@/modules/reports";
 import type { NextPage } from "next";
 import Head from "next/head";
 
@@ -13,7 +14,10 @@ const ReportPage: NextPage = () => {
 			</Head>
 
 			<DashboardLayout>
-				<div></div>
+				<div className="flex flex-col w-full overflow-hidden my-[20px] mx-[10px] w-full gap-4">
+					<ReportsHeader />
+					<ReportsTable />
+				</div>
 			</DashboardLayout>
 		</>
 	);

@@ -8,21 +8,21 @@
   box-sizing: border-box;
 }
 
-#influencer-wrapper::-webkit-scrollbar {
+.custom-scroll::-webkit-scrollbar {
   width: 5px;
 }
 
 /* Track */
-#influencer-wrapper::-webkit-scrollbar-track {
+.custom-scroll::-webkit-scrollbar-track {
   background: #afafaf;
   
 }
 /* Handle */
-#influencer-wrapper::-webkit-scrollbar-thumb {
+.custom-scroll::-webkit-scrollbar-thumb {
   background: #f1efef;
 }
 
 /* Handle on hover */
-#influencer-wrapper::-webkit-scrollbar-thumb:hover {
+.custom-scroll::-webkit-scrollbar-thumb:hover {
   background: #555;
 }

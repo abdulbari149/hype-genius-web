@@ -6,7 +6,7 @@ const Header: React.FC<{ influencer: InfluencerData }> = ({ influencer }) => {
 	return (
 		<div className="flex flex-row justify-between w-full">
 			<div className="">
-				<p className="text-[18px] text-[#272830] font-600">Joe Rogan</p>
+				<p className="text-[18px] text-[#272830] font-[600]">Joe Rogan</p>
 				<p className="text-[#697AFF] text-[15px]">joerogan@gmail.com</p>
 				<p className="text-[15px] font-normal">514-333-1789</p>
 			</div>

@@ -11,7 +11,7 @@ const FollowUp = () => {
 			className="relative py-[20px] rounded-xl flex flex-col justify-center items-center max-w-[340px] w-full"
 			style={{ backgroundColor: "#ECF0F4" }}
 		>
-			<h3 className="text-[18px] text-[#272830] py-1 font-600 text-center">Follow Up</h3>
+			<h3 className="text-[18px] text-[#272830] py-1 font-[600] text-center">Follow Up</h3>
 			<div className="flex flex-row w-full pl-[15px] pr-[30px] gap-2 items-center">
 				<div className="flex flex-row items-center gap-1">
 					<div className="">
