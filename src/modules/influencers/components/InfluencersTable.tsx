@@ -12,12 +12,12 @@ export const influencersData: InfluencerData[] = [
 	{
 		id: 1,
 		influencer: { name: "Mr Beast", circle: true, circleColor: "#F3EA02" },
-		tags: [{ title: "Partner", color: "#7187FB80" }],
+		tags: [{ text: "Partner", color: "#7187FB80" }],
 		currentDeal: {
 			perVideo: "100",
 			perMonth: "4x",
 		},
-		alert: { title: "Payment Due", color: "#FFDE2E80" },
+		alert: { text: "Payment Due", color: "#FFDE2E80" },
 		paymentStatus: "unpaid",
 	},
 
@@ -25,41 +25,41 @@ export const influencersData: InfluencerData[] = [
 		id: 2,
 		influencer: { name: "PewDiepie", circle: false },
 		tags: [
-			{ title: "Emailed", color: "#FFDE2E80" },
-			{ title: "Onboarding", color: "#2EFF6880" },
+			{ text: "Emailed", color: "#FFDE2E80" },
+			{ text: "Onboarding", color: "#2EFF6880" },
 		],
-		alert: { title: "Follow - Up", color: "#ABABAB80" },
+		alert: { text: "Follow - Up", color: "#ABABAB80" },
 		paymentStatus: "paid",
 	},
 
 	{
 		id: 3,
 		influencer: { name: "Joe Rogan", circle: true, circleColor: "#F3EA02" },
-		tags: [{ title: "Partner", color: "#7187FB80" }],
+		tags: [{ text: "Partner", color: "#7187FB80" }],
 		currentDeal: {
 			perVideo: "100",
 			perMonth: "4x",
 		},
-		alert: { title: "New Video", color: "#A4F2FD" },
+		alert: { text: "New Video", color: "#A4F2FD" },
 		paymentStatus: "paid",
 	},
 
 	{
 		id: 4,
 		influencer: { name: "Danny Duncan", circle: false },
-		tags: [{ title: "Lost Partner", color: "#FF2E2E80" }],
-		alert: { title: "Follow - Up", color: "#ABABAB80" },
+		tags: [{ text: "Lost Partner", color: "#FF2E2E80" }],
+		alert: { text: "Follow - Up", color: "#ABABAB80" },
 		paymentStatus: "paid",
 	},
 	{
 		id: 5,
 		influencer: { name: "Matt D'Avella", circle: true, circleColor: "#CC7321" },
-		tags: [{ title: "Partner", color: "#7187FB80" }],
+		tags: [{ text: "Partner", color: "#7187FB80" }],
 		currentDeal: {
 			perVideo: "100",
 			perMonth: "4x",
 		},
-		alert: { title: "Upload Frequency", color: "#FB2EFF80" },
+		alert: { text: "Upload Frequency", color: "#FB2EFF80" },
 		paymentStatus: "paid",
 	},
 ];
@@ -80,7 +80,7 @@ const InfluencersTable: React.FC<InfluencersTableProps> = ({
 
 	return (
 		<div
-			className={`h-screen w-full flex flex-col w-full ${selectedInfluencer === null ? `col-span-full` : `col-span-5`}`}
+			className={`h-screen w-full flex flex-col w-full overflow-hidden ${selectedInfluencer === null ? `col-span-full` : `col-span-5`}`}
 		>
 			<select
 				className="pl-3 pr-8 py-2 mt-5 w-fit text-[#272830] text-[14px] font-normal bg-[#F8FAFC] rounded-xl"
@@ -103,7 +103,7 @@ const InfluencersTable: React.FC<InfluencersTableProps> = ({
 				<option>Tags</option>
 				<option>ROAS</option>
 			</select>
-			<div className="w-full overflow-y-scroll">
+			<div className="w-full overflow-y-scroll custom-scroll px-[10px]">
 				<table
 					{...getTableProps()}
 					className="w-full border-separate border-spacing-y-4"
@@ -195,7 +195,7 @@ const InfluencersTable: React.FC<InfluencersTableProps> = ({
 					</tbody>
 				</table>
 			</div>
-			<div className="flex items-center gap-4 ml-auto">
+			<div className="flex items-center gap-4 min-h-[50px] mb-[15px] mr-[10px] ml-auto">
 				<p>Pages</p>
 
 				{Array(3)

@@ -44,7 +44,7 @@ export const columns: Readonly<Array<Column<InfluencerData>>> = [
 			return (
 				<div className="flex flex-row items-center gap-2">
 					{props.data[props.row.index].tags.map((tag) => (
-						<Tag {...tag} key={tag.title} />
+						<Tag {...tag} key={tag.text} />
 					))}
 				</div>
 			);
@@ -92,7 +92,7 @@ export const columns: Readonly<Array<Column<InfluencerData>>> = [
 			<div className="flex items-center justify-end pr-4">
 				<Tag
 					color={props.data[props.row.index].alert.color}
-					title={props.data[props.row.index].alert.title}
+					text={props.data[props.row.index].alert.text}
 				/>
 			</div>
 		),

@@ -2,7 +2,6 @@ import Card from "@/components/Card";
 import React from "react";
 import { influencersData } from "../InfluencersTable";
 import Close from "@/components/Close";
-import Tag from "@/components/Tag";
 import FollowUp from "./FollowUp";
 import Header from "./Header";
 import Channel from "./Channel";

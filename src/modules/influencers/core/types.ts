@@ -1,7 +1,7 @@
 import { PaymentStatusType } from "@/modules/settings/components/PaymentStatus";
 
 export type TagType = {
-	title: string;
+	text: string;
 	color: string;
 };
 

@@ -12,7 +12,7 @@ const Header: React.FC<{ influencer: InfluencerData }> = ({ influencer }) => {
 			</div>
 
 			<div className="space-y-2">
-				<Tag title="Partner" color="#7187FB80" />
+				<Tag text="Partner" color="#7187FB80" className="px-2 ml-auto w-fit" />
 
 				<div className="flex items-center gap-3">
 					<div className="">
