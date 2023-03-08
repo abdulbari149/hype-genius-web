@@ -1,5 +1,5 @@
 import React from "react";
-import DateSelector from "./DateSelector";
+import Selector from "@/components/Selector";
 
 const uploads = [
 	{
@@ -53,8 +53,11 @@ const Uploads = () => {
 		<div className="flex flex-col w-full">
 			<div className="flex items-center gap-2 mb-[3px]">
 				<p className="text-[18px] text-[#272830] font-[600]">Uploads</p>
-				<DateSelector />
-			</div>
+				<Selector
+					type="time"
+					customClassName="bg-[#ECF0F4] pr-5 pl-3 mb-1 py-2 rounded-xl text-[13px]"
+					style={{ backgroundPosition: "calc(100% - 8px) center" }}
+				/>			</div>
 			<span className="inline-block w-full opacity-50 bg-stone-400 h-[2px]"></span>
 
 			<div className="flex flex-col gap-1 mt-[10px]">

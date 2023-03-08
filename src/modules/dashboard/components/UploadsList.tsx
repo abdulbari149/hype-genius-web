@@ -10,7 +10,7 @@ const inter = Inter({
 
 const UploadColumn = () => {
 	return (
-		<div className="gap-5 flex items-center h-max mb-6">
+		<div className="flex items-center gap-5 mb-6 h-max">
 			<div className="flex flex-col max-w-[70%] w-full">
 				<p className="text-[#344054] text-[15px]" style={inter.style}>
 					Joe Rogan
@@ -26,17 +26,17 @@ const UploadColumn = () => {
 	);
 };
 
-const data = Array(20).fill(0);
+const data = Array(20).fill(0).map((_, i) => i + 1);
 const UploadsList = () => {
 	return (
-		<Card className="flex-1 py-[25px] pl-[50px] w-full rounded-[15px]">
-			<div className="gap-5 flex items-start mb-7">
+		<Card className="flex-1 py-[25px] pl-[50px] w-full h-full overflow-y-scroll custom-scroll rounded-[15px]">
+			<div className="flex items-start gap-5 mb-7">
 				<p className="max-w-[70%] w-full text-[17px]">Uploads</p>
 				<p className="max-w-[30%] w-full text-[17px]">Views</p>
 			</div>
-      {
+      {	
         data.map((item, idx) => {
-          return <UploadColumn key={idx} />
+          return <UploadColumn key={item} />
         })
       }
 		</Card>

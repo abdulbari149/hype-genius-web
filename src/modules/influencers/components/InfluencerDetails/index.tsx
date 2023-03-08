@@ -50,7 +50,7 @@ const InfluencersDetail: React.FC<InfluencerDetailProps> = ({
 				className="bg-[#F8FAFC] absolute bottom-5 inline-block w-full h-[120px]"
 				style={{ filter: "blur(10px)" }}
 			></span>
-			<button className="px-3 py-2 text-white bg-[#EF539E] absolute bottom-2 rounded-xl">
+			<button className="px-3 py-2 text-white bg-[#EF539E] absolute bottom-8 rounded-xl">
 				Edit Info
 			</button>
 		</Card>

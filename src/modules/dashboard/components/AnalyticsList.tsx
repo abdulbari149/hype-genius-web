@@ -3,7 +3,7 @@ import AnalyticsCard from "./AnalyticsCard";
 
 const AnalyticsList = () => {
 	return (
-		<div className="flex justify-between h-[90px]">
+		<div className="flex flex-row flex-wrap h-max mb-[20px] flex-shrink gap-y-2 gap-x-3">
 			<AnalyticsCard
 				icon={require("@/assets/icons/3-User.png")}
 				title="Active Partners"
@@ -18,7 +18,6 @@ const AnalyticsList = () => {
 				value={"167,000"}
 				variation={true}
 				changeInPercent={8}
-        containerClassName="space-x-[20px]"
       />
 
 			<AnalyticsCard
@@ -27,7 +26,6 @@ const AnalyticsList = () => {
 				value={"$6,389"}
 				variation={true}
 				changeInPercent={16}
-        containerClassName="space-x-[10px]"
 			/>
 			<AnalyticsCard
 				icon={require("@/assets/icons/profit-icon.png")}
@@ -35,7 +33,6 @@ const AnalyticsList = () => {
 				value={"7.3"}
 				variation={false}
 				changeInPercent={8}
-        containerClassName="space-x-[1px]"
 			/>
 		</div>
 	);

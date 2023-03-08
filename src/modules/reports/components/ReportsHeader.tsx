@@ -1,5 +1,14 @@
 import React from "react";
-import DateSelector from "./DateSelector";
+import Selector, { type Option } from "@/components/Selector";
+
+const options = (defaultOptions: Array<Option>) => [
+	{
+		id: 5,
+		value: "full-reports",
+		label: "Full Report",
+	},
+	...defaultOptions,
+];
 
 const ReportsHeader = () => {
 	return (
@@ -9,9 +18,9 @@ const ReportsHeader = () => {
 			</h1>
 			<div className="flex items-center gap-3">
 				<p className="text-[15px] font-light">I would like to view</p>
-				<DateSelector />
+				<Selector type="time" options={options} />
 				<p className="text-[15px] font-light">From</p>
-				<DateSelector />
+				<Selector type="time" options={options} />
 				<button className="text-white bg-[#EF539E] px-3 py-2 shadow-lg rounded-lg text-[13px] ml-3">
 					Export
 				</button>
