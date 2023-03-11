@@ -3,6 +3,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const Header: React.FC = () => {
+
 	return (
 		<header className="bg-[#F2F6FA] flex flex-row pt-[5rem] px-[12rem] overflow-x-hidden min-h-[10vh] justify-between">
 			<div className="h-[80px] object-contain">
