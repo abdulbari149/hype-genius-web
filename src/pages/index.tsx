@@ -10,7 +10,7 @@ export default function Home() {
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<link rel="icon" href="/hype-genius-logo.png" />
 			</Head>
-			<main className="w-screen">
+			<main className="w-full overflow-x-hidden max-w-screen">
 				<Header />
 				<Content />
 				<HowItWorks />
