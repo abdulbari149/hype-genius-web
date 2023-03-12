@@ -17,7 +17,6 @@
     "formik": "^2.2.9",
     "next": "13.2.1",
     "react": "18.2.0",
-    "react-content-loader": "^6.2.0",
     "react-dom": "18.2.0",
     "react-icons": "^4.8.0",
     "react-select": "^5.7.0",
@@ -27,7 +26,6 @@
     "zod-formik-adapter": "^1.2.0"
   },
   "devDependencies": {
-    "@types/react-content-loader": "^4.0.0",
     "@types/react-table": "^7.7.14",
     "autoprefixer": "^10.4.13",
     "postcss": "^8.4.21",
