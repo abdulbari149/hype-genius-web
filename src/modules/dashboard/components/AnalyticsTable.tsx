@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
 import { useTable } from "react-table";
-import { columns as analyticsColumns } from "../core/columns";
+import { columns as analyticsColumns } from "../core/analytics";
 import { AnalyticsDataType } from "../core/type";
 import Card from "@/components/Card";
 

@@ -23,6 +23,7 @@ const Activities = () => {
 		pinned: false,
 		note: "",
 	});
+	
 	const addNote = () => {
 		setNotes((prevNotes) => [
 			...prevNotes,

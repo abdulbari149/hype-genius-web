@@ -8,7 +8,7 @@ import DashboardCharts from "@/modules/dashboard/components/DashboardCharts";
 import UploadsList from "@/modules/dashboard/components/UploadsList";
 import Tag from "@/components/Tag";
 
-const DashboardPage: NextPage = () => {
+const BusinessDashboardPage: NextPage = () => {
 	return (
 		<>
 			<Head>
@@ -36,4 +36,4 @@ const DashboardPage: NextPage = () => {
 	);
 };
 
-export default DashboardPage;
+export default BusinessDashboardPage;
