@@ -9,6 +9,7 @@ import {
 } from "@/modules/settings";
 import AccountSettings from "@/modules/settings/components/AccountSettings";
 const SettingsPage: NextPage = () => {
+
 	return (
 		<>
 			<Head>

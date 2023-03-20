@@ -2,7 +2,7 @@ import Image, { ImageProps } from "next/image";
 import React from "react";
 import { useRouter } from "next/router";
 
-interface SidebarItemProps {
+export interface SidebarItemProps {
 	href: string;
 	text: string;
 	icon: ImageProps["src"];

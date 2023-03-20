@@ -1,4 +1,4 @@
-import type { NextPage } from "next";
+import type { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
 import { DashboardLayout } from "@/components/Layout";
 import DashboardDatePicker from "@/modules/dashboard/components/DashboardDatePicker";
@@ -7,7 +7,6 @@ import AnalyticsTable from "@/modules/dashboard/components/AnalyticsTable";
 import DashboardCharts from "@/modules/dashboard/components/DashboardCharts";
 import UploadsList from "@/modules/dashboard/components/UploadsList";
 import Tag from "@/components/Tag";
-
 const BusinessDashboardPage: NextPage = () => {
 	return (
 		<>
@@ -37,3 +36,42 @@ const BusinessDashboardPage: NextPage = () => {
 };
 
 export default BusinessDashboardPage;
+
+// const getInitialProps =
+// 	(store: AppStore) =>
+// 	async ({ req, res }: NextPageContext) => {
+	
+// 		const cookie = req ? req?.headers.cookie : {};
+// 		if (!cookie && res) {
+// 			res.writeHead()
+// 		}
+// 		const parsedCookie = parseCookie(cookie) as unknown as {
+// 			"refresh-token"?: string;
+// 		};
+// 		const refreshToken = parsedCookie["refresh-token"];
+// 		if (!refreshToken) {
+// 			return {
+// 				redirect: {
+// 					destination: "/auth/login",
+// 					permanent: true,
+// 				},
+// 			};
+// 		}
+// 		try {
+// 			const { data } = await AuthApi.refreshToken(refreshToken);
+// 			store.dispatch(setAccessToken({ token: data.access_token }));
+// 			return {
+// 				props: {},
+// 			};
+// 		} catch (error) {
+// 			return {
+// 				redirect: {
+// 					destination: "/auth/login",
+// 					permanent: true,
+// 				},
+// 			};
+// 		}
+// 	};
+
+// BusinessDashboardPage.getInitialProps =
+// 	wrapper.getInitialPageProps(getInitialProps);

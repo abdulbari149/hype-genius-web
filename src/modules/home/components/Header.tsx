@@ -3,7 +3,6 @@ import Image from "next/image";
 import Link from "next/link";
 
 const Header: React.FC = () => {
-
 	return (
 		<header className="bg-[#F2F6FA] flex flex-row pt-[5rem] px-[12rem] overflow-x-hidden min-h-[10vh] justify-between">
 			<div className="h-[80px] object-contain">
@@ -29,7 +28,7 @@ const Header: React.FC = () => {
 						<Link href={"/"}>Contact us</Link>
 					</li>
 					<li className="font-bold cursor-pointer">
-						<Link href={"/auth/signup-business"}>Sign in</Link>
+						<Link href={"/auth/signup/business"}>Sign in</Link>
 					</li>
 					<button className="font-bold  bg-[#EF539E] px-4 py-2 text-[#F2F6FA] rounded-2xl hover:bg-pink-400">
 						Get Started

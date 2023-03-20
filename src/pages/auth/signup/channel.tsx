@@ -1,6 +1,6 @@
 import { AuthLayout } from "@/components/Layout";
 import { ChannelSignup } from "@/modules/auth";
-import type { NextPage } from "next";
+import type { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
 
 const title = (
@@ -10,7 +10,7 @@ const title = (
 	</>
 );
 
-const SignupChanel: NextPage = () => {
+const SignupChannel: NextPage<{ token: string }> = ({ token }) => {
 	return (
 		<>
 			<Head>
@@ -20,10 +20,24 @@ const SignupChanel: NextPage = () => {
 				<link rel="icon" href={"/hype-genius-logo.png"} />
 			</Head>
 			<AuthLayout title={title} subTitle={`Fill out the information below :)`}>
-				<ChannelSignup />
+				<ChannelSignup token={token} />
 			</AuthLayout>
 		</>
 	);
 };
 
-export default SignupChanel;
+export const getServerSideProps: GetServerSideProps = async ({
+	req,
+	query,
+}) => {
+	const token = query.token as string;
+	if (!token)
+		return {
+			redirect: { destination: "/", permanent: true },
+		};
+	return {
+		props: { token },
+	};
+};
+
+export default SignupChannel;

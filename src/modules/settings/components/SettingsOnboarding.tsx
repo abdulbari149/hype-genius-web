@@ -1,6 +1,9 @@
 import React from "react";
+import { useMyBusiness } from "../hooks/useMyBusiness";
 
-const SettingsOnboarding = () => {
+const SettingsOnboarding: React.FC = () => {
+	const data = useMyBusiness();
+
 	return (
 		<div
 			className="flex bg-[#FFFFFF]/50 rounded-lg w-full h-[120px] shadow-xl px-9 py-6"
@@ -13,7 +16,7 @@ const SettingsOnboarding = () => {
 				<p className="font-semibold ">Onboarding Link</p>
 				<div className="flex gap-3 mt-4">
 					<p className="text-[#5C6FFF] w-fit cursor-pointer">
-						hypegenius.com/businessnamehere
+						{data?.data.onboardingLink}
 					</p>
 					<button className="bg-[#EF539E] w-[60px] h-[31px] rounded-xl px-2 text-white ml-4 ">
 						Copy

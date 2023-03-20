@@ -5,7 +5,7 @@ export const loginSchema = z.object({
 	password: z.string(),
 });
 
-const signupSchema = z.object({
+export const signupSchema = z.object({
 	email: z.string(),
 	password: z.string(),
 	passwordAgain: z.string(),
@@ -23,3 +23,4 @@ export const channelSignupSchema = signupSchema.extend({
 	channelName: z.string(),
 	channelLink: z.string(),
 });
+

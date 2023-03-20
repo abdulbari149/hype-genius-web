@@ -1,5 +1,4 @@
 import Card from "@/components/Card";
-import Field from "@/components/Field";
 import React from "react";
 
 const AccountSettings = () => {
