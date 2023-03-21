@@ -10,4 +10,12 @@ export class BusinessApi {
 		});
 		return result.data;
 	}
+
+	static async getAllBusiness(): Promise<Response<IBusiness[]>> {
+		const token = getAccessToken();
+		const result = await api.get("/business", {
+			headers: { Authorization: `Bearer ${token}` },
+		});
+		return result.data;
+	}
 }

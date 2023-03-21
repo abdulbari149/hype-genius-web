@@ -16,8 +16,6 @@ export type IBase = {
 	createdAt: Date | null;
 	updatedAt: Date | null;
 	deletedAt: Date | null;
-	createdBy: number | null;
-	updatedBy: number | null;
 };
 
 export type RoleType = "business_admin" | "influencer" | "superadmin";
@@ -38,7 +36,7 @@ export type IChannel = {
 	name: string;
 	link: string;
 	influencer_id: number;
-} & IBase
+} & IBase;
 
 export interface BusinessSignupApiData {
 	user: IUser;

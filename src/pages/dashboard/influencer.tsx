@@ -1,16 +1,11 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import { DashboardLayout } from "@/components/Layout";
-import DashboardDatePicker from "@/modules/dashboard/components/DashboardDatePicker";
-import AnalyticsList from "@/modules/dashboard/components/AnalyticsList";
-import AnalyticsTable from "@/modules/dashboard/components/AnalyticsTable";
-import DashboardCharts from "@/modules/dashboard/components/DashboardCharts";
-import UploadsList from "@/modules/dashboard/components/UploadsList";
-import Tag from "@/components/Tag";
-import VideoDetails from "@/modules/dashboard/components/VideoDetails";
-import { AiOutlinePlus } from "react-icons/ai";
-import VideosTable from "@/modules/dashboard/components/VideosTable";
+import { Influencer } from "@/modules/dashboard";
+
 const InfluencerDashboardPage: NextPage = () => {
+
+
 	return (
 		<>
 			<Head>
@@ -21,31 +16,7 @@ const InfluencerDashboardPage: NextPage = () => {
 			</Head>
 
 			<DashboardLayout>
-				<main className="flex flex-row w-full px-4 overflow-y-hidden gap-7">
-					<div className="flex flex-col max-w-[60%] w-full mt-[10px] space-y-[20px]">
-						<div className="flex items-center justify-between">
-							<button className="px-3 py-2 flex h-fit items-center text-[13px] w-fit text-white bg-[#EF539E] rounded-xl">
-								<AiOutlinePlus size={15} />
-								New Upload
-							</button>
-							<DashboardDatePicker />
-						</div>
-						<VideosTable />
-						<div
-							className="w-full px-2 py-2 space-y-1"
-							key={"action required div"}
-						>
-							<p className="text-[#272830] opacity-70 pb-1 font-light text-[13px] px-2">
-								New vIdeos this month
-							</p>
-							<div className="w-full h-[2px] opacity-20 bg-[#272830]"></div>
-						</div>
-						<AnalyticsList />
-					</div>
-					<div className="flex flex-col items-start gap-2 max-w-[40%] w-full pr-3">
-						<VideoDetails />
-					</div>
-				</main>
+				<Influencer />
 			</DashboardLayout>
 		</>
 	);

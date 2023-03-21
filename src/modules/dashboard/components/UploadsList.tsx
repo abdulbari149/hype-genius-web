@@ -1,6 +1,8 @@
+import { VideosApi } from "@/api/VideosApi";
 import Card from "@/components/Card";
 import { Inter } from "next/font/google";
 import React from "react";
+import { useQuery } from "react-query";
 
 const inter = Inter({
 	weight: "500",
@@ -28,6 +30,7 @@ const UploadColumn = () => {
 
 const data = Array(20).fill(0).map((_, i) => i + 1);
 const UploadsList = () => {
+
 	return (
 		<Card className="flex-1 py-[25px] pl-[50px] w-full h-full overflow-y-scroll custom-scroll rounded-[15px]">
 			<div className="flex items-start gap-5 mb-7">

@@ -11,7 +11,12 @@ const notesData = [
 		date: "Jan 22, 2023",
 	},
 ];
-const VideoDetails = () => {
+
+interface Props {
+	handleClose: () => void
+}
+
+const VideoDetails: React.FC<Props> = ({ handleClose }) => {
 	const [editPaypalEmail, setEditPaypalEmail] = useState(false);
 	const [paypalEmail, setPaypalEmail] = useState("coolemail@gmail.com");
 	const [isAddNote, setIsAddNote] = useState(false);
@@ -37,7 +42,7 @@ const VideoDetails = () => {
 					"0px 4px 103px rgba(50, 50, 71, 0.01), 0px 4px 59px rgba(50, 50, 71, 0.06)",
 			}}
 		>
-			<Close onClose={() => {}} />
+			<Close onClose={handleClose} />
 			<div className="max-w-md my-[50px] flex flex-col gap-4">
 				<div className="space-y-1">
 					<p className="text-[17px] text-[#272830] font-[500]">
