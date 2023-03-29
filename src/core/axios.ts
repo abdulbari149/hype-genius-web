@@ -29,20 +29,17 @@ api.interceptors.response.use(
 	},
 	async (err) => {
 		const originalConfig = err.config;
-		console.log(originalConfig);
-
 		if (originalConfig.url === "/auth/login") throw err;
 
 		if (err.response && err.response.status === 401 && !originalConfig._retry) {
 			originalConfig._retry = true;
 			try {
 				const rsToken = localStorage.getItem(REFRESH_TOKEN);
-				const rs = await api.post("auth/refresh", {
+				const rs = await api.post("auth/refresh", {}, {
 					headers: {
 						Authorization: `Bearer ${rsToken}`,
 					},
 				});
-				console.log({ rsToken })
 				const access = rs.data.data.access_token;
 				localStorage.setItem(ACCESS_TOKEN, access);
 				return api(originalConfig);

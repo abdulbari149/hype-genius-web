@@ -38,26 +38,5 @@ export type IChannel = {
 	influencer_id: number;
 } & IBase;
 
-export interface BusinessSignupApiData {
-	user: IUser;
-	business: IBusiness;
-	access_token: string;
-	refresh_token: string;
-}
 
-export interface ChannelSignupApiData {
-	user: IUser;
-	channel: IChannel;
-	access_token: string;
-	refresh_token: string;
-}
 
-export interface LoginApiData {
-	user: IUser;
-	access_token: string;
-	refresh_token: string;
-}
-
-export interface MeApiData {
-	user: IUser;
-}

@@ -4,3 +4,5 @@ export const uploadVideoSchema = z.object({
 	title: z.string(),
 	link: z.string(),
 });
+
+export const addNoteSchema = z.object({ body: z.string().nonempty() });

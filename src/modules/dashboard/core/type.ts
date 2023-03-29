@@ -1,7 +1,7 @@
 import { IBase } from "@/modules/auth/core/types";
 import { TagType } from "@/modules/influencers/core/types";
 import { z } from "zod";
-import { uploadVideoSchema } from "./schema";
+import { addNoteSchema, uploadVideoSchema } from "./schema";
 
 export type AnalyticsDataType = {
 	id: number;
@@ -11,20 +11,5 @@ export type AnalyticsDataType = {
 	roas: number;
 };
 
-export type VideoDataType = {
-	id: number;
-	title: string;
-	paymentStatus: "paid" | "unpaid";
-	url: string;
-};
-
-export type IVideo = {
-	link: string;
-	title: string;
-	views: number;
-	is_payment_due: boolean;
-	payment_id: number | null;
-	business_channel_id: number;
-} & IBase;
-
 export type UploadVideoData = z.infer<typeof uploadVideoSchema>;
+export type AddNoteData = z.infer<typeof addNoteSchema>

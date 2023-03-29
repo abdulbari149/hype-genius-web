@@ -1,32 +1,32 @@
-import { Response, api } from "@/core/axios";
-import {
-	BusinessSignupApiData,
-	BusinessSignupData,
-	ChannelSignupApiData,
-	ChannelSignupData,
-	LoginApiData,
-	LoginData,
-	MeApiData,
-} from "../modules/auth/core/types";
+import { api } from "@/core/axios";
 import { getAccessToken } from "../modules/auth/core/utils";
+import {
+	Login,
+	LoginData,
+	Me,
+	RegisterBusiness,
+	RegisterBusinessData,
+	RegisterChannel,
+	RegisterChannelData,
+} from "./type";
 
 export class AuthApi {
 	static registerBusiness = async (
-		data: Omit<BusinessSignupData, 'passwordAgain'>
-	): Promise<Response<BusinessSignupApiData>> => {
+		data: RegisterBusinessData
+	): Promise<RegisterBusiness> => {
 		const result = await api.post("/auth/business", data);
 		return result.data;
 	};
 
 	static registerChannel = async (
-		data: Omit<ChannelSignupData, 'passwordAgain'> & { token: string }
-	): Promise<Response<ChannelSignupApiData>> => {
+		data: RegisterChannelData
+	): Promise<RegisterChannel> => {
 		const { token, ...body } = data;
 		const result = await api.post(`/auth/channel/${token}`, body);
 		return result.data;
 	};
 
-	static me = async (): Promise<Response<MeApiData>> => {
+	static me = async (): Promise<Me> => {
 		const token = getAccessToken();
 		const result = await api.get("/auth/me", {
 			headers: { Authorization: `Bearer ${token}` },
@@ -34,7 +34,7 @@ export class AuthApi {
 		return result.data;
 	};
 
-	static login = async (data: LoginData): Promise<Response<LoginApiData>> => {
+	static login = async (data: LoginData): Promise<Login> => {
 		const result = await api.post("/auth/login", data, {
 			withCredentials: true,
 		});
@@ -42,13 +42,9 @@ export class AuthApi {
 	};
 
 	static refreshToken = async (token: string) => {
-		try {
-			const result = await api.get("/auth/refresh", {
-				headers: { Authorization: `Bearer ${token}` },
-			});
-			return result.data;
-		} catch (error) {
-			throw error;
-		}
+		const result = await api.get("/auth/refresh", {
+			headers: { Authorization: `Bearer ${token}` },
+		});
+		return result.data;
 	};
 }

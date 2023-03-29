@@ -1,8 +1,9 @@
 import type { NextPage } from "next";
 import { DashboardLayout } from "@/components/Layout";
 import Head from "next/head";
-import { InfluencersDetail, InfluencersTable } from "@/modules/influencers";
-import { useState } from "react";
+import { InfluencerContainer, InfluencersDetail } from "@/modules/influencers";
+import { Suspense, useState } from "react";
+import Loading from "@/components/Loading";
 
 const InfluencerPage: NextPage = () => {
 	const [selectedInfluencer, setSelectedInfluencer] = useState<number | null>(
@@ -20,7 +21,7 @@ const InfluencerPage: NextPage = () => {
 
 			<DashboardLayout>
 				<div className="grid w-full grid-cols-8 gap-3">
-					<InfluencersTable
+					<InfluencerContainer
 						selectedInfluencer={selectedInfluencer}
 						setSelectedInfluencer={setSelectedInfluencer}
 					/>

@@ -16,6 +16,7 @@ const Header: React.FC<
 
 export const columns: Readonly<Array<Column<InfluencerData>>> = [
 	{
+		id: "influencer",
 		Header: <Header title={"Influencer"} />,
 		accessor: "influencer",
 		maxWidth: 100,
@@ -37,13 +38,16 @@ export const columns: Readonly<Array<Column<InfluencerData>>> = [
 		},
 	},
 	{
+		id: "tags",
 		Header: <Header title={"Tags"} />,
 		accessor: "tags",
 		maxWidth: 120,
 		Cell: (props) => {
+			const tags = props.data[props.row.index].tags;
+			if (!tags) return <div></div>;
 			return (
 				<div className="flex flex-row items-center gap-2">
-					{props.data[props.row.index].tags.map((tag) => (
+					{tags.map((tag) => (
 						<Tag {...tag} key={tag.text} />
 					))}
 				</div>
@@ -51,6 +55,7 @@ export const columns: Readonly<Array<Column<InfluencerData>>> = [
 		},
 	},
 	{
+		id: "currentDeal",
 		Header: <Header title={"Current Deal"} />,
 		accessor: "currentDeal",
 		maxWidth: 100,
@@ -77,25 +82,25 @@ export const columns: Readonly<Array<Column<InfluencerData>>> = [
 	},
 	{
 		Header: <Header title="Payment Status" />,
-		Cell: (props) => (
-			<PaymentStatus
-				containerClassName="pl-[30px]"
-				status={props.data[props.row.index].paymentStatus}
-			/>
-		),
+		Cell: (props) => {
+			const status = props.data[props.row.index].paymentStatus;
+			if (!status) return <></>;
+			return <PaymentStatus containerClassName="pl-[30px]" status={status} />;
+		},
 		accessor: "paymentStatus",
 		id: "paymentStatus",
 	},
 	{
 		Header: <Header title="Alert" className="text-end" />,
-		Cell: (props) => (
-			<div className="flex items-center justify-end pr-4">
-				<Tag
-					color={props.data[props.row.index].alert.color}
-					text={props.data[props.row.index].alert.text}
-				/>
-			</div>
-		),
+		Cell: (props) => {
+			const alert = props.data[props.row.index].alert;
+			if (!alert) return <></>;
+			return (
+				<div className="flex items-center justify-end pr-4">
+					<Tag {...alert} />
+				</div>
+			);
+		},
 		accessor: "alert",
 		id: "alert",
 	},

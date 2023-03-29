@@ -11,21 +11,22 @@ import VideoDetails from "@/modules/dashboard/components/VideoDetails";
 import { AiOutlinePlus } from "react-icons/ai";
 import VideosTable from "@/modules/dashboard/components/VideosTable";
 import UploadVideoModal from "@/modules/dashboard/components/UploadVideoModal";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import ReactModal from "react-modal";
 import UploadVideoBtn from "./UploadVideoBtn";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsDetailsOpen } from "../core/influencerSlice";
 import { AppState } from "@/store";
+import Loading from "@/components/Loading";
 const Influencer = () => {
 	const [isUploadOpen, setIsUploadOpen] = useState(false);
 	const isDetailsOpen = useSelector(
 		(state: AppState) => state.influencer.isDetailsOpen
 	);
-  
+
 	const dispatch = useDispatch();
-	
-  function openUpload() {
+
+	function openUpload() {
 		setIsUploadOpen(true);
 	}
 
@@ -58,13 +59,14 @@ const Influencer = () => {
 					<AnalyticsList />
 				</div>
 
-				{isDetailsOpen ? (
-					<div className="flex flex-col items-start gap-2 max-w-[40%] w-full pr-3">
-						<VideoDetails
-							handleClose={() => dispatch(setIsDetailsOpen(false))}
-						/>
-					</div>
-				) : null}
+				{isDetailsOpen && (
+					<Suspense fallback={<Loading />}>
+						<div className="flex flex-col items-start gap-2 max-w-[40%] w-full pr-3">
+							<VideoDetails
+								handleClose={() => dispatch(setIsDetailsOpen(false))}
+							/>
+						</div>
+					</Suspense> )}
 			</main>
 
 			<UploadVideoModal isOpen={isUploadOpen} handleClose={closeUpload} />

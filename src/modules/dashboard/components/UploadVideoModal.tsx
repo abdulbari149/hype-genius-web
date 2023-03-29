@@ -11,7 +11,7 @@ import { uploadVideoSchema } from "../core/schema";
 import { UploadVideoData } from "../core/type";
 import { toast } from "react-toastify";
 import { handleError } from "@/modules/auth/core/utils";
-import { QUERY_KEYS } from "../core/constants";
+import { QUERY_KEYS } from "@/core/constants";
 
 interface UploadVideoModalProps {
 	isOpen: boolean;

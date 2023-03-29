@@ -1,5 +1,5 @@
 import { CellProps, Column } from "react-table";
-import { VideoDataType } from "./type";
+import { IVideo } from "./type";
 import React from "react";
 import PaymentStatus from "@/modules/settings/components/PaymentStatus";
 import Tag from "@/components/Tag";
@@ -15,11 +15,11 @@ const Header: React.FC<{ title: string; className?: string }> = ({
 	</p>
 );
 
-export const columns: ReadonlyArray<Column<VideoDataType>> = [
+export const columns: ReadonlyArray<Column<IVideo>> = [
 	{
 		id: "title",
 		Header: <Header title="View Title" />,
-		Cell: (props: CellProps<VideoDataType>) => (
+		Cell: (props: CellProps<IVideo>) => (
 			<p className="pl-5 text-[17px] text-[#272830] opacity-75 font-normal">
 				{props.data[props.row.index].title}
 			</p>
@@ -28,12 +28,12 @@ export const columns: ReadonlyArray<Column<VideoDataType>> = [
 	{
 		id: "view",
 		Header: <Header title="View Video" />,
-		Cell: (props: CellProps<VideoDataType>) => {
+		Cell: (props: CellProps<IVideo>) => {
 			const video = props.data[props.row.index];
 			return (
 				<div className="grid w-[80px]">
 					<a
-						href={video.url}
+						href={video.link}
 						target="_blank"
 						className="bg-[#7187FB80] mx-auto px-4 rounded-xl text-[13px] py-2 cursor-pointer"
 					>
@@ -46,20 +46,24 @@ export const columns: ReadonlyArray<Column<VideoDataType>> = [
 	{
 		id: "status",
 		Header: <Header title="Payment Status" />,
-		Cell: (props: CellProps<VideoDataType>) => {
+		Cell: (props: CellProps<IVideo>) => {
 			const video = props.data[props.row.index];
-			return <PaymentStatus status={video.paymentStatus} />;
+			return (
+				<PaymentStatus status={video.is_payment_due ? "unpaid" : "paid"} />
+			);
 		},
 	},
 	{
 		id: "alert",
 		Header: <Header title="Alert" />,
-		Cell: (props: CellProps<VideoDataType>) => {
-			return props.data[props.row.index].paymentStatus === "unpaid" ? (
-				<Tag text="Payment Due" color="#FFDE2E80" className="w-fit text-[13px] px-5" />
-			) : (
-				null
-			);
+		Cell: (props: CellProps<IVideo>) => {
+			return props.data[props.row.index].is_payment_due ? (
+				<Tag
+					text="Payment Due"
+					color="#FFDE2E80"
+					className="w-fit text-[13px] px-5"
+				/>
+			) : null;
 		},
 	},
 ];

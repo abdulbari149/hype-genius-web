@@ -13,11 +13,11 @@ export interface InfluencerData {
 		| { circle: true; circleColor: string }
 		| { circle: false; circleColor?: unknown }
 	);
-	tags: TagType[];
+	tags?: TagType[];
 	currentDeal?: {
 		perVideo: string;
 		perMonth: string;
 	};
-	paymentStatus: PaymentStatusType;
-	alert: TagType;
+	paymentStatus?: PaymentStatusType;
+	alert?: TagType & { priority: number };
 }

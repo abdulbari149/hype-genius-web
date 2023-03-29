@@ -1,33 +1,17 @@
-import Card from "@/components/Card";
 import React, { useMemo } from "react";
 import { useTable } from "react-table";
 import { columns as videosColumns } from "../core/videos";
-import { VideoDataType } from "../core/type";
 import { VideosApi } from "@/api/VideosApi";
 import { useQuery } from "react-query";
-import { QUERY_KEYS } from "../core/constants";
+import { QUERY_KEYS } from "@/core/constants";
 import { useDispatch } from "react-redux";
 import { selectVideo } from "../core/influencerSlice";
+import { IVideo } from "../core/type";
 
 const VideosTable = () => {
 	const { data: videos } = useQuery(QUERY_KEYS.GET_VIDEOS, {
 		queryFn: VideosApi.getVideos,
 		initialData: { data: [], message: "", status: 200 },
-		select(data) {
-			console.log({data })
-			return {
-				...data,
-				data: data.data.map(
-					(item) =>
-						({
-							id: item.id,
-							paymentStatus: item.is_payment_due ? "unpaid" : "paid",
-							title: item.title,
-							url: item.link,
-						} as VideoDataType)
-				),
-			};
-		},
 	});
 
 	const data = useMemo(() => videos?.data ?? [], [videos]);
@@ -35,10 +19,10 @@ const VideosTable = () => {
 	const table = useTable({ columns, data });
 	const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
 		table;
-	const dispatch = useDispatch()
+	const dispatch = useDispatch();
 
-	function handleSelectVideo(id: number) {
-		dispatch(selectVideo({ id }))
+	function handleSelectVideo(video: IVideo) {
+		dispatch(selectVideo({ video }));
 	}
 
 	return (
@@ -48,7 +32,7 @@ const VideosTable = () => {
 		>
 			<thead>
 				{headerGroups.map((headerGroup, idx) => (
-					<tr {...headerGroup.getHeaderGroupProps()} key={idx}>
+					<tr {...headerGroup.getHeaderGroupProps()} key={"header-" + idx}>
 						{headerGroup.headers.map((column) => (
 							<th
 								className="first:pl-7 last:pr-4"
@@ -74,7 +58,7 @@ const VideosTable = () => {
 								}}
 								{...row.getRowProps()}
 								key={row.original.id}
-								onClick={() => handleSelectVideo(row.original.id)}
+								onClick={() => handleSelectVideo(row.original)}
 							>
 								{row.cells.map((cell, idx) => {
 									return (

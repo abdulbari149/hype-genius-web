@@ -25,8 +25,10 @@ const defaultTimeOptions = [
 
 export type Option = { id: number; value: string | number; label: string };
 
-interface SelectorProps extends React.HTMLAttributes<HTMLSelectElement> {
+interface SelectorProps
+	extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, "onChange"> {
 	customClassName?: string;
+	onChange?: (value: string, e: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
 interface TimeSelector {
@@ -47,11 +49,13 @@ const Selector: React.FC<
 	customClassName,
 	options,
 	type,
+	onChange = (value, e) => {},
 	...props
 }) => {
 	let selectOptions: Array<Option> = [];
 	if (!options) selectOptions = defaultTimeOptions;
-	else if (typeof options === "function") selectOptions = options(defaultTimeOptions)
+	else if (typeof options === "function")
+		selectOptions = options(defaultTimeOptions);
 	else if (typeof options === "object") selectOptions = options;
 
 	return (
@@ -74,6 +78,9 @@ const Selector: React.FC<
 				...style,
 			}}
 			{...props}
+			onChange={(e) => {
+				onChange(e.target.value, e)
+			}}
 		>
 			{selectOptions.map((option) => (
 				<option key={option.id} value={option.value}>

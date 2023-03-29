@@ -26,6 +26,7 @@ const Modal: React.FC<PropsWithChildren<ModalProps>> = ({
 	isOpen,
 	handleClose,
 	children,
+	style = { content: {}, overlay: {} },
 	...props
 }) => {
 	return (
@@ -33,7 +34,10 @@ const Modal: React.FC<PropsWithChildren<ModalProps>> = ({
 			isOpen={isOpen}
 			{...props}
 			onRequestClose={() => handleClose()}
-			style={{ content: contentCustomStyle, overlay: overlayCustomStyle }}
+			style={{
+				content: { ...contentCustomStyle, ...(style?.content ?? {}) },
+				overlay: {...overlayCustomStyle, ...(style?.overlay ?? {})},
+			}}
 		>
 			<div className="relative w-full h-full px-8">
 				<Close onClose={handleClose} />

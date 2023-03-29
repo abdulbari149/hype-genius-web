@@ -1,6 +1,7 @@
 import { useUser } from "@/modules/auth/hooks/useUser";
 import { useRouter } from "next/router";
 import React, { PropsWithChildren, useEffect } from "react";
+import Loading from "../Loading";
 
 const AuthRoutes: React.FC<PropsWithChildren> = ({ children }) => {
 	const router = useRouter();
@@ -13,7 +14,7 @@ const AuthRoutes: React.FC<PropsWithChildren> = ({ children }) => {
 			}
 		},
 	});
-	if (isLoading || isSuccess) return <div>loading...</div>;
+	if (isLoading || isSuccess) return <Loading />;
 	return <>{children}</>;
 };
 

@@ -28,7 +28,7 @@ const Header: React.FC = () => {
 						<Link href={"/"}>Contact us</Link>
 					</li>
 					<li className="font-bold cursor-pointer">
-						<Link href={"/auth/signup/business"}>Sign in</Link>
+						<Link href={"/auth/login"}>Sign in</Link>
 					</li>
 					<button className="font-bold  bg-[#EF539E] px-4 py-2 text-[#F2F6FA] rounded-2xl hover:bg-pink-400">
 						Get Started
