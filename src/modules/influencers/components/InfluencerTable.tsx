@@ -14,11 +14,12 @@ interface Props {
 const selectGetInfluencers = (data: GetInfluencers) => {
 	return data.data.map<InfluencerData>((item) => {
 		const influencerDataItem: InfluencerData = {
-			id: item.business_channel_id,
+			id: item.id,
 			influencer: {
-				name: item.influencer_name,
+				name: item.influencer.firstName + ' ' + item.influencer.lastName,
 				circle: false,
 			},
+			paymentStatus: item.paymentStatus
 		};
 		if (item.alert) {
 			influencerDataItem.alert = {
@@ -30,6 +31,15 @@ const selectGetInfluencers = (data: GetInfluencers) => {
 				color: item.alert.color,
 				priority: item.alert.priority,
 			};
+		}
+		if (item.contract) {
+			influencerDataItem.currentDeal = {
+				perVideo: item.contract.amount.toString(),
+				perMonth: item.contract.uploadFrequency.toString()
+			}
+		}
+		if (item.tags) {
+			influencerDataItem.tags = item.tags.map(tag => ({ text: tag.name, color: tag.color }))
 		}
 		return influencerDataItem;
 	});

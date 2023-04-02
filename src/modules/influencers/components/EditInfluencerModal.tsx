@@ -88,7 +88,7 @@ const EditInfluencerModal: React.FC<EditInfluencerModalProps> = ({
 					</div>
 				</div>
 
-				<Contract />
+				// <Contract />
 				<TagsList />
 			</div>
 		</Modal>

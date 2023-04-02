@@ -1,9 +1,6 @@
-import React, { Suspense, useMemo, useState } from "react";
-import { useTable } from "react-table";
-import { InfluencerData } from "../core/types";
-import { columns as influencersColumns } from "../core/columns";
+import React, { Suspense, useState } from "react";
 import InfluencersHeader from "./InfluencerHeader";
-import AddInfluencerModal from "./AddInfluencerModal";
+import AddInfluencerModal from "./AddInfluencer/Modal";
 import InfluencerTable from "./InfluencerTable";
 import Loading from "@/components/Loading";
 
