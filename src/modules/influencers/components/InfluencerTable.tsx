@@ -1,58 +1,20 @@
 import React, { useMemo } from "react";
 import { useTable } from "react-table";
-import { InfluencerData } from "../core/types";
 import { columns as influencersColumns } from "../core/columns";
 import { useQuery } from "react-query";
 import { QUERY_KEYS } from "@/core/constants";
 import { BusinessApi } from "@/api/BusinessApi";
-import { GetInfluencers } from "@/api/type";
 
 interface Props {
 	setSelectedInfluencer: React.Dispatch<React.SetStateAction<number | null>>;
 }
-
-const selectGetInfluencers = (data: GetInfluencers) => {
-	return data.data.map<InfluencerData>((item) => {
-		const influencerDataItem: InfluencerData = {
-			id: item.id,
-			influencer: {
-				name: item.influencer.firstName + ' ' + item.influencer.lastName,
-				circle: false,
-			},
-			paymentStatus: item.paymentStatus
-		};
-		if (item.alert) {
-			influencerDataItem.alert = {
-				text: item.alert.name
-					.replace("_", " ")
-					.split(" ")
-					.map((i) => `${i.charAt(0).toUpperCase()}${i.substring(1)}`)
-					.join(" "),
-				color: item.alert.color,
-				priority: item.alert.priority,
-			};
-		}
-		if (item.contract) {
-			influencerDataItem.currentDeal = {
-				perVideo: item.contract.amount.toString(),
-				perMonth: item.contract.uploadFrequency.toString()
-			}
-		}
-		if (item.tags) {
-			influencerDataItem.tags = item.tags.map(tag => ({ text: tag.name, color: tag.color }))
-		}
-		return influencerDataItem;
-	});
-};
-
 const InfluencerTable: React.FC<Props> = ({ setSelectedInfluencer }) => {
 	const { data: influencers } = useQuery(QUERY_KEYS.GET_INFLUENCERS, {
 		queryFn: BusinessApi.getInfluencers,
-		select: selectGetInfluencers,
 		suspense: true,
 	});
 
-	const data = useMemo(() => influencers ?? [], [influencers]);
+	const data = useMemo(() => influencers?.data ?? [], [influencers]);
 	const columns = useMemo(() => influencersColumns, []);
 	const table = useTable({ columns, data });
 
@@ -70,7 +32,7 @@ const InfluencerTable: React.FC<Props> = ({ setSelectedInfluencer }) => {
 		>
 			<thead>
 				{headerGroups.map((headerGroup, idx) => (
-					<tr {...headerGroup.getHeaderGroupProps()} key={idx}>
+					<tr {...headerGroup.getHeaderGroupProps()} key={headerGroup.id}>
 						{headerGroup.headers.map((column) => (
 							<th
 								className="first:pl-4 last:pr-4"
@@ -150,7 +112,7 @@ const InfluencerTable: React.FC<Props> = ({ setSelectedInfluencer }) => {
 										<td
 											className="py-3 h-[50px] bg-white first:border-solid  last:border-solid first:rounded-tl-[16px] first:rounded-bl-[16px] last:rounded-br-[16px] last:rounded-tr-[16px]"
 											{...cell.getCellProps()}
-											key={idx}
+											key={cell.row.id}
 										>
 											{cell.render("Cell")}
 										</td>
