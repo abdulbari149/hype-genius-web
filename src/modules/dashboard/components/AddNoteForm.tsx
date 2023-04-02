@@ -21,7 +21,7 @@ type Props = {
 
 const AddNoteForm: React.FC<Props> = ({ closeAfterSubmit }) => {
 	const videoId = useSelector<AppState, number | null>(
-		(state) => state.influencer.videoId
+		(state) => state.dashboard.videoId
 	);
 
 	const queryClient = useQueryClient()

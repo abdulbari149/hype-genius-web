@@ -1,23 +1,21 @@
 import { AxiosError } from "axios";
-import { MeApiData } from "./../core/types";
 import { setAuthState } from "@/modules/auth/core/slice";
 import { UseQueryOptions, useQuery } from "react-query";
 import { AuthApi } from "@/api/AuthApi";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser } from "../core/slice";
-import { Response } from "@/core/axios";
 import { AppState } from "@/store";
+import { Me } from "@/api/type";
 
 export const useUser = (
-	options: UseQueryOptions<Response<MeApiData>, AxiosError | Error>
+	options: UseQueryOptions<Me, AxiosError | Error>
 ) => {
 	const dispatch = useDispatch();
 	const { onSuccess = undefined, onError = undefined, ...props } = options;
 	const loggedIn = useSelector((state: AppState) => state.auth.isLoggedIn);
 	const user = useSelector((state: AppState) => state.auth.user);
-	console.log(!loggedIn || !user);
 
-	const userQuery = useQuery<Response<MeApiData>, AxiosError | Error>("user", {
+	const userQuery = useQuery<Me, AxiosError | Error>("user", {
 		queryFn: AuthApi.me,
 		retry: false,
 		enabled: !loggedIn || !user,

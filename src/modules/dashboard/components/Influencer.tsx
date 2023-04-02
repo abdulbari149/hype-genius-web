@@ -15,13 +15,13 @@ import { Suspense, useState } from "react";
 import ReactModal from "react-modal";
 import UploadVideoBtn from "./UploadVideoBtn";
 import { useDispatch, useSelector } from "react-redux";
-import { setIsDetailsOpen } from "../core/influencerSlice";
+import { setIsDetailsOpen } from "../core/slice";
 import { AppState } from "@/store";
 import Loading from "@/components/Loading";
 const Influencer = () => {
 	const [isUploadOpen, setIsUploadOpen] = useState(false);
 	const isDetailsOpen = useSelector(
-		(state: AppState) => state.influencer.isDetailsOpen
+		(state: AppState) => state.dashboard.isDetailsOpen
 	);
 
 	const dispatch = useDispatch();

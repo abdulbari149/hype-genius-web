@@ -8,7 +8,7 @@ const { GET_NOTES } = QUERY_KEYS;
 
 const NotesList = () => {
 	const videoId = useSelector<AppState, number | null>(
-		(state) => state.influencer.videoId
+		(state) => state.dashboard.videoId
 	);
 
 	const { data: notes } = useQuery(`${videoId}/${GET_NOTES}`, {

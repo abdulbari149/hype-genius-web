@@ -10,7 +10,6 @@ const analyticsData: AnalyticsDataType[] = [
 	{  id: 3, influencer: "Pwede Pie", views: 2635000, totalSpent: 523000, roas: 7.80 },
 	{  id: 4, influencer: "Pwede Pie", views: 2635000, totalSpent: 523000, roas: 7.80 },
 	{  id: 5, influencer: "Pwede Pie", views: 2635000, totalSpent: 523000, roas: 7.80 },
-
 ];
 
 const AnalyticsTable = () => {

@@ -5,8 +5,8 @@ import { VideosApi } from "@/api/VideosApi";
 import { useQuery } from "react-query";
 import { QUERY_KEYS } from "@/core/constants";
 import { useDispatch } from "react-redux";
-import { selectVideo } from "../core/influencerSlice";
-import { IVideo } from "../core/type";
+import { selectVideo } from "../core/slice";
+import { IVideo } from "@/api/type";
 
 const VideosTable = () => {
 	const { data: videos } = useQuery(QUERY_KEYS.GET_VIDEOS, {

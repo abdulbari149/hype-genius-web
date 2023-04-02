@@ -33,7 +33,7 @@ const cardStyles = {
 const VideoDetails: React.FC<Props> = ({ handleClose }) => {
 	const [isAddNote, setIsAddNote] = useState(false);
 	const videoLink = useSelector<AppState, string>(
-		(state) => state.influencer.video?.link ?? ""
+		(state) => state.dashboard.video?.link ?? ""
 	);
 
 	return (

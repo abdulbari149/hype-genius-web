@@ -1,8 +1,8 @@
 import { CellProps, Column } from "react-table";
-import { IVideo } from "./type";
 import React from "react";
 import PaymentStatus from "@/modules/settings/components/PaymentStatus";
 import Tag from "@/components/Tag";
+import { IVideo } from "@/api/type";
 
 const Header: React.FC<{ title: string; className?: string }> = ({
 	title,

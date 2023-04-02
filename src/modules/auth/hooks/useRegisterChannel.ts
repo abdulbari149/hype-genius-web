@@ -15,12 +15,16 @@ const useRegisterChannel = () => {
 		onSuccess(data, variables, context) {
 			localStorage.setItem(ACCESS_TOKEN, data.data.access_token);
 			localStorage.setItem(REFRESH_TOKEN, data.data.refresh_token);
+			dispatch(setAuthState({ isLoggedIn: true }));
+			dispatch(setUser({ user: data.data.user }));
 			toast(data.message, { type: "success" });
 			router.replace("/dashboard/influencer");
 		},
 		onError(error, variables, context) {
 			const message = handleError(error);
 			toast(message, { type: "error" });
+			dispatch(setAuthState({ isLoggedIn: false }));
+			dispatch(setUser({ user: null }));
 		},
 	});
 	return registerChannel;

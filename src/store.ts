@@ -1,13 +1,13 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 import { authSlice } from "@/modules/auth/core/slice";
 import { createWrapper } from "next-redux-wrapper";
-import influencerSlice from "./modules/dashboard/core/influencerSlice";
+import dashboardSlice from "./modules/dashboard/core/slice";
 
 const makeStore = () =>
 	configureStore({
 		reducer: {
 			[authSlice.name]: authSlice.reducer,
-			[influencerSlice.name]: influencerSlice.reducer,
+			[dashboardSlice.name]: dashboardSlice.reducer,
 		},
 		devTools: true,
 	});
