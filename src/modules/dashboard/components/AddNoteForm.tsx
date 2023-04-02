@@ -66,7 +66,7 @@ const AddNoteForm: React.FC<Props> = ({ closeAfterSubmit }) => {
 							name="body"
 							cols={10}
 							rows={3}
-							className="w-full outline-none border-1 border-slate-600 bg-[#EDF1F5] px-6 py-4 w-full rounded-xl"
+							className="w-full outline-none border-1 border-slate-600 bg-[#EDF1F5] px-6 py-4 rounded-xl"
 						></textarea>
 						{formik.errors.body && formik.touched.body && (
 							<p className="text-red-400 px-2 pt-1 text-[13px]">

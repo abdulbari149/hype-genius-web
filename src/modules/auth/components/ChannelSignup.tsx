@@ -4,7 +4,7 @@ import AuthButton from "./AuthButton";
 import Link from "next/link";
 import { ChannelSignupData } from "../core/types";
 import { channelSignupSchema } from "../core/schema";
-import { Formik, FormikHelpers, useFormik } from "formik";
+import { Formik, FormikHelpers } from "formik";
 import { toFormikValidationSchema } from "zod-formik-adapter";
 import useRegisterChannel from "../hooks/useRegisterChannel";
 
