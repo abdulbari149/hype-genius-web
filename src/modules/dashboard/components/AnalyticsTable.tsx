@@ -27,8 +27,8 @@ const AnalyticsTable = () => {
 				className="w-full border-separate"
 			>
 				<thead>
-					{headerGroups.map((headerGroup, idx) => (
-						<tr {...headerGroup.getHeaderGroupProps()} key={idx}>
+					{headerGroups.map((headerGroup) => (
+						<tr {...headerGroup.getHeaderGroupProps()} key={headerGroup.id}>
 							{headerGroup.headers.map((column) => (
 								<th
 									className="first:pl-4 last:pr-4"
@@ -50,12 +50,12 @@ const AnalyticsTable = () => {
 								{...row.getRowProps()}
 								key={row.index}
 							>
-								{row.cells.map((cell, idx) => {
+								{row.cells.map((cell) => {
 									return (
 										<td
 											className="py-[5px] align-middle h-fit"
 											{...cell.getCellProps()}
-											key={idx}
+											key={cell.row.id}
 										>
 											{cell.render("Cell")}
 										</td>

@@ -32,7 +32,7 @@ const VideosTable = () => {
 		>
 			<thead>
 				{headerGroups.map((headerGroup, idx) => (
-					<tr {...headerGroup.getHeaderGroupProps()} key={"header-" + idx}>
+					<tr {...headerGroup.getHeaderGroupProps()} key={headerGroup.id}>
 						{headerGroup.headers.map((column) => (
 							<th
 								className="first:pl-7 last:pr-4"
@@ -65,7 +65,7 @@ const VideosTable = () => {
 										<td
 											className="py-3 h-[50px] bg-white first:border-solid  last:border-solid first:rounded-tl-[16px] first:rounded-bl-[16px] last:rounded-br-[16px] last:rounded-tr-[16px]"
 											{...cell.getCellProps()}
-											key={idx}
+											key={cell.row.id}
 										>
 											{cell.render("Cell")}
 										</td>
