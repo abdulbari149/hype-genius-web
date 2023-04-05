@@ -2,13 +2,12 @@ import type { NextPage } from "next";
 import { DashboardLayout } from "@/components/Layout";
 import Head from "next/head";
 import { InfluencerContainer, InfluencersDetail } from "@/modules/influencers";
-import { Suspense, useState } from "react";
-import Loading from "@/components/Loading";
+import { AppState } from "@/store";
+import { useSelector } from "react-redux";
 
 const InfluencerPage: NextPage = () => {
-	const [selectedInfluencer, setSelectedInfluencer] = useState<number | null>(
-		1
-	);
+	const isInfluencerSelected = useSelector<AppState, boolean>(state => state.influencers.influencer !== null);
+
 
 	return (
 		<>
@@ -21,15 +20,9 @@ const InfluencerPage: NextPage = () => {
 
 			<DashboardLayout>
 				<div className="grid w-full grid-cols-8 gap-3">
-					<InfluencerContainer
-						selectedInfluencer={selectedInfluencer}
-						setSelectedInfluencer={setSelectedInfluencer}
-					/>
-					{selectedInfluencer !== null ? (
-						<InfluencersDetail
-							selectedInfluencer={selectedInfluencer}
-							setSelectedInfluencer={setSelectedInfluencer}
-						/>
+					<InfluencerContainer />
+					{isInfluencerSelected ? (
+						<InfluencersDetail />
 					) : null}
 				</div>
 			</DashboardLayout>

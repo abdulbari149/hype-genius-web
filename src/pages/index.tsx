@@ -1,3 +1,4 @@
+import AuthRoutes from "@/components/Routes/AuthRoutes";
 import { Header, Content, HowItWorks, Footer } from "@/modules/home";
 import Head from "next/head";
 
@@ -11,10 +12,12 @@ export default function Home() {
 				<link rel="icon" href="/hype-genius-logo.png" />
 			</Head>
 			<main className="w-full overflow-x-hidden max-w-screen">
-				<Header />
-				<Content />
-				<HowItWorks />
-				<Footer />
+				<AuthRoutes>
+					<Header />
+					<Content />
+					<HowItWorks />
+					<Footer />
+				</AuthRoutes>
 			</main>
 		</>
 	);

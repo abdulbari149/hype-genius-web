@@ -105,7 +105,7 @@ export type ITag = IBase & {
 }
 export type IContract2 = IBase & Omit<ContractState, 'note'>
 
-interface GetInfluencerData {
+export interface GetInfluencerData {
 	id: number;
 	business_id: number;
 	channel_id: number;
@@ -158,6 +158,9 @@ export type GetInfluencers = Response<GetInfluencerData[]>;
 export type GetVideos = Response<IVideo[]>;
 export type CreateVideo = Response<IVideo>;
 export type AddNote = Response<INote>;
+export type CreateActivity = Response<INote & { pinned: boolean }>;
+
+export type GetActivityList = Response<Array<INote & { pinned: boolean }>>;
 export type GetNotes = Response<INote[]>;
 export type CreateOnboardingRequest = Response<IOnboardRequest>;
 export type GetCurrencyList = Response<ICurrency[]>;

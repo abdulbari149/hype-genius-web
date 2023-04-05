@@ -3,17 +3,15 @@ import InfluencersHeader from "./InfluencerHeader";
 import AddInfluencerModal from "./AddInfluencer/Modal";
 import InfluencerTable from "./InfluencerTable";
 import Loading from "@/components/Loading";
+import { useSelector } from "react-redux";
+import { AppState } from "@/store";
 
 interface Props {
-	selectedInfluencer: number | null;
-	setSelectedInfluencer: React.Dispatch<React.SetStateAction<number | null>>;
 }
 
-const InfluencerContainer: React.FC<Props> = ({
-	selectedInfluencer,
-	setSelectedInfluencer,
-}) => {
+const InfluencerContainer: React.FC<Props> = () => {
 	const [isAddOpen, setIsAddOpen] = useState(false);
+	const isInfluencerSelected = useSelector<AppState, boolean>(state => state.influencers.influencer !== null);
 	// const [currentPage, setCurrentPage] = useState(1);
 
 	function closeAdd() {
@@ -26,14 +24,13 @@ const InfluencerContainer: React.FC<Props> = ({
 
 	return (
 		<div
-			className={`h-screen w-full flex flex-col w-full overflow-hidden ${
-				selectedInfluencer === null ? `col-span-full` : `col-span-5`
-			}`}
+			className={`h-screen w-full flex flex-col w-full overflow-hidden ${isInfluencerSelected ? `col-span-5` : `col-span-full`
+				}`}
 		>
 			<InfluencersHeader openAdd={openAdd} />
 			<div className="w-full overflow-y-scroll custom-scroll px-[10px]">
 				<Suspense fallback={<Loading />}>
-					<InfluencerTable setSelectedInfluencer={setSelectedInfluencer} />
+					<InfluencerTable />
 				</Suspense>
 			</div>
 			{/* <div className="flex items-center gap-4 min-h-[50px] mb-[15px] mr-[10px] ml-auto">

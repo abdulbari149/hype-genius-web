@@ -6,7 +6,9 @@ export const QUERY_KEYS = {
 	GET_INFLUENCERS: 'influencers/get',
 	CREATE_ONBOARING: 'onboarding/create',
 	UPDATE_ONBOARDING: 'onboarding/update',
-	GET_CURRENCY_LIST: 'currency/get'
+	GET_CURRENCY_LIST: 'currency/get',
+	ADD_ACTIVITY: 'activity/add',
+	GET_ACTIVITIES: 'activity/get',
 };
 
 export const CONTRACT_KEY = '@contractTemp'

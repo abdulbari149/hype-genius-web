@@ -1,14 +1,17 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import { useTable } from "react-table";
 import { columns as influencersColumns } from "../core/columns";
 import { useQuery } from "react-query";
 import { QUERY_KEYS } from "@/core/constants";
 import { BusinessApi } from "@/api/BusinessApi";
+import { useDispatch } from "react-redux";
+import { setInfluencer } from "../core/slice";
+import { GetInfluencerData } from "@/api/type";
 
-interface Props {
-	setSelectedInfluencer: React.Dispatch<React.SetStateAction<number | null>>;
-}
-const InfluencerTable: React.FC<Props> = ({ setSelectedInfluencer }) => {
+interface Props {}
+const InfluencerTable: React.FC<Props> = () => {
+	const dispatch = useDispatch()
+
 	const { data: influencers } = useQuery(QUERY_KEYS.GET_INFLUENCERS, {
 		queryFn: BusinessApi.getInfluencers,
 		suspense: true,
@@ -21,8 +24,8 @@ const InfluencerTable: React.FC<Props> = ({ setSelectedInfluencer }) => {
 	const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
 		table;
 
-	const handleRowClick = (id: number) => {
-		setSelectedInfluencer(id);
+	const handleRowClick = (influencer: GetInfluencerData) => {
+		dispatch(setInfluencer({ influencer }))
 	};
 
 	return (
@@ -56,7 +59,7 @@ const InfluencerTable: React.FC<Props> = ({ setSelectedInfluencer }) => {
 						return (
 							<tr
 								className="cursor-pointer"
-								onClick={() => handleRowClick(row.original.id)}
+								onClick={() => handleRowClick(row.original)}
 								style={{
 									boxShadow:
 										"0px 4px 103px rgba(50, 50, 71, 0.01), 0px 4px 59px rgba(50, 50, 71, 0.06)",
@@ -99,7 +102,7 @@ const InfluencerTable: React.FC<Props> = ({ setSelectedInfluencer }) => {
 						return (
 							<tr
 								className="cursor-pointer"
-								onClick={() => setSelectedInfluencer(row.original.id)}
+								onClick={() => handleRowClick(row.original)}
 								style={{
 									boxShadow:
 										"0px 4px 103px rgba(50, 50, 71, 0.01), 0px 4px 59px rgba(50, 50, 71, 0.06)",

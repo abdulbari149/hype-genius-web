@@ -18,10 +18,10 @@ const Login: React.FC = () => {
 				password: '',
 			}}
 			validationSchema={toFormikValidationSchema(loginSchema)}
-			onSubmit={(values) => login.mutateAsync(values)}
+			onSubmit={values => login.mutateAsync(values)}
 		>
 			{(formik) => (
-				<form>
+				<form className='flex flex-col items-center'>
 					<div className="flex flex-col gap-2">
 						<Field
 							label=""
@@ -44,9 +44,11 @@ const Login: React.FC = () => {
 							onChange={formik.handleChange}
 						/>
 					</div>
+					<pre>{JSON.stringify(formik.values, null, 2)}</pre>
 					<AuthButton
 						type="submit"
-						onClick={() => {
+						onClick={(e) => {
+							e.preventDefault()
 							formik.handleSubmit();
 						}}
 						content="Login"
