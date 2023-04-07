@@ -1,16 +1,60 @@
 import React, { useEffect, useMemo } from "react";
-import { useTable } from "react-table";
+import { Row, useTable } from "react-table";
 import { columns as influencersColumns } from "../core/columns";
 import { useQuery } from "react-query";
 import { QUERY_KEYS } from "@/core/constants";
 import { BusinessApi } from "@/api/BusinessApi";
-import { useDispatch } from "react-redux";
-import { setInfluencer } from "../core/slice";
+import { useDispatch, useSelector } from "react-redux";
+import { setInfluencer, showPanel } from "../core/slice";
 import { GetInfluencerData } from "@/api/type";
+import { AppState } from "@/store";
+import { Alerts } from "../core/constants";
 
-interface Props {}
-const InfluencerTable: React.FC<Props> = () => {
+interface Props { rows: Row<GetInfluencerData>[]; prepareRow: (row: Row<GetInfluencerData>) => void }
+
+const InfluencerRows: React.FC<Props> = ({ rows, prepareRow }) => {
 	const dispatch = useDispatch()
+	const influencerId = useSelector((state: AppState) => state.influencers.influencer?.id ?? null)
+
+	const handleRowClick = (influencer: GetInfluencerData) => {
+		dispatch(setInfluencer({ influencer }))
+		dispatch(showPanel({ panel: 'detail' }))
+	};
+
+	const cellClassName = 'py-3 h-[50px] bg-white first:border-solid last:border-solid first:rounded-tl-[16px] first:rounded-bl-[16px] last:rounded-br-[16px] last:rounded-tr-[16px]'
+
+	return <React.Fragment>
+		{rows.map((row) => {
+			prepareRow(row);
+			return (
+				<tr
+					className="cursor-pointer"
+					onClick={() => handleRowClick(row.original)}
+					style={{
+						boxShadow:
+							"0px 4px 103px rgba(50, 50, 71, 0.01), 0px 4px 59px rgba(50, 50, 71, 0.06)",
+					}}
+					{...row.getRowProps()}
+					key={row.original.id}
+				>
+					{row.cells.map((cell, idx) => {
+						return (
+							<td
+								className={`${cellClassName} ${row.original.id === influencerId ? 'first:border-l-4 last:border-r-4 border-b-4 border-t-4' : 'border-0'} ${row.original.alert?.name === Alerts.MISSING_DEAL ? 'border-[#FF3434B8]' : 'border-[#3BADFF]'}`}
+								{...cell.getCellProps()}
+								key={`${cell.row.id}-${idx}`}
+							>
+								{cell.render("Cell")}
+							</td>
+						);
+					})}
+				</tr>
+			);
+		})}
+	</React.Fragment>
+}
+
+const InfluencerTable: React.FC<Props> = () => {
 
 	const { data: influencers } = useQuery(QUERY_KEYS.GET_INFLUENCERS, {
 		queryFn: BusinessApi.getInfluencers,
@@ -24,9 +68,17 @@ const InfluencerTable: React.FC<Props> = () => {
 	const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
 		table;
 
-	const handleRowClick = (influencer: GetInfluencerData) => {
-		dispatch(setInfluencer({ influencer }))
-	};
+	const { actionRows, noActionRows } = useMemo(() => {
+		return {
+			actionRows: rows
+				.filter((item) => !!item.original.alert)
+				.sort(
+					(a, b) => b.original.alert!.priority - a.original.alert!.priority
+				),
+			noActionRows: rows
+				.filter((item) => !item.original.alert)
+		}
+	}, [rows])
 
 	return (
 		<table
@@ -49,39 +101,7 @@ const InfluencerTable: React.FC<Props> = () => {
 				))}
 			</thead>
 			<tbody {...getTableBodyProps()} className="w-full">
-				{rows
-					.filter((item) => !!item.original.alert)
-					.sort(
-						(a, b) => b.original.alert!.priority - a.original.alert!.priority
-					)
-					.map((row) => {
-						prepareRow(row);
-						return (
-							<tr
-								className="cursor-pointer"
-								onClick={() => handleRowClick(row.original)}
-								style={{
-									boxShadow:
-										"0px 4px 103px rgba(50, 50, 71, 0.01), 0px 4px 59px rgba(50, 50, 71, 0.06)",
-								}}
-								{...row.getRowProps()}
-								key={row.original.id}
-							>
-								{row.cells.map((cell, idx) => {
-									return (
-										<td
-											className="py-3 h-[50px] bg-white first:border-solid  last:border-solid first:rounded-tl-[16px] first:rounded-bl-[16px] last:rounded-br-[16px] last:rounded-tr-[16px]"
-											{...cell.getCellProps()}
-											key={cell.column.id + cell.row.original.id}
-										>
-											{cell.render("Cell")}
-										</td>
-									);
-								})}
-							</tr>
-						);
-					})}
-
+				<InfluencerRows rows={actionRows} prepareRow={prepareRow} />
 				<tr className="w-full" key={"action required"}>
 					<td
 						colSpan={5}
@@ -94,36 +114,7 @@ const InfluencerTable: React.FC<Props> = () => {
 						<div className="w-full h-[2px] opacity-20 bg-[#272830]"></div>
 					</td>
 				</tr>
-
-				{rows
-					.filter((item) => !item.original.alert)
-					.map((row) => {
-						prepareRow(row);
-						return (
-							<tr
-								className="cursor-pointer"
-								onClick={() => handleRowClick(row.original)}
-								style={{
-									boxShadow:
-										"0px 4px 103px rgba(50, 50, 71, 0.01), 0px 4px 59px rgba(50, 50, 71, 0.06)",
-								}}
-								{...row.getRowProps()}
-								key={row.original.id}
-							>
-								{row.cells.map((cell, idx) => {
-									return (
-										<td
-											className="py-3 h-[50px] bg-white first:border-solid  last:border-solid first:rounded-tl-[16px] first:rounded-bl-[16px] last:rounded-br-[16px] last:rounded-tr-[16px]"
-											{...cell.getCellProps()}
-											key={cell.row.id}
-										>
-											{cell.render("Cell")}
-										</td>
-									);
-								})}
-							</tr>
-						);
-					})}
+				<InfluencerRows rows={noActionRows} prepareRow={prepareRow} />
 			</tbody>
 		</table>
 	);

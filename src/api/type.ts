@@ -13,6 +13,7 @@ import {
 	AddNoteData as VideoNote,
 } from '@/modules/dashboard/core/type';
 import { PaymentStatusType } from '@/modules/settings/components/PaymentStatus';
+import { Alerts } from '@/modules/influencers/core/constants';
 
 export type IBase = {
 	id: number,
@@ -94,7 +95,7 @@ export type IOnboardRequest = {
 export type IAlert = {
 	businessChannelId: number,
 	priority: number,
-	name: string,
+	name: Alerts,
 	color: string,
 } & IBase;
 
@@ -165,3 +166,5 @@ export type GetNotes = Response<INote[]>;
 export type CreateOnboardingRequest = Response<IOnboardRequest>;
 export type GetCurrencyList = Response<ICurrency[]>;
 export type UpdateOnboardingRequest = Response<IOnboardRequest>
+
+export type GetAlerts = Response<Array<IAlert & { alertId: number }>>

@@ -9,6 +9,8 @@ import AddInfluencerForm from './Form';
 import { useMutation, useQueryClient } from 'react-query';
 import { ChannelApi } from '@/api/ChannelApi';
 import { handleError } from '@/modules/auth/core/utils';
+import { ContractState } from '../../core/types';
+import { useContract } from '../../hooks/useContract';
 
 const { UPDATE_ONBOARDING, CREATE_ONBOARING } = QUERY_KEYS;
 
@@ -25,21 +27,14 @@ const modalStyles: ReactModal.Styles = {
 	},
 };
 
-export type ContractState = {
-	isOneTime: 'yes' | 'no',
-	uploadFrequency: ContractUploadFrequency,
-	amount: number,
-	currencyId: number,
-	onboardingId: number | null,
-	note: string;
-};
+
 
 const initialData: ContractState = {
-	isOneTime: 'yes',
-	uploadFrequency: '1x',
+	is_one_time: 'yes',
+	upload_frequency: '1x',
 	amount: 0,
-	currencyId: -1,
-	onboardingId: null,
+	currency_id: -1,
+	onboarding_id: null,
 	note: ''
 };
 
@@ -47,54 +42,43 @@ const AddInfluencerModal: React.FC<Props> = (props) => {
 	const { isOpen, handleClose } = props;
 	const queryClient = useQueryClient();
 
-	const [contract, setContract] = useReducer(
-		(state: ContractState, newState: Partial<ContractState>) => {
-			if (newState.isOneTime === 'yes') {
-				newState.uploadFrequency = '1x';
-			}
-			return {
-				...state,
-				...newState,
-			};
-		},
-		initialData
-	);
+	const { data, handleChange, setData } = useContract()
 
 	const updateContract = useMutation(UPDATE_ONBOARDING, {
 		mutationFn: ChannelApi.updateOnboardingRequest,
 		onSuccess() {
 			handleClose();
-			setContract(initialData);
+			setData(initialData);
 		},
 		onError() {
 			const message = `Sorry, there was an error setting up the onboarding request. Please try again with a new link.`;
 			toast.error(message);
 			queryClient.invalidateQueries(CREATE_ONBOARING);
-			setContract(initialData);
+			setData(initialData);
 		},
 	});
 
 	const handleAddModalClose = async () => {
 		if (
-			contract.amount === 0 ||
-			contract.currencyId === -1 ||
-			contract.onboardingId === null
+			data.amount === 0 ||
+			data.currency_id === -1 ||
+			data.onboarding_id === null
 		) {
 			return toast.error(
 				'Please complete the contract details first.'
 			);
 		}
-		const data: UpdateOnboardingRequestData = {
-			amount: contract.amount,
-			is_one_time: contract.isOneTime === 'yes' ? true : false,
-			onboarding_id: contract.onboardingId,
-			currency_id: contract.currencyId,
-			upload_frequency: contract.uploadFrequency,
+		const updatedData: UpdateOnboardingRequestData = {
+			amount: data.amount,
+			is_one_time: data.is_one_time === 'yes' ? true : false,
+			onboarding_id: data.onboarding_id,
+			currency_id: data.currency_id,
+			upload_frequency: data.upload_frequency,
 		}
-		if (contract.note !== '') {
-			data.note = contract.note
+		if (data.note !== '') {
+			updatedData.note = data.note
 		}
-		await updateContract.mutateAsync(data);
+		await updateContract.mutateAsync(updatedData);
 	};
 
 	return (
@@ -104,7 +88,7 @@ const AddInfluencerModal: React.FC<Props> = (props) => {
 			style={modalStyles}
 		>
 			<Suspense fallback={<Loading />}>
-				<AddInfluencerForm data={contract} setData={setContract} />
+				<AddInfluencerForm data={data} handleChange={handleChange} />
 			</Suspense>
 		</Modal>
 	);

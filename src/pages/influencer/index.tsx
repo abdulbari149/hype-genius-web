@@ -4,10 +4,17 @@ import Head from "next/head";
 import { InfluencerContainer, InfluencersDetail } from "@/modules/influencers";
 import { AppState } from "@/store";
 import { useSelector } from "react-redux";
+import { PanelType } from "@/modules/influencers/core/types";
+import Payment from "@/modules/influencers/components/Payment";
+
+const panels: Record<PanelType, React.ReactNode> = {
+	detail: <InfluencersDetail />,
+	payment: <Payment />
+}
 
 const InfluencerPage: NextPage = () => {
 	const isInfluencerSelected = useSelector<AppState, boolean>(state => state.influencers.influencer !== null);
-
+	const panel = useSelector((state: AppState) => state.influencers.panel)
 
 	return (
 		<>
@@ -21,9 +28,9 @@ const InfluencerPage: NextPage = () => {
 			<DashboardLayout>
 				<div className="grid w-full grid-cols-8 gap-3">
 					<InfluencerContainer />
-					{isInfluencerSelected ? (
-						<InfluencersDetail />
-					) : null}
+					{isInfluencerSelected && panel ?
+						panels[panel]
+						: null}
 				</div>
 			</DashboardLayout>
 		</>

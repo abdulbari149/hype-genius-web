@@ -1,30 +1,15 @@
-import { CurrencyApi } from '@/api/CurrencyApi';
 import Selector from '@/components/Selector';
-import React, { useState } from 'react';
-import { useQuery } from 'react-query';
+import React from 'react';
 import { QUERY_KEYS } from 'src/core/constants';
-import { HandleChangeType } from './AddInfluencer/Form';
-const { GET_CURRENCY_LIST } = QUERY_KEYS;
+import CurrencySelector from './CurrencySelector';
+import { ContractState, HandleChangeType } from '../core/types';
+
 interface Props {
-	data: {
-		isOneTime: string,
-		amount: number,
-		uploadFrequency: string,
-		currencyId: number,
-		note: string,
-	};
+	data: Required<Omit<ContractState, 'onboarding_id'>>;
 	handleChange: HandleChangeType;
 }
 
 const Contract: React.FC<Props> = (props) => {
-	const { data } = useQuery(GET_CURRENCY_LIST, {
-		queryFn: CurrencyApi.getCurrentList,
-		suspense: true,
-		onSuccess(data) {
-			props.handleChange('currencyId', data.data[0].id);
-		},
-	});
-
 	return (
 		<div className="space-y-[15px] max-w-[80%]">
 			<h3 className="text-[#272830] text-[18px] font-[600] ">
@@ -43,14 +28,14 @@ const Contract: React.FC<Props> = (props) => {
 						{ id: 2, label: 'Yes', value: 'yes' },
 					]}
 					onChange={(value) => {
-						props.handleChange('isOneTime', value);
+						props.handleChange('is_one_time', value);
 					}}
-					value={props.data.isOneTime}
+					value={props.data.is_one_time}
 					name="isOneTime"
 				/>
 			</div>
 
-			{props.data.isOneTime === 'no' ? (
+			{props.data.is_one_time === 'no' ? (
 				<div className="flex items-center gap-4" key={'monthly'}>
 					<p className="text-[#272830] text-[14px] opacity-80">
 						We pay sponsor them
@@ -76,9 +61,9 @@ const Contract: React.FC<Props> = (props) => {
 								value: 'unlimited',
 							},
 						]}
-						value={props.data.uploadFrequency}
+						value={props.data.upload_frequency}
 						onChange={(value, e) => {
-							props.handleChange('uploadFrequency', value);
+							props.handleChange('upload_frequency', value);
 						}}
 					/>
 					<p className="text-[#272830] text-[14px] opacity-80">
@@ -100,22 +85,11 @@ const Contract: React.FC<Props> = (props) => {
 						per video in
 					</p>
 
-					<Selector
-						className="focus:outline-none focus-within:outline-none hover:outline-none"
-						style={{ backgroundColor: '#ECF0F4' }}
-						type="option"
-						options={
-							data?.data.map((item) => ({
-								id: item.id,
-								label: item.name.toUpperCase(),
-								value: item.id,
-							})) ?? []
+					<CurrencySelector
+						handleChange={(value) =>
+							props.handleChange('currency_id', value)
 						}
-						name="currencyId"
-						onChange={(value) => {
-							props.handleChange('currencyId', value);
-						}}
-						value={props.data.currencyId}
+						value={props.data.currency_id}
 					/>
 				</div>
 			) : (
@@ -139,22 +113,11 @@ const Contract: React.FC<Props> = (props) => {
 						For this video in
 					</p>
 
-					<Selector
-						className="focus:outline-none focus-within:outline-none hover:outline-none"
-						style={{ backgroundColor: '#ECF0F4' }}
-						type="option"
-						options={
-							data?.data.map((item) => ({
-								id: item.id,
-								label: item.name.toUpperCase(),
-								value: item.id,
-							})) ?? []
+					<CurrencySelector
+						handleChange={(value) =>
+							props.handleChange('currency_id', value)
 						}
-						name="currencyId"
-						onChange={(value) => {
-							props.handleChange('currencyId', value);
-						}}
-						value={props.data.currencyId}
+						value={props.data.currency_id}
 					/>
 				</div>
 			)}

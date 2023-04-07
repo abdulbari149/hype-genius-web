@@ -1,6 +1,13 @@
 import React from "react";
 import Selector from "@/components/Selector";
+import { useQuery } from "react-query";
+import { MONTHS, QUERY_KEYS } from '@/core/constants'
+import { useSelector } from "react-redux";
+import { AppState } from "@/store";
+import { VideosApi } from "@/api/VideosApi";
+import moment from 'moment';
 
+const { GET_VIDEOS } = QUERY_KEYS;
 const uploads = [
 	{
 		id: 1,
@@ -35,7 +42,7 @@ const uploads = [
 		amount: 300,
 		views: 20000,
 	},
-  {
+	{
 		id: 4,
 		date: {
 			year: "2023",
@@ -49,6 +56,33 @@ const uploads = [
 ];
 
 const Uploads = () => {
+	const businessChannelId = useSelector<AppState, number | null>((state) => state.influencers.influencer?.id ?? null);
+
+	const { data: uploads, isLoading, isSuccess } = useQuery(`${GET_VIDEOS}/${businessChannelId}`, {
+		queryFn: () => {
+			if (!businessChannelId || businessChannelId === null) {
+				throw new Error("Please select an influencer first");
+			}
+			return VideosApi.getVideos({ businessChannelId });
+		},
+		suspense: true,
+		select(data) {
+			return {
+				...data,
+				data: data.data.map(item => {
+					const uploadDate = new Date(item?.createdAt ?? '');
+					return { ...item, amount: 0, date: { 
+						day: uploadDate.getDate(),
+						year: uploadDate.getFullYear(),
+						month: MONTHS[uploadDate.getMonth()]
+					}
+				}
+				})
+			}
+		}
+	})
+
+
 	return (
 		<div className="flex flex-col w-full">
 			<div className="flex items-center gap-2 mb-[3px]">
@@ -61,7 +95,7 @@ const Uploads = () => {
 			<span className="inline-block w-full opacity-50 bg-stone-400 h-[2px]"></span>
 
 			<div className="flex flex-col gap-1 mt-[10px]">
-				{uploads.map((upload) => {
+				{isSuccess && uploads?.data.length > 0 && uploads?.data?.map((upload) => {
 					return (
 						<div
 							key={upload.id}
@@ -76,15 +110,16 @@ const Uploads = () => {
 								</span>
 							</div>
 
-							<p className="text-[13px] text-[#272830]">{upload.link}</p>
+							<p className="text-[13px] text-[#272830]">{upload.link.length < 35 ? upload.link : upload.link.slice(0, 35) + '...'}</p>
 							<p className="text-[17px] text-[#1C921A]">${upload.amount}</p>
 							<div className="flex items-center gap-1">
 								<span className="text-[17px] text-[#3BACFE]">{upload.views.toLocaleString("en-US")}</span>
-                <span className="text-[11px] text-[#272830]">Views</span>
+								<span className="text-[11px] text-[#272830]">Views</span>
 							</div>
 						</div>
 					);
 				})}
+				{isSuccess && uploads?.data.length === 0 && 'NA'}
 			</div>
 		</div>
 	);

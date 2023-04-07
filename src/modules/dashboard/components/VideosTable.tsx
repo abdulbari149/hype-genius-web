@@ -10,7 +10,7 @@ import { IVideo } from "@/api/type";
 
 const VideosTable = () => {
 	const { data: videos } = useQuery(QUERY_KEYS.GET_VIDEOS, {
-		queryFn: VideosApi.getVideos,
+		queryFn: () => VideosApi.getVideos({}),
 		initialData: { data: [], message: "", status: 200 },
 	});
 

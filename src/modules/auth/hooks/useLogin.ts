@@ -16,7 +16,6 @@ export const useLogin = () => {
 			localStorage.setItem(REFRESH_TOKEN, data.data.refresh_token)
 			dispatch(setUser({ user:  data.data.user }))
 			toast(data.message, { type: "success" });
-			debugger;
 			if (data.data.user.role === "business_admin") {
 				router.replace("/dashboard/business");
 			} else if (data.data.user.role === "influencer") {

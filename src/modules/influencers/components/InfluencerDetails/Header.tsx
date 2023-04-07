@@ -10,13 +10,13 @@ const Header: React.FC<Props> = ({ deal, influencer }) => {
 	return (
 		<div className="flex flex-row justify-between w-full">
 			<div className="">
-				<p className="text-[18px] text-[#272830] font-[600]">
-					{influencer.name}
+				<p className="text-[20px] text-[#272830] font-[600]">
+					{influencer.name.charAt(0).toUpperCase() + influencer.name.slice(1)}
 				</p>
-				<p className="text-[#697AFF] text-[15px]">
+				<p className="text-[#697AFF] text-[17px]">
 					{influencer.email}{' '}
 				</p>
-				<p className="text-[15px] font-normal">
+				<p className="text-[17px] font-normal">
 					{influencer.phoneNumber}
 				</p>
 			</div>

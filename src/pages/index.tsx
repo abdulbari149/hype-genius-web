@@ -1,8 +1,9 @@
-import AuthRoutes from "@/components/Routes/AuthRoutes";
-import { Header, Content, HowItWorks, Footer } from "@/modules/home";
 import Head from "next/head";
+import { NextPageWithLayout } from "./_app";
+import { HomeLayout } from "@/components/Layout";
+import { Content, HowItWorks } from "@/modules/home";
 
-export default function Home() {
+const Home: NextPageWithLayout = () => {
 	return (
 		<>
 			<Head>
@@ -11,14 +12,12 @@ export default function Home() {
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<link rel="icon" href="/hype-genius-logo.png" />
 			</Head>
-			<main className="w-full overflow-x-hidden max-w-screen">
-				<AuthRoutes>
-					<Header />
-					<Content />
-					<HowItWorks />
-					<Footer />
-				</AuthRoutes>
-			</main>
+			<HomeLayout>
+				<Content />
+				<HowItWorks />
+			</HomeLayout>
 		</>
 	);
 }
+
+export default Home;

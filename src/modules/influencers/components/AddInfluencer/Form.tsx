@@ -1,26 +1,21 @@
 import React, { useState } from 'react';
-import Contract, { ContractProps } from '../Contract';
+import Contract from '../Contract';
 import TagsList from '../TagsList';
 import { useQuery } from 'react-query';
 import { QUERY_KEYS } from '@/core/constants';
 import { ChannelApi } from '@/api/ChannelApi';
 import OnboardingLink from '../OnboardingLink';
-import { ContractState } from './Modal';
+import { ContractState, HandleChangeType } from '../../core/types';
 
 const { CREATE_ONBOARING } = QUERY_KEYS;
 
-export type HandleChangeType = (
-	key: keyof ContractState,
-	value: string | number,
-) => Promise<void>;
-
 interface Props {
 	data: ContractState;
-	setData: React.Dispatch<Partial<ContractState>>;
+	handleChange: HandleChangeType;
 }
 
-const AddInfluencerForm: React.FC<Props> = ({ data, setData }) => {
-	const { onboardingId, ...contract } = data;
+const AddInfluencerForm: React.FC<Props> = ({ data, handleChange }) => {
+	const { onboarding_id, ...contract } = data;
 
 	const [enabled, setEnabled] = useState(true);
 	const { data: onboardingData } = useQuery(CREATE_ONBOARING, {
@@ -32,16 +27,12 @@ const AddInfluencerForm: React.FC<Props> = ({ data, setData }) => {
 		refetchOnWindowFocus: false,
 		enabled,
 		onSuccess(data) {
-			setData({ onboardingId: data.data.id });
+			handleChange("onboarding_id", data.data.id)
 		},
 		onSettled() {
 			setEnabled(false);
 		},
 	});
-
-	const handleChange: HandleChangeType = async (key, value) => {
-		setData({ [key]: value });
-	};
 
 	return (
 		<div className="flex flex-col pt-[30px] space-y-[50px] w-full h-full">

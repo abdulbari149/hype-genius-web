@@ -1,14 +1,14 @@
 import { GetInfluencerData } from "@/api/type";
-import { AppState } from "@/store";
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import { PanelType } from "./types";
 
 interface State {
-  influencer: null | GetInfluencerData
+  influencer: null | GetInfluencerData,
+  panel?: PanelType;
 }
 
 const initialState: State = {
-  influencer: null
-
+  influencer: null,
 }
 
 const influencersSlice = createSlice({
@@ -17,10 +17,16 @@ const influencersSlice = createSlice({
   reducers: {
     setInfluencer(state: State, action: PayloadAction<Pick<State, 'influencer'>>) {
       state.influencer = action.payload.influencer
+    },
+    showPanel(state: State, action: PayloadAction<Required<Pick<State, 'panel'>>>) {
+      state.panel = action.payload.panel
+    },
+    hidePanel(state: State, action: PayloadAction) {
+      state.panel = undefined
     }
   }
 })
 
-export const { setInfluencer } = influencersSlice.actions;
+export const { setInfluencer, showPanel, hidePanel } = influencersSlice.actions;
 
 export default influencersSlice;

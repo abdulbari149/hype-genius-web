@@ -10,9 +10,13 @@ import {
 } from "./type";
 
 export class VideosApi {
-	static async getVideos(): Promise<GetVideos> {
+	static async getVideos({ businessChannelId }: { businessChannelId?: number }): Promise<GetVideos> {
 		const token = getAccessToken();
-		const result = await api.get("/videos", {
+		let url = "/videos";
+		if (businessChannelId) {
+			url += `?business_channel_id=${businessChannelId}`
+		}
+		const result = await api.get(url, {
 			headers: { Authorization: `Bearer ${token}` },
 		});
 		return result.data;
