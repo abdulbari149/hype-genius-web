@@ -4,7 +4,7 @@ import React from "react";
 const AccountSettings = () => {
 	return (
 		<Card
-			className="flex flex-col bg-[#FFFFFF]/50 py-6 h-full w-full px-9 gap-2 rounded-lg"
+			className="flex flex-col bg-[#FFFFFF]/50 py-6 h-fit w-full px-9 gap-2 rounded-lg"
 			style={{
 				boxShadow:
 					"0px 4px 103px rgba(50, 50, 71, 0.01), 0px 4px 59px rgba(50, 50, 71, 0.06)",

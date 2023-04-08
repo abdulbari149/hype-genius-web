@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { Dispatch, useReducer } from "react";
 import { ContractState, HandleChangeType } from "../core/types";
 
 const initialData: ContractState = {
@@ -10,9 +10,17 @@ const initialData: ContractState = {
   note: ''
 } as const;
 
-type UseContract = () => ({ data: ContractState, handleChange: HandleChangeType, setData: React.Dispatch<React.SetStateAction<ContractState>> })
+type UseContractReturn = { 
+  data: ContractState,
+  handleChange: HandleChangeType, 
+  setData: Dispatch<Partial<ContractState>>, 
+  resetData: () => void 
+}
 
-export const useContract: UseContract = () => {
+type UseContract = (initial?: ContractState) => UseContractReturn
+
+export const useContract: UseContract = (initial = initialData) => {
+  
   const [contract, setContract] = useReducer(
     (state: ContractState, newState: Partial<ContractState>) => {
       if (newState.is_one_time === 'yes') {
@@ -23,7 +31,7 @@ export const useContract: UseContract = () => {
         ...newState,
       };
     },
-    initialData
+    initial
   );
   return {
     data: contract,
@@ -31,5 +39,6 @@ export const useContract: UseContract = () => {
       setContract({ [key]: value })
     },
     setData: setContract,
+    resetData: () => setContract(initialData)
   }
 }

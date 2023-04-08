@@ -1,5 +1,4 @@
-import { ContractState } from './../modules/influencers/components/AddInfluencer/Modal';
-import { TagType } from '@/modules/influencers/core/types';
+import { ContractState, TagType } from '@/modules/influencers/core/types';
 import { Response } from '@/core/axios';
 import {
 	BusinessSignupData,
@@ -71,16 +70,27 @@ export type ContractUploadFrequency = | '1x'
 
 export type ContractDataFields = 'amount' | 'currency_id' | 'is_one_time' | "upload_frequency"
 
-export type IContract = {
+export type ContractData = {
 	amount: number,
 	currency_id: number,
 	is_one_time: boolean,
 	upload_frequency: ContractUploadFrequency
-} & IBase
+}
+export type IContract = ContractData & IBase
 
 export type Empty<T> = {
 	[P in keyof T]?: T[P] | null | undefined;
 };
+type SnakeToCamelCase<S extends string> =
+	S extends `${infer T}_${infer U}` ?
+	`${Lowercase<T>}${Capitalize<SnakeToCamelCase<U>>}` :
+	S
+
+type SnakeToCamelCaseNested<T> = T extends object ? {
+	[K in keyof T as SnakeToCamelCase<K & string>]: SnakeToCamelCaseNested<T[K]>
+} : T
+
+
 
 type NullableContract = Empty<Pick<IContract, ContractDataFields>>
 
@@ -104,7 +114,6 @@ export type ITag = IBase & {
 	color: string;
 	businessChannelId: number;
 }
-export type IContract2 = IBase & Omit<ContractState, 'note'>
 
 export interface GetInfluencerData {
 	id: number;
@@ -113,7 +122,7 @@ export interface GetInfluencerData {
 	influencer: Omit<IUser, 'password' | 'roleId' | 'role'>;
 	alert: IAlert | null;
 	tags: Array<ITag> | null;
-	contract: IContract2 | null;
+	contract: IBase & SnakeToCamelCaseNested<Pick<IContract, 'amount' | 'currency_id' | 'is_one_time' | 'upload_frequency'>> | null;
 	channel: Omit<IChannel, 'influencer_id'> & { influencerId: number; }
 	paymentStatus: PaymentStatusType
 }
@@ -148,6 +157,8 @@ export type UpdateOnboardingRequestData = {
 	onboarding_id: number,
 	note?: string;
 } & NullableContract;
+export type CreateContractData = ContractData & { business_channel_id: number }
+export type UpdateContractData = Empty<ContractData> & { business_channel_id: number, id: number }
 
 export type RegisterBusiness = Response<BusinessSignupApiData>;
 export type RegisterChannel = Response<ChannelSignupApiData>;
@@ -160,11 +171,10 @@ export type GetVideos = Response<IVideo[]>;
 export type CreateVideo = Response<IVideo>;
 export type AddNote = Response<INote>;
 export type CreateActivity = Response<INote & { pinned: boolean }>;
-
 export type GetActivityList = Response<Array<INote & { pinned: boolean }>>;
 export type GetNotes = Response<INote[]>;
 export type CreateOnboardingRequest = Response<IOnboardRequest>;
 export type GetCurrencyList = Response<ICurrency[]>;
 export type UpdateOnboardingRequest = Response<IOnboardRequest>
-
+export type CreateContract = Response<IContract>
 export type GetAlerts = Response<Array<IAlert & { alertId: number }>>

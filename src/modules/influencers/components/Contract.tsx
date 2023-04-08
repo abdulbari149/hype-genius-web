@@ -77,7 +77,10 @@ const Contract: React.FC<Props> = (props) => {
 						name="amount"
 						value={props.data.amount}
 						onChange={(e) => {
-							props.handleChange('amount', e.target.value);
+							const value = parseInt(e.target.value);
+							if (!isNaN(value)){ 
+								props.handleChange('amount', value);
+							}
 						}}
 					/>
 
@@ -87,7 +90,7 @@ const Contract: React.FC<Props> = (props) => {
 
 					<CurrencySelector
 						handleChange={(value) =>
-							props.handleChange('currency_id', value)
+							props.handleChange('currency_id', parseInt(value.toString()))
 						}
 						value={props.data.currency_id}
 					/>
@@ -105,7 +108,10 @@ const Contract: React.FC<Props> = (props) => {
 						name="amount"
 						value={props.data.amount}
 						onChange={(e) => {
-							props.handleChange('amount', e.target.value);
+							const value = parseInt(e.target.value);
+							if (!isNaN(value)){ 
+								props.handleChange('amount', value);
+							}
 						}}
 					/>
 
@@ -115,7 +121,7 @@ const Contract: React.FC<Props> = (props) => {
 
 					<CurrencySelector
 						handleChange={(value) =>
-							props.handleChange('currency_id', value)
+							props.handleChange('currency_id', parseInt(value.toString()))
 						}
 						value={props.data.currency_id}
 					/>

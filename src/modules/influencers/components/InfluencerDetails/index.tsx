@@ -8,22 +8,25 @@ import Uploads from './Uploads';
 import Activities from './Activities';
 import EditInfluencerModal from '../EditInfluencerModal';
 import { AppState } from '@/store';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import InfluencerSidePanel from '../InfluencerSidePanel';
+import { hideIsEdit, showIsEdit } from '../../core/slice';
 
-interface Props {}
+interface Props { }
 
 const InfluencersDetail: React.FC<Props> = () => {
-	const [isEditOpen, setIsEditOpen] = useState(false);
+	const isEditOpen = useSelector((state: AppState) => state.influencers.isEditOpen);
+	const dispatch = useDispatch();
 	function openIsEdit() {
-		setIsEditOpen(true);
+		dispatch(showIsEdit())
 	}
 	function closeIsEdit() {
-		setIsEditOpen(false);
+		dispatch(hideIsEdit())
 	}
 
 	const { channelLink = '', ...data } = useSelector((state: AppState) => {
 		const { influencer: data } = state.influencers;
+		const tags = data?.tags && Array.isArray(data?.tags) ? data.tags : [];
 		return {
 			influencer: {
 				email: data?.influencer.email ?? '',
@@ -37,6 +40,7 @@ const InfluencersDetail: React.FC<Props> = () => {
 				perMonth: data?.contract?.uploadFrequency ?? '',
 				perVideo: data?.contract?.amount.toString(10) ?? 0,
 			},
+			tag: tags.length > 0 ? { text: tags[0].name, color: tags[0].color } : null,
 			channelLink: data?.channel.link,
 		};
 	});

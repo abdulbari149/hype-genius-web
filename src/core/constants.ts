@@ -9,7 +9,9 @@ export const QUERY_KEYS = {
 	GET_CURRENCY_LIST: 'currency/get',
 	ADD_ACTIVITY: 'activity/add',
 	GET_ACTIVITIES: 'activity/get',
-	GET_ALERTS: 'alerts/get'
+	GET_ALERTS: 'alerts/get',
+	CREATE_CONTRACT: 'contract/create',
+	UPDATE_CONTRACT: "contract/update"
 };
 
 export const MONTHS = ['Jan', 'Feb', 'March', 'April', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']

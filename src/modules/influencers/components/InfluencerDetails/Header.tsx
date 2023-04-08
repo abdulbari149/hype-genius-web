@@ -1,12 +1,14 @@
 import React from 'react';
 import Tag from '@/components/Tag';
+import { TagType } from '../../core/types';
 
 interface Props {
 	influencer: { email: string, name: string, phoneNumber: string };
 	deal: { perVideo: number | string, perMonth: string | number };
+	tag: TagType | null
 }
 
-const Header: React.FC<Props> = ({ deal, influencer }) => {
+const Header: React.FC<Props> = ({ deal, influencer, tag }) => {
 	return (
 		<div className="flex flex-row justify-between w-full">
 			<div className="">
@@ -22,11 +24,13 @@ const Header: React.FC<Props> = ({ deal, influencer }) => {
 			</div>
 
 			<div className="space-y-2">
-				<Tag
-					text="Partner"
-					color="#7187FB80"
-					className="px-2 ml-auto w-fit"
-				/>
+				{!!tag ?
+					<Tag
+						{...tag}
+						className="px-2 ml-auto w-fit"
+					/>
+					: null}
+
 
 				<div className="flex items-center gap-3">
 					<div className="">
