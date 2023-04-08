@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo } from "react";
+import React, { useMemo } from "react";
 import { Row, useTable } from "react-table";
 import { columns as influencersColumns } from "../core/columns";
 import { useQuery } from "react-query";

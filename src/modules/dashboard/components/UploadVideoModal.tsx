@@ -62,14 +62,14 @@ const UploadVideoModal: React.FC<UploadVideoModalProps> = ({
 			<div className="flex flex-col pt-[30px] space-y-[50px] w-full h-full">
 				<h3 className="text-[#272830] text-[18px] font-[600] ">New Video</h3>
 				<Formik
-					initialValues={{ title: "", link: "" }}
+					initialValues={{ link: "" }}
 					validationSchema={toFormikValidationSchema(uploadVideoSchema)}
 					onSubmit={onSubmit}
 				>
 					{(formik) => {
 						return (
 							<>
-								<div className="flex flex-col gap-5 w-[70%]">
+								{/* <div className="flex flex-col gap-5 w-[70%]">
 									<label
 										className="text-[#272830] text-[18px] font-[600]"
 										htmlFor="videoLink"
@@ -84,7 +84,7 @@ const UploadVideoModal: React.FC<UploadVideoModalProps> = ({
 										placeholder="Insert Link Here"
 										className="font-normal px-4 py-3 bg-[#ECF0F4] rounded-xl px-1 text-[16px] w-full border-none outline-none hover:border-none hover:outline-none focus:outline-none focus-within:outline-none"
 									/>
-								</div>
+								</div> */}
 								<div className="flex flex-col gap-5 w-[70%]">
 									<label
 										className="text-[#272830] text-[18px] font-[600]"

@@ -18,9 +18,9 @@ const Header: React.FC<{ title: string; className?: string }> = ({
 export const columns: ReadonlyArray<Column<IVideo>> = [
 	{
 		id: "title",
-		Header: <Header title="View Title" />,
+		Header: <Header title="Video Title" />,
 		Cell: (props: CellProps<IVideo>) => (
-			<p className="pl-5 text-[17px] text-[#272830] opacity-75 font-normal">
+			<p className="pl-3 text-[17px] max-w-[300px] w-fit text-[#272830] opacity-75 font-normal">
 				{props.data[props.row.index].title}
 			</p>
 		),
