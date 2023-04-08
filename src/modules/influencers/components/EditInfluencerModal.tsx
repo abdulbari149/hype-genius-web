@@ -58,12 +58,12 @@ const EditInfluencerModal: React.FC<EditInfluencerModalProps> = ({
 	const business_channel_id = useSelector((state: AppState) => state.influencers.influencer?.id);
 	const updateContract = useUpdateContract()
 	const createContract = useCreateContract()
-	
-
 
 	useEffect(() => {
-		setData(contract)
-	}, [business_channel_id, contract])
+		if (isOpen){
+			setData(contract);
+		}
+	}, [isOpen])
 
 	async function onSave() {
 		if (!business_channel_id) return;
