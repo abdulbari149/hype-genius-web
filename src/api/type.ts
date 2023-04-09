@@ -101,6 +101,12 @@ type SnakeToCamelCaseNested<T> = T extends object ? {
 
 type NullableContract = Empty<Pick<IContract, ContractDataFields>>
 
+export interface Partnership {
+	id: number;
+	name: string;
+}
+
+
 export type IOnboardRequest = {
 	link: string;
 	business_id: number;
@@ -213,4 +219,8 @@ export type GetBusinessAnalytics = Response<{
 	spent: number,
 	roas: number,
 	active_partners: number,
+}>
+export type GetInfluencerOnboarding = Response<{
+	currentPartnerShips: Partnership[],
+	newPartnerShip: Partnership
 }>

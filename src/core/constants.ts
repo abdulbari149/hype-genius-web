@@ -16,7 +16,8 @@ export const QUERY_KEYS = {
 	UPDATE_CONTRACT: "contract/update",
 	CREATE_PAYMENT: 'payment/create',
 	GET_REPORT: 'report/get',
-	GET_ANALYTICS: 'analytics/get'
+	GET_ANALYTICS: 'analytics/get',
+	GET_INFLUENCER_ONBOARDINGS: 'influencer-onboardings/get'
 };
 
 export const MONTHS = ['Jan', 'Feb', 'March', 'April', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']

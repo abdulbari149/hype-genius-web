@@ -1,6 +1,7 @@
 import { api } from "@/core/axios";
 import { getAccessToken } from "../modules/auth/core/utils";
 import {
+	GetInfluencerOnboarding,
 	Login,
 	LoginData,
 	Me,
@@ -47,4 +48,14 @@ export class AuthApi {
 		});
 		return result.data;
 	};
+
+	static async getInfluncerNewOnboardings(token: string): Promise<GetInfluencerOnboarding> {
+		const result = await api.get(`/auth/influencer/onboarding/${token}`);
+		return result.data;
+	}
+
+	static async confirmOnboarding(token: string): Promise<GetInfluencerOnboarding> {
+		const result = await api.post(`/auth/influencer/onboarding/${token}`);
+		return result.data;
+	}
 }
