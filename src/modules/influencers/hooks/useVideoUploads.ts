@@ -37,7 +37,9 @@ export const useVideoUploads = (args: UseVideoUploadArgs, options: UseVideoUploa
 		const videos = data.data.map(item => {
 			const uploadDate = new Date(item?.createdAt ?? '');
 			return {
-				...item, amount: 0, date: {
+				...item, 
+				amount: item?.payment?.business_amount ?? 0, 
+				date: {
 					day: uploadDate.getDate(),
 					year: uploadDate.getFullYear(),
 					month: MONTHS[uploadDate.getMonth()]

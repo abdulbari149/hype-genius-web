@@ -42,6 +42,8 @@ export type IChannel = {
 	influencer_id: number,
 } & IBase;
 
+export type IPayment = Omit<CreatePaymentData,'video_id'> & IBase
+
 export type IVideo = {
 	link: string,
 	title: string,
@@ -49,6 +51,7 @@ export type IVideo = {
 	is_payment_due: boolean,
 	payment_id: number | null,
 	business_channel_id: number,
+	payment: IPayment | null
 } & IBase;
 
 export type INote = {
