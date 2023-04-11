@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef } from "react";
 
 const defaultTimeOptions = [
 	{
@@ -41,9 +41,9 @@ interface CustomOptionSelector {
 	options: Option[];
 }
 
-const Selector: React.FC<
-	SelectorProps & (TimeSelector | CustomOptionSelector)
-> = ({
+type Props = SelectorProps & (TimeSelector | CustomOptionSelector)
+
+const SelectorComponent: React.ForwardRefRenderFunction<HTMLSelectElement, Props> = ({
 	style = {},
 	className = "",
 	customClassName,
@@ -51,7 +51,7 @@ const Selector: React.FC<
 	type,
 	onChange = (value, e) => {},
 	...props
-}) => {
+}, ref) => {
 	let selectOptions: Array<Option> = [];
 	if (!options) selectOptions = defaultTimeOptions;
 	else if (typeof options === "function")
@@ -60,6 +60,7 @@ const Selector: React.FC<
 
 	return (
 		<select
+			ref={ref}
 			className={
 				!customClassName
 					? `bg-[#ffffff] px-4 pr-7 py-2 rounded-xl text-[13px] ${className}`
@@ -73,7 +74,7 @@ const Selector: React.FC<
 				WebkitAppearance: "none",
 				backgroundImage: `url(/downArrow.png)`,
 				backgroundRepeat: "no-repeat",
-				backgroundPosition: "calc(100% - 12px) center",
+				backgroundPosition: "calc(100% - 15px) center",
 				backgroundSize: "10px",
 				...style,
 			}}
@@ -91,4 +92,4 @@ const Selector: React.FC<
 	);
 };
 
-export default Selector;
+export default forwardRef<HTMLSelectElement, Props>(SelectorComponent);

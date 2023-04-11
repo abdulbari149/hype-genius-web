@@ -3,7 +3,7 @@ import Selector from "@/components/Selector";
 import { useVideoUploads } from "../../hooks/useVideoUploads";
 
 const Uploads = () => {
-	const { data: uploads, isSuccess } = useVideoUploads()
+	const { data: uploads, isSuccess } = useVideoUploads({})
 	return (
 		<div className="flex flex-col w-full">
 			<div className="flex items-center gap-2 mb-[3px]">

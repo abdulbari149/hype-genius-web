@@ -1,17 +1,62 @@
-import React, { useState } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import Card from '@/components/Card';
 import CurrencySelector from '@/modules/influencers/components/CurrencySelector';
 import Select from 'react-select';
+import CoversionRatePresets from './CoversionRatePresets';
+import { useDebounce } from 'usehooks-ts';
+import { useMyBusiness } from '../hooks/useMyBusiness';
+import { UpdateBusinessData } from '@/api/type';
+import { useUpdateBusiness } from '../hooks/useUpdateBusiness';
+import { useDebouncedCallback } from 'use-debounce';
+import { useQueryClient } from 'react-query';
 
-const options = [
-	{ value: 'chocolate', label: 'Chocolate' },
-	{ value: 'strawberry', label: 'Strawberry' },
-	{ value: 'vanilla', label: 'Vanilla' },
-];
+const initialState: UpdateBusinessData = {
+	acrvv: 0,
+	customer_ltv: 0,
+	default_currency_id: null,
+};
 
 const CustomerSettings: React.FC<{}> = () => {
-	const [selectedOption, setSelectedOption] = useState<string | null>(null);
-	const [currencyId, setCurrencyId] = useState(0);
+	const [state, setState] = useState<UpdateBusinessData>({});
+	const { data: business, isSuccess, isFetched } = useMyBusiness({
+		onSuccess(data) { 
+			console.log(data);
+			const state: UpdateBusinessData = {
+				acrvv: data.data.acrvv,
+				customer_ltv: data.data.customer_ltv ? parseInt(data.data.customer_ltv?.toString(), 10) : 0,
+        default_currency_id: data.data.default_currency_id,	
+			}
+			console.log(state)
+			setState(state);
+		},
+	});
+
+
+	const updateMyBusiness = useUpdateBusiness();
+	const debouncedState = useDebounce(state, 1000);
+	const handleState = (state: Partial<UpdateBusinessData>) => {
+			setState((prevState) => ({
+				...prevState,
+				...state,
+			}));
+	}
+
+	const removeEmptyValues = <T extends Record<string, unknown>>(obj: T) => {
+		return Object.keys(obj).reduce((acc: Partial<T>, key: keyof T) => {
+      if (obj[key] !== undefined || obj[key] !== null) {
+				acc[key] = obj[key]
+      }
+      return acc;
+    }, {});
+	}
+
+	useEffect(() => {
+		if (isFetched) {
+			const data = removeEmptyValues(debouncedState);
+			updateMyBusiness.mutateAsync(data)
+		}
+	}, [debouncedState])
+
 
 	return (
 		<Card
@@ -24,10 +69,16 @@ const CustomerSettings: React.FC<{}> = () => {
 			<div className="flex items-center gap-3">
 				<p className="font-normal text-[18px]">Default Currency</p>
 				<CurrencySelector
-					value={currencyId}
-					handleChange={(value, e) =>
-						setCurrencyId(parseInt(value.toString()))
-					}
+					value={state?.default_currency_id ?? 0}
+					handleChange={(value, e) => {
+						const default_currency_id = parseInt(
+							value.toString(),
+							10
+						);
+						if (isNaN(default_currency_id)) return;
+						handleState({ default_currency_id });
+					}}
+					name="default_currency_id"
 				/>
 			</div>
 			<div className="flex items-center justify-start gap-3">
@@ -37,6 +88,18 @@ const CustomerSettings: React.FC<{}> = () => {
 				<div className="flex items-center max-w-[150px] w-full gap-2 justify-center px-3 py-2  w-[110px] rounded-xl h-fit bg-[#EAEEF3] ">
 					<span className="text-[#272830]">$</span>
 					<input
+						value={state?.customer_ltv ?? 0}
+						name="customer_ltv"
+						onChange={(e) => {
+							const customer_ltv = parseInt(
+								e.target.value,
+								10
+							);
+							if (isNaN(customer_ltv)) return;
+							handleState({
+								customer_ltv,
+							});
+						}}
 						placeholder="enter here"
 						className="opacity-70 text-md w-full bg-[#EAEEF3] focus:outline-none focus-within:outline-none hover:outline-none"
 					/>
@@ -54,6 +117,16 @@ const CustomerSettings: React.FC<{}> = () => {
 						<div className="flex items-center max-w-[150px] w-full gap-2 justify-center px-3 py-2  w-[110px] rounded-xl h-fit bg-[#EAEEF3] ">
 							<span className="text-[#272830]">%</span>
 							<input
+								value={state?.acrvv ?? 0}
+								name="acrvv"
+								onChange={(e) => {
+									const acrvv = parseInt(
+										e.target.value,
+										10
+									);
+									if (isNaN(acrvv)) return;
+									handleState({ acrvv });
+								}}
 								placeholder="enter here"
 								className="opacity-70 text-md w-full bg-[#EAEEF3] "
 							/>
@@ -72,56 +145,12 @@ const CustomerSettings: React.FC<{}> = () => {
 							<option className='bg-[#EAEEF3] py-2 inline-block opacity-70 text-[#001CFF80]' value={0.07}>Medium 0.07%</option>
 							<option className='bg-[#EAEEF3] py-2 inline-block opacity-70 text-[#FF6D6D]' value={0.11}>High 0.11%</option>
 						</select> */}
-						<Select
-							defaultValue={selectedOption}
-							onChange={(value) => {
-								setSelectedOption(value)
+						<CoversionRatePresets
+						 	defaultValue={business?.data?.acrvv}
+							value={state?.acrvv}
+							setConversionRate={(value) => {
+								handleState({ acrvv: value });
 							}}
-							className='ml-5'
-							styles={{
-								control: (base) => ({
-								  ...base,
-									backgroundColor: '#EAEEF3',
-									display: 'flex',
-									borderRadius: 10,
-									paddingLeft: 5,
-									border: 0,
-									outline: 0,
-									":focus": {
-										border: 0,
-										outline: 0,
-									},
-									":focus-within": {
-										border: 0,
-										outline: 0,
-									},
-									":hover": {
-										border: 0,
-										outline: 0,
-									}
-								}),
-								option(base, props) {
-									return { 
-										backgroundColor: '#EAEEF3',
-									}
-								},
-							}}
-							components={{
-								IndicatorSeparator: () => null
-							}}
-							placeholder="Select"
-							options={[
-								{
-									label: 'Medium 0.07%',
-									options: ['0.07'],
-								},
-								{
-									label: 'Low 0.03%',
-									options: ['0.03'],
-								},
-							]}
-							isMulti={false}
-							defaultMenuIsOpen
 						/>
 					</div>
 				</div>

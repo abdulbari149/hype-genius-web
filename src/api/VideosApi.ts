@@ -8,13 +8,22 @@ import {
 	GetNotes,
 	GetVideos,
 } from "./type";
+import { UseVideoUploadArgs } from "@/modules/influencers/hooks/useVideoUploads";
 
 export class VideosApi {
-	static async getVideos({ businessChannelId }: { businessChannelId?: number }): Promise<GetVideos> {
+	static async getVideos(query: { businessChannelId?: number } & UseVideoUploadArgs): Promise<GetVideos> {
 		const token = getAccessToken();
 		let url = "/videos";
-		if (businessChannelId) {
-			url += `?business_channel_id=${businessChannelId}`
+
+		const params = []
+		if (query?.businessChannelId !== undefined && query.businessChannelId !== null) {
+			params.push(`business_channel_id=${query.businessChannelId}`)
+		}
+		if (query?.is_payment_due !== undefined && query.is_payment_due !== null) {
+			params.push(`is_payment_due=${query.is_payment_due}`)
+		}
+		if (params.length > 0) {
+			url += '?' + params.join('&')
 		}
 		const result = await api.get(url, {
 			headers: { Authorization: `Bearer ${token}` },

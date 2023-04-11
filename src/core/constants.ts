@@ -6,12 +6,15 @@ export const QUERY_KEYS = {
 	GET_INFLUENCERS: 'influencers/get',
 	CREATE_ONBOARING: 'onboarding/create',
 	UPDATE_ONBOARDING: 'onboarding/update',
+	GET_MY_BUSINESS: 'my-business/get',
+	UPDATE_BUSINESS: 'business/update',
 	GET_CURRENCY_LIST: 'currency/get',
 	ADD_ACTIVITY: 'activity/add',
 	GET_ACTIVITIES: 'activity/get',
 	GET_ALERTS: 'alerts/get',
 	CREATE_CONTRACT: 'contract/create',
-	UPDATE_CONTRACT: "contract/update"
+	UPDATE_CONTRACT: "contract/update",
+	CREATE_PAYMENT: 'payment/create',
 };
 
 export const MONTHS = ['Jan', 'Feb', 'March', 'April', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']

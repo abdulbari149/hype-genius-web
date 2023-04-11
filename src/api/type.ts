@@ -31,6 +31,9 @@ export type IBusiness = {
 	link: string,
 	onboardingLink: string,
 	adminId: number,
+	default_currency_id: number | null;
+	customer_ltv: number | null;
+	acrvv: number | null;
 } & IBase;
 
 export type IChannel = {
@@ -159,12 +162,22 @@ export type UpdateOnboardingRequestData = {
 } & NullableContract;
 export type CreateContractData = ContractData & { business_channel_id: number }
 export type UpdateContractData = Empty<ContractData> & { business_channel_id: number, id: number }
+export type CreatePaymentData = {  
+	video_id: number;
+	business_channel_id: number;
+	channel_currency_id: number;
+	business_currency_id: number;
+	business_amount: number;
+	channel_amount: number;
+}
+export type UpdateBusinessData = Partial<Pick<IBusiness, 'acrvv' | 'customer_ltv' | 'default_currency_id'>>
 
 export type RegisterBusiness = Response<BusinessSignupApiData>;
 export type RegisterChannel = Response<ChannelSignupApiData>;
 export type Login = Response<LoginApiData>;
 export type Me = Response<Pick<LoginApiData, 'user'>>;
-export type GetMyBusiness = Response<IBusiness>;
+export type GetMyBusiness = Response<IBusiness & { default_currency: ICurrency }>;
+export type UpdateBusiness = Response<IBusiness>;
 export type GetAllBusineess = Response<IBusiness[]>;
 export type GetInfluencers = Response<GetInfluencerData[]>;
 export type GetVideos = Response<IVideo[]>;

@@ -1,32 +1,84 @@
-import React from 'react';
+import React, { useMemo, useRef } from 'react';
 import InfluencerSidePanel from './InfluencerSidePanel';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppState } from '@/store';
-import Field from '@/components/Field';
-import { Formik } from 'formik';
+import {
+  Formik,
+  FormikComputedProps,
+  FormikConfig,
+  FormikHandlers,
+  FormikProps,
+} from 'formik';
 import { BiDollar } from 'react-icons/bi';
 import { showPanel } from '../core/slice';
 import CurrencySelector from './CurrencySelector';
+import { useVideoUploads } from '../hooks/useVideoUploads';
+import Selector from '@/components/Selector';
+import { useCreatePayment } from '../hooks/useCreatePayment';
+import { toFormikValidationSchema } from 'zod-formik-adapter';
+import {
+  CreatePaymentData,
+  createPaymentSchema,
+  paymentDataSchema,
+} from '../core/schema';
+import { ZodError, z } from 'zod';
+import { toast } from 'react-toastify';
+import { useMyBusiness } from '@/modules/settings/hooks/useMyBusiness';
+import VideoSelector from './VideoSelector';
 
-type PaymentValues = { amount: number | null, currencyId: number | null }
-
-const initialValues: PaymentValues = { 
-  amount: null, 
-  currencyId: null
-}
+const initialValues: CreatePaymentData = {
+  business_amount: 0,
+  channel_amount: 0,
+  channel_currency_id: undefined,
+  business_currency_id: undefined,
+  video_id: undefined,
+};
 
 const Payment = () => {
+  const { data: myBusiness } = useMyBusiness({});
+
   const data = useSelector(
     (state: AppState) => state.influencers.influencer
   );
   const dispatch = useDispatch();
+
+
+  const createPayment = useCreatePayment();
+
   if (!data) return <></>;
 
-  const onSubmit = () => { };
+  const onSubmit: FormikConfig<CreatePaymentData>['onSubmit'] = async (
+    values,
+    helpers
+  ) => {
+    if (!myBusiness || !myBusiness?.data?.default_currency?.id) return;
+    try { 
+      const data = await paymentDataSchema.parseAsync({
+        ...values,
+        business_currency_id: myBusiness.data.default_currency.id,
+        channel_currency_id: values?.channel_currency_id ? parseInt(values?.channel_currency_id.toString(), 10) : undefined,
+      });
+      await createPayment.mutateAsync(data);
+    } catch (error) {
+      if (error instanceof ZodError) {
+        console.log(error);
+        toast.error(error.errors[0].message);
+      } else if (error instanceof Error) {
+        toast.error(error.message);
+      }
+      helpers.setSubmitting(false);
+    }
+  };
 
   return (
     <InfluencerSidePanel>
-      <Formik initialValues={initialValues} onSubmit={onSubmit}>
+      <Formik
+        initialValues={initialValues}
+        onSubmit={onSubmit}
+        validateSchema={toFormikValidationSchema(
+          createPaymentSchema
+        )}
+      >
         {(formik) => (
           <div className="flex flex-col items-start w-full gap-6 px-[50px] mt-4 mb-[90px]">
             <button
@@ -94,56 +146,94 @@ const Payment = () => {
                 </div>
               </div>
             </div>
-            <div className='space-y-2'>
+            <div className="space-y-2">
               <p className="text-black text-[17px]">
                 Amount Paid in Default Account Currency
-                (CAD)
+                (
+                {myBusiness?.data?.default_currency.name.toUpperCase()}
+                )
               </p>
-              <div className='bg-[#ECF0F4] max-w-[180px] rounded-xl flex items-center px-4 py-2 gap-3'>
+              <div className="bg-[#ECF0F4] max-w-[180px] rounded-xl flex items-center px-4 py-2 gap-3">
                 <BiDollar size={22} />
                 <input
                   type="text"
-                  className="bg-transparent w-full focus-within:outline-none focus:outline-none hover:outline-none outline-none"
+                  className="w-full bg-transparent outline-none focus-within:outline-none focus:outline-none hover:outline-none"
                   placeholder="enter here"
-                  name="amount"
-                  value={formik?.values?.amount ?? undefined}
-                  onChange={formik.handleChange}
+                  name="business_amount"
+                  value={
+                    formik?.values
+                      ?.business_amount ??
+                    undefined
+                  }
+                  onChange={(e) => {
+                    const value = parseFloat(e.target.value);
+                    if (isNaN(value)) return;
+                    formik.handleChange(e)
+                  }}
                 />
               </div>
             </div>
 
-            <div className='space-y-2'>
+            <div className="space-y-2">
               <p className="text-black text-[17px]">
                 Currency to Display on Influencer End
               </p>
-              <div className='flex gap-4'>
-					<CurrencySelector
-						handleChange={(value, e) => {
-              if (!e){
-                formik.setFieldValue('currencyId', value);
-              } else {
-                formik.handleChange('currencyId')(e);
-              }
-            }}
-						value={formik.values.currencyId ?? 0}
-					/>
-              <div className='bg-[#ECF0F4] max-w-[180px] rounded-xl flex items-center px-4 py-2 gap-3'>
-                <BiDollar size={22} />
-                <input
-                  type="text"
-                  className="bg-transparent w-full focus-within:outline-none focus:outline-none hover:outline-none outline-none"
-                  placeholder="enter here"
-                  name="amount"
-                  value={formik?.values?.amount ?? undefined}
-                  onChange={formik.handleChange}
+              <div className="flex gap-4">
+                <CurrencySelector
+                  handleChange={(value, e) => {
+                    if (!e) {
+                      formik.setFieldValue(
+                        'channel_currency_id',
+                        value
+                      );
+                      console.log(value);
+                    } else {
+                      formik.handleChange(
+                        'channel_currency_id'
+                      )(e);
+                    }
+                  }}
+                  value={
+                    formik.values
+                      .channel_currency_id ?? 0
+                  }
+                  name={'channel_currency_id'}
                 />
-              </div>
+                <div className="bg-[#ECF0F4] max-w-[180px] rounded-xl flex items-center px-4 py-2 gap-3">
+                  <BiDollar size={22} />
+                  <input
+                    type="text"
+                    className="w-full bg-transparent outline-none focus-within:outline-none focus:outline-none hover:outline-none"
+                    placeholder="enter here"
+                    name="channel_amount"
+                    value={
+                      formik?.values
+                        ?.channel_amount ??
+                      undefined
+                    }
+                    onChange={(e) => {
+                      const value = parseFloat(e.target.value);
+                      if (isNaN(value)) return;
+                      formik.handleChange(e)
+                    }}
+                  />
+                </div>
               </div>
             </div>
-
-            <button className="bg-[#EF539E] px-4 py-2 rounded-xl text-white">
-					Payment Confirmed
-				</button>
+            <VideoSelector
+              name={"video_id"}
+              value={formik.values.video_id ?? 0}
+            />
+            <button
+              onClick={(e) => {
+                e.preventDefault();
+                formik.handleSubmit();
+              }}
+              type="submit"
+              className="bg-[#EF539E] px-4 py-2 rounded-xl text-white"
+            >
+              Payment Confirmed
+            </button>
           </div>
         )}
       </Formik>

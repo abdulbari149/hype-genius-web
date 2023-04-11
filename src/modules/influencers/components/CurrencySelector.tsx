@@ -1,23 +1,30 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { CurrencyApi } from '@/api/CurrencyApi';
 import Selector from '@/components/Selector';
 import { useQuery } from 'react-query';
 import { QUERY_KEYS } from 'src/core/constants';
 const { GET_CURRENCY_LIST } = QUERY_KEYS;
 type Props = {
+  name?: string;
   value: number;
   handleChange: (value: number | string, e?: React.ChangeEvent<HTMLSelectElement>) => void;
 }
 
-const CurrencySelector: React.FC<Props> = ({ value, handleChange }) => {
+const CurrencySelector: React.FC<Props> = ({ name = "currencyId", value, handleChange }) => {
 
   const { data } = useQuery(GET_CURRENCY_LIST, {
 		queryFn: CurrencyApi.getCurrentList,
 		suspense: true,
-		onSuccess(data) {
-			handleChange(data.data[0].id);
-		},
+    retry: false,
+    cacheTime: 24 * 60 * 60 * 7
 	});
+
+  useEffect(() => {
+    if (data) {
+      console.log('Setting Currency')
+      handleChange(data.data[0].id);
+    }
+  }, [data])
 
   return (
     <Selector
@@ -31,7 +38,7 @@ const CurrencySelector: React.FC<Props> = ({ value, handleChange }) => {
           value: item.id,
         })) ?? []
       }
-      name="currencyId"
+      name={name}
       onChange={handleChange}
       value={value}
     />

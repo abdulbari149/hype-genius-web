@@ -2,7 +2,7 @@ import React from "react";
 import { useMyBusiness } from "../hooks/useMyBusiness";
 
 const SettingsOnboarding: React.FC = () => {
-	const data = useMyBusiness();
+	const { data } = useMyBusiness({});
 
 	return (
 		<div
