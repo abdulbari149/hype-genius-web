@@ -9,6 +9,7 @@ import { setInfluencer, showPanel } from "../core/slice";
 import { GetInfluencerData } from "@/api/type";
 import { AppState } from "@/store";
 import { Alerts } from "../core/constants";
+import { useGetInfluencers } from "../hooks/useGetInfluencers";
 
 interface Props { rows: Row<GetInfluencerData>[]; prepareRow: (row: Row<GetInfluencerData>) => void }
 
@@ -56,10 +57,7 @@ const InfluencerRows: React.FC<Props> = ({ rows, prepareRow }) => {
 
 const InfluencerTable: React.FC<Props> = () => {
 
-	const { data: influencers } = useQuery(QUERY_KEYS.GET_INFLUENCERS, {
-		queryFn: BusinessApi.getInfluencers,
-		suspense: true,
-	});
+	const { data: influencers } = useGetInfluencers()
 
 	const data = useMemo(() => influencers?.data ?? [], [influencers]);
 	const columns = useMemo(() => influencersColumns, []);

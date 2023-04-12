@@ -2,6 +2,9 @@ import Selector, { Option } from '@/components/Selector';
 import { FormikProps, useField } from 'formik';
 import React, { useMemo } from 'react';
 import { useVideoUploads } from '../hooks/useVideoUploads';
+import { QUERY_KEYS } from '@/core/constants';
+import { useSelector } from 'react-redux';
+import { AppState } from '@/store';
 
 interface Props extends React.SelectHTMLAttributes<HTMLSelectElement> {
   name: string;
@@ -9,9 +12,11 @@ interface Props extends React.SelectHTMLAttributes<HTMLSelectElement> {
 }
 
 const VideoSelector: React.FC<Props> = (props) => {
-  const [field, helpers, meta] = useField(props);
+  const [field,_, meta] = useField(props);
+  const businessChannelId = useSelector((state: AppState) => state.influencers?.influencer?.id ?? NaN)
   const { data } = useVideoUploads(
-    { is_payment_due: true },
+    `${QUERY_KEYS.GET_VIDEOS}/${businessChannelId}`,
+    { is_payment_due: true, businessChannelId },
     {
       refetchOnMount: 'always',
       onSuccess(data) {

@@ -1,13 +1,16 @@
 import React from "react";
 import AnalyticsCard from "./AnalyticsCard";
+import { useGetAnalytics } from "../hooks/useGetAnalytics";
 
 const AnalyticsList = () => {
+	const { data: analytics } = useGetAnalytics()
+
 	return (
 		<div className="flex flex-row flex-wrap h-max mb-[20px] flex-shrink gap-y-2 gap-x-3">
 			<AnalyticsCard
 				icon={require("@/assets/icons/3-User.png")}
 				title="Active Partners"
-				value={10}
+				value={analytics?.data.active_partners ?? 0}
 				variation={true}
 				changeInPercent={25}
 			/>
@@ -15,7 +18,7 @@ const AnalyticsList = () => {
 			<AnalyticsCard
 				icon={require("@/assets/icons/eye-icon.png")}
 				title="Views"
-				value={"167,000"}
+				value={analytics?.data.total_views.toLocaleString('en-US') ?? ''}
 				variation={true}
 				changeInPercent={8}
       />
@@ -23,14 +26,14 @@ const AnalyticsList = () => {
 			<AnalyticsCard
 				icon={require("@/assets/icons/budgeting-icon.png")}
 				title="Total Spent"
-				value={"$6,389"}
+				value={analytics?.data.spent ? '$' + analytics.data.spent.toLocaleString('en-US') : ''} 
 				variation={true}
 				changeInPercent={16}
 			/>
 			<AnalyticsCard
 				icon={require("@/assets/icons/profit-icon.png")}
 				title="ROAS"
-				value={"7.3"}
+				value={analytics?.data.roas ?? ''}
 				variation={false}
 				changeInPercent={8}
 			/>

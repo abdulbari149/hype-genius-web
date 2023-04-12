@@ -1,4 +1,4 @@
-import { GetMyBusiness, GetAllBusineess, GetInfluencers, UpdateBusiness, UpdateBusinessData } from './type';
+import { GetMyBusiness, GetAllBusineess, GetInfluencers, UpdateBusiness, UpdateBusinessData, GetReportData, GetBusinessReport, GetBusinessAnalytics } from './type';
 import { api } from '@/core/axios';
 import { getAccessToken } from '@/modules/auth/core/utils';
 
@@ -34,4 +34,39 @@ export class BusinessApi {
 		});
 		return result.data;
 	}
+
+	static async getBusinessReport(query?: Partial<GetReportData>): Promise<GetBusinessReport> {
+		const token = getAccessToken();
+		let url = '/business/report'
+		const params = [] 
+		if(query?.report_for_all !== undefined) {
+			params.push(`report_for_all=${query.report_for_all}`)
+		}
+		if(query?.business_channel_id !== undefined && query?.business_channel_id !== null) {
+			params.push(`business_channel_id=${query.business_channel_id}`)
+		}
+		if(query?.page !== undefined) {
+			params.push(`page=${query.page}`)
+		}
+		if(query?.size !== undefined) {
+			params.push(`size=${query.size}`)
+		}
+		if (params.length > 0) {
+			url += '?' + params.join('&')
+		}
+		const result = await api.get(url, {
+			headers: { Authorization: `Bearer ${token}` },
+		});
+		return result.data;
+	}
+
+	static async getBusinessAnalytics(): Promise<GetBusinessAnalytics> {
+		const token = getAccessToken()
+		const url = '/business/analytics'
+		const result = await api.get(url, {
+			headers: { Authorization: `Bearer ${token}` },
+		});
+		return result.data;
+	}
 }
+

@@ -23,7 +23,7 @@ const defaultTimeOptions = [
 	},
 ];
 
-export type Option = { id: number; value: string | number; label: string };
+export type Option = { id: number | string; value: string | number; label: string };
 
 interface SelectorProps
 	extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>, "onChange"> {

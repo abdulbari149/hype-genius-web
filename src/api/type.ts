@@ -13,6 +13,8 @@ import {
 } from '@/modules/dashboard/core/type';
 import { PaymentStatusType } from '@/modules/settings/components/PaymentStatus';
 import { Alerts } from '@/modules/influencers/core/constants';
+import { ReportState } from '@/modules/reports/core/slice';
+import { ReportsData } from '@/modules/reports/core/type';
 
 export type IBase = {
 	id: number,
@@ -42,7 +44,7 @@ export type IChannel = {
 	influencer_id: number,
 } & IBase;
 
-export type IPayment = Omit<CreatePaymentData,'video_id'> & IBase
+export type IPayment = Omit<CreatePaymentData, 'video_id'> & IBase
 
 export type IVideo = {
 	link: string,
@@ -51,7 +53,6 @@ export type IVideo = {
 	is_payment_due: boolean,
 	payment_id: number | null,
 	business_channel_id: number,
-	payment: IPayment | null
 } & IBase;
 
 export type INote = {
@@ -152,6 +153,8 @@ interface LoginApiData extends TokenType {
 	user: IUser;
 }
 
+export type GetReportData = Pick<ReportState, 'business_channel_id' | 'page' | 'report_for_all' | 'size'>
+
 export type RegisterBusinessData = Omit<BusinessSignupData, 'passwordAgain'>;
 export type LoginData = AuthLoginData;
 export type RegisterChannelData = Omit<ChannelSignupData, 'passwordAgain'> & {
@@ -165,7 +168,7 @@ export type UpdateOnboardingRequestData = {
 } & NullableContract;
 export type CreateContractData = ContractData & { business_channel_id: number }
 export type UpdateContractData = Empty<ContractData> & { business_channel_id: number, id: number }
-export type CreatePaymentData = {  
+export type CreatePaymentData = {
 	video_id: number;
 	business_channel_id: number;
 	channel_currency_id: number;
@@ -183,7 +186,7 @@ export type GetMyBusiness = Response<IBusiness & { default_currency: ICurrency }
 export type UpdateBusiness = Response<IBusiness>;
 export type GetAllBusineess = Response<IBusiness[]>;
 export type GetInfluencers = Response<GetInfluencerData[]>;
-export type GetVideos = Response<IVideo[]>;
+export type GetVideos = Response<Array<IVideo & { payment: IPayment | undefined; influencer: IUser | undefined }>>;
 export type CreateVideo = Response<IVideo>;
 export type AddNote = Response<INote>;
 export type CreateActivity = Response<INote & { pinned: boolean }>;
@@ -194,3 +197,20 @@ export type GetCurrencyList = Response<ICurrency[]>;
 export type UpdateOnboardingRequest = Response<IOnboardRequest>
 export type CreateContract = Response<IContract>
 export type GetAlerts = Response<Array<IAlert & { alertId: number }>>
+
+export type GetBusinessReport = Response<{
+	reports: Array<ReportsData>;
+	metadata: {
+		totalNoOfPages: number;
+		page: number;
+		size: number;
+		offset: number
+	}
+}>
+export type GetBusinessAnalytics = Response<{ 
+	no_of_uploads: number,
+	total_views: number,
+	spent: number,
+	roas: number,
+	active_partners: number,
+}>

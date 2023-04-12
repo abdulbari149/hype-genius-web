@@ -11,10 +11,10 @@ import {
 import { UseVideoUploadArgs } from "@/modules/influencers/hooks/useVideoUploads";
 
 export class VideosApi {
-	static async getVideos(query: { businessChannelId?: number } & UseVideoUploadArgs): Promise<GetVideos> {
+	static async getVideos(query: UseVideoUploadArgs): Promise<GetVideos> {
 		const token = getAccessToken();
 		let url = "/videos";
-
+		console.log(token);
 		const params = []
 		if (query?.businessChannelId !== undefined && query.businessChannelId !== null) {
 			params.push(`business_channel_id=${query.businessChannelId}`)
@@ -22,6 +22,11 @@ export class VideosApi {
 		if (query?.is_payment_due !== undefined && query.is_payment_due !== null) {
 			params.push(`is_payment_due=${query.is_payment_due}`)
 		}
+
+		if (query?.fields !== undefined && Array.isArray(query.fields) && query.fields.length > 0) {
+			params.push(`fields=${query.fields.join(",")}`)
+		}
+
 		if (params.length > 0) {
 			url += '?' + params.join('&')
 		}
