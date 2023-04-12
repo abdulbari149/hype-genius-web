@@ -3,47 +3,31 @@ import { useTable } from 'react-table';
 import { columns as analyticsColumns } from '../core/analytics';
 import { AnalyticsDataType } from '../core/type';
 import Card from '@/components/Card';
-
-const analyticsData: AnalyticsDataType[] = [
-	{
-		id: 1,
-		influencer: 'Joe Rogan',
-		views: 635000,
-		totalSpent: 13000,
-		roas: 6.23,
-	},
-	{
-		id: 2,
-		influencer: 'Pwede Pie',
-		views: 2635000,
-		totalSpent: 523000,
-		roas: 7.8,
-	},
-	{
-		id: 3,
-		influencer: 'Pwede Pie',
-		views: 2635000,
-		totalSpent: 523000,
-		roas: 7.8,
-	},
-	{
-		id: 4,
-		influencer: 'Pwede Pie',
-		views: 2635000,
-		totalSpent: 523000,
-		roas: 7.8,
-	},
-	{
-		id: 5,
-		influencer: 'Pwede Pie',
-		views: 2635000,
-		totalSpent: 523000,
-		roas: 7.8,
-	},
-];
+import { useGetReport } from '@/modules/reports/hooks/useGetReport';
 
 const AnalyticsTable = () => {
-	const data = useMemo(() => analyticsData, []);
+	const { data: analyticsData } = useGetReport(
+		{ report_for_all: true },
+		{
+			select(data) {
+				return data.data.reports
+					.sort((a, b) => b.total.views - a.total.views)
+					.map((r) => {
+						return {
+							id: r.id,
+							influencer:
+								r.influencer.firstName +
+								' ' +
+								r.influencer.lastName,
+							views: r.total.views,
+							totalSpent: r.total.amount,
+							roas: Number(r.total.roas),
+						};
+					});
+			},
+		}
+	);
+	const data = useMemo(() => analyticsData ?? [], [analyticsData]);
 	const columns = useMemo(() => analyticsColumns, []);
 	const table = useTable({ columns, data });
 	const {

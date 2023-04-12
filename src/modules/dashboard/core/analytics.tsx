@@ -51,7 +51,7 @@ export const columns: ReadonlyArray<Column<AnalyticsDataType>> = [
 		),
 		id: "roas",
 		Cell: (props: AnalyticsCellProps) => (
-			<p className="py-1 rounded-xl text-[15px] w-[50px] bg-[#C87C0A] ml-auto mr-3 text-center">
+			<p className="py-1 rounded-xl text-[15px] w-[80px] ml-auto px-2 bg-[#C87C0A] text-center">
 				{props.data[props.row.index].roas}
 			</p>
 		),

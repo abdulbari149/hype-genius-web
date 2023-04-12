@@ -38,9 +38,8 @@ const Influencer = () => {
 		<>
 			<main className="flex flex-row w-full px-4 overflow-y-hidden gap-7">
 				<div
-					className={`flex flex-col ${
-						isDetailsOpen ? "max-w-[60%]" : "max-w-[100%]"
-					} w-full mt-[10px] space-y-[20px]`}
+					className={`flex flex-col ${isDetailsOpen ? "max-w-[60%]" : "max-w-[100%]"
+						} w-full mt-[10px] space-y-[20px]`}
 				>
 					<div className="flex items-center justify-between">
 						<UploadVideoBtn onClick={openUpload} />
@@ -56,7 +55,9 @@ const Influencer = () => {
 						</p>
 						<div className="w-full h-[2px] opacity-20 bg-[#272830]"></div>
 					</div>
-					<AnalyticsList />
+					<Suspense fallback={<Loading />}>
+						<AnalyticsList />
+					</Suspense>
 				</div>
 
 				{isDetailsOpen && (
@@ -66,7 +67,7 @@ const Influencer = () => {
 								handleClose={() => dispatch(setIsDetailsOpen(false))}
 							/>
 						</div>
-					</Suspense> )}
+					</Suspense>)}
 			</main>
 
 			<UploadVideoModal isOpen={isUploadOpen} handleClose={closeUpload} />

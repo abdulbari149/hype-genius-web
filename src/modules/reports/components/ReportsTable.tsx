@@ -8,7 +8,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useGetAnalytics } from '@/modules/dashboard/hooks/useGetAnalytics';
 const ReportsTable = () => {
 	const currentPage = useSelector((state: AppState) => state.report.page);
-	const { data: reportList } = useGetReport();
+	const reportFilters = useSelector((state: AppState) => state.report);
+
+	const { data: reportList } = useGetReport(reportFilters);
 	const data = useMemo(() => reportList?.data?.reports ?? [], [reportList?.data?.reports]);
 	const dispatch = useDispatch();
 	const columns = useMemo(() => reportsColumns, []);

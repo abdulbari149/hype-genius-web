@@ -27,13 +27,13 @@ const BusinessDashboardPage: NextPage = () => {
 
 			<DashboardLayout>
 				<main className="flex flex-row w-full px-4 overflow-y-hidden gap-7">
-					<div className="flex flex-col max-w-[60%] w-full space-y-[20px]">
-						<DashboardDatePicker />
-						<AnalyticsList />
-						<DashboardCharts />
-						<AnalyticsTable />
-					</div>
 					<Suspense fallback={<Loading />}>
+						<div className="flex flex-col max-w-[60%] w-full space-y-[20px]">
+							<DashboardDatePicker />
+							<AnalyticsList />
+							<DashboardCharts />
+							<AnalyticsTable />
+						</div>
 						<UploadsList />
 					</Suspense>
 				</main>
