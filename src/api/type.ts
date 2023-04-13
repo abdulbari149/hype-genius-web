@@ -252,4 +252,11 @@ export type GetInfluencerOnboarding = Response<{
 	newPartnerShip: Partnership
 }>
 
+export type GetChannelAnalytics = Response<{
+	no_of_uploads: number
+	amount_earned: number
+	total_views: number
+	contracts: Array<IContract>
+}>
+
 export type ConfirmOnboarding = RegisterChannel

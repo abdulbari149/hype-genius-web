@@ -9,7 +9,10 @@ import {
 } from '@/modules/settings'
 import AccountSettings from '@/modules/settings/components/AccountSettings'
 import Loading from '@/components/Loading'
+import { useUser } from '@/modules/auth/hooks/useUser'
 const SettingsPage: NextPage = () => {
+	const { data: user } = useUser({})
+
 	return (
 		<>
 			<Head>
@@ -23,13 +26,17 @@ const SettingsPage: NextPage = () => {
 				<Suspense fallback={<Loading />}>
 					<div className="grid mt-3 grid-cols-[1.5fr_1fr_1fr] gap-5 w-full">
 						<div className="flex flex-col gap-5">
-							<CustomerSettings />
+							{user?.data.user.role === 'business_admin' && (
+								<CustomerSettings />
+							)}
 							<AccountSettings />
 							<BillingsSettings />
 						</div>
-						<div>
-							<SettingsOnboarding />
-						</div>
+						{user?.data.user.role === 'business_admin' && (
+							<div>
+								<SettingsOnboarding />
+							</div>
+						)}
 					</div>
 				</Suspense>
 			</DashboardLayout>

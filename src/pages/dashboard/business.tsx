@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import Head from 'next/head'
 import { DashboardLayout } from '@/components/Layout'
 import DashboardDatePicker from '@/modules/dashboard/components/DashboardDatePicker'
-import AnalyticsList from '@/modules/dashboard/components/AnalyticsList'
+import BusinessAnalyticsList from '@/modules/dashboard/components/BusinessAnalyticsList'
 import AnalyticsTable from '@/modules/dashboard/components/AnalyticsTable'
 import DashboardCharts from '@/modules/dashboard/components/DashboardCharts'
 import UploadsList from '@/modules/dashboard/components/UploadsList'
@@ -23,7 +23,7 @@ const BusinessDashboardPage: NextPage = () => {
 					<Suspense fallback={<Loading />}>
 						<div className="flex flex-col max-w-[60%] w-full space-y-[20px]">
 							<DashboardDatePicker />
-							<AnalyticsList />
+							<BusinessAnalyticsList />
 							<DashboardCharts />
 							<AnalyticsTable />
 						</div>

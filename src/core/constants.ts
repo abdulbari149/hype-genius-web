@@ -16,7 +16,8 @@ export const QUERY_KEYS = {
 	UPDATE_CONTRACT: 'contract/update',
 	CREATE_PAYMENT: 'payment/create',
 	GET_REPORT: 'report/get',
-	GET_ANALYTICS: 'analytics/get',
+	BUSINESS_ANALYTICS: 'business/analytics',
+	CHANNEL_ANALYTICS: 'channel/analytics',
 	GET_INFLUENCER_ONBOARDINGS: 'influencer-onboardings/get',
 	UPDATE_USER: 'user/update',
 }

@@ -4,6 +4,7 @@ import {
 	CreateOnboardingRequest,
 	UpdateOnboardingRequestData,
 	UpdateOnboardingRequest,
+	GetChannelAnalytics,
 } from './type'
 
 export class ChannelApi {
@@ -24,6 +25,14 @@ export class ChannelApi {
 	): Promise<UpdateOnboardingRequest> {
 		const token = getAccessToken()
 		const result = await api.put('/channels/influencer/onboarding', data, {
+			headers: { Authorization: `Bearer ${token}` },
+		})
+		return result.data
+	}
+
+	static async getChannelAnalytics(): Promise<GetChannelAnalytics> {
+		const token = getAccessToken()
+		const result = await api.get('/channels/analytics', {
 			headers: { Authorization: `Bearer ${token}` },
 		})
 		return result.data

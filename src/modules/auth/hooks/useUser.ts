@@ -30,6 +30,7 @@ export const useUser = (options: UseQueryOptions<Me, AxiosError | Error>) => {
 			return onError(err)
 		},
 		...props,
+		staleTime: 15 * 60 * 60 * 100,
 	})
 
 	return userQuery

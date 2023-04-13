@@ -1,9 +1,18 @@
-import React, { useState } from 'react'
+import { useUser } from '@/modules/auth/hooks/useUser'
+import React, { useEffect, useState } from 'react'
 import { TiEdit } from 'react-icons/ti'
 
 const PayPalEmail = () => {
 	const [editPaypalEmail, setEditPaypalEmail] = useState(false)
 	const [paypalEmail, setPaypalEmail] = useState('coolemail@gmail.com')
+	const { data: user } = useUser({})
+
+	useEffect(() => {
+		if (user) {
+			setPaypalEmail(user?.data.user.email)
+		}
+	}, [user])
+
 	return (
 		<div className="flex flex-col">
 			<p className="text-[17px] text-[#272830] font-[500]">PayPal Email</p>

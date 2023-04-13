@@ -9,7 +9,6 @@ import { wrapper } from '@/store'
 import { Provider } from 'react-redux'
 import { NextPage } from 'next'
 import { ErrorBoundary } from 'react-error-boundary'
-import { useRouter } from 'next/router'
 
 export type NextPageWithLayout<P = object, IP = P> = NextPage<P, IP> & {
 	getLayout?: (page: ReactElement) => ReactNode
@@ -28,17 +27,10 @@ function App({ Component, ...rest }: AppPropsWithLayout) {
 	const { store, props } = wrapper.useWrappedStore(rest)
 	const { pageProps } = props
 	const getLayout = Component.getLayout ?? ((page) => page)
-	const router = useRouter()
 	return (
 		<QueryClientProvider client={queryClient}>
 			<Provider store={store}>
-				<ErrorBoundary
-					fallbackRender={Error}
-					onError={(error) => {
-						router.replace('/404')
-						return error
-					}}
-				>
+				<ErrorBoundary fallbackRender={Error}>
 					{getLayout(<Component {...pageProps} />)}
 					<ReactQueryDevtools initialIsOpen={false} />
 					<ToastContainer autoClose={2000} />

@@ -5,7 +5,7 @@ import { useGetReport } from '../hooks/useGetReport'
 import { setPage } from '../core/slice'
 import { AppState } from '@/store'
 import { useDispatch, useSelector } from 'react-redux'
-import { useGetAnalytics } from '@/modules/dashboard/hooks/useGetAnalytics'
+import { useGetBusinessAnalytics } from '@/modules/dashboard/hooks/useGetBusinessAnalytics'
 const ReportsTable = () => {
 	const currentPage = useSelector((state: AppState) => state.report.page)
 	const reportFilters = useSelector((state: AppState) => state.report)
@@ -21,7 +21,7 @@ const ReportsTable = () => {
 	const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
 		table
 
-	const { data: analytics } = useGetAnalytics()
+	const { data: analytics } = useGetBusinessAnalytics()
 
 	return (
 		<div className="bg-white	grid w-full h-full grid-cols-7 py-[20px] shadow-lg rounded-xl">

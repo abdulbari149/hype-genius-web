@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setIsDetailsOpen } from '../core/slice'
 import { AppState } from '@/store'
 import Loading from '@/components/Loading'
+import ChannelAnalyticsList from './ChannelAnalyticsList'
 const Influencer = () => {
 	const [isUploadOpen, setIsUploadOpen] = useState(false)
 	const isDetailsOpen = useSelector(
@@ -46,7 +47,9 @@ const Influencer = () => {
 						</p>
 						<div className="w-full h-[2px] opacity-20 bg-[#272830]"></div>
 					</div>
-					<Suspense fallback={<Loading />}>{/* <AnalyticsList /> */}</Suspense>
+					<Suspense fallback={<Loading />}>
+						<ChannelAnalyticsList />
+					</Suspense>
 				</div>
 
 				{isDetailsOpen && (

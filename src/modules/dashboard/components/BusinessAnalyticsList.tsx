@@ -1,9 +1,9 @@
 import React from 'react'
 import AnalyticsCard from './AnalyticsCard'
-import { useGetAnalytics } from '../hooks/useGetAnalytics'
+import { useGetBusinessAnalytics } from '../hooks/useGetBusinessAnalytics'
 
-const AnalyticsList = () => {
-	const { data: analytics } = useGetAnalytics()
+const BusinessAnalyticsList = () => {
+	const { data: analytics } = useGetBusinessAnalytics()
 
 	return (
 		<div className="flex flex-row flex-wrap h-max mb-[20px] flex-shrink gap-y-2 gap-x-3">
@@ -45,4 +45,4 @@ const AnalyticsList = () => {
 	)
 }
 
-export default AnalyticsList
+export default BusinessAnalyticsList
