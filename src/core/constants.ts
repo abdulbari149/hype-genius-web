@@ -18,6 +18,7 @@ export const QUERY_KEYS = {
 	GET_REPORT: 'report/get',
 	GET_ANALYTICS: 'analytics/get',
 	GET_INFLUENCER_ONBOARDINGS: 'influencer-onboardings/get',
+	UPDATE_USER: 'user/update',
 }
 
 export const MONTHS = [

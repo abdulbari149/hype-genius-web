@@ -8,6 +8,7 @@ import Image from 'next/image'
 import { useQuery } from 'react-query'
 import { QUERY_KEYS } from '@/core/constants'
 import { AuthApi } from '@/api/AuthApi'
+import { useConfirmOnboarding } from '../hooks/useConfirmOnboarding'
 
 const { GET_INFLUENCER_ONBOARDINGS } = QUERY_KEYS
 
@@ -20,8 +21,16 @@ const InfluencerOnboarding: React.FC<Props> = ({ token }) => {
 		queryFn: () => {
 			return AuthApi.getInfluncerNewOnboardings(token)
 		},
+		onSuccess(data) {
+			console.log(data)
+		},
 		suspense: true,
+		cacheTime: 15 * 60 * 60,
 	})
+	const confirmOnboarding = useConfirmOnboarding()
+	const handleJoin = async () => {
+		confirmOnboarding.mutate(token)
+	}
 
 	return (
 		<div className="h-screen bg-[#F2F6FA]">
@@ -40,11 +49,13 @@ const InfluencerOnboarding: React.FC<Props> = ({ token }) => {
 					</p>
 				</div>
 				<div
-					key={data?.data.newPartnerShip.id}
+					key={data?.data.newPartnerShip.id ?? 'new-partnership'}
 					className="flex bg-[#DFDFDF]/70 rounded-xl w-fit py-1  px-5 items-center mt-14 cursor-pointer"
 				>
 					<Image src={businessmanlogo} alt="" width={25} />
-					<p className="text-lg px-2 ">{data?.data.newPartnerShip.name}</p>
+					<p className="text-lg px-2 ">
+						{data?.data?.newPartnerShip?.name ?? ''}
+					</p>
 				</div>
 				<div>
 					<input
@@ -53,7 +64,7 @@ const InfluencerOnboarding: React.FC<Props> = ({ token }) => {
 					/>
 					<Image src={vector} alt="vector" width={400} />
 				</div>
-				{data?.data.currentPartnerShips.map((partnerShip) => (
+				{data?.data?.currentPartnerShips?.map((partnerShip) => (
 					<div
 						key={partnerShip.id}
 						className="flex bg-[#DFDFDF]/70 rounded-xl w-fit py-1  px-5 items-center mt-7 cursor-pointer"
@@ -61,8 +72,12 @@ const InfluencerOnboarding: React.FC<Props> = ({ token }) => {
 						<Image src={startuplogo} alt="" width={25} />
 						<p className="text-lg px-2">{partnerShip.name}</p>
 					</div>
-				))}
-				<button className="bg-[#EF539E] flex items-center px-4 py-2 text-[#F2F6FA] font-semibold rounded-xl mt-12">
+				)) ?? null}
+				<button
+					disabled={!data}
+					onClick={() => handleJoin()}
+					className="bg-[#EF539E] flex items-center px-4 py-2 text-[#F2F6FA] font-semibold rounded-xl mt-12"
+				>
 					<p>Yes, Join!</p>
 					<AiOutlineArrowRight color="white" />
 				</button>

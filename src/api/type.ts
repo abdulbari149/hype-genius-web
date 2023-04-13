@@ -203,6 +203,7 @@ export type CreatePaymentData = {
 export type UpdateBusinessData = Partial<
 	Pick<IBusiness, 'acrvv' | 'customer_ltv' | 'default_currency_id'>
 >
+export type UpdateUserData = { email: string }
 
 export type RegisterBusiness = Response<BusinessSignupApiData>
 export type RegisterChannel = Response<ChannelSignupApiData>
@@ -250,3 +251,5 @@ export type GetInfluencerOnboarding = Response<{
 	currentPartnerShips: Partnership[]
 	newPartnerShip: Partnership
 }>
+
+export type ConfirmOnboarding = RegisterChannel

@@ -18,7 +18,12 @@ const SettingsOnboarding: React.FC = () => {
 					<p className="text-[#5C6FFF] w-fit cursor-pointer">
 						{data?.data.onboardingLink}
 					</p>
-					<button className="bg-[#EF539E] w-[60px] h-[31px] rounded-xl px-2 text-white ml-4 ">
+					<button
+						onClick={() => {
+							navigator.clipboard.writeText(data?.data?.onboardingLink ?? '')
+						}}
+						className="bg-[#EF539E] w-[60px] h-[31px] rounded-xl px-2 text-white ml-4 "
+					>
 						Copy
 					</button>
 				</div>

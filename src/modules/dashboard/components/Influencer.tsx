@@ -1,5 +1,4 @@
 import DashboardDatePicker from '@/modules/dashboard/components/DashboardDatePicker'
-import AnalyticsList from '@/modules/dashboard/components/AnalyticsList'
 import VideoDetails from '@/modules/dashboard/components/VideoDetails'
 import VideosTable from '@/modules/dashboard/components/VideosTable'
 import UploadVideoModal from '@/modules/dashboard/components/UploadVideoModal'
@@ -47,9 +46,7 @@ const Influencer = () => {
 						</p>
 						<div className="w-full h-[2px] opacity-20 bg-[#272830]"></div>
 					</div>
-					<Suspense fallback={<Loading />}>
-						<AnalyticsList />
-					</Suspense>
+					<Suspense fallback={<Loading />}>{/* <AnalyticsList /> */}</Suspense>
 				</div>
 
 				{isDetailsOpen && (

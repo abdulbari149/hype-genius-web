@@ -12,10 +12,9 @@ type UseMyBusinessOptions = Omit<
 
 export const useMyBusiness = (options: UseMyBusinessOptions) => {
 	const loggedIn = useSelector(getLoginStatus)
-	const business = useQuery(QUERY_KEYS.GET_MY_BUSINESS, {
+	return useQuery(QUERY_KEYS.GET_MY_BUSINESS, {
 		queryFn: BusinessApi.getMyBusiness,
 		enabled: loggedIn,
 		...options,
 	})
-	return business
 }
