@@ -1,4 +1,4 @@
-import { Response, api } from '@/core/axios'
+import { api } from '@/core/axios'
 import { getAccessToken } from '@/modules/auth/core/utils'
 import {
 	AddNote,

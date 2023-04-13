@@ -121,7 +121,7 @@ const BusinessSignup: FC<PropsWithChildren> = () => {
 
 						<AuthButton
 							content="Signup"
-							onClick={(e) => formik.handleSubmit()}
+							onClick={() => formik.handleSubmit()}
 							type="submit"
 							disabled={formik.isSubmitting || isLoading}
 						/>

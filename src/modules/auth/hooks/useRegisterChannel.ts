@@ -12,7 +12,7 @@ const useRegisterChannel = () => {
 
 	const registerChannel = useMutation('register-channel', {
 		mutationFn: AuthApi.registerChannel,
-		onSuccess(data, variables, context) {
+		onSuccess(data) {
 			localStorage.setItem(ACCESS_TOKEN, data.data.access_token)
 			localStorage.setItem(REFRESH_TOKEN, data.data.refresh_token)
 			dispatch(setAuthState({ isLoggedIn: true }))
@@ -20,7 +20,7 @@ const useRegisterChannel = () => {
 			toast(data.message, { type: 'success' })
 			router.replace('/dashboard/influencer')
 		},
-		onError(error, variables, context) {
+		onError(error) {
 			const message = handleError(error)
 			toast(message, { type: 'error' })
 			dispatch(setAuthState({ isLoggedIn: false }))

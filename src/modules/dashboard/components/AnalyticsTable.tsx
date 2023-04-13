@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react'
 import { useTable } from 'react-table'
 import { columns as analyticsColumns } from '../core/analytics'
-import { AnalyticsDataType } from '../core/type'
 import Card from '@/components/Card'
 import { useGetReport } from '@/modules/reports/hooks/useGetReport'
 
@@ -39,7 +38,7 @@ const AnalyticsTable = () => {
 							const { key, ...headerGroupProps } =
 								headerGroup.getHeaderGroupProps()
 							return (
-								<tr {...headerGroupProps} key={headerGroup.id}>
+								<tr {...headerGroupProps} key={key}>
 									{headerGroup.headers.map((column) => {
 										const { key, ...headerProps } = column.getHeaderProps()
 										return (
@@ -62,7 +61,7 @@ const AnalyticsTable = () => {
 							const { key, ...rowProps } = row.getRowProps()
 							return (
 								<tr className="cursor-pointer" key={key} {...rowProps}>
-									{row.cells.map((cell, idx) => {
+									{row.cells.map((cell) => {
 										const { key, ...cellProps } = cell.getCellProps()
 										return (
 											<td

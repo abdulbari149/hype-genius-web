@@ -14,7 +14,7 @@ const Field: React.FC<FieldProps> = ({
 	icon,
 	...props
 }) => {
-	const [field, meta, helpers] = useField(props.name)
+	const [field, meta] = useField(props.name)
 	return (
 		<div
 			className={'flex flex-col gap-3 max-w-xs w-full ' + containerClassName}

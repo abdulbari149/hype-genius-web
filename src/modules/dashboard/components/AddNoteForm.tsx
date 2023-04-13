@@ -32,11 +32,11 @@ const AddNoteForm: React.FC<Props> = ({ closeAfterSubmit }) => {
 				throw new Error('Invalid video id. Please selecte an uploaded video')
 			return VideosApi.addNote(videoId, data)
 		},
-		onSuccess(data, variables, context) {
+		onSuccess(data) {
 			toast.success(data.message)
 			queryClient.invalidateQueries(`${videoId}/${GET_NOTES}`)
 		},
-		onError(error, variables, context) {
+		onError(error) {
 			const message = handleError(error)
 			toast.error(message)
 		},

@@ -19,7 +19,7 @@ module.exports = {
     node: true,
     jest: true,
   },
-  ignorePatterns: ['.eslintrc.js', 'tailwind.config.js', 'postcss.config.js'],
+  ignorePatterns: ['.eslintrc.js', '*.config.js'],
   rules: {
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
@@ -31,6 +31,6 @@ module.exports = {
     "jsx-a11y/anchor-is-valid": "off",
     "jsx-a11y/click-events-have-key-events": "off",
     "jsx-a11y/no-static-element-interactions": "off",
-    "@typescript-eslint/no-unused-vars": ["error", { args: "after-used", "destructuredArrayIgnorePattern": "^_"  }]
+    "@typescript-eslint/no-unused-vars": ["error", { args: "after-used", "destructuredArrayIgnorePattern": "^_", "ignoreRestSiblings": true }]
   },
 };

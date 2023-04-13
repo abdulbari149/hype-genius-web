@@ -1,4 +1,3 @@
-import { ContractState, TagType } from '@/modules/influencers/core/types'
 import { Response } from '@/core/axios'
 import {
 	BusinessSignupData,

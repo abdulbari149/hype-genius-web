@@ -47,9 +47,11 @@ const UploadColumn: React.FC<Props> = ({
 }
 
 function select(data: GetVideos) {
-	const uploads = data?.data.sort((x, y) =>
-		x.is_payment_due === y.is_payment_due ? 0 : x.is_payment_due ? -1 : 1,
-	)
+	const uploads = data?.data.sort((x, y) => {
+		if (x.is_payment_due === y.is_payment_due) return 0
+		if (x.is_payment_due) return -1
+		return 1
+	})
 	return {
 		...data,
 		data: uploads,
@@ -57,7 +59,7 @@ function select(data: GetVideos) {
 }
 
 const UploadsList = () => {
-	const { data: uploads, error } = useVideoUploads(
+	const { data: uploads } = useVideoUploads(
 		`${QUERY_KEYS.GET_VIDEOS}`,
 		{
 			fields: ['influencer'],
@@ -94,7 +96,6 @@ const UploadsList = () => {
 				</div>
 				{uploads?.data.map((item) => {
 					const upload = {
-						key: item.id,
 						name: item?.influencer
 							? `${item?.influencer?.firstName} ${item?.influencer?.lastName}`
 							: '',
@@ -102,7 +103,7 @@ const UploadsList = () => {
 						views: item.views,
 						uploadedTime: item.createdAt ? new Date(item.createdAt) : null,
 					}
-					return <UploadColumn {...upload} />
+					return <UploadColumn key={item.id} {...upload} />
 				})}
 			</Card>
 		</div>

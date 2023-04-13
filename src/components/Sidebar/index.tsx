@@ -1,4 +1,4 @@
-import Image, { ImageProps } from 'next/image'
+import Image from 'next/image'
 import React, { PropsWithChildren } from 'react'
 import HypeGeniusLogo from '@/assets/logos/hype-genius-logo-with-text.png'
 import { useRouter } from 'next/router'

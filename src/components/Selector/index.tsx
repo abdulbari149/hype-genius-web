@@ -51,15 +51,7 @@ const SelectorComponent: React.ForwardRefRenderFunction<
 	HTMLSelectElement,
 	Props
 > = (
-	{
-		style = {},
-		className = '',
-		customClassName,
-		options,
-		type,
-		onChange = (value, e) => {},
-		...props
-	},
+	{ style = {}, className = '', customClassName, options, type, ...props },
 	ref,
 ) => {
 	let selectOptions: Array<Option> = []
@@ -90,7 +82,9 @@ const SelectorComponent: React.ForwardRefRenderFunction<
 			}}
 			{...props}
 			onChange={(e) => {
-				onChange(e.target.value, e)
+				if (props.onChange) {
+					props.onChange(e.target.value, e)
+				}
 			}}
 		>
 			{selectOptions.map((option) => (

@@ -3,8 +3,7 @@ import { VideosApi } from '@/api/VideosApi'
 import Modal from '@/components/Modal'
 import { Formik, FormikHelpers } from 'formik'
 import Image from 'next/image'
-import React, { CSSProperties, useEffect, useState } from 'react'
-import ReactModal, { Props as ReactModalProps } from 'react-modal'
+import React, { useState } from 'react'
 import { useMutation, useQuery, useQueryClient } from 'react-query'
 import { toFormikValidationSchema } from 'zod-formik-adapter'
 import { uploadVideoSchema } from '../core/schema'
@@ -38,7 +37,7 @@ const UploadVideoModal: React.FC<UploadVideoModalProps> = ({
 			toast.success<string>(data.message)
 			queryClient.invalidateQueries(QUERY_KEYS.GET_VIDEOS)
 		},
-		onError(error, variables, context) {
+		onError(error) {
 			const message = handleError(error)
 			toast.error<string>(message)
 		},
