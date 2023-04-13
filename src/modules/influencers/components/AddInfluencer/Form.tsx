@@ -1,23 +1,23 @@
-import React, { useState } from 'react';
-import Contract from '../Contract';
-import TagsList from '../TagsList';
-import { useQuery } from 'react-query';
-import { QUERY_KEYS } from '@/core/constants';
-import { ChannelApi } from '@/api/ChannelApi';
-import OnboardingLink from '../OnboardingLink';
-import { ContractState, HandleChangeType } from '../../core/types';
+import React, { useState } from 'react'
+import Contract from '../Contract'
+import TagsList from '../TagsList'
+import { useQuery } from 'react-query'
+import { QUERY_KEYS } from '@/core/constants'
+import { ChannelApi } from '@/api/ChannelApi'
+import OnboardingLink from '../OnboardingLink'
+import { ContractState, HandleChangeType } from '../../core/types'
 
-const { CREATE_ONBOARING } = QUERY_KEYS;
+const { CREATE_ONBOARING } = QUERY_KEYS
 
 interface Props {
-	data: ContractState;
-	handleChange: HandleChangeType;
+	data: ContractState
+	handleChange: HandleChangeType
 }
 
 const AddInfluencerForm: React.FC<Props> = ({ data, handleChange }) => {
-	const { onboarding_id, ...contract } = data;
+	const { onboarding_id, ...contract } = data
 
-	const [enabled, setEnabled] = useState(true);
+	const [enabled, setEnabled] = useState(true)
 	const { data: onboardingData } = useQuery(CREATE_ONBOARING, {
 		queryFn: ChannelApi.createOnboardingRequest,
 		suspense: true,
@@ -27,23 +27,21 @@ const AddInfluencerForm: React.FC<Props> = ({ data, handleChange }) => {
 		refetchOnWindowFocus: false,
 		enabled,
 		onSuccess(data) {
-			handleChange("onboarding_id", data.data.id)
+			handleChange('onboarding_id', data.data.id)
 		},
 		onSettled() {
-			setEnabled(false);
+			setEnabled(false)
 		},
-	});
+	})
 
 	return (
 		<div className="flex flex-col pt-[30px] space-y-[50px] w-full h-full">
-			<h3 className="text-[#272830] text-[18px] font-[600]">
-				Add Influencer
-			</h3>
+			<h3 className="text-[#272830] text-[18px] font-[600]">Add Influencer</h3>
 			<OnboardingLink url={onboardingData?.data.link ?? ''} />
 			<Contract data={contract} handleChange={handleChange} />
 			<TagsList />
 		</div>
-	);
-};
+	)
+}
 
-export default AddInfluencerForm;
+export default AddInfluencerForm

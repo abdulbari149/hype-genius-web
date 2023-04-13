@@ -1,22 +1,24 @@
-import Card from "@/components/Card";
-import Image from "next/image";
-import React, { useState } from "react";
+import Card from '@/components/Card'
+import Image from 'next/image'
+import React, { useState } from 'react'
 
 const FollowUp = () => {
-	const [followUpOption, setFollowUpOption] = useState("email");
-	const [selectedTime, setSelectedTime] = useState("");
+	const [followUpOption, setFollowUpOption] = useState('email')
+	const [selectedTime, setSelectedTime] = useState('')
 
 	return (
 		<Card
 			className="relative py-[20px] rounded-xl flex flex-col justify-center items-center max-w-[340px] w-full"
-			style={{ backgroundColor: "#ECF0F4" }}
+			style={{ backgroundColor: '#ECF0F4' }}
 		>
-			<h3 className="text-[18px] text-[#272830] py-1 font-[600] text-center">Follow Up</h3>
+			<h3 className="text-[18px] text-[#272830] py-1 font-[600] text-center">
+				Follow Up
+			</h3>
 			<div className="flex flex-row w-full pl-[15px] pr-[30px] gap-2 items-center">
 				<div className="flex flex-row items-center gap-1">
 					<div className="">
 						<Image
-							src={require("@/assets/icons/email-icon.png")}
+							src={require('@/assets/icons/email-icon.png')}
 							alt="Email"
 							width={20}
 							height={20}
@@ -24,7 +26,7 @@ const FollowUp = () => {
 					</div>
 					<div>
 						<Image
-							src={require("@/assets/icons/downArrow.png")}
+							src={require('@/assets/icons/downArrow.png')}
 							alt="dropdown"
 							width={20}
 							height={20}
@@ -40,7 +42,7 @@ const FollowUp = () => {
 			</div>
 
 			<div className="flex gap-1 my-5 w-fit pl-[35px]">
-				{["Tomorrow", "Next Week", "Next Month", "Custom"].map((item) => (
+				{['Tomorrow', 'Next Week', 'Next Month', 'Custom'].map((item) => (
 					<div
 						className="bg-[#fff] px-[5px] py-[2px] rounded-lg text-[10px] w-fit cursor-pointer font-light tracking-wide"
 						key={item}
@@ -50,7 +52,7 @@ const FollowUp = () => {
 				))}
 			</div>
 		</Card>
-	);
-};
+	)
+}
 
-export default FollowUp;
+export default FollowUp

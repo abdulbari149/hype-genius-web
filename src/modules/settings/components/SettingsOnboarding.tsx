@@ -1,15 +1,15 @@
-import React from "react";
-import { useMyBusiness } from "../hooks/useMyBusiness";
+import React from 'react'
+import { useMyBusiness } from '../hooks/useMyBusiness'
 
 const SettingsOnboarding: React.FC = () => {
-	const { data } = useMyBusiness({});
+	const { data } = useMyBusiness({})
 
 	return (
 		<div
 			className="flex bg-[#FFFFFF]/50 rounded-lg w-full h-[120px] shadow-xl px-9 py-6"
 			style={{
 				boxShadow:
-					"0px 4px 103px rgba(50, 50, 71, 0.01), 0px 4px 59px rgba(50, 50, 71, 0.06)",
+					'0px 4px 103px rgba(50, 50, 71, 0.01), 0px 4px 59px rgba(50, 50, 71, 0.06)',
 			}}
 		>
 			<div>
@@ -24,7 +24,7 @@ const SettingsOnboarding: React.FC = () => {
 				</div>
 			</div>
 		</div>
-	);
-};
+	)
+}
 
-export default SettingsOnboarding;
+export default SettingsOnboarding

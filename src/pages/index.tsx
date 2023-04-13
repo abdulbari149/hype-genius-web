@@ -1,7 +1,7 @@
-import Head from "next/head";
-import { NextPageWithLayout } from "./_app";
-import { HomeLayout } from "@/components/Layout";
-import { Content, HowItWorks } from "@/modules/home";
+import Head from 'next/head'
+import { NextPageWithLayout } from './_app'
+import { HomeLayout } from '@/components/Layout'
+import { Content, HowItWorks } from '@/modules/home'
 
 const Home: NextPageWithLayout = () => {
 	return (
@@ -17,7 +17,7 @@ const Home: NextPageWithLayout = () => {
 				<HowItWorks />
 			</HomeLayout>
 		</>
-	);
+	)
 }
 
-export default Home;
+export default Home

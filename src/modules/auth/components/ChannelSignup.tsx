@@ -1,37 +1,37 @@
-import Field from "@/components/Field";
-import React from "react";
-import AuthButton from "./AuthButton";
-import Link from "next/link";
-import { ChannelSignupData } from "../core/types";
-import { channelSignupSchema } from "../core/schema";
-import { Formik, FormikHelpers } from "formik";
-import { toFormikValidationSchema } from "zod-formik-adapter";
-import useRegisterChannel from "../hooks/useRegisterChannel";
+import Field from '@/components/Field'
+import React from 'react'
+import AuthButton from './AuthButton'
+import Link from 'next/link'
+import { ChannelSignupData } from '../core/types'
+import { channelSignupSchema } from '../core/schema'
+import { Formik, FormikHelpers } from 'formik'
+import { toFormikValidationSchema } from 'zod-formik-adapter'
+import useRegisterChannel from '../hooks/useRegisterChannel'
 
 interface ChannelSignupProps {
-	token: string;
+	token: string
 }
 
 const initialValues = {
-	firstName: "",
-	lastName: "",
-	email: "",
-	phoneNumber: "",
-	password: "",
-	passwordAgain: "",
-	channelName: "",
-	channelLink: "",
-};
+	firstName: '',
+	lastName: '',
+	email: '',
+	phoneNumber: '',
+	password: '',
+	passwordAgain: '',
+	channelName: '',
+	channelLink: '',
+}
 const ChannelSignup: React.FC<ChannelSignupProps> = ({ token }) => {
-	const channelRegister = useRegisterChannel();
+	const channelRegister = useRegisterChannel()
 	async function onSubmit(
 		values: ChannelSignupData,
-		formikHelpers: FormikHelpers<ChannelSignupData>
+		formikHelpers: FormikHelpers<ChannelSignupData>,
 	) {
-		const { passwordAgain, ...data } = values;
-		formikHelpers.setSubmitting(true);
-		await channelRegister.mutateAsync({ ...data, token });
-		formikHelpers.setSubmitting(false);
+		const { passwordAgain, ...data } = values
+		formikHelpers.setSubmitting(true)
+		await channelRegister.mutateAsync({ ...data, token })
+		formikHelpers.setSubmitting(false)
 	}
 	return (
 		<Formik
@@ -67,7 +67,7 @@ const ChannelSignup: React.FC<ChannelSignupProps> = ({ token }) => {
 							type="email"
 							id="email"
 							name="email"
-							placeholder={"elonmusk@tesla.com"}
+							placeholder={'elonmusk@tesla.com'}
 							value={formik.values.email}
 							onChange={formik.handleChange}
 						/>
@@ -117,7 +117,7 @@ const ChannelSignup: React.FC<ChannelSignupProps> = ({ token }) => {
 							type="text"
 							id="channelLink"
 							name="channelLink"
-							placeholder={"youtube.com/fgdhersdq"}
+							placeholder={'youtube.com/fgdhersdq'}
 							value={formik.values.channelLink}
 							onChange={formik.handleChange}
 							containerClassName="max-w-[520px] w-full col-span-2"
@@ -127,7 +127,7 @@ const ChannelSignup: React.FC<ChannelSignupProps> = ({ token }) => {
 					<p className="text-lg">
 						Already have an account?
 						<Link
-							href={"/auth/login"}
+							href={'/auth/login'}
 							className="pl-1 text-lg font-bold text-pink-600 cursor-pointer"
 						>
 							Sign In
@@ -136,7 +136,7 @@ const ChannelSignup: React.FC<ChannelSignupProps> = ({ token }) => {
 				</>
 			)}
 		</Formik>
-	);
-};
+	)
+}
 
-export default ChannelSignup;
+export default ChannelSignup

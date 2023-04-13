@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { TiEdit } from "react-icons/ti";
+import React, { useState } from 'react'
+import { TiEdit } from 'react-icons/ti'
 
 const PayPalEmail = () => {
-	const [editPaypalEmail, setEditPaypalEmail] = useState(false);
-	const [paypalEmail, setPaypalEmail] = useState("coolemail@gmail.com");
+	const [editPaypalEmail, setEditPaypalEmail] = useState(false)
+	const [paypalEmail, setPaypalEmail] = useState('coolemail@gmail.com')
 	return (
 		<div className="flex flex-col">
 			<p className="text-[17px] text-[#272830] font-[500]">PayPal Email</p>
@@ -37,7 +37,7 @@ const PayPalEmail = () => {
 				)}
 			</div>
 		</div>
-	);
-};
+	)
+}
 
-export default PayPalEmail;
+export default PayPalEmail

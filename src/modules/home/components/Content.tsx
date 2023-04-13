@@ -1,6 +1,6 @@
-import React from "react";
-import Image from "next/image";
-import { AiOutlineArrowRight } from "react-icons/ai";
+import React from 'react'
+import Image from 'next/image'
+import { AiOutlineArrowRight } from 'react-icons/ai'
 
 const Content = () => {
 	return (
@@ -10,15 +10,15 @@ const Content = () => {
 					Supercharge Your Marketing and
 					<span className="text-pink-500"> Easily </span>
 					<span className="inline-block text-pink-500">Achieve 6+ ROAS</span>
-				</p>{" "}
+				</p>{' '}
 				<p className="text-[1.6rem] text-center max-w-[80%] w-full">
-					Discover the Game-Changing Benefits of Partnering with{" "}
+					Discover the Game-Changing Benefits of Partnering with{' '}
 					<span className="font-bold text-pink-500">Youtube Creators</span> to
-					Generate{" "}
+					Generate{' '}
 					<span className="bg-[#2EFF68]/50 rounded-xl px-2 py-1 inline-block">
 						High-Quality Leads and Sales
-					</span>{" "}
-					Growth with Our{" "}
+					</span>{' '}
+					Growth with Our{' '}
 					<span className="bg-[#FFDE2E]/50 rounded-xl px-2 leading-[45px] py-1">
 						Expert Influencer Marketing Solutions!
 					</span>
@@ -28,13 +28,13 @@ const Content = () => {
 					<AiOutlineArrowRight size={25} />
 				</button>
 				<Image
-					src={require("@/assets/home/black.png")}
+					src={require('@/assets/home/black.png')}
 					width={150}
 					className="absolute top-[12%] left-0 -translate-x-[40%]"
 					alt="Youtube Logo Black"
 				/>
 				<Image
-					src={require("@/assets/home/red.png")}
+					src={require('@/assets/home/red.png')}
 					width={220}
 					className="absolute bottom-[5%] right-0 translate-x-[45%]"
 					alt="Youtube Red Logo"
@@ -63,7 +63,7 @@ const Content = () => {
 				Here&apos;s how it works
 			</p> */}
 		</div>
-	);
-};
+	)
+}
 
-export default Content;
+export default Content

@@ -1,6 +1,6 @@
 export const QUERY_KEYS = {
-	GET_VIDEOS: "videos/get",
-	UPLOAD_VIDEO: "video/upload",
+	GET_VIDEOS: 'videos/get',
+	UPLOAD_VIDEO: 'video/upload',
 	ADD_NOTE: 'note/add',
 	GET_NOTES: 'note/get',
 	GET_INFLUENCERS: 'influencers/get',
@@ -13,13 +13,25 @@ export const QUERY_KEYS = {
 	GET_ACTIVITIES: 'activity/get',
 	GET_ALERTS: 'alerts/get',
 	CREATE_CONTRACT: 'contract/create',
-	UPDATE_CONTRACT: "contract/update",
+	UPDATE_CONTRACT: 'contract/update',
 	CREATE_PAYMENT: 'payment/create',
 	GET_REPORT: 'report/get',
 	GET_ANALYTICS: 'analytics/get',
-	GET_INFLUENCER_ONBOARDINGS: 'influencer-onboardings/get'
-};
+	GET_INFLUENCER_ONBOARDINGS: 'influencer-onboardings/get',
+}
 
-export const MONTHS = ['Jan', 'Feb', 'March', 'April', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec']
+export const MONTHS = [
+	'Jan',
+	'Feb',
+	'March',
+	'April',
+	'June',
+	'July',
+	'Aug',
+	'Sept',
+	'Oct',
+	'Nov',
+	'Dec',
+]
 
 export const CONTRACT_KEY = '@contractTemp'

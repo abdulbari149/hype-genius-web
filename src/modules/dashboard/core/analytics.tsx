@@ -1,7 +1,7 @@
-import { Column, CellProps } from "react-table";
-import { AnalyticsDataType } from "./type";
+import { Column, CellProps } from 'react-table'
+import { AnalyticsDataType } from './type'
 
-type AnalyticsCellProps = CellProps<AnalyticsDataType>;
+type AnalyticsCellProps = CellProps<AnalyticsDataType>
 
 export const columns: ReadonlyArray<Column<AnalyticsDataType>> = [
 	{
@@ -10,7 +10,7 @@ export const columns: ReadonlyArray<Column<AnalyticsDataType>> = [
 				Influencer
 			</p>
 		),
-		id: "influencer",
+		id: 'influencer',
 		Cell: (props: AnalyticsCellProps) => (
 			<p className="pl-3 text-start text-[17px]">
 				{props.data[props.row.index].influencer}
@@ -23,10 +23,10 @@ export const columns: ReadonlyArray<Column<AnalyticsDataType>> = [
 				Views
 			</p>
 		),
-		id: "views",
+		id: 'views',
 		Cell: (props: AnalyticsCellProps) => (
 			<p className="text-center text-[17px]">
-				{props.data[props.row.index].views.toLocaleString("en-US")}
+				{props.data[props.row.index].views.toLocaleString('en-US')}
 			</p>
 		),
 	},
@@ -36,10 +36,10 @@ export const columns: ReadonlyArray<Column<AnalyticsDataType>> = [
 				Total Spent
 			</p>
 		),
-		id: "totalSpent",
+		id: 'totalSpent',
 		Cell: (props: AnalyticsCellProps) => (
 			<p className="text-center text-[17px] text-[#1C921A]">
-				${props.data[props.row.index].totalSpent.toLocaleString("en-US")}
+				${props.data[props.row.index].totalSpent.toLocaleString('en-US')}
 			</p>
 		),
 	},
@@ -49,11 +49,11 @@ export const columns: ReadonlyArray<Column<AnalyticsDataType>> = [
 				ROAS
 			</p>
 		),
-		id: "roas",
+		id: 'roas',
 		Cell: (props: AnalyticsCellProps) => (
 			<p className="py-1 rounded-xl text-[15px] w-[80px] ml-auto px-2 bg-[#C87C0A] text-center">
 				{props.data[props.row.index].roas}
 			</p>
 		),
 	},
-];
+]

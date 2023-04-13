@@ -1,72 +1,72 @@
-import Modal from '@/components/Modal';
-import React, { useEffect } from 'react';
-import Contract from './Contract';
-import TagsList from './TagsList';
-import { useSelector } from 'react-redux';
-import { AppState } from '@/store';
-import { useContract } from '../hooks/useContract';
-import { ContractState } from '../core/types';
-import { getDiff } from '../helpers/getDiff';
-import { useUpdateContract } from '../hooks/useUpdateContract';
-import { UpdateContractData } from '@/api/type';
-import { pick } from '../helpers/pick';
-import { useCreateContract } from '../hooks/useCreateContract';
-import App from 'next/app';
+import Modal from '@/components/Modal'
+import React, { useEffect } from 'react'
+import Contract from './Contract'
+import TagsList from './TagsList'
+import { useSelector } from 'react-redux'
+import { AppState } from '@/store'
+import { useContract } from '../hooks/useContract'
+import { ContractState } from '../core/types'
+import { getDiff } from '../helpers/getDiff'
+import { useUpdateContract } from '../hooks/useUpdateContract'
+import { UpdateContractData } from '@/api/type'
+import { pick } from '../helpers/pick'
+import { useCreateContract } from '../hooks/useCreateContract'
+import App from 'next/app'
 
 interface EditInfluencerModalProps {
-	isOpen: boolean;
-	handleClose: () => void;
+	isOpen: boolean
+	handleClose: () => void
 }
 
 const EditInfluencerModal: React.FC<EditInfluencerModalProps> = ({
 	isOpen,
 	handleClose,
 }) => {
-
 	const influencer = useSelector((state: AppState) => {
-		const data = state.influencers.influencer;
+		const data = state.influencers.influencer
 		return {
-			name:
-				data?.influencer.firstName +
-				' ' +
-				data?.influencer.lastName,
+			name: data?.influencer.firstName + ' ' + data?.influencer.lastName,
 			email: data?.influencer.email ?? '',
 			phoneNumber: data?.influencer.phoneNumber ?? '',
-		};
-	});
+		}
+	})
 
 	const channel = useSelector((state: AppState) => ({
-		link: state.influencers.influencer?.channel.link ?? ''
+		link: state.influencers.influencer?.channel.link ?? '',
 	}))
 
 	const contract = useSelector((state: AppState) => {
-		const data = state.influencers.influencer;
+		const data = state.influencers.influencer
 		return {
 			is_one_time: data?.contract?.isOneTime ? 'yes' : 'no',
 			amount: data?.contract?.amount ?? 0,
 			currency_id: data?.contract?.currencyId ?? 0,
 			note: '',
 			upload_frequency: data?.contract?.uploadFrequency ?? '1x',
-			onboarding_id: -1
+			onboarding_id: -1,
 		} as ContractState
 	})
 
-	const contractId = useSelector((state: AppState) => state.influencers?.influencer?.contract?.id ?? null)
+	const contractId = useSelector(
+		(state: AppState) => state.influencers?.influencer?.contract?.id ?? null,
+	)
 
 	const { data, handleChange, setData, resetData } = useContract(contract)
 
-	const business_channel_id = useSelector((state: AppState) => state.influencers.influencer?.id);
+	const business_channel_id = useSelector(
+		(state: AppState) => state.influencers.influencer?.id,
+	)
 	const updateContract = useUpdateContract()
 	const createContract = useCreateContract()
 
 	useEffect(() => {
-		if (isOpen){
-			setData(contract);
+		if (isOpen) {
+			setData(contract)
 		}
 	}, [isOpen])
 
 	async function onSave() {
-		if (!business_channel_id) return;
+		if (!business_channel_id) return
 		if (!contractId) {
 			await createContract.mutateAsync({
 				amount: data.amount,
@@ -74,20 +74,20 @@ const EditInfluencerModal: React.FC<EditInfluencerModalProps> = ({
 				currency_id: data.currency_id,
 				is_one_time: data.is_one_time === 'yes',
 				upload_frequency: data.upload_frequency,
-			});
+			})
 			resetData()
-			return;
+			return
 		}
-		const updatedData: Partial<ContractState> = getDiff(contract, data);
+		const updatedData: Partial<ContractState> = getDiff(contract, data)
 		const newData: UpdateContractData = {
 			id: contractId,
 			business_channel_id,
-			...pick(updatedData, 'amount', 'currency_id', 'upload_frequency')
+			...pick(updatedData, 'amount', 'currency_id', 'upload_frequency'),
 		}
 		if (updatedData.is_one_time) {
 			newData.is_one_time = updatedData.is_one_time === 'yes'
 		}
-		await updateContract.mutateAsync(newData);
+		await updateContract.mutateAsync(newData)
 		resetData()
 	}
 
@@ -187,12 +187,15 @@ const EditInfluencerModal: React.FC<EditInfluencerModalProps> = ({
 				/>
 				<TagsList />
 
-				<button onClick={onSave} className="bg-[#EF539E] px-4 py-2 w-fit mx-auto rounded-xl text-white">
+				<button
+					onClick={onSave}
+					className="bg-[#EF539E] px-4 py-2 w-fit mx-auto rounded-xl text-white"
+				>
 					Save
 				</button>
 			</div>
 		</Modal>
-	);
-};
+	)
+}
 
-export default EditInfluencerModal;
+export default EditInfluencerModal

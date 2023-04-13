@@ -1,18 +1,18 @@
-import React, { type PropsWithChildren } from 'react';
-import Logo from '@/assets/logos/hype-genius-logo-with-text.png';
-import Image from 'next/image';
-import { Poppins } from 'next/font/google';
-import { useUser } from '@/modules/auth/hooks/useUser';
-import { useRouter } from 'next/router';
-import Loading from '../Loading';
+import React, { type PropsWithChildren } from 'react'
+import Logo from '@/assets/logos/hype-genius-logo-with-text.png'
+import Image from 'next/image'
+import { Poppins } from 'next/font/google'
+import { useUser } from '@/modules/auth/hooks/useUser'
+import { useRouter } from 'next/router'
+import Loading from '../Loading'
 
 const poppins = Poppins({
 	weight: '500',
 	subsets: ['latin'],
-});
+})
 interface AuthLayoutProps extends PropsWithChildren {
-	title: string | React.ReactNode;
-	subTitle: string;
+	title: string | React.ReactNode
+	subTitle: string
 }
 
 const AuthLayout: React.FC<AuthLayoutProps> = ({
@@ -20,17 +20,17 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({
 	subTitle,
 	children,
 }) => {
-	const router = useRouter();
+	const router = useRouter()
 	const { isLoading } = useUser({
 		onSuccess(data) {
 			if (data.data.user.role === 'business_admin') {
-				router.replace('/dashboard/business');
+				router.replace('/dashboard/business')
 			} else if (data.data.user.role === 'influencer') {
-				router.replace('/dashboard/influencer');
+				router.replace('/dashboard/influencer')
 			}
 		},
-	});
-	if (isLoading) return <Loading />;
+	})
+	if (isLoading) return <Loading />
 	return (
 		<div
 			className="grid w-full h-screen grid-cols-5 overflow-hidden max-w-screen"
@@ -38,12 +38,7 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({
 		>
 			<div className="bg-[#EF539E] h-[100%] min-h-screen flex flex-col static col-span-2 py-[100px]">
 				<div className="grid flex-1 w-full place-content-center">
-					<Image
-						src={'/next.svg'}
-						alt="ext"
-						width={500}
-						height={500}
-					/>
+					<Image src={'/next.svg'} alt="ext" width={500} height={500} />
 				</div>
 
 				<div className="mt-auto mx-auto text-center text-[45px] font-semibold ">
@@ -67,7 +62,7 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({
 				{children}
 			</div>
 		</div>
-	);
-};
+	)
+}
 
-export default AuthLayout;
+export default AuthLayout

@@ -1,28 +1,28 @@
-import React, { useMemo } from "react";
-import { useTable } from "react-table";
-import { columns as videosColumns } from "../core/videos";
-import { VideosApi } from "@/api/VideosApi";
-import { useQuery } from "react-query";
-import { QUERY_KEYS } from "@/core/constants";
-import { useDispatch } from "react-redux";
-import { selectVideo } from "../core/slice";
-import { IVideo } from "@/api/type";
+import React, { useMemo } from 'react'
+import { useTable } from 'react-table'
+import { columns as videosColumns } from '../core/videos'
+import { VideosApi } from '@/api/VideosApi'
+import { useQuery } from 'react-query'
+import { QUERY_KEYS } from '@/core/constants'
+import { useDispatch } from 'react-redux'
+import { selectVideo } from '../core/slice'
+import { IVideo } from '@/api/type'
 
 const VideosTable = () => {
 	const { data: videos } = useQuery(QUERY_KEYS.GET_VIDEOS, {
 		queryFn: () => VideosApi.getVideos({}),
-		initialData: { data: [], message: "", status: 200 },
-	});
+		initialData: { data: [], message: '', status: 200 },
+	})
 
-	const data = useMemo(() => videos?.data ?? [], [videos]);
-	const columns = useMemo(() => videosColumns, []);
-	const table = useTable({ columns, data });
+	const data = useMemo(() => videos?.data ?? [], [videos])
+	const columns = useMemo(() => videosColumns, [])
+	const table = useTable({ columns, data })
 	const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-		table;
-	const dispatch = useDispatch();
+		table
+	const dispatch = useDispatch()
 
 	function handleSelectVideo(video: IVideo) {
-		dispatch(selectVideo({ video }));
+		dispatch(selectVideo({ video }))
 	}
 
 	return (
@@ -39,7 +39,7 @@ const VideosTable = () => {
 								{...column.getHeaderProps()}
 								key={column.id}
 							>
-								{column.render("Header")}
+								{column.render('Header')}
 							</th>
 						))}
 					</tr>
@@ -48,13 +48,13 @@ const VideosTable = () => {
 			<tbody {...getTableBodyProps()} className="w-full">
 				{data.length !== 0 ? (
 					rows.map((row) => {
-						prepareRow(row);
+						prepareRow(row)
 						return (
 							<tr
 								className="cursor-pointer"
 								style={{
 									boxShadow:
-										"0px 4px 103px rgba(50, 50, 71, 0.01), 0px 4px 59px rgba(50, 50, 71, 0.06)",
+										'0px 4px 103px rgba(50, 50, 71, 0.01), 0px 4px 59px rgba(50, 50, 71, 0.06)',
 								}}
 								{...row.getRowProps()}
 								key={row.original.id}
@@ -67,19 +67,19 @@ const VideosTable = () => {
 											{...cell.getCellProps()}
 											key={cell.row.id}
 										>
-											{cell.render("Cell")}
+											{cell.render('Cell')}
 										</td>
-									);
+									)
 								})}
 							</tr>
-						);
+						)
 					})
 				) : (
 					<tr
 						className="cursor-pointer"
 						style={{
 							boxShadow:
-								"0px 4px 103px rgba(50, 50, 71, 0.01), 0px 4px 59px rgba(50, 50, 71, 0.06)",
+								'0px 4px 103px rgba(50, 50, 71, 0.01), 0px 4px 59px rgba(50, 50, 71, 0.06)',
 						}}
 					>
 						<td
@@ -92,7 +92,7 @@ const VideosTable = () => {
 				)}
 			</tbody>
 		</table>
-	);
-};
+	)
+}
 
-export default VideosTable;
+export default VideosTable

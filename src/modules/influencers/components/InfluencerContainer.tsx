@@ -1,31 +1,33 @@
-import React, { Suspense, useState } from "react";
-import InfluencersHeader from "./InfluencerHeader";
-import AddInfluencerModal from "./AddInfluencer/Modal";
-import InfluencerTable from "./InfluencerTable";
-import Loading from "@/components/Loading";
-import { useSelector } from "react-redux";
-import { AppState } from "@/store";
+import React, { Suspense, useState } from 'react'
+import InfluencersHeader from './InfluencerHeader'
+import AddInfluencerModal from './AddInfluencer/Modal'
+import InfluencerTable from './InfluencerTable'
+import Loading from '@/components/Loading'
+import { useSelector } from 'react-redux'
+import { AppState } from '@/store'
 
-interface Props {
-}
+interface Props {}
 
 const InfluencerContainer: React.FC<Props> = () => {
-	const [isAddOpen, setIsAddOpen] = useState(false);
-	const isInfluencerSelected = useSelector<AppState, boolean>(state => state.influencers.influencer !== null);
+	const [isAddOpen, setIsAddOpen] = useState(false)
+	const isInfluencerSelected = useSelector<AppState, boolean>(
+		(state) => state.influencers.influencer !== null,
+	)
 	// const [currentPage, setCurrentPage] = useState(1);
 
 	function closeAdd() {
-		setIsAddOpen(false);
+		setIsAddOpen(false)
 	}
 
 	function openAdd() {
-		setIsAddOpen(true);
+		setIsAddOpen(true)
 	}
 
 	return (
 		<div
-			className={`h-screen w-full flex flex-col w-full overflow-hidden ${isInfluencerSelected ? `col-span-5` : `col-span-full`
-				}`}
+			className={`h-screen w-full flex flex-col w-full overflow-hidden ${
+				isInfluencerSelected ? `col-span-5` : `col-span-full`
+			}`}
 		>
 			<InfluencersHeader openAdd={openAdd} />
 			<div className="w-full overflow-y-scroll custom-scroll px-[10px]">
@@ -55,7 +57,7 @@ const InfluencerContainer: React.FC<Props> = () => {
 			</div> */}
 			<AddInfluencerModal isOpen={isAddOpen} handleClose={closeAdd} />
 		</div>
-	);
-};
+	)
+}
 
-export default InfluencerContainer;
+export default InfluencerContainer

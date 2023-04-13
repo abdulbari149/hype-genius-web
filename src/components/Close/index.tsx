@@ -1,11 +1,11 @@
-import Image from "next/image";
-import React from "react";
+import Image from 'next/image'
+import React from 'react'
 
 interface CloseProps extends React.HtmlHTMLAttributes<HTMLDivElement> {
 	onClose: React.MouseEventHandler
 }
 
-const Close: React.FC<CloseProps> = ({ className = "", onClose, ...props }) => {
+const Close: React.FC<CloseProps> = ({ className = '', onClose, ...props }) => {
 	return (
 		<div
 			onClick={onClose}
@@ -13,13 +13,13 @@ const Close: React.FC<CloseProps> = ({ className = "", onClose, ...props }) => {
 			{...props}
 		>
 			<Image
-				src={require("@/assets/icons/cancel-black-icon.png")}
+				src={require('@/assets/icons/cancel-black-icon.png')}
 				alt="close"
-        width={25}
-        height={25}
+				width={25}
+				height={25}
 			/>
 		</div>
-	);
-};
+	)
+}
 
-export default Close;
+export default Close

@@ -1,36 +1,36 @@
-import Field from "@/components/Field";
-import React, { FC, PropsWithChildren } from "react";
-import { Formik, FormikHelpers } from "formik";
-import { toFormikValidationSchema } from "zod-formik-adapter";
-import { BusinessSignupData } from "../core/types";
-import { businessSignupSchema } from "../core/schema";
-import AuthButton from "./AuthButton";
-import Link from "next/link";
-import useRegisterBusiness from "../hooks/useRegisterBusiness";
+import Field from '@/components/Field'
+import React, { FC, PropsWithChildren } from 'react'
+import { Formik, FormikHelpers } from 'formik'
+import { toFormikValidationSchema } from 'zod-formik-adapter'
+import { BusinessSignupData } from '../core/types'
+import { businessSignupSchema } from '../core/schema'
+import AuthButton from './AuthButton'
+import Link from 'next/link'
+import useRegisterBusiness from '../hooks/useRegisterBusiness'
 
 const BusinessSignup: FC<PropsWithChildren> = () => {
-	const { mutateAsync, isLoading } = useRegisterBusiness();
+	const { mutateAsync, isLoading } = useRegisterBusiness()
 	const onSubmit = async (
 		values: BusinessSignupData,
-		formikHelpers: FormikHelpers<BusinessSignupData>
+		formikHelpers: FormikHelpers<BusinessSignupData>,
 	) => {
-		const {  passwordAgain, ...data  }=  values;
-		formikHelpers.setSubmitting(true);
-		await mutateAsync(data);
-		formikHelpers.setSubmitting(false);
-	};
+		const { passwordAgain, ...data } = values
+		formikHelpers.setSubmitting(true)
+		await mutateAsync(data)
+		formikHelpers.setSubmitting(false)
+	}
 
 	return (
 		<Formik
 			initialValues={{
-				firstName: "",
-				lastName: "",
-				email: "",
-				phoneNumber: "",
-				password: "",
-				passwordAgain: "",
-				businessName: "",
-				businessLink: "",
+				firstName: '',
+				lastName: '',
+				email: '',
+				phoneNumber: '',
+				password: '',
+				passwordAgain: '',
+				businessName: '',
+				businessLink: '',
 			}}
 			validationSchema={toFormikValidationSchema(businessSignupSchema)}
 			onSubmit={onSubmit}
@@ -63,7 +63,7 @@ const BusinessSignup: FC<PropsWithChildren> = () => {
 								type="email"
 								id="email"
 								name="email"
-								placeholder={"elonmusk@tesla.com"}
+								placeholder={'elonmusk@tesla.com'}
 								value={formik.values.email}
 								onChange={formik.handleChange}
 							/>
@@ -103,7 +103,7 @@ const BusinessSignup: FC<PropsWithChildren> = () => {
 								type="text"
 								id="businessName"
 								name="businessName"
-								placeholder={"Tesla"}
+								placeholder={'Tesla'}
 								value={formik.values.businessName}
 								onChange={formik.handleChange}
 							/>
@@ -113,7 +113,7 @@ const BusinessSignup: FC<PropsWithChildren> = () => {
 								type="text"
 								id="businessLink"
 								name="businessLink"
-								placeholder={"tesla.com"}
+								placeholder={'tesla.com'}
 								value={formik.values.businessLink}
 								onChange={formik.handleChange}
 							/>
@@ -129,17 +129,17 @@ const BusinessSignup: FC<PropsWithChildren> = () => {
 						<p className="text-lg">
 							Already have an account?
 							<Link
-								href={"/auth/login"}
+								href={'/auth/login'}
 								className="pl-1 text-lg font-bold text-pink-600 cursor-pointer"
 							>
 								Sign In
 							</Link>
 						</p>
 					</>
-				);
+				)
 			}}
 		</Formik>
-	);
-};
+	)
+}
 
-export default BusinessSignup;
+export default BusinessSignup

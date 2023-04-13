@@ -1,20 +1,18 @@
-import Selector from '@/components/Selector';
-import React from 'react';
-import { QUERY_KEYS } from 'src/core/constants';
-import CurrencySelector from './CurrencySelector';
-import { ContractState, HandleChangeType } from '../core/types';
+import Selector from '@/components/Selector'
+import React from 'react'
+import { QUERY_KEYS } from 'src/core/constants'
+import CurrencySelector from './CurrencySelector'
+import { ContractState, HandleChangeType } from '../core/types'
 
 interface Props {
-	data: Required<Omit<ContractState, 'onboarding_id'>>;
-	handleChange: HandleChangeType;
+	data: Required<Omit<ContractState, 'onboarding_id'>>
+	handleChange: HandleChangeType
 }
 
 const Contract: React.FC<Props> = (props) => {
 	return (
 		<div className="space-y-[15px] max-w-[80%]">
-			<h3 className="text-[#272830] text-[18px] font-[600] ">
-				Contract
-			</h3>
+			<h3 className="text-[#272830] text-[18px] font-[600] ">Contract</h3>
 			<div className="flex items-center gap-4">
 				<p className="text-[#272830] text-[14px] opacity-80">
 					Is this a one-time sponsorship?
@@ -28,7 +26,7 @@ const Contract: React.FC<Props> = (props) => {
 						{ id: 2, label: 'Yes', value: 'yes' },
 					]}
 					onChange={(value) => {
-						props.handleChange('is_one_time', value);
+						props.handleChange('is_one_time', value)
 					}}
 					value={props.data.is_one_time}
 					name="isOneTime"
@@ -63,7 +61,7 @@ const Contract: React.FC<Props> = (props) => {
 						]}
 						value={props.data.upload_frequency}
 						onChange={(value, e) => {
-							props.handleChange('upload_frequency', value);
+							props.handleChange('upload_frequency', value)
 						}}
 					/>
 					<p className="text-[#272830] text-[14px] opacity-80">
@@ -77,16 +75,14 @@ const Contract: React.FC<Props> = (props) => {
 						name="amount"
 						value={props.data.amount}
 						onChange={(e) => {
-							const value = parseInt(e.target.value);
-							if (!isNaN(value)){ 
-								props.handleChange('amount', value);
+							const value = parseInt(e.target.value)
+							if (!isNaN(value)) {
+								props.handleChange('amount', value)
 							}
 						}}
 					/>
 
-					<p className="text-[#272830] text-[14px] opacity-80">
-						per video in
-					</p>
+					<p className="text-[#272830] text-[14px] opacity-80">per video in</p>
 
 					<CurrencySelector
 						handleChange={(value) =>
@@ -97,9 +93,7 @@ const Contract: React.FC<Props> = (props) => {
 				</div>
 			) : (
 				<div className="flex items-center gap-4" key={'onetime'}>
-					<p className="text-[#272830] text-[14px] opacity-80">
-						We will pay
-					</p>
+					<p className="text-[#272830] text-[14px] opacity-80">We will pay</p>
 
 					<input
 						type="text"
@@ -108,9 +102,9 @@ const Contract: React.FC<Props> = (props) => {
 						name="amount"
 						value={props.data.amount}
 						onChange={(e) => {
-							const value = parseInt(e.target.value);
-							if (!isNaN(value)){ 
-								props.handleChange('amount', value);
+							const value = parseInt(e.target.value)
+							if (!isNaN(value)) {
+								props.handleChange('amount', value)
 							}
 						}}
 					/>
@@ -137,7 +131,7 @@ const Contract: React.FC<Props> = (props) => {
 				onChange={(e) => props.handleChange('note', e.target.value)}
 			></textarea>
 		</div>
-	);
-};
-export type ContractProps = Props;
-export default Contract;
+	)
+}
+export type ContractProps = Props
+export default Contract

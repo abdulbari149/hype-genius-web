@@ -1,27 +1,27 @@
-import Selector from "@/components/Selector";
-import React from "react";
+import Selector from '@/components/Selector'
+import React from 'react'
 const options = [
 	{
 		id: 1,
-		value: "this-month",
-		label: "This Month",
+		value: 'this-month',
+		label: 'This Month',
 	},
 	{
 		id: 2,
-		value: "next-month",
-		label: "Next Month",
+		value: 'next-month',
+		label: 'Next Month',
 	},
 	{
 		id: 3,
-		value: "prev-month",
-		label: "Prev Month",
+		value: 'prev-month',
+		label: 'Prev Month',
 	},
 	{
 		id: 4,
-		value: "custom",
-		label: "Custom",
+		value: 'custom',
+		label: 'Custom',
 	},
-];
+]
 
 const DashboardDatePicker = () => {
 	return (
@@ -30,7 +30,7 @@ const DashboardDatePicker = () => {
 			<p className="text-[13px] font-light">Compare to</p>
 			<Selector type="time" />
 		</div>
-	);
-};
+	)
+}
 
-export default DashboardDatePicker;
+export default DashboardDatePicker

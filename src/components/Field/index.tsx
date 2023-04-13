@@ -1,23 +1,23 @@
-import { useField } from "formik";
-import React from "react";
+import { useField } from 'formik'
+import React from 'react'
 
 interface FieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
-	label: string;
-	name: string;
-	containerClassName?: string;
-	icon?: React.ReactNode;
+	label: string
+	name: string
+	containerClassName?: string
+	icon?: React.ReactNode
 }
 
 const Field: React.FC<FieldProps> = ({
 	label,
-	containerClassName = "",
+	containerClassName = '',
 	icon,
 	...props
 }) => {
-	const [field, meta, helpers] = useField(props.name);
+	const [field, meta, helpers] = useField(props.name)
 	return (
 		<div
-			className={"flex flex-col gap-3 max-w-xs w-full " + containerClassName}
+			className={'flex flex-col gap-3 max-w-xs w-full ' + containerClassName}
 		>
 			<label htmlFor={props.id} className="pl-2 font-normal">
 				{label}
@@ -34,7 +34,7 @@ const Field: React.FC<FieldProps> = ({
 				<p className="px-1 text-[13px] text-red-500">{meta.error}</p>
 			)}
 		</div>
-	);
-};
+	)
+}
 
-export default Field;
+export default Field

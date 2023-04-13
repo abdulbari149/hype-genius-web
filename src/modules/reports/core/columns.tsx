@@ -1,14 +1,14 @@
-import { Column, CellPropGetter, CellProps } from 'react-table';
-import { ReportsData } from './type';
+import { Column, CellPropGetter, CellProps } from 'react-table'
+import { ReportsData } from './type'
 
-const Header: React.FC<{ title: string, className?: string }> = ({
+const Header: React.FC<{ title: string; className?: string }> = ({
 	title,
 	className = '',
 }) => (
 	<p className={`text-[18px] font-[600] text-[#272830] mb-4 ${className}`}>
 		{title}
 	</p>
-);
+)
 
 export const columns: ReadonlyArray<Column<ReportsData>> = [
 	{
@@ -17,12 +17,12 @@ export const columns: ReadonlyArray<Column<ReportsData>> = [
 		maxWidth: 120,
 		width: 120,
 		Cell: (props: CellProps<ReportsData>) => {
-			const influencer = props.data[props.row.index].influencer;
+			const influencer = props.data[props.row.index].influencer
 			return (
 				<p className="text-[17px] pl-[16px] font-light text-start">
 					{influencer.firstName + ' ' + influencer.lastName}
 				</p>
-			);
+			)
 		},
 	},
 	{
@@ -31,7 +31,7 @@ export const columns: ReadonlyArray<Column<ReportsData>> = [
 		maxWidth: 350,
 		width: 350,
 		Cell: (props: CellProps<ReportsData>) => {
-			const videos = props.data[props.row.index].videos;
+			const videos = props.data[props.row.index].videos
 			return (
 				<div className="flex flex-col max-w-[340px] w-full gap-10">
 					{videos.length > 0 ? (
@@ -56,7 +56,7 @@ export const columns: ReadonlyArray<Column<ReportsData>> = [
 						Total
 					</p>
 				</div>
-			);
+			)
 		},
 	},
 	{
@@ -65,7 +65,7 @@ export const columns: ReadonlyArray<Column<ReportsData>> = [
 		maxWidth: 250,
 		width: 250,
 		Cell: (props: CellProps<ReportsData>) => {
-			const videos = props.data[props.row.index].videos;
+			const videos = props.data[props.row.index].videos
 			return (
 				<div className="max-w-[170px] flex flex-col items-center gap-10 w-full">
 					{videos.length > 0 ? (
@@ -75,20 +75,16 @@ export const columns: ReadonlyArray<Column<ReportsData>> = [
 									className="text-[17px] font-light py-[3px] text-center"
 									key={video.id}
 								>
-									{video.views.toLocaleString(
-										'en-US'
-									)}
+									{video.views.toLocaleString('en-US')}
 								</p>
 							))}
 						</div>
 					) : null}
 					<p className="px-2 text-center text-[17px] text-[#272830] font-500">
-						{props.data[
-							props.row.index
-						].total.views.toLocaleString('en-US')}
+						{props.data[props.row.index].total.views.toLocaleString('en-US')}
 					</p>
 				</div>
-			);
+			)
 		},
 	},
 	{
@@ -97,7 +93,7 @@ export const columns: ReadonlyArray<Column<ReportsData>> = [
 		maxWidth: 250,
 		width: 250,
 		Cell: (props: CellProps<ReportsData>) => {
-			const videos = props.data[props.row.index].videos;
+			const videos = props.data[props.row.index].videos
 			return (
 				<div className="max-w-[170px] flex flex-col items-center gap-10 w-full">
 					{videos.length > 0 ? (
@@ -107,23 +103,17 @@ export const columns: ReadonlyArray<Column<ReportsData>> = [
 									className="text-[17px] font-light py-[3px] text-center"
 									key={video.id}
 								>
-									$
-									{video.amount.toLocaleString(
-										'en-US'
-									)}
+									${video.amount.toLocaleString('en-US')}
 								</p>
 							))}
 						</div>
 					) : null}
 
 					<p className="px-2 text-center text-[17px] text-[#272830] font-500">
-						$
-						{props.data[
-							props.row.index
-						].total.amount.toLocaleString('en-US')}
+						${props.data[props.row.index].total.amount.toLocaleString('en-US')}
 					</p>
 				</div>
-			);
+			)
 		},
 	},
 	{
@@ -131,7 +121,7 @@ export const columns: ReadonlyArray<Column<ReportsData>> = [
 		Header: <Header title="ROAS" className="text-center" />,
 		maxWidth: 50,
 		Cell: (props: CellProps<ReportsData>) => {
-			const videos = props.data[props.row.index].videos;
+			const videos = props.data[props.row.index].videos
 			return (
 				<div className="flex flex-col items-center pr-[15px] gap-8 max-w-[150px]">
 					{videos?.length > 0 ? (
@@ -154,7 +144,7 @@ export const columns: ReadonlyArray<Column<ReportsData>> = [
 						{props.data[props.row.index].total.roas}
 					</p>
 				</div>
-			);
+			)
 		},
 	},
-];
+]

@@ -1,22 +1,24 @@
-import React, { useState } from 'react';
-import FollowUp from './FollowUp';
-import Header from './Header';
-import Channel from './Channel';
-import Alert from './Alert';
-import Metrics from './Metrics';
-import Uploads from './Uploads';
-import Activities from './Activities';
-import EditInfluencerModal from '../EditInfluencerModal';
-import { AppState } from '@/store';
-import { useDispatch, useSelector } from 'react-redux';
-import InfluencerSidePanel from '../InfluencerSidePanel';
-import { hideIsEdit, showIsEdit } from '../../core/slice';
+import React, { useState } from 'react'
+import FollowUp from './FollowUp'
+import Header from './Header'
+import Channel from './Channel'
+import Alert from './Alert'
+import Metrics from './Metrics'
+import Uploads from './Uploads'
+import Activities from './Activities'
+import EditInfluencerModal from '../EditInfluencerModal'
+import { AppState } from '@/store'
+import { useDispatch, useSelector } from 'react-redux'
+import InfluencerSidePanel from '../InfluencerSidePanel'
+import { hideIsEdit, showIsEdit } from '../../core/slice'
 
-interface Props { }
+interface Props {}
 
 const InfluencersDetail: React.FC<Props> = () => {
-	const isEditOpen = useSelector((state: AppState) => state.influencers.isEditOpen);
-	const dispatch = useDispatch();
+	const isEditOpen = useSelector(
+		(state: AppState) => state.influencers.isEditOpen,
+	)
+	const dispatch = useDispatch()
 	function openIsEdit() {
 		dispatch(showIsEdit())
 	}
@@ -25,25 +27,24 @@ const InfluencersDetail: React.FC<Props> = () => {
 	}
 
 	const { channelLink = '', ...data } = useSelector((state: AppState) => {
-		const { influencer: data } = state.influencers;
-		const tags = data?.tags && Array.isArray(data?.tags) ? data.tags : [];
+		const { influencer: data } = state.influencers
+		const tags = data?.tags && Array.isArray(data?.tags) ? data.tags : []
 		return {
 			influencer: {
 				email: data?.influencer.email ?? '',
 				name:
-					data?.influencer.firstName +
-					' ' +
-					data?.influencer.lastName ?? '',
+					data?.influencer.firstName + ' ' + data?.influencer.lastName ?? '',
 				phoneNumber: data?.influencer.phoneNumber ?? '',
 			},
 			deal: {
 				perMonth: data?.contract?.uploadFrequency ?? '',
 				perVideo: data?.contract?.amount.toString(10) ?? 0,
 			},
-			tag: tags.length > 0 ? { text: tags[0].name, color: tags[0].color } : null,
+			tag:
+				tags.length > 0 ? { text: tags[0].name, color: tags[0].color } : null,
 			channelLink: data?.channel.link,
-		};
-	});
+		}
+	})
 
 	return (
 		<InfluencerSidePanel onClose={closeIsEdit}>
@@ -68,12 +69,9 @@ const InfluencersDetail: React.FC<Props> = () => {
 				Edit Info
 			</button>
 
-			<EditInfluencerModal
-				isOpen={isEditOpen}
-				handleClose={closeIsEdit}
-			/>
+			<EditInfluencerModal isOpen={isEditOpen} handleClose={closeIsEdit} />
 		</InfluencerSidePanel>
-	);
-};
+	)
+}
 
-export default InfluencersDetail;
+export default InfluencersDetail

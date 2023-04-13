@@ -1,9 +1,9 @@
-import { configureStore } from "@reduxjs/toolkit";
-import { authSlice } from "@/modules/auth/core/slice";
-import { createWrapper } from "next-redux-wrapper";
-import dashboardSlice from "./modules/dashboard/core/slice";
-import influencersSlice from "./modules/influencers/core/slice";
-import reportsSlice from "./modules/reports/core/slice";
+import { configureStore } from '@reduxjs/toolkit'
+import { authSlice } from '@/modules/auth/core/slice'
+import { createWrapper } from 'next-redux-wrapper'
+import dashboardSlice from './modules/dashboard/core/slice'
+import influencersSlice from './modules/influencers/core/slice'
+import reportsSlice from './modules/reports/core/slice'
 
 const makeStore = () =>
 	configureStore({
@@ -14,9 +14,9 @@ const makeStore = () =>
 			[reportsSlice.name]: reportsSlice.reducer,
 		},
 		devTools: true,
-	});
+	})
 
-export type AppStore = ReturnType<typeof makeStore>;
-export type AppState = ReturnType<AppStore["getState"]>;
+export type AppStore = ReturnType<typeof makeStore>
+export type AppState = ReturnType<AppStore['getState']>
 
-export const wrapper = createWrapper<AppStore>(makeStore);
+export const wrapper = createWrapper<AppStore>(makeStore)

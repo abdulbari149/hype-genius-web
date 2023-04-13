@@ -1,19 +1,19 @@
-import Card from "@/components/Card";
-import Image, { ImageProps } from "next/image";
-import React from "react";
-import { Montserrat } from "next/font/google";
+import Card from '@/components/Card'
+import Image, { ImageProps } from 'next/image'
+import React from 'react'
+import { Montserrat } from 'next/font/google'
 const montserrat = Montserrat({
-	weight: "600",
-	subsets: ["latin"],
-});
+	weight: '600',
+	subsets: ['latin'],
+})
 
 interface AnalyticsCardProps {
-	title: string;
-	icon: ImageProps["src"];
-	value: string | number;
-	containerClassName?: string;
-	changeInPercent: number;
-	variation: boolean;
+	title: string
+	icon: ImageProps['src']
+	value: string | number
+	containerClassName?: string
+	changeInPercent: number
+	variation: boolean
 }
 
 const AnalyticsCard: React.FC<AnalyticsCardProps> = (props) => {
@@ -21,14 +21,14 @@ const AnalyticsCard: React.FC<AnalyticsCardProps> = (props) => {
 		title,
 		icon,
 		value,
-		containerClassName = "",
+		containerClassName = '',
 		changeInPercent,
 		variation,
-	} = props;
+	} = props
 	return (
 		<Card
 			className={
-				"grid auto-cols-fr px-5 py-3 max-h-[5rem] h-full place-content-center rounded-[20px] min-w-[11rem] xl:max-w-[13rem] lg:max-w-[16rem] w-[100%] " +
+				'grid auto-cols-fr px-5 py-3 max-h-[5rem] h-full place-content-center rounded-[20px] min-w-[11rem] xl:max-w-[13rem] lg:max-w-[16rem] w-[100%] ' +
 				containerClassName
 			}
 		>
@@ -40,13 +40,13 @@ const AnalyticsCard: React.FC<AnalyticsCardProps> = (props) => {
 						</p>
 						<span
 							className={`text-[10px] align-middle flex items-center h-[24px] px-2 rounded-[5px] md:px-1 md:h-[20px] md:text-[9px] md:rounded-[5px]  ${
-								variation ? "bg-[#CAFFA0]" : "bg-[#FFCBD7]"
+								variation ? 'bg-[#CAFFA0]' : 'bg-[#FFCBD7]'
 							} `}
 						>
-							{variation ? "+" : "-"}
-							{""}
+							{variation ? '+' : '-'}
+							{''}
 							{changeInPercent}
-							{"%"}
+							{'%'}
 						</span>
 					</div>
 
@@ -63,7 +63,7 @@ const AnalyticsCard: React.FC<AnalyticsCardProps> = (props) => {
 				</div>
 			</div>
 		</Card>
-	);
-};
+	)
+}
 
-export default AnalyticsCard;
+export default AnalyticsCard

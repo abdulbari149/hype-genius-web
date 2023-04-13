@@ -1,24 +1,26 @@
-import Tag from "@/components/Tag";
-import React from "react";
-import { useQuery } from "react-query";
+import Tag from '@/components/Tag'
+import React from 'react'
+import { useQuery } from 'react-query'
 import { QUERY_KEYS } from '@/core/constants'
-import { useDispatch, useSelector } from "react-redux";
-import { AppState } from "@/store";
-import { AlertApi } from "@/api/AlertApi";
-import { Alerts } from "../../core/constants";
-import { showIsEdit, showPanel } from "../../core/slice";
+import { useDispatch, useSelector } from 'react-redux'
+import { AppState } from '@/store'
+import { AlertApi } from '@/api/AlertApi'
+import { Alerts } from '../../core/constants'
+import { showIsEdit, showPanel } from '../../core/slice'
 
-const { GET_ALERTS } = QUERY_KEYS;
-type ALERT_NAMES = `${Alerts}`;
+const { GET_ALERTS } = QUERY_KEYS
+type ALERT_NAMES = `${Alerts}`
 
 const Alert = () => {
-	const businessChannelId = useSelector<AppState, number | null>((state) => state.influencers.influencer?.id ?? null);
+	const businessChannelId = useSelector<AppState, number | null>(
+		(state) => state.influencers.influencer?.id ?? null,
+	)
 	const { data: alerts } = useQuery(`${GET_ALERTS}/${businessChannelId}`, {
 		queryFn: () => {
 			if (!businessChannelId || businessChannelId === null) {
-				throw new Error("Please select an influencer first");
+				throw new Error('Please select an influencer first')
 			}
-			return AlertApi.getBusinessChannelAlerts(businessChannelId);
+			return AlertApi.getBusinessChannelAlerts(businessChannelId)
 		},
 		suspense: true,
 		onSuccess(data) {
@@ -27,17 +29,17 @@ const Alert = () => {
 		select(data) {
 			return {
 				...data,
-				data: data?.data
-					.map(alert => ({
+				data:
+					data?.data.map((alert) => ({
 						...alert,
 						text: alert.name
-							.replace("_", " ")
-							.split(" ")
+							.replace('_', ' ')
+							.split(' ')
 							.map((i) => `${i.charAt(0).toUpperCase()}${i.substring(1)}`)
-							.join(" "),
-					})) ?? []
+							.join(' '),
+					})) ?? [],
 			}
-		}
+		},
 	})
 
 	const dispatch = useDispatch()
@@ -46,12 +48,12 @@ const Alert = () => {
 		payment_due: () => {
 			dispatch(showPanel({ panel: 'payment' }))
 		},
-		follow_up: () => { },
+		follow_up: () => {},
 		missing_deal: () => {
 			dispatch(showIsEdit())
 		},
-		new_video_upload: () => { },
-		upload_frequency: () => { }
+		new_video_upload: () => {},
+		upload_frequency: () => {},
 	}
 
 	const alertSubtitles: Record<ALERT_NAMES, string> = {
@@ -59,7 +61,7 @@ const Alert = () => {
 		missing_deal: 'Add current deal with influencer',
 		new_video_upload: 'Influencer uploaded a new video',
 		payment_due: 'Payment is Due',
-		upload_frequency: ''
+		upload_frequency: '',
 	}
 
 	return (
@@ -68,18 +70,27 @@ const Alert = () => {
 			<span className="inline-block w-full opacity-50 bg-stone-400 h-[2px]"></span>
 			{alerts?.data.map((alert) => (
 				<div key={alert.id} className="flex flex-row items-center mt-2">
-					<Tag text={alert.name
-						.replace("_", " ")
-						.split(" ")
-						.map((i) => `${i.charAt(0).toUpperCase()}${i.substring(1)}`)
-						.join(" ")} color={alert.color} />
+					<Tag
+						text={alert.name
+							.replace('_', ' ')
+							.split(' ')
+							.map((i) => `${i.charAt(0).toUpperCase()}${i.substring(1)}`)
+							.join(' ')}
+						color={alert.color}
+					/>
 					<p className="font-[600] text-[15px] text-[#272830] ml-6">
-						{alertSubtitles[alert.name]} | <span className="px-1 text-[#697AFF] cursor-pointer" onClick={alertActions[alert.name]}>Click here</span>{" "}
+						{alertSubtitles[alert.name]} |{' '}
+						<span
+							className="px-1 text-[#697AFF] cursor-pointer"
+							onClick={alertActions[alert.name]}
+						>
+							Click here
+						</span>{' '}
 					</p>
 				</div>
 			))}
 		</div>
-	);
-};
+	)
+}
 
-export default Alert;
+export default Alert

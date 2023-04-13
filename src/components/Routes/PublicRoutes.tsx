@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react'
 
 const PublicRoutes = () => {
-	return <div>PublicRoutes</div>;
-};
+	return <div>PublicRoutes</div>
+}
 
-export default PublicRoutes;
+export default PublicRoutes

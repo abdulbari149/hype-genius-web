@@ -1,5 +1,5 @@
-import Card from "@/components/Card";
-import React from "react";
+import Card from '@/components/Card'
+import React from 'react'
 
 const AccountSettings = () => {
 	return (
@@ -7,7 +7,7 @@ const AccountSettings = () => {
 			className="flex flex-col bg-[#FFFFFF]/50 py-6 h-fit w-full px-9 gap-2 rounded-lg"
 			style={{
 				boxShadow:
-					"0px 4px 103px rgba(50, 50, 71, 0.01), 0px 4px 59px rgba(50, 50, 71, 0.06)",
+					'0px 4px 103px rgba(50, 50, 71, 0.01), 0px 4px 59px rgba(50, 50, 71, 0.06)',
 			}}
 		>
 			<p className="font-semibold">Account</p>
@@ -16,7 +16,7 @@ const AccountSettings = () => {
 				Email
 			</label>
 			<input
-				type={"email"}
+				type={'email'}
 				name="email"
 				id="email"
 				placeholder="test123@gmail.com"
@@ -31,7 +31,7 @@ const AccountSettings = () => {
 				</button>
 			</div>
 		</Card>
-	);
-};
+	)
+}
 
-export default AccountSettings;
+export default AccountSettings

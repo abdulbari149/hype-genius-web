@@ -1,30 +1,27 @@
-import React, { useMemo, useState } from 'react';
-import { useTable } from 'react-table';
-import { columns as reportsColumns } from '../core/columns';
-import { useGetReport } from '../hooks/useGetReport';
-import { setPage } from '../core/slice';
-import { AppState } from '@/store';
-import { useDispatch, useSelector } from 'react-redux';
-import { useGetAnalytics } from '@/modules/dashboard/hooks/useGetAnalytics';
+import React, { useMemo, useState } from 'react'
+import { useTable } from 'react-table'
+import { columns as reportsColumns } from '../core/columns'
+import { useGetReport } from '../hooks/useGetReport'
+import { setPage } from '../core/slice'
+import { AppState } from '@/store'
+import { useDispatch, useSelector } from 'react-redux'
+import { useGetAnalytics } from '@/modules/dashboard/hooks/useGetAnalytics'
 const ReportsTable = () => {
-	const currentPage = useSelector((state: AppState) => state.report.page);
-	const reportFilters = useSelector((state: AppState) => state.report);
+	const currentPage = useSelector((state: AppState) => state.report.page)
+	const reportFilters = useSelector((state: AppState) => state.report)
 
-	const { data: reportList } = useGetReport(reportFilters);
-	const data = useMemo(() => reportList?.data?.reports ?? [], [reportList?.data?.reports]);
-	const dispatch = useDispatch();
-	const columns = useMemo(() => reportsColumns, []);
-	const table = useTable({ columns, data });
-	const {
-		getTableProps,
-		getTableBodyProps,
-		headerGroups,
-		rows,
-		prepareRow,
-	} = table;
+	const { data: reportList } = useGetReport(reportFilters)
+	const data = useMemo(
+		() => reportList?.data?.reports ?? [],
+		[reportList?.data?.reports],
+	)
+	const dispatch = useDispatch()
+	const columns = useMemo(() => reportsColumns, [])
+	const table = useTable({ columns, data })
+	const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+		table
 
 	const { data: analytics } = useGetAnalytics()
-
 
 	return (
 		<div className="bg-white	grid w-full h-full grid-cols-7 py-[20px] shadow-lg rounded-xl">
@@ -36,61 +33,47 @@ const ReportsTable = () => {
 					>
 						<thead>
 							{headerGroups.map((headerGroup, idx) => (
-								<tr
-									{...headerGroup.getHeaderGroupProps()}
-									key={idx}
-								>
-									{headerGroup.headers.map(
-										(column) => (
-											<th
-												className="first:pl-4 last:pr-4"
-												{...column.getHeaderProps()}
-												key={column.id}
-											>
-												{column.render(
-													'Header'
-												)}
-											</th>
-										)
-									)}
+								<tr {...headerGroup.getHeaderGroupProps()} key={idx}>
+									{headerGroup.headers.map((column) => (
+										<th
+											className="first:pl-4 last:pr-4"
+											{...column.getHeaderProps()}
+											key={column.id}
+										>
+											{column.render('Header')}
+										</th>
+									))}
 								</tr>
 							))}
 						</thead>
-						<tbody
-							{...getTableBodyProps()}
-							className="w-full"
-						>
+						<tbody {...getTableBodyProps()} className="w-full">
 							{rows.map((row) => {
-								prepareRow(row);
+								prepareRow(row)
 								return (
 									<tr
 										className="cursor-pointer"
 										{...row.getRowProps()}
 										key={row.id}
 									>
-										{row.cells.map(
-											(cell, idx) => {
-												return (
-													<td
-														className="py-3 align-top text-start"
-														{...cell.getCellProps()}
-														key={idx}
-													>
-														{cell.render(
-															'Cell'
-														)}
-													</td>
-												);
-											}
-										)}
+										{row.cells.map((cell, idx) => {
+											return (
+												<td
+													className="py-3 align-top text-start"
+													{...cell.getCellProps()}
+													key={idx}
+												>
+													{cell.render('Cell')}
+												</td>
+											)
+										})}
 									</tr>
-								);
+								)
 							})}
 						</tbody>
 					</table>
 				</div>
 				<div className="flex h-fit mt-auto gap-3 my-[20px] mx-[30px] ">
-					<div className='flex gap-3'>
+					<div className="flex gap-3">
 						<p>Pages</p>
 
 						{Array(reportList?.data?.metadata.totalNoOfPages ?? 1)
@@ -99,20 +82,15 @@ const ReportsTable = () => {
 							.map((page, index) => {
 								return (
 									<div
-										onClick={() =>
-											dispatch(
-												setPage({ page })
-											)
-										}
-										className={`px-2 py-[2px] h-fit rounded-lg cursor-pointer text-center ${currentPage === page
-												? 'bg-[#D9D9D9]'
-												: ''
-											}`}
+										onClick={() => dispatch(setPage({ page }))}
+										className={`px-2 py-[2px] h-fit rounded-lg cursor-pointer text-center ${
+											currentPage === page ? 'bg-[#D9D9D9]' : ''
+										}`}
 										key={page}
 									>
 										{page}
 									</div>
-								);
+								)
 							})}
 					</div>
 				</div>
@@ -126,21 +104,19 @@ const ReportsTable = () => {
 					</p>
 					<div className="grid grid-cols-3 px-[10px] gap-[40px]">
 						<div className="flex flex-col items-center gap-5">
-							<p className="text-[16px] text-[#272830] font-[600]">
-								View
+							<p className="text-[16px] text-[#272830] font-[600]">View</p>
+							<p className="font-light">
+								{analytics?.data?.total_views.toLocaleString('en-US')}
 							</p>
-							<p className="font-light">{analytics?.data?.total_views.toLocaleString('en-US')}</p>
 						</div>
 						<div className="flex flex-col items-center gap-5">
-							<p className="text-[16px] text-[#272830] font-[600]">
-								Spent
+							<p className="text-[16px] text-[#272830] font-[600]">Spent</p>
+							<p className="font-light">
+								${analytics?.data?.spent.toLocaleString('en-US')}
 							</p>
-							<p className="font-light">${analytics?.data?.spent.toLocaleString('en-US')}</p>
 						</div>
 						<div className="flex flex-col items-center gap-2">
-							<p className="text-[16px] text-[#272830] font-[600]">
-								ROAS
-							</p>
+							<p className="text-[16px] text-[#272830] font-[600]">ROAS</p>
 							<p className="py-2 px-3 text-[15px] font-light bg-[#D7D7D7] rounded-xl">
 								{analytics?.data?.roas}
 							</p>
@@ -149,7 +125,7 @@ const ReportsTable = () => {
 				</div>
 			</div>
 		</div>
-	);
-};
+	)
+}
 
-export default ReportsTable;
+export default ReportsTable

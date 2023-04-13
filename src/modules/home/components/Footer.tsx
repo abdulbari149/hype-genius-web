@@ -1,6 +1,6 @@
-import Image from "next/image";
-import React from "react";
-import Logo from "@/assets/home/My project.png";
+import Image from 'next/image'
+import React from 'react'
+import Logo from '@/assets/home/My project.png'
 
 function Footer() {
 	return (
@@ -37,7 +37,7 @@ function Footer() {
 				</div>
 			</div>
 		</section>
-	);
+	)
 }
 
-export default Footer;
+export default Footer

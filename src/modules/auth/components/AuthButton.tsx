@@ -1,9 +1,9 @@
-import React from "react";
-import { AiOutlineArrowRight } from "react-icons/ai";
+import React from 'react'
+import { AiOutlineArrowRight } from 'react-icons/ai'
 
 interface AuthButtonProps
 	extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-	content: string;
+	content: string
 }
 
 const AuthButton: React.FC<AuthButtonProps> = ({ content, ...props }) => {
@@ -15,7 +15,7 @@ const AuthButton: React.FC<AuthButtonProps> = ({ content, ...props }) => {
 			<span className="text-[17px] font-semibold">{content}</span>
 			<AiOutlineArrowRight size={18} />
 		</button>
-	);
-};
+	)
+}
 
-export default AuthButton;
+export default AuthButton

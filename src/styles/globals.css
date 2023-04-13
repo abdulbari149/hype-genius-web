@@ -4,7 +4,7 @@
 
 * {
   margin: 0;
-  padding:0;
+  padding: 0;
   box-sizing: border-box;
 }
 
@@ -15,7 +15,6 @@
 /* Track */
 .custom-scroll::-webkit-scrollbar-track {
   background: #afafaf;
-  
 }
 /* Handle */
 .custom-scroll::-webkit-scrollbar-thumb {
@@ -26,4 +25,3 @@
 .custom-scroll::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
-

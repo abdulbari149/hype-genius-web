@@ -1,6 +1,6 @@
-import Change from "@/components/Change";
-import React from "react";
-import Selector from "@/components/Selector";
+import Change from '@/components/Change'
+import React from 'react'
+import Selector from '@/components/Selector'
 
 const Metrics = () => {
 	return (
@@ -11,15 +11,15 @@ const Metrics = () => {
 				<Selector
 					type="time"
 					customClassName="bg-[#ECF0F4] pr-5 pl-3 mb-1 py-2 rounded-xl text-[13px]"
-					style={{ backgroundPosition: "calc(100% - 8px) center" }}
+					style={{ backgroundPosition: 'calc(100% - 8px) center' }}
 				/>
 
 				<p className="font-light text-[12px] px-1">Compare to</p>
 
 				<Selector
-				type="time"
+					type="time"
 					customClassName="bg-[#ECF0F4] pr-5 pl-3 mb-1 py-2 rounded-xl text-[13px]"
-					style={{ backgroundPosition: "calc(100% - 8px) center" }}
+					style={{ backgroundPosition: 'calc(100% - 8px) center' }}
 				/>
 			</div>
 			<span className="inline-block w-full opacity-50 bg-stone-400 h-[2px]"></span>
@@ -71,7 +71,7 @@ const Metrics = () => {
 				</div>
 			</div>
 		</div>
-	);
-};
+	)
+}
 
-export default Metrics;
+export default Metrics

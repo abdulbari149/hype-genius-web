@@ -1,8 +1,7 @@
-import React from "react";
-import { AiOutlinePlus } from "react-icons/ai";
+import React from 'react'
+import { AiOutlinePlus } from 'react-icons/ai'
 
-interface UploadVidoBtnProps
-	extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
+type UploadVidoBtnProps = React.ButtonHTMLAttributes<HTMLButtonElement>
 
 const UploadVideoBtn: React.FC<UploadVidoBtnProps> = (props) => {
 	return (
@@ -13,7 +12,7 @@ const UploadVideoBtn: React.FC<UploadVidoBtnProps> = (props) => {
 			<AiOutlinePlus size={15} />
 			New Upload
 		</button>
-	);
-};
+	)
+}
 
-export default UploadVideoBtn;
+export default UploadVideoBtn

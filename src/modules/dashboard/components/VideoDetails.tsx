@@ -1,40 +1,40 @@
-import Card from "@/components/Card";
-import Close from "@/components/Close";
-import React, { Suspense, useState } from "react";
-import { AiOutlinePlus } from "react-icons/ai";
-import { useSelector } from "react-redux";
-import { AppState } from "@/store";
-import { useQuery } from "react-query";
-import { QUERY_KEYS } from "@/core/constants";
-import { VideosApi } from "@/api/VideosApi";
-import PayPalEmail from "./PayPalEmail";
-import AddNoteForm from "./AddNoteForm";
-import NotesList from "./NotesList";
+import Card from '@/components/Card'
+import Close from '@/components/Close'
+import React, { Suspense, useState } from 'react'
+import { AiOutlinePlus } from 'react-icons/ai'
+import { useSelector } from 'react-redux'
+import { AppState } from '@/store'
+import { useQuery } from 'react-query'
+import { QUERY_KEYS } from '@/core/constants'
+import { VideosApi } from '@/api/VideosApi'
+import PayPalEmail from './PayPalEmail'
+import AddNoteForm from './AddNoteForm'
+import NotesList from './NotesList'
 
-const { ADD_NOTE, GET_NOTES } = QUERY_KEYS;
+const { ADD_NOTE, GET_NOTES } = QUERY_KEYS
 
 const notesData = [
 	{
 		id: 1,
-		note: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Porttitor leo a diam sollicitudin tempor id. Morbi non arcu risus quis varius quam quisque id diam. Enim praesent elementum facilisis leo vel fringilla est. Turpis egestas integer eget aliquet nibh praesent.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Porttitor leo a diam sollicitudin tempor id. Morbi non arcu risus quis varius quam quisque id diam. Enim praesent elementum facilisis leo vel fringilla est. Turpis egestas integer eget aliquet nibh praesent. Lorem.",
-		date: "Jan 22, 2023",
+		note: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Porttitor leo a diam sollicitudin tempor id. Morbi non arcu risus quis varius quam quisque id diam. Enim praesent elementum facilisis leo vel fringilla est. Turpis egestas integer eget aliquet nibh praesent.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Porttitor leo a diam sollicitudin tempor id. Morbi non arcu risus quis varius quam quisque id diam. Enim praesent elementum facilisis leo vel fringilla est. Turpis egestas integer eget aliquet nibh praesent. Lorem.',
+		date: 'Jan 22, 2023',
 	},
-];
+]
 
 interface Props {
-	handleClose: () => void;
+	handleClose: () => void
 }
 
 const cardStyles = {
 	boxShadow:
-		"0px 4px 103px rgba(50, 50, 71, 0.01), 0px 4px 59px rgba(50, 50, 71, 0.06)",
-};
+		'0px 4px 103px rgba(50, 50, 71, 0.01), 0px 4px 59px rgba(50, 50, 71, 0.06)',
+}
 
 const VideoDetails: React.FC<Props> = ({ handleClose }) => {
-	const [isAddNote, setIsAddNote] = useState(false);
+	const [isAddNote, setIsAddNote] = useState(false)
 	const videoLink = useSelector<AppState, string>(
-		(state) => state.dashboard.video?.link ?? ""
-	);
+		(state) => state.dashboard.video?.link ?? '',
+	)
 
 	return (
 		<Card
@@ -76,7 +76,7 @@ const VideoDetails: React.FC<Props> = ({ handleClose }) => {
 				</div>
 			</div>
 		</Card>
-	);
-};
+	)
+}
 
-export default VideoDetails;
+export default VideoDetails

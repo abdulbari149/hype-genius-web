@@ -1,6 +1,6 @@
-import React from "react";
-import Image from "next/image";
-import { AiOutlineArrowRight } from "react-icons/ai";
+import React from 'react'
+import Image from 'next/image'
+import { AiOutlineArrowRight } from 'react-icons/ai'
 
 const HowItWorks = () => {
 	return (
@@ -10,27 +10,27 @@ const HowItWorks = () => {
 		>
 			<div className="flex gap-3">
 				<Image
-					src={require("@/assets/home/hand.png")}
+					src={require('@/assets/home/hand.png')}
 					width={60}
 					alt="Hand logo"
 				/>
 				<h3 className="text-[2.7rem] font-bold">Here&apos;s how it works</h3>
 				<Image
-					src={require("@/assets/home/hand.png")}
+					src={require('@/assets/home/hand.png')}
 					width={60}
 					alt="Hand logo"
 				/>
 			</div>
 			<div className="flex justify-between w-full max-w-[38rem] mt-[40px]">
 				<Image
-					src={require("@/assets/home/vecleft.png")}
+					src={require('@/assets/home/vecleft.png')}
 					width={250}
 					height={200}
 					className=""
 					alt="left vec"
 				/>
 				<Image
-					src={require("@/assets/home/vecright.png")}
+					src={require('@/assets/home/vecright.png')}
 					width={200}
 					height={200}
 					alt="right vec"
@@ -52,7 +52,7 @@ const HowItWorks = () => {
 					<ul className="space-y-5 list-disc pl-7">
 						<li className="w-full text-[1.3rem] leading-9">
 							Track Metrics about sponsored videos (Views, ROAS, Total Spent,
-							etc.{" "}
+							etc.{' '}
 						</li>
 						<li className="w-full text-[1.3rem] leading-9">
 							Manage which partners have been paid, or if payments are due
@@ -103,7 +103,7 @@ const HowItWorks = () => {
 						PROFIT!
 					</p>
 					<p className="text-[1.3rem] leading-2">
-						{" "}
+						{' '}
 						Best of all we offer an insane Guarantee...
 					</p>
 					<p className="text-[1.3rem] font-bold leading-1">
@@ -119,12 +119,14 @@ const HowItWorks = () => {
 
 			<div className="flex">
 				<p className="text-[2.8rem] font-bold mt-[200px] flex  flex-col items-center">
-					Get started now and leverage the power of{" "}
-					<span className="bg-[#FFDE2E]/50 px-10 mt-3 rounded-xl inline-block">influencer marketing!</span>
+					Get started now and leverage the power of{' '}
+					<span className="bg-[#FFDE2E]/50 px-10 mt-3 rounded-xl inline-block">
+						influencer marketing!
+					</span>
 				</p>
 			</div>
 		</div>
-	);
-};
+	)
+}
 
-export default HowItWorks;
+export default HowItWorks

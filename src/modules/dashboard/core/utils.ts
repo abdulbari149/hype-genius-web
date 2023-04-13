@@ -1,3 +1,3 @@
 export const formatDate = (date: Date) => {
-  return date
+	return date
 }
