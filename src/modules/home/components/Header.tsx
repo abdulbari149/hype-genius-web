@@ -1,8 +1,11 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 const Header: React.FC = () => {
+	const router = useRouter()
+
 	return (
 		<header className="bg-[#F2F6FA] flex flex-row pt-[5rem] px-[12rem] overflow-x-hidden min-h-[10vh] justify-between">
 			<div className="h-[80px] object-contain">
@@ -30,7 +33,10 @@ const Header: React.FC = () => {
 					<li className="font-bold cursor-pointer">
 						<Link href={'/auth/login'}>Sign in</Link>
 					</li>
-					<button className="font-bold  bg-[#EF539E] px-4 py-2 text-[#F2F6FA] rounded-2xl hover:bg-pink-400">
+					<button
+						onClick={() => router.push('/auth/signup/business')}
+						className="font-bold  bg-[#EF539E] px-4 py-2 text-[#F2F6FA] rounded-2xl hover:bg-pink-400"
+					>
 						Get Started
 					</button>
 				</ul>

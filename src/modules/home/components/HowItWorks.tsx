@@ -1,8 +1,11 @@
 import React from 'react'
 import Image from 'next/image'
 import { AiOutlineArrowRight } from 'react-icons/ai'
+import { useRouter } from 'next/router'
 
 const HowItWorks = () => {
+	const router = useRouter()
+
 	return (
 		<div
 			className="w-screen relative flex flex-col items-center -top-[14rem] pt-[80px]"
@@ -69,7 +72,10 @@ const HowItWorks = () => {
 						<button className="border-pink-500 px-5 py-2 rounded-2xl border-solid border-[5px] text-[1.3rem] font-extrabold ">
 							Preview Video
 						</button>
-						<button className="px-5 py-2 flex items-center gap-3 text-[1.3rem] font-bold text-white bg-pink-500 rounded-2xl">
+						<button
+							onClick={() => router.push('/auth/signup/business')}
+							className="px-5 py-2 flex items-center gap-3 text-[1.3rem] font-bold text-white bg-pink-500 rounded-2xl"
+						>
 							Book Demo
 							<AiOutlineArrowRight />
 						</button>
@@ -110,7 +116,10 @@ const HowItWorks = () => {
 						We guarantee you&apos;ll get a 3X ROAS (Return on Ad Spend) within 3
 						months Or we&apos;ll refund every cent you&apos;ve paid!
 					</p>
-					<button className="px-5 py-3 flex items-center gap-3 self-center bg-pink-500 rounded-2xl  text-[1.3rem] font-bold text-white">
+					<button
+						onClick={() => router.push('/auth/signup/business')}
+						className="px-5 py-3 flex items-center gap-3 self-center bg-pink-500 rounded-2xl  text-[1.3rem] font-bold text-white"
+					>
 						Book a Call
 						<AiOutlineArrowRight />
 					</button>

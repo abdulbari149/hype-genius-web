@@ -1,8 +1,11 @@
 import React from 'react'
 import Image from 'next/image'
 import { AiOutlineArrowRight } from 'react-icons/ai'
+import { useRouter } from 'next/router'
 
 const Content = () => {
+	const router = useRouter()
+
 	return (
 		<div className="bg-[#F2F6FA] flex items-center w-[100%] overflow-x-hidden pt-[2rem] pb-[18rem]">
 			<div className="bg-[#FFFFFF] relative w-full gap-[2.5rem] max-w-[85%] justify-center rounded-xl flex flex-col items-center mx-auto shadow-sm py-[5%]">
@@ -23,7 +26,10 @@ const Content = () => {
 						Expert Influencer Marketing Solutions!
 					</span>
 				</p>
-				<button className="flex items-center gap-3 px-[30px] py-4 text-lg font-bold text-white bg-pink-500 rounded-2xl ">
+				<button
+					onClick={() => router.push('/auth/signup/business')}
+					className="flex items-center gap-3 px-[30px] py-4 text-lg font-bold text-white bg-pink-500 rounded-2xl "
+				>
 					Book A Call
 					<AiOutlineArrowRight size={25} />
 				</button>

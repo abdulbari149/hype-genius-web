@@ -44,7 +44,6 @@ const Login: React.FC = () => {
 							onChange={formik.handleChange}
 						/>
 					</div>
-					<pre>{JSON.stringify(formik.values, null, 2)}</pre>
 					<AuthButton
 						type="submit"
 						onClick={(e) => {
