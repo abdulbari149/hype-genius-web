@@ -1,4 +1,4 @@
-import { Column, CellPropGetter, CellProps } from 'react-table'
+import { Column, CellProps } from 'react-table'
 import { ReportsData } from './type'
 
 const Header: React.FC<{ title: string; className?: string }> = ({

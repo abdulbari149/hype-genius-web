@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { useMemo } from 'react'
 import { useTable } from 'react-table'
 import { columns as reportsColumns } from '../core/columns'
 import { useGetReport } from '../hooks/useGetReport'
@@ -32,35 +32,37 @@ const ReportsTable = () => {
 						className="w-full border-separate border-spacing-y-4"
 					>
 						<thead>
-							{headerGroups.map((headerGroup, idx) => (
-								<tr {...headerGroup.getHeaderGroupProps()} key={idx}>
-									{headerGroup.headers.map((column) => (
-										<th
-											className="first:pl-4 last:pr-4"
-											{...column.getHeaderProps()}
-											key={column.id}
-										>
-											{column.render('Header')}
-										</th>
-									))}
-								</tr>
-							))}
+							{headerGroups.map((headerGroup) => {
+								const { key, ...headerGroupProps } =
+									headerGroup.getHeaderGroupProps()
+								return (
+									<tr {...headerGroupProps} key={key}>
+										{headerGroup.headers.map((column) => (
+											<th
+												className="first:pl-4 last:pr-4"
+												{...column.getHeaderProps()}
+												key={column.id}
+											>
+												{column.render('Header')}
+											</th>
+										))}
+									</tr>
+								)
+							})}
 						</thead>
 						<tbody {...getTableBodyProps()} className="w-full">
 							{rows.map((row) => {
 								prepareRow(row)
+								const { key, ...rowProps } = row.getRowProps()
 								return (
-									<tr
-										className="cursor-pointer"
-										{...row.getRowProps()}
-										key={row.id}
-									>
-										{row.cells.map((cell, idx) => {
+									<tr className="cursor-pointer" {...rowProps} key={key}>
+										{row.cells.map((cell) => {
+											const { key, ...cellProps } = cell.getCellProps()
 											return (
 												<td
 													className="py-3 align-top text-start"
-													{...cell.getCellProps()}
-													key={idx}
+													{...cellProps}
+													key={key}
 												>
 													{cell.render('Cell')}
 												</td>
@@ -79,7 +81,7 @@ const ReportsTable = () => {
 						{Array(reportList?.data?.metadata.totalNoOfPages ?? 1)
 							.fill(0)
 							.map((p, i) => i + 1)
-							.map((page, index) => {
+							.map((page) => {
 								return (
 									<div
 										onClick={() => dispatch(setPage({ page }))}

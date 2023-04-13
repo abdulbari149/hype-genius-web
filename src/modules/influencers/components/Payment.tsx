@@ -1,19 +1,11 @@
-import React, { useMemo, useRef } from 'react'
+import React from 'react'
 import InfluencerSidePanel from './InfluencerSidePanel'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppState } from '@/store'
-import {
-	Formik,
-	FormikComputedProps,
-	FormikConfig,
-	FormikHandlers,
-	FormikProps,
-} from 'formik'
+import { Formik, FormikConfig } from 'formik'
 import { BiDollar } from 'react-icons/bi'
 import { showPanel } from '../core/slice'
 import CurrencySelector from './CurrencySelector'
-import { useVideoUploads } from '../hooks/useVideoUploads'
-import Selector from '@/components/Selector'
 import { useCreatePayment } from '../hooks/useCreatePayment'
 import { toFormikValidationSchema } from 'zod-formik-adapter'
 import {
@@ -21,7 +13,7 @@ import {
 	createPaymentSchema,
 	paymentDataSchema,
 } from '../core/schema'
-import { ZodError, z } from 'zod'
+import { ZodError } from 'zod'
 import { toast } from 'react-toastify'
 import { useMyBusiness } from '@/modules/settings/hooks/useMyBusiness'
 import VideoSelector from './VideoSelector'

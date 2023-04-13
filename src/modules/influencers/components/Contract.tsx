@@ -1,6 +1,5 @@
 import Selector from '@/components/Selector'
 import React from 'react'
-import { QUERY_KEYS } from 'src/core/constants'
 import CurrencySelector from './CurrencySelector'
 import { ContractState, HandleChangeType } from '../core/types'
 
@@ -60,7 +59,7 @@ const Contract: React.FC<Props> = (props) => {
 							},
 						]}
 						value={props.data.upload_frequency}
-						onChange={(value, e) => {
+						onChange={(value) => {
 							props.handleChange('upload_frequency', value)
 						}}
 					/>

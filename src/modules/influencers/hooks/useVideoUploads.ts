@@ -1,22 +1,11 @@
 import { UseQueryOptions, useQuery } from 'react-query'
-import { MONTHS, QUERY_KEYS } from '@/core/constants'
 import { VideosApi } from '@/api/VideosApi'
-import { GetVideos, IVideo } from '@/api/type'
-import { Response } from '@/core/axios'
-const { GET_VIDEOS } = QUERY_KEYS
+import { GetVideos } from '@/api/type'
 
 export type UseVideoUploadArgs = {
 	is_payment_due?: boolean
 	businessChannelId?: number
 	fields?: string[]
-}
-
-type SelectedVideoData = IVideo & {
-	date: {
-		day: number
-		month: string
-		year: number
-	}
 }
 
 type UseVideoUploadOptions<T = GetVideos> = UseQueryOptions<

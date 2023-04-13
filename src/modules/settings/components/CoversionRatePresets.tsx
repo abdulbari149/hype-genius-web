@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Downshift from 'downshift'
 import { AiOutlineDown } from 'react-icons/ai'
 
@@ -87,6 +87,7 @@ const CoversionRatePresets: React.FC<Props> = ({
 						{isOpen
 							? items.map((item, index) => (
 									<li
+										key={item.label}
 										{...getItemProps({
 											key: item.label,
 											index,

@@ -9,14 +9,13 @@ type Props = PropsWithChildren<{
 	onClose?: () => void
 }>
 
-const InfluencerSidePanel: React.FC<Props> = ({
-	children,
-	onClose = () => {},
-}) => {
+const InfluencerSidePanel: React.FC<Props> = ({ children, ...props }) => {
 	const dispatch = useDispatch()
 	function handleClose() {
 		dispatch(setInfluencer({ influencer: null }))
-		onClose()
+		if (props.onClose) {
+			props.onClose()
+		}
 	}
 	return (
 		<Card

@@ -44,16 +44,16 @@ const Alert = () => {
 
 	const dispatch = useDispatch()
 
-	const alertActions: Record<ALERT_NAMES, () => void> = {
+	const alertActions: Record<ALERT_NAMES, (() => void) | null> = {
 		payment_due: () => {
 			dispatch(showPanel({ panel: 'payment' }))
 		},
-		follow_up: () => {},
+		follow_up: null,
 		missing_deal: () => {
 			dispatch(showIsEdit())
 		},
-		new_video_upload: () => {},
-		upload_frequency: () => {},
+		new_video_upload: null,
+		upload_frequency: null,
 	}
 
 	const alertSubtitles: Record<ALERT_NAMES, string> = {
@@ -82,7 +82,12 @@ const Alert = () => {
 						{alertSubtitles[alert.name]} |{' '}
 						<span
 							className="px-1 text-[#697AFF] cursor-pointer"
-							onClick={alertActions[alert.name]}
+							onClick={() => {
+								const fn = alertActions[alert.name]
+								if (fn) {
+									fn()
+								}
+							}}
 						>
 							Click here
 						</span>{' '}

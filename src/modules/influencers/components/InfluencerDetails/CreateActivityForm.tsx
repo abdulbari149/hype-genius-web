@@ -26,7 +26,7 @@ const CreateActivityForm: React.FC<Props> = ({ onHide }) => {
 			}
 			return NotesApi.createActivity(businessChannelId, data)
 		},
-		async onSuccess(data) {
+		async onSuccess() {
 			onHide()
 			await queryClient.invalidateQueries(
 				`${GET_ACTIVITIES}/${businessChannelId}`,
@@ -44,7 +44,7 @@ const CreateActivityForm: React.FC<Props> = ({ onHide }) => {
 			validationSchema={toFormikValidationSchema(createActivitySchema)}
 			onSubmit={onSubmit}
 		>
-			{({ values, errors, handleChange, handleSubmit }) => (
+			{({ values, handleChange, handleSubmit }) => (
 				<form
 					onSubmit={handleSubmit}
 					className="flex flex-col w-full my-[20px]"

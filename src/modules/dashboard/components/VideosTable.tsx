@@ -31,19 +31,22 @@ const VideosTable = () => {
 			className="w-full border-separate border-spacing-y-4"
 		>
 			<thead>
-				{headerGroups.map((headerGroup, idx) => (
-					<tr {...headerGroup.getHeaderGroupProps()} key={headerGroup.id}>
-						{headerGroup.headers.map((column) => (
-							<th
-								className="first:pl-7 last:pr-4"
-								{...column.getHeaderProps()}
-								key={column.id}
-							>
-								{column.render('Header')}
-							</th>
-						))}
-					</tr>
-				))}
+				{headerGroups.map((headerGroup) => {
+					const { key, ...headerGroupProps } = headerGroup.getHeaderGroupProps()
+					return (
+						<tr {...headerGroupProps} key={key}>
+							{headerGroup.headers.map((column) => (
+								<th
+									className="first:pl-7 last:pr-4"
+									{...column.getHeaderProps()}
+									key={column.id}
+								>
+									{column.render('Header')}
+								</th>
+							))}
+						</tr>
+					)
+				})}
 			</thead>
 			<tbody {...getTableBodyProps()} className="w-full">
 				{data.length !== 0 ? (
@@ -60,12 +63,13 @@ const VideosTable = () => {
 								key={row.original.id}
 								onClick={() => handleSelectVideo(row.original)}
 							>
-								{row.cells.map((cell, idx) => {
+								{row.cells.map((cell) => {
+									const { key, ...cellProps } = cell.getCellProps()
 									return (
 										<td
 											className="py-3 h-[50px] bg-white first:border-solid  last:border-solid first:rounded-tl-[16px] first:rounded-bl-[16px] last:rounded-br-[16px] last:rounded-tr-[16px]"
-											{...cell.getCellProps()}
-											key={cell.row.id}
+											{...cellProps}
+											key={key}
 										>
 											{cell.render('Cell')}
 										</td>

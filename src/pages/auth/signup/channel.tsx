@@ -26,10 +26,7 @@ const SignupChannel: NextPage<{ token: string }> = ({ token }) => {
 	)
 }
 
-export const getServerSideProps: GetServerSideProps = async ({
-	req,
-	query,
-}) => {
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 	const token = query.token as string
 	if (!token)
 		return {

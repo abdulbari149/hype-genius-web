@@ -1,28 +1,15 @@
-import React, { useEffect, useReducer, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Card from '@/components/Card'
 import CurrencySelector from '@/modules/influencers/components/CurrencySelector'
-import Select from 'react-select'
 import CoversionRatePresets from './CoversionRatePresets'
 import { useDebounce } from 'usehooks-ts'
 import { useMyBusiness } from '../hooks/useMyBusiness'
 import { UpdateBusinessData } from '@/api/type'
 import { useUpdateBusiness } from '../hooks/useUpdateBusiness'
-import { useDebouncedCallback } from 'use-debounce'
-import { useQueryClient } from 'react-query'
 
-const initialState: UpdateBusinessData = {
-	acrvv: 0,
-	customer_ltv: 0,
-	default_currency_id: null,
-}
-
-const CustomerSettings: React.FC<{}> = () => {
+const CustomerSettings: React.FC = () => {
 	const [state, setState] = useState<UpdateBusinessData>({})
-	const {
-		data: business,
-		isSuccess,
-		isFetched,
-	} = useMyBusiness({
+	const { data: business, isFetched } = useMyBusiness({
 		onSuccess(data) {
 			console.log(data)
 			const state: UpdateBusinessData = {
@@ -60,6 +47,7 @@ const CustomerSettings: React.FC<{}> = () => {
 			const data = removeEmptyValues(debouncedState)
 			updateMyBusiness.mutateAsync(data)
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [debouncedState])
 
 	return (
@@ -74,7 +62,7 @@ const CustomerSettings: React.FC<{}> = () => {
 				<p className="font-normal text-[18px]">Default Currency</p>
 				<CurrencySelector
 					value={state?.default_currency_id ?? 0}
-					handleChange={(value, e) => {
+					handleChange={(value) => {
 						const default_currency_id = parseInt(value.toString(), 10)
 						if (isNaN(default_currency_id)) return
 						handleState({ default_currency_id })

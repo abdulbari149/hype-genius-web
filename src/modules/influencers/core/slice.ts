@@ -29,7 +29,7 @@ const influencersSlice = createSlice({
 		) {
 			state.panel = action.payload.panel
 		},
-		hidePanel(state: State, action: PayloadAction) {
+		hidePanel(state: State) {
 			state.panel = undefined
 		},
 		showIsEdit(state: State) {

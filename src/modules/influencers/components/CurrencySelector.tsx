@@ -30,6 +30,7 @@ const CurrencySelector: React.FC<Props> = ({
 			console.log('Setting Currency')
 			handleChange(data.data[0].id)
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [data])
 
 	return (

@@ -6,9 +6,7 @@ import Loading from '@/components/Loading'
 import { useSelector } from 'react-redux'
 import { AppState } from '@/store'
 
-interface Props {}
-
-const InfluencerContainer: React.FC<Props> = () => {
+const InfluencerContainer: React.FC = () => {
 	const [isAddOpen, setIsAddOpen] = useState(false)
 	const isInfluencerSelected = useSelector<AppState, boolean>(
 		(state) => state.influencers.influencer !== null,
@@ -25,7 +23,7 @@ const InfluencerContainer: React.FC<Props> = () => {
 
 	return (
 		<div
-			className={`h-screen w-full flex flex-col w-full overflow-hidden ${
+			className={`h-screen w-full flex flex-col overflow-hidden ${
 				isInfluencerSelected ? `col-span-5` : `col-span-full`
 			}`}
 		>

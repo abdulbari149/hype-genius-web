@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import FollowUp from './FollowUp'
 import Header from './Header'
 import Channel from './Channel'
@@ -12,9 +12,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import InfluencerSidePanel from '../InfluencerSidePanel'
 import { hideIsEdit, showIsEdit } from '../../core/slice'
 
-interface Props {}
-
-const InfluencersDetail: React.FC<Props> = () => {
+const InfluencersDetail: React.FC = () => {
 	const isEditOpen = useSelector(
 		(state: AppState) => state.influencers.isEditOpen,
 	)

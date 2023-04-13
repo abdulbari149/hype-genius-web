@@ -1,5 +1,3 @@
-import { IBase } from '@/modules/auth/core/types'
-import { TagType } from '@/modules/influencers/core/types'
 import { z } from 'zod'
 import { addNoteSchema, uploadVideoSchema } from './schema'
 

@@ -1,5 +1,4 @@
 import { CellProps, Column } from 'react-table'
-import { InfluencerData } from './types'
 import Tag from '@/components/Tag'
 import PaymentStatus from '@/modules/settings/components/PaymentStatus'
 import { GetInfluencers } from '@/api/type'

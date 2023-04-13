@@ -1,5 +1,5 @@
-import Selector, { Option } from '@/components/Selector'
-import { FormikProps, useField } from 'formik'
+import Selector from '@/components/Selector'
+import { useField } from 'formik'
 import React, { useMemo } from 'react'
 import { useVideoUploads } from '../hooks/useVideoUploads'
 import { QUERY_KEYS } from '@/core/constants'
@@ -12,7 +12,7 @@ interface Props extends React.SelectHTMLAttributes<HTMLSelectElement> {
 }
 
 const VideoSelector: React.FC<Props> = (props) => {
-	const [field, _, meta] = useField(props)
+	const [field, _helpers, meta] = useField(props)
 	const businessChannelId = useSelector(
 		(state: AppState) => state.influencers?.influencer?.id ?? NaN,
 	)

@@ -1,11 +1,7 @@
-import { Formik } from 'formik'
-import Image from 'next/image'
 import React, { useState } from 'react'
 import { AiOutlinePlus } from 'react-icons/ai'
 import { VscPinned } from 'react-icons/vsc'
-import { toFormikValidationSchema } from 'zod-formik-adapter'
-import { CreateActivityData, createActivitySchema } from '../../core/schema'
-import { useMutation, useQuery } from 'react-query'
+import { useQuery } from 'react-query'
 import { useSelector } from 'react-redux'
 import { AppState } from '@/store'
 import { QUERY_KEYS } from '@/core/constants'
@@ -13,21 +9,6 @@ import { NotesApi } from '@/api/NotesApi'
 import CreateActivityForm from './CreateActivityForm'
 
 const { GET_ACTIVITIES } = QUERY_KEYS
-
-const notesData = [
-	{
-		id: 1,
-		pinned: true,
-		note: 'New Follow - up meeting: Discuss new contract',
-		date: 'Jan 22, 2023',
-	},
-	{
-		id: 2,
-		pinned: false,
-		note: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Porttitor leo a diam sollicitudin tempor id. Morbi non arcu risus quis varius quam quisque id diam. Enim praesent elementum facilisis leo vel fringilla est. Turpis egestas integer eget aliquet nibh praesent.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Porttitor leo a diam sollicitudin tempor id. Morbi non arcu risus quis varius quam quisque id diam. Enim praesent elementum facilisis leo vel fringilla est. Turpis egestas integer eget aliquet nibh praesent. Lorem.',
-		date: 'Jan 22, 2023',
-	},
-]
 const Activities = () => {
 	const [isCreateActivity, setIsCreateActivity] = useState(false)
 	const businessChannelId = useSelector<AppState, number | null>(

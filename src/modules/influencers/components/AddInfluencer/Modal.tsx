@@ -1,17 +1,13 @@
 import Modal from '@/components/Modal'
-import React, { Suspense, useReducer } from 'react'
+import React, { Suspense } from 'react'
 import { QUERY_KEYS } from '@/core/constants'
 import Loading from '@/components/Loading'
 import ReactModal from 'react-modal'
 import { toast } from 'react-toastify'
-import {
-	ContractUploadFrequency,
-	UpdateOnboardingRequestData,
-} from '@/api/type'
+import { UpdateOnboardingRequestData } from '@/api/type'
 import AddInfluencerForm from './Form'
 import { useMutation, useQueryClient } from 'react-query'
 import { ChannelApi } from '@/api/ChannelApi'
-import { handleError } from '@/modules/auth/core/utils'
 import { ContractState } from '../../core/types'
 import { useContract } from '../../hooks/useContract'
 

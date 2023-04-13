@@ -1,6 +1,5 @@
-import Selector from '@/components/Selector'
+import React from 'react'
 import Tag from '@/components/Tag'
-import React, { useRef, useState } from 'react'
 import { AiOutlineCheck } from 'react-icons/ai'
 
 const tags = [
@@ -11,12 +10,8 @@ const tags = [
 	{ id: 5, text: 'Affiliate Only', color: '#2EF2FF80', active: false },
 ]
 
-const colors = ['#7187FB80', '#FF2E2E80', '#FFDE2E80', '#2EFF6880', '#2EF2FF80']
+// const colors = ['#7187FB80', '#FF2E2E80', '#FFDE2E80', '#2EFF6880', '#2EF2FF80']
 const TagsList = () => {
-	const [size, setSize] = useState(3)
-	const [color, setColor] = useState('#7187FB80')
-	const colorSelectRef = useRef<HTMLSelectElement>(null)
-
 	return (
 		<div className="grid grid-rows-[30px_200px] grid-flow-row gap-2">
 			<h3 className="text-[#272830] text-[18px] font-[600]">Tags</h3>

@@ -1,7 +1,6 @@
 import React from 'react'
 
-interface SubscriptionBillingProps {}
-const SubscriptionBilling: React.FC<SubscriptionBillingProps> = () => {
+const SubscriptionBilling: React.FC = () => {
 	return (
 		<div
 			className="bg-[#FFFFFF]/50 shadow-xl rounded-lg px-3 py-[40px] flex flex-col px-9 gap-2"

@@ -1,11 +1,8 @@
 import Card from '@/components/Card'
 import Image from 'next/image'
-import React, { useState } from 'react'
+import React from 'react'
 
 const FollowUp = () => {
-	const [followUpOption, setFollowUpOption] = useState('email')
-	const [selectedTime, setSelectedTime] = useState('')
-
 	return (
 		<Card
 			className="relative py-[20px] rounded-xl flex flex-col justify-center items-center max-w-[340px] w-full"

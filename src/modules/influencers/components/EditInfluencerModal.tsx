@@ -11,7 +11,6 @@ import { useUpdateContract } from '../hooks/useUpdateContract'
 import { UpdateContractData } from '@/api/type'
 import { pick } from '../helpers/pick'
 import { useCreateContract } from '../hooks/useCreateContract'
-import App from 'next/app'
 
 interface EditInfluencerModalProps {
 	isOpen: boolean
@@ -63,6 +62,7 @@ const EditInfluencerModal: React.FC<EditInfluencerModalProps> = ({
 		if (isOpen) {
 			setData(contract)
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isOpen])
 
 	async function onSave() {

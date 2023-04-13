@@ -1,6 +1,6 @@
 import { getLoginStatus } from '@/modules/auth/core/slice'
 import { BusinessApi } from './../../../api/BusinessApi'
-import { UseMutationOptions, UseQueryOptions, useQuery } from 'react-query'
+import { UseQueryOptions, useQuery } from 'react-query'
 import { useSelector } from 'react-redux'
 import { QUERY_KEYS } from '@/core/constants'
 import { GetMyBusiness } from '@/api/type'

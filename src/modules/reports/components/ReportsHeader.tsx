@@ -1,11 +1,9 @@
 import React, { useMemo } from 'react'
-import Selector, { type Option } from '@/components/Selector'
+import Selector from '@/components/Selector'
 import { useGetInfluencers } from '@/modules/influencers/hooks/useGetInfluencers'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppState } from '@/store'
 import { setBusinessChannel, setReportForAll } from '../core/slice'
-import { useQueryClient } from 'react-query'
-import { QUERY_KEYS } from '@/core/constants'
 
 const ReportsHeader = () => {
 	const { data: influencers } = useGetInfluencers()
@@ -33,8 +31,6 @@ const ReportsHeader = () => {
 		})
 		return [...defaultOptions, ...businessChannelOptions]
 	}, [influencers])
-
-	const queryClient = useQueryClient()
 
 	const handleChange = async (value: string) => {
 		let business_channel_id: number | null = parseInt(value)

@@ -1,9 +1,6 @@
 import React, { useMemo } from 'react'
 import { Row, useTable } from 'react-table'
 import { columns as influencersColumns } from '../core/columns'
-import { useQuery } from 'react-query'
-import { QUERY_KEYS } from '@/core/constants'
-import { BusinessApi } from '@/api/BusinessApi'
 import { useDispatch, useSelector } from 'react-redux'
 import { setInfluencer, showPanel } from '../core/slice'
 import { GetInfluencerData } from '@/api/type'
@@ -34,6 +31,7 @@ const InfluencerRows: React.FC<Props> = ({ rows, prepareRow }) => {
 		<React.Fragment>
 			{rows.map((row) => {
 				prepareRow(row)
+				const { key, ...rowProps } = row.getRowProps()
 				return (
 					<tr
 						className="cursor-pointer"
@@ -42,10 +40,11 @@ const InfluencerRows: React.FC<Props> = ({ rows, prepareRow }) => {
 							boxShadow:
 								'0px 4px 103px rgba(50, 50, 71, 0.01), 0px 4px 59px rgba(50, 50, 71, 0.06)',
 						}}
-						{...row.getRowProps()}
-						key={row.original.id}
+						{...rowProps}
+						key={key}
 					>
-						{row.cells.map((cell, idx) => {
+						{row.cells.map((cell) => {
+							const { key, ...cellProps } = cell.getCellProps()
 							return (
 								<td
 									className={`${cellClassName} ${
@@ -57,8 +56,8 @@ const InfluencerRows: React.FC<Props> = ({ rows, prepareRow }) => {
 											? 'border-[#FF3434B8]'
 											: 'border-[#3BADFF]'
 									}`}
-									{...cell.getCellProps()}
-									key={`${cell.row.id}-${idx}`}
+									{...cellProps}
+									key={key}
 								>
 									{cell.render('Cell')}
 								</td>
@@ -71,7 +70,7 @@ const InfluencerRows: React.FC<Props> = ({ rows, prepareRow }) => {
 	)
 }
 
-const InfluencerTable: React.FC<Props> = () => {
+const InfluencerTable: React.FC = () => {
 	const { data: influencers } = useGetInfluencers()
 
 	const data = useMemo(() => influencers?.data ?? [], [influencers])
@@ -82,12 +81,15 @@ const InfluencerTable: React.FC<Props> = () => {
 		table
 
 	const { actionRows, noActionRows } = useMemo(() => {
+		const filteredActionRows = rows.filter((item) => !!item.original.alert)
+		const sortedActionRows = filteredActionRows.sort((a, b) => {
+			if (a.original.alert && b.original.alert) {
+				return b.original.alert.priority - a.original.alert.priority
+			}
+			return 0
+		})
 		return {
-			actionRows: rows
-				.filter((item) => !!item.original.alert)
-				.sort(
-					(a, b) => b.original.alert!.priority - a.original.alert!.priority,
-				),
+			actionRows: sortedActionRows,
 			noActionRows: rows.filter((item) => !item.original.alert),
 		}
 	}, [rows])
@@ -98,19 +100,22 @@ const InfluencerTable: React.FC<Props> = () => {
 			className="w-full border-separate border-spacing-y-4"
 		>
 			<thead>
-				{headerGroups.map((headerGroup, idx) => (
-					<tr {...headerGroup.getHeaderGroupProps()} key={headerGroup.id}>
-						{headerGroup.headers.map((column) => (
-							<th
-								className="first:pl-4 last:pr-4"
-								{...column.getHeaderProps()}
-								key={column.id}
-							>
-								{column.render('Header')}
-							</th>
-						))}
-					</tr>
-				))}
+				{headerGroups.map((headerGroup) => {
+					const { key, ...headerGroupProps } = headerGroup.getHeaderGroupProps()
+					return (
+						<tr {...headerGroupProps} key={key}>
+							{headerGroup.headers.map((column) => (
+								<th
+									className="first:pl-4 last:pr-4"
+									{...column.getHeaderProps()}
+									key={column.id}
+								>
+									{column.render('Header')}
+								</th>
+							))}
+						</tr>
+					)
+				})}
 			</thead>
 			<tbody {...getTableBodyProps()} className="w-full">
 				<InfluencerRows rows={actionRows} prepareRow={prepareRow} />

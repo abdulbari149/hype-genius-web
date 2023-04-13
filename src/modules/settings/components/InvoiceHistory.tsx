@@ -1,10 +1,5 @@
 import React from 'react'
-import greenEllipse from '@/assets/icons/greenEllipse.png'
-import tick from '@/assets/icons/tick.png'
-import Image from 'next/image'
 import PaymentStatus from './PaymentStatus'
-
-const invoiceDates = ['June 29th, 2022', 'June 29th, 2022']
 
 const InvoiceHistory = () => {
 	return (
