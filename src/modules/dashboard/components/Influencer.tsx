@@ -47,9 +47,7 @@ const Influencer = () => {
 						</p>
 						<div className="w-full h-[2px] opacity-20 bg-[#272830]"></div>
 					</div>
-					<Suspense fallback={<Loading />}>
-						<AnalyticsList />
-					</Suspense>
+					<Suspense fallback={<Loading />}>{/* <AnalyticsList /> */}</Suspense>
 				</div>
 
 				{isDetailsOpen && (

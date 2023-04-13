@@ -9,6 +9,7 @@ import {
 	RegisterBusinessData,
 	RegisterChannel,
 	RegisterChannelData,
+	ConfirmOnboarding,
 } from './type'
 
 export class AuthApi {
@@ -52,14 +53,12 @@ export class AuthApi {
 	static async getInfluncerNewOnboardings(
 		token: string,
 	): Promise<GetInfluencerOnboarding> {
-		const result = await api.get(`/auth/influencer/onboarding/${token}`)
+		const result = await api.get(`/auth/onboarding/${token}`)
 		return result.data
 	}
 
-	static async confirmOnboarding(
-		token: string,
-	): Promise<GetInfluencerOnboarding> {
-		const result = await api.post(`/auth/influencer/onboarding/${token}`)
+	static async confirmOnboarding(token: string): Promise<ConfirmOnboarding> {
+		const result = await api.post(`/auth/onboarding/${token}`)
 		return result.data
 	}
 }
