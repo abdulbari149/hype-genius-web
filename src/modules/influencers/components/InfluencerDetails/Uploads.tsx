@@ -6,6 +6,8 @@ import { AppState } from '@/store'
 import { MONTHS, QUERY_KEYS } from '@/core/constants'
 import { GetVideos } from '@/api/type'
 
+const { GET_VIDEOS } = QUERY_KEYS
+
 function select(data: GetVideos) {
 	const videos = data.data.map((item) => {
 		const uploadDate = new Date(item?.createdAt ?? '')
@@ -31,7 +33,7 @@ const Uploads = () => {
 		(state: AppState) => state.influencers?.influencer?.id ?? NaN,
 	)
 	const { data: uploads, isSuccess } = useVideoUploads(
-		`${QUERY_KEYS.GET_VIDEOS}/${businessChannelId}`,
+		[GET_VIDEOS, businessChannelId],
 		{
 			businessChannelId,
 			fields: ['payment'],

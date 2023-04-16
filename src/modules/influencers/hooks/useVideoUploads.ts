@@ -1,4 +1,4 @@
-import { UseQueryOptions, useQuery } from 'react-query'
+import { QueryKey, UseQueryOptions, useQuery } from 'react-query'
 import { VideosApi } from '@/api/VideosApi'
 import { GetVideos } from '@/api/type'
 
@@ -14,15 +14,16 @@ type UseVideoUploadOptions<T = GetVideos> = UseQueryOptions<
 	GetVideos,
 	unknown,
 	T,
-	string
+	QueryKey
 >
 
 export const useVideoUploads = <T = GetVideos>(
-	key: string,
+	key: QueryKey,
 	args: UseVideoUploadArgs = {},
 	options: UseVideoUploadOptions<T> = {},
 ) => {
-	return useQuery(key, {
+	return useQuery({
+		queryKey: key,
 		queryFn: () => VideosApi.getVideos(args),
 		suspense: true,
 		...options,
