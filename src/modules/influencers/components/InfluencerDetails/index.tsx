@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import FollowUp from './FollowUp'
 import Header from './Header'
 import Channel from './Channel'
@@ -11,6 +11,7 @@ import { AppState } from '@/store'
 import { useDispatch, useSelector } from 'react-redux'
 import InfluencerSidePanel from '../InfluencerSidePanel'
 import { hideIsEdit, showIsEdit } from '../../core/slice'
+import Loading from '@/components/Loading'
 
 const InfluencersDetail: React.FC = () => {
 	const isEditOpen = useSelector(
@@ -45,30 +46,33 @@ const InfluencersDetail: React.FC = () => {
 	})
 
 	return (
-		<InfluencerSidePanel onClose={closeIsEdit}>
-			<div className="flex flex-col items-center h-full gap-6 px-[55px] mt-[50px] mb-[90px] overflow-y-scroll custom-scroll w-full">
-				<Header {...data} />
-				<FollowUp />
-				<Channel link={channelLink} />
-				<Alert />
-				<Metrics />
-				<Uploads />
-				<Activities />
-			</div>
+		<>
+			<InfluencerSidePanel onClose={closeIsEdit}>
+				<div className="flex flex-col items-center h-full gap-6 px-[55px] mt-[50px] mb-[90px] overflow-y-scroll custom-scroll w-full">
+					<Header {...data} />
+					<FollowUp />
+					<Channel link={channelLink} />
+					<Alert />
+					<Metrics />
+					<Uploads />
+					<Activities />
+				</div>
 
-			<span
-				className="bg-[#F8FAFC] absolute bottom-5 inline-block w-full h-[80px]"
-				style={{ filter: 'blur(10px)' }}
-			></span>
-			<button
-				onClick={openIsEdit}
-				className="px-3 py-2 text-white bg-[#EF539E] absolute bottom-8 rounded-xl"
-			>
-				Edit Info
-			</button>
-
-			<EditInfluencerModal isOpen={isEditOpen} handleClose={closeIsEdit} />
-		</InfluencerSidePanel>
+				<span
+					className="bg-[#F8FAFC] absolute bottom-5 inline-block w-full h-[80px]"
+					style={{ filter: 'blur(10px)' }}
+				></span>
+				<button
+					onClick={openIsEdit}
+					className="px-3 py-2 text-white bg-[#EF539E] absolute bottom-8 rounded-xl"
+				>
+					Edit Info
+				</button>
+			</InfluencerSidePanel>
+			<Suspense fallback={<Loading />}>
+				<EditInfluencerModal isOpen={isEditOpen} handleClose={closeIsEdit} />
+			</Suspense>
+		</>
 	)
 }
 
