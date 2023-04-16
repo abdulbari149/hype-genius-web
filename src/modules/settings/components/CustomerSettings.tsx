@@ -6,6 +6,7 @@ import { useDebounce } from 'usehooks-ts'
 import { useMyBusiness } from '../hooks/useMyBusiness'
 import { UpdateBusinessData } from '@/api/type'
 import { useUpdateBusiness } from '../hooks/useUpdateBusiness'
+import Tooltip from '@/components/Tooltip'
 
 const CustomerSettings: React.FC = () => {
 	const [state, setState] = useState<UpdateBusinessData>({})
@@ -71,8 +72,25 @@ const CustomerSettings: React.FC = () => {
 				/>
 			</div>
 			<div className="flex items-center justify-start gap-3">
-				<p className="py-4 font-normal text-[18px]">
+				<p className="py-4 font-normal text-[18px] flex gap-3 items-center">
 					Customer LTV(used to track ROAS)
+					<Tooltip placement="right-end">
+						<>
+							<h4 className="text-[15px]">LTV</h4>
+							<p className="text-[13px] text-light py-4">
+								LTV (Lifetime Value) measures the total value a customer brings
+								to a business over their lifetime by multiplying the average
+								value of a purchase by the number of purchases per year and the
+								estimated customer lifespan. It&apos;s a crucial metric for
+								understanding the long-term value of acquiring and retaining
+								customers.
+							</p>
+							<p className="text-[13px] text-light">
+								LTV = (Average Value of a Purchase) x (Number of Purchases per
+								Year) x (Average Customer Lifespan)
+							</p>
+						</>
+					</Tooltip>
 				</p>
 				<div className="flex items-center max-w-[150px] w-full gap-2 justify-center px-3 py-2  w-[110px] rounded-xl h-fit bg-[#EAEEF3] ">
 					<span className="text-[#272830]">$</span>
@@ -92,8 +110,28 @@ const CustomerSettings: React.FC = () => {
 				</div>
 			</div>
 			<div className="flex flex-col items-start justify-start gap-3">
-				<p className="py-4 font-normal text-[18px]">
+				<p className="py-4 font-normal text-[18px] flex gap-3 items-center">
 					Average Conversion Rate from Video Views
+					<Tooltip placement="bottom-end">
+						<>
+							<h4 className="text-[15px]">ACRVV</h4>
+							<p className="text-[13px] text-light py-4">
+								Average Con. Rate from Video Views (ACRVV) is a metric used to
+								measure the effectiveness of sponsored video campaigns in
+								converting video views into customers. It is calculated by
+								dividing the number of conversions generated from a given number
+								of video views by the total number of views, expressed as a
+								percentage.
+							</p>
+							<p className="text-[13px] text-light">
+								For example, if 100,000 views from 5 sponsored videos last month
+								resulted in 50 new customers, the ACRVV is 0.05%. ACRVV is
+								useful for optimizing video campaigns by tracking trends and
+								adjusting targeting, messaging, and creative elements to improve
+								customer acquisition.
+							</p>
+						</>
+					</Tooltip>
 				</p>
 				<div className="flex items-center gap-10">
 					<div className="flex flex-col gap-1">
