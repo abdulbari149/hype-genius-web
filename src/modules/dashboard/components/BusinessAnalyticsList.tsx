@@ -28,7 +28,10 @@ const BusinessAnalyticsList = () => {
 				title="Total Spent"
 				value={
 					analytics?.data.spent
-						? '$' + analytics.data.spent.toLocaleString('en-US')
+						? analytics.data.spent.toLocaleString('en-US', {
+								style: 'currency',
+								currency: 'USD',
+						  })
 						: ''
 				}
 				variation={true}
