@@ -1,47 +1,14 @@
 import Tag from '@/components/Tag'
 import React from 'react'
-import { useQuery } from 'react-query'
-import { QUERY_KEYS } from '@/core/constants'
-import { useDispatch, useSelector } from 'react-redux'
-import { AppState } from '@/store'
-import { AlertApi } from '@/api/AlertApi'
+import { useDispatch } from 'react-redux'
 import { Alerts } from '../../core/constants'
 import { showIsEdit, showPanel } from '../../core/slice'
+import { useGetAlerts } from '../../hooks/useGetAlerts'
 
-const { GET_ALERTS } = QUERY_KEYS
 type ALERT_NAMES = `${Alerts}`
 
 const Alert = () => {
-	const businessChannelId = useSelector<AppState, number | null>(
-		(state) => state.influencers.influencer?.id ?? null,
-	)
-	const { data: alerts } = useQuery(`${GET_ALERTS}/${businessChannelId}`, {
-		queryFn: () => {
-			if (!businessChannelId || businessChannelId === null) {
-				throw new Error('Please select an influencer first')
-			}
-			return AlertApi.getBusinessChannelAlerts(businessChannelId)
-		},
-		suspense: true,
-		onSuccess(data) {
-			console.log(data)
-		},
-		select(data) {
-			return {
-				...data,
-				data:
-					data?.data.map((alert) => ({
-						...alert,
-						text: alert.name
-							.replace('_', ' ')
-							.split(' ')
-							.map((i) => `${i.charAt(0).toUpperCase()}${i.substring(1)}`)
-							.join(' '),
-					})) ?? [],
-			}
-		},
-	})
-
+	const { data: alerts } = useGetAlerts()
 	const dispatch = useDispatch()
 
 	const alertActions: Record<ALERT_NAMES, (() => void) | null> = {
