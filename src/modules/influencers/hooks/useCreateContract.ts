@@ -23,6 +23,7 @@ export const useCreateContract = () => {
 						deletedAt: data.data.deletedAt,
 						currencyId: data.data.currency_id,
 						uploadFrequency: data.data.upload_frequency,
+						budget: data.data.budget,
 					},
 				}),
 			)

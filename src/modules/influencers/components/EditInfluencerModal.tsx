@@ -1,5 +1,5 @@
 import Modal from '@/components/Modal'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Contract from './Contract'
 import TagsList from './TagsList'
 import { useSelector } from 'react-redux'
@@ -21,6 +21,8 @@ const EditInfluencerModal: React.FC<EditInfluencerModalProps> = ({
 	isOpen,
 	handleClose,
 }) => {
+	const [budget, setBudget] = useState(0)
+
 	const influencer = useSelector((state: AppState) => {
 		const data = state.influencers.influencer
 		return {
@@ -43,6 +45,7 @@ const EditInfluencerModal: React.FC<EditInfluencerModalProps> = ({
 			note: '',
 			upload_frequency: data?.contract?.uploadFrequency ?? '1x',
 			onboarding_id: -1,
+			budget: data?.contract?.budget,
 		} as ContractState
 	})
 
@@ -61,6 +64,7 @@ const EditInfluencerModal: React.FC<EditInfluencerModalProps> = ({
 	useEffect(() => {
 		if (isOpen) {
 			setData(contract)
+			setBudget(contract.budget)
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isOpen])
@@ -74,6 +78,7 @@ const EditInfluencerModal: React.FC<EditInfluencerModalProps> = ({
 				currency_id: data.currency_id,
 				is_one_time: data.is_one_time === 'yes',
 				upload_frequency: data.upload_frequency,
+				budget,
 			})
 			resetData()
 			return
@@ -82,6 +87,7 @@ const EditInfluencerModal: React.FC<EditInfluencerModalProps> = ({
 		const newData: UpdateContractData = {
 			id: contractId,
 			business_channel_id,
+			budget,
 			...pick(updatedData, 'amount', 'currency_id', 'upload_frequency'),
 		}
 		if (updatedData.is_one_time) {
@@ -174,6 +180,27 @@ const EditInfluencerModal: React.FC<EditInfluencerModalProps> = ({
 							value={channel.link}
 							disabled={true}
 							placeholder="insert link"
+							className="font-normal px-4 py-2 bg-[#ECF0F4] rounded-xl text-[15px] w-full max-w-[85%] border-none outline-none hover:border-none hover:outline-none focus:outline-none focus-within:outline-none"
+						/>
+					</div>
+					<div className="flex flex-col gap-5 mt-4">
+						<label
+							className="text-[#272830] text-[18px] font-[600]"
+							htmlFor="budget"
+						>
+							Budget
+						</label>
+						<input
+							name="budget"
+							type="number"
+							id="budget"
+							value={budget}
+							onChange={(e) => {
+								const value = parseFloat(e.target.value)
+								if (isNaN(value)) return
+								setBudget(value)
+							}}
+							placeholder="enter your budg et"
 							className="font-normal px-4 py-2 bg-[#ECF0F4] rounded-xl text-[15px] w-full border-none outline-none hover:border-none hover:outline-none focus:outline-none focus-within:outline-none"
 						/>
 					</div>

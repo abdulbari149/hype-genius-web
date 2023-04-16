@@ -21,7 +21,7 @@ interface Props {
 const modalStyles: ReactModal.Styles = {
 	content: {
 		maxWidth: '1200px',
-		height: '90%',
+		height: '95%',
 		paddingInline: '50px',
 	},
 }
@@ -33,6 +33,7 @@ const initialData: ContractState = {
 	currency_id: -1,
 	onboarding_id: null,
 	note: '',
+	budget: 0,
 }
 
 const AddInfluencerModal: React.FC<Props> = (props) => {
@@ -69,6 +70,7 @@ const AddInfluencerModal: React.FC<Props> = (props) => {
 			onboarding_id: data.onboarding_id,
 			currency_id: data.currency_id,
 			upload_frequency: data.upload_frequency,
+			budget: data.budget,
 		}
 		if (data.note !== '') {
 			updatedData.note = data.note

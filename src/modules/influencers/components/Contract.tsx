@@ -68,13 +68,13 @@ const Contract: React.FC<Props> = (props) => {
 					</p>
 
 					<input
-						type="text"
+						type="number"
 						className="bg-[#ECF0F4] px-3 py-1 w-[120px] rounded-xl"
 						placeholder="amount"
 						name="amount"
 						value={props.data.amount}
 						onChange={(e) => {
-							const value = parseInt(e.target.value)
+							const value = parseFloat(e.target.value)
 							if (!isNaN(value)) {
 								props.handleChange('amount', value)
 							}
@@ -95,13 +95,13 @@ const Contract: React.FC<Props> = (props) => {
 					<p className="text-[#272830] text-[14px] opacity-80">We will pay</p>
 
 					<input
-						type="text"
+						type="number"
 						className="bg-[#ECF0F4] px-3 py-1 w-[120px] rounded-xl"
 						placeholder="amount"
 						name="amount"
 						value={props.data.amount}
 						onChange={(e) => {
-							const value = parseInt(e.target.value)
+							const value = parseFloat(e.target.value)
 							if (!isNaN(value)) {
 								props.handleChange('amount', value)
 							}

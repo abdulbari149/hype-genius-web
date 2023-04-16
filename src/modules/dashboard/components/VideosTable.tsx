@@ -1,20 +1,15 @@
 import React, { useMemo } from 'react'
 import { useTable } from 'react-table'
 import { columns as videosColumns } from '../core/videos'
-import { VideosApi } from '@/api/VideosApi'
-import { useQuery } from 'react-query'
-import { QUERY_KEYS } from '@/core/constants'
 import { useDispatch } from 'react-redux'
 import { selectVideo } from '../core/slice'
 import { IVideo } from '@/api/type'
+import { useGetVideos } from '../hooks/useGetVideos'
 
 const VideosTable = () => {
-	const { data: videos } = useQuery(QUERY_KEYS.GET_VIDEOS, {
-		queryFn: () => VideosApi.getVideos({}),
-		initialData: { data: [], message: '', status: 200 },
-	})
+	const { data: videos } = useGetVideos()
 
-	const data = useMemo(() => videos?.data ?? [], [videos])
+	const data = useMemo(() => videos?.data ?? [], [videos?.data])
 	const columns = useMemo(() => videosColumns, [])
 	const table = useTable({ columns, data })
 	const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =

@@ -6,7 +6,7 @@ import { useMutation, useQueryClient } from 'react-query'
 import { useDispatch, useSelector } from 'react-redux'
 import { showPanel } from '../core/slice'
 
-const { CREATE_PAYMENT, GET_ALERTS } = QUERY_KEYS
+const { CREATE_PAYMENT, GET_ALERTS, GET_INFLUENCERS } = QUERY_KEYS
 
 export const useCreatePayment = () => {
 	const queryClient = useQueryClient()
@@ -25,7 +25,10 @@ export const useCreatePayment = () => {
 			})
 		},
 		async onSuccess() {
-			await queryClient.invalidateQueries(`${GET_ALERTS}/${businessChannelId}`)
+			await queryClient.invalidateQueries([
+				`${GET_ALERTS}/${businessChannelId}`,
+				GET_INFLUENCERS,
+			])
 			dispatch(showPanel({ panel: 'detail' }))
 		},
 	})

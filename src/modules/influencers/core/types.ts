@@ -32,6 +32,7 @@ export type ContractState = {
 	currency_id: number
 	onboarding_id: number | null
 	note: string
+	budget: number
 }
 
 export type HandleChangeType = (

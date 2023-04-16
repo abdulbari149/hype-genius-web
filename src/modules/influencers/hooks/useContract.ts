@@ -8,6 +8,7 @@ const initialData: ContractState = {
 	currency_id: -1,
 	onboarding_id: null,
 	note: '',
+	budget: 0,
 } as const
 
 type UseContractReturn = {

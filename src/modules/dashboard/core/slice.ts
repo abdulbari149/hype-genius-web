@@ -1,16 +1,25 @@
 import { IVideo } from '@/api/type'
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+import { DateOptionsType } from './type'
 
 interface DashboardSliceData {
 	videoId: number | null
 	isDetailsOpen: boolean
 	video: IVideo | null
+	dateFilters: {
+		startDate: DateOptionsType
+		endDate: DateOptionsType
+	}
 }
 
 const initialState: DashboardSliceData = {
 	videoId: null,
 	isDetailsOpen: false,
 	video: null,
+	dateFilters: {
+		startDate: 'this-month',
+		endDate: 'this-month',
+	},
 }
 
 const dashboardSlice = createSlice({
@@ -25,8 +34,18 @@ const dashboardSlice = createSlice({
 		setIsDetailsOpen: (state, action: PayloadAction<boolean>) => {
 			state.isDetailsOpen = action.payload
 		},
+		setDateFilter: (
+			state: DashboardSliceData,
+			action: PayloadAction<Partial<DashboardSliceData['dateFilters']>>,
+		) => {
+			state.dateFilters = {
+				...state.dateFilters,
+				...action.payload,
+			}
+		},
 	},
 })
 
-export const { selectVideo, setIsDetailsOpen } = dashboardSlice.actions
+export const { selectVideo, setIsDetailsOpen, setDateFilter } =
+	dashboardSlice.actions
 export default dashboardSlice

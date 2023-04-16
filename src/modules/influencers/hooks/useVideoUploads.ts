@@ -6,6 +6,8 @@ export type UseVideoUploadArgs = {
 	is_payment_due?: boolean
 	businessChannelId?: number
 	fields?: string[]
+	start_date?: string | undefined
+	end_date?: string | undefined
 }
 
 type UseVideoUploadOptions<T = GetVideos> = UseQueryOptions<

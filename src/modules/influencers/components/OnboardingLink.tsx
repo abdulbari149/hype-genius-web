@@ -8,7 +8,12 @@ const OnboardingLink: React.FC<{ url: string }> = ({ url }) => {
 			</h3>
 			<div className="flex items-center gap-2">
 				<p className="text-[#5C6FFF] w-fit cursor-pointer">{url}</p>
-				<button className="bg-[#EF539E] px-4 py-1 rounded-xl text-white text-[15px]">
+				<button
+					onClick={() => {
+						navigator.clipboard.writeText(url)
+					}}
+					className="bg-[#EF539E] px-4 py-1 rounded-xl text-white text-[15px]"
+				>
 					Copy
 				</button>
 			</div>

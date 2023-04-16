@@ -25,7 +25,6 @@ export class VideosApi {
 		if (query?.is_payment_due !== undefined && query.is_payment_due !== null) {
 			params.push(`is_payment_due=${query.is_payment_due}`)
 		}
-
 		if (
 			query?.fields !== undefined &&
 			Array.isArray(query.fields) &&
@@ -34,6 +33,13 @@ export class VideosApi {
 			params.push(`fields=${query.fields.join(',')}`)
 		}
 
+		if (query?.start_date !== undefined && query.start_date !== null) {
+			params.push(`start_date=${query.start_date}`)
+		}
+
+		if (query?.end_date !== undefined && query.end_date !== null) {
+			params.push(`end_date=${query.end_date}`)
+		}
 		if (params.length > 0) {
 			url += '?' + params.join('&')
 		}

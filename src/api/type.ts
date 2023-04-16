@@ -80,12 +80,14 @@ export type ContractDataFields =
 	| 'currency_id'
 	| 'is_one_time'
 	| 'upload_frequency'
+	| 'budget'
 
 export type ContractData = {
 	amount: number
 	currency_id: number
 	is_one_time: boolean
 	upload_frequency: ContractUploadFrequency
+	budget: number
 }
 export type IContract = ContractData & IBase
 
@@ -144,7 +146,11 @@ export interface GetInfluencerData {
 				SnakeToCamelCaseNested<
 					Pick<
 						IContract,
-						'amount' | 'currency_id' | 'is_one_time' | 'upload_frequency'
+						| 'amount'
+						| 'currency_id'
+						| 'is_one_time'
+						| 'upload_frequency'
+						| 'budget'
 					>
 				>)
 		| null

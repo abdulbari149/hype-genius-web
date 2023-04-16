@@ -1,7 +1,7 @@
 import Card from '@/components/Card'
 import React, { useEffect, useState } from 'react'
 import { useUser } from '@/modules/auth/hooks/useUser'
-// import { useUpdateUser } from '../hooks/useUpdateUser'
+import { useUpdateUser } from '../hooks/useUpdateUser'
 
 const AccountSettings = () => {
 	const { data } = useUser({
@@ -14,7 +14,7 @@ const AccountSettings = () => {
 		}
 	}, [data])
 
-	// const updateUser = useUpdateUser()
+	const updateUser = useUpdateUser()
 
 	return (
 		<Card
@@ -39,7 +39,10 @@ const AccountSettings = () => {
 				className="w-[300px] py-2 px-5 outline-none hover:outline-none focus:outline-none focus-within:outline-none bg-[#EAEEF3] rounded-[20px]"
 			/>
 			<div className="flex gap-2 my-3">
-				<button className="bg-[#EF539E] px-4 py-2 rounded-xl text-white">
+				<button
+					onClick={() => updateUser.mutate({ email })}
+					className="bg-[#EF539E] px-4 py-2 rounded-xl text-white"
+				>
 					Save Account Details
 				</button>
 				<button
