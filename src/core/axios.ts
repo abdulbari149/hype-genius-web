@@ -51,7 +51,10 @@ api.interceptors.response.use(
 				toast.error('Session time out. Please login again.', {})
 				localStorage.removeItem(ACCESS_TOKEN)
 				localStorage.removeItem(REFRESH_TOKEN)
-				window.location.href = window.location.origin
+				if (!window.location.pathname.includes('/auth')) {
+					window.location.href = window.location.origin
+				}
+				console.log(window.location)
 				return Promise.reject(_error)
 			}
 		}

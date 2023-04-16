@@ -21,7 +21,7 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({
 	children,
 }) => {
 	const router = useRouter()
-	const { isLoading } = useUser({
+	const { isLoading, isSuccess } = useUser({
 		onSuccess(data) {
 			if (data.data.user.role === 'business_admin') {
 				router.replace('/dashboard/business')
@@ -30,7 +30,7 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({
 			}
 		},
 	})
-	if (isLoading) return <Loading />
+	if (isLoading || isSuccess) return <Loading />
 	return (
 		<div
 			className="grid w-full h-screen grid-cols-5 overflow-hidden max-w-screen"
