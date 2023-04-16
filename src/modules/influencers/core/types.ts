@@ -1,11 +1,15 @@
 import { ContractUploadFrequency } from '@/api/type'
 import { PaymentStatusType } from '@/modules/settings/components/PaymentStatus'
 
-export type TagType = {
+export interface Tag {
+	id: number
+	active: boolean
 	text: string
 	color: string
 }
+export type Tags = Array<Tag>
 
+export type TagType = Pick<Tag, 'text' | 'color'>
 export interface InfluencerData {
 	id: number
 	influencer: {

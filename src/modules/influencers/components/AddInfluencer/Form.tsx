@@ -5,7 +5,7 @@ import { useQuery } from 'react-query'
 import { QUERY_KEYS } from '@/core/constants'
 import { ChannelApi } from '@/api/ChannelApi'
 import OnboardingLink from '../OnboardingLink'
-import { ContractState, HandleChangeType } from '../../core/types'
+import { ContractState, HandleChangeType, Tags } from '../../core/types'
 
 const { CREATE_ONBOARING } = QUERY_KEYS
 
@@ -16,6 +16,7 @@ interface Props {
 
 const AddInfluencerForm: React.FC<Props> = ({ data, handleChange }) => {
 	const [enabled, setEnabled] = useState(true)
+	const [tags, setTags] = useState<Tags>([])
 	const { data: onboardingData } = useQuery(CREATE_ONBOARING, {
 		queryFn: ChannelApi.createOnboardingRequest,
 		suspense: true,
@@ -67,7 +68,7 @@ const AddInfluencerForm: React.FC<Props> = ({ data, handleChange }) => {
 				}}
 				handleChange={handleChange}
 			/>
-			<TagsList />
+			<TagsList tags={tags} setTags={setTags} />
 		</div>
 	)
 }

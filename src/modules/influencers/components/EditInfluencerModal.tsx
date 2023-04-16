@@ -5,7 +5,7 @@ import TagsList from './TagsList'
 import { useSelector } from 'react-redux'
 import { AppState } from '@/store'
 import { useContract } from '../hooks/useContract'
-import { ContractState } from '../core/types'
+import { ContractState, Tags } from '../core/types'
 import { getDiff } from '../helpers/getDiff'
 import { useUpdateContract } from '../hooks/useUpdateContract'
 import { UpdateContractData } from '@/api/type'
@@ -22,6 +22,7 @@ const EditInfluencerModal: React.FC<EditInfluencerModalProps> = ({
 	handleClose,
 }) => {
 	const [budget, setBudget] = useState(0)
+	const [tags, setTags] = useState<Tags>([])
 
 	const influencer = useSelector((state: AppState) => {
 		const data = state.influencers.influencer
@@ -69,8 +70,7 @@ const EditInfluencerModal: React.FC<EditInfluencerModalProps> = ({
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isOpen])
 
-	async function onSave() {
-		if (!business_channel_id) return
+	const saveContract = async (business_channel_id: number) => {
 		if (!contractId) {
 			await createContract.mutateAsync({
 				amount: data.amount,
@@ -97,6 +97,17 @@ const EditInfluencerModal: React.FC<EditInfluencerModalProps> = ({
 		resetData()
 	}
 
+	const saveTags = async (business_channel_id: number) => {
+		
+	}
+	async function onSave() {
+		if (!business_channel_id) return
+		await Promise.all([
+			saveContract(business_channel_id),
+			saveTags(business_channel_id),
+		])
+	}
+
 	return (
 		<Modal
 			isOpen={isOpen}
@@ -104,7 +115,7 @@ const EditInfluencerModal: React.FC<EditInfluencerModalProps> = ({
 			style={{
 				content: {
 					maxWidth: '1200px',
-					height: '90%',
+					height: '95%',
 					paddingInline: '50px',
 				},
 			}}
@@ -212,7 +223,7 @@ const EditInfluencerModal: React.FC<EditInfluencerModalProps> = ({
 						handleChange(key, value)
 					}}
 				/>
-				<TagsList />
+				<TagsList tags={tags} setTags={setTags} />
 
 				<button
 					onClick={onSave}
