@@ -48,22 +48,6 @@ const InfluencerOnboarding: React.FC<Props> = ({ token }) => {
 						Would you like to join a second one?
 					</p>
 				</div>
-				<div
-					key={data?.data.newPartnerShip.id ?? 'new-partnership'}
-					className="flex bg-[#DFDFDF]/70 rounded-xl w-fit py-1  px-5 items-center mt-14 cursor-pointer"
-				>
-					<Image src={businessmanlogo} alt="" width={25} />
-					<p className="text-lg px-2 ">
-						{data?.data?.newPartnerShip?.name ?? ''}
-					</p>
-				</div>
-				<div>
-					<input
-						className="w-[400px] bg-[#F2F6FA]  outline-none focus:outline-none placeholder:text-[10px] mt-2"
-						placeholder="Current Partnerships"
-					/>
-					<Image src={vector} alt="vector" width={400} />
-				</div>
 				{data?.data?.currentPartnerShips?.map((partnerShip) => (
 					<div
 						key={partnerShip.id}
@@ -73,6 +57,22 @@ const InfluencerOnboarding: React.FC<Props> = ({ token }) => {
 						<p className="text-lg px-2">{partnerShip.name}</p>
 					</div>
 				)) ?? null}
+				<div>
+					<input
+						className="w-[400px] bg-[#F2F6FA]  outline-none focus:outline-none placeholder:text-[10px] mt-2"
+						placeholder="Current Partnerships"
+					/>
+					<Image src={vector} alt="vector" width={400} />
+				</div>
+				<div
+					key={data?.data.newPartnerShip.id ?? 'new-partnership'}
+					className="flex bg-[#DFDFDF]/70 rounded-xl w-fit py-1  px-5 items-center mt-14 cursor-pointer"
+				>
+					<Image src={businessmanlogo} alt="" width={25} />
+					<p className="text-lg px-2 ">
+						{data?.data?.newPartnerShip?.name ?? ''}
+					</p>
+				</div>
 				<button
 					disabled={!data}
 					onClick={() => handleJoin()}
