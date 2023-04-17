@@ -1,35 +1,26 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Contract from '../Contract'
 import TagsList from '../TagsList'
-import { useQuery } from 'react-query'
-import { QUERY_KEYS } from '@/core/constants'
-import { ChannelApi } from '@/api/ChannelApi'
 import OnboardingLink from '../OnboardingLink'
 import { ContractState, HandleChangeType, Tags } from '../../core/types'
-
-const { CREATE_ONBOARING } = QUERY_KEYS
+import { useCreateOnboarding } from '../../hooks/useCreateOnboarding'
 
 interface Props {
-	data: ContractState
+	contract: ContractState
 	handleChange: HandleChangeType
+	tags: Tags
+	setTags: React.Dispatch<React.SetStateAction<Tags>>
 }
 
-const AddInfluencerForm: React.FC<Props> = ({ data, handleChange }) => {
-	const [enabled, setEnabled] = useState(true)
-	const [tags, setTags] = useState<Tags>([])
-	const { data: onboardingData } = useQuery(CREATE_ONBOARING, {
-		queryFn: ChannelApi.createOnboardingRequest,
-		suspense: true,
-		retry: false,
-		refetchOnReconnect: false,
-		refetchOnMount: false,
-		refetchOnWindowFocus: false,
-		enabled,
+const AddInfluencerForm: React.FC<Props> = ({
+	contract,
+	handleChange,
+	tags,
+	setTags,
+}) => {
+	const { data: onboardingData } = useCreateOnboarding({
 		onSuccess(data) {
 			handleChange('onboarding_id', data.data.id)
-		},
-		onSettled() {
-			setEnabled(false)
 		},
 	})
 
@@ -48,7 +39,7 @@ const AddInfluencerForm: React.FC<Props> = ({ data, handleChange }) => {
 					name="budget"
 					type="number"
 					id="budget"
-					value={data.budget}
+					value={contract.budget}
 					onChange={(e) => {
 						const value = parseFloat(e.target.value)
 						handleChange('budget', value)
@@ -59,12 +50,12 @@ const AddInfluencerForm: React.FC<Props> = ({ data, handleChange }) => {
 			</div>
 			<Contract
 				data={{
-					amount: data.amount,
-					currency_id: data.currency_id,
-					is_one_time: data.is_one_time,
-					note: data.note,
-					upload_frequency: data.upload_frequency,
-					budget: data.budget,
+					amount: contract.amount,
+					currency_id: contract.currency_id,
+					is_one_time: contract.is_one_time,
+					note: contract.note,
+					upload_frequency: contract.upload_frequency,
+					budget: contract.budget,
 				}}
 				handleChange={handleChange}
 			/>

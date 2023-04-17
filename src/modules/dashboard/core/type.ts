@@ -12,4 +12,4 @@ export type AnalyticsDataType = {
 export type UploadVideoData = z.infer<typeof uploadVideoSchema>
 export type AddNoteData = z.infer<typeof addNoteSchema>
 
-export type DateOptionsType = 'prev-month' | 'this-month' | 'next-month'
+export type DateOptionType = 'prev-month' | 'this-month' | 'next-month'

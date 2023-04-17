@@ -14,6 +14,7 @@ import { PaymentStatusType } from '@/modules/settings/components/PaymentStatus'
 import { Alerts } from '@/modules/influencers/core/constants'
 import { ReportState } from '@/modules/reports/core/slice'
 import { ReportsData } from '@/modules/reports/core/type'
+import { Tag } from '@/modules/influencers/core/types'
 
 export type IBase = {
 	id: number
@@ -128,11 +129,10 @@ export type IAlert = {
 	color: string
 } & IBase
 
-export type ITag = IBase & {
-	name: string
-	color: string
-	businessChannelId: number
-}
+export type ITag = IBase &
+	Pick<Tag, 'active' | 'text' | 'color'> & {
+		businessChannelId: number
+	}
 
 export interface GetInfluencerData {
 	id: number
@@ -192,6 +192,7 @@ export type AddNoteData = VideoNote
 export type UpdateOnboardingRequestData = {
 	onboarding_id: number
 	note?: string
+	tags: Array<Omit<Tag, 'id' | 'new'>>
 } & NullableContract
 export type CreateContractData = ContractData & { business_channel_id: number }
 export type UpdateContractData = Empty<ContractData> & {
@@ -210,6 +211,16 @@ export type UpdateBusinessData = Partial<
 	Pick<IBusiness, 'acrvv' | 'customer_ltv' | 'default_currency_id'>
 >
 export type UpdateUserData = { email: string }
+export type GetMetricsQuery = {
+	start_date?: string | undefined
+	end_date?: string | undefined
+}
+export type UpdateTagsData = {
+	old_tags: Array<Omit<Tag, 'new' | 'id'> & { id: number }>
+	delete_tags: Array<Omit<Tag, 'new' | 'id'> & { id: number }>
+	new_tags: Array<Omit<Tag, 'new' | 'id'>>
+	business_channel_id: number
+}
 
 export type RegisterBusiness = Response<BusinessSignupApiData>
 export type RegisterChannel = Response<ChannelSignupApiData>
@@ -253,6 +264,15 @@ export type GetBusinessAnalytics = Response<{
 	roas: number
 	active_partners: number
 }>
+
+export type GetMetrics = Response<{
+	total_spent: number
+	budget: number
+	no_of_uploads: number
+	total_views: number
+	roas: number
+}>
+
 export type GetInfluencerOnboarding = Response<{
 	currentPartnerShips: Partnership[]
 	newPartnerShip: Partnership
@@ -266,3 +286,5 @@ export type GetChannelAnalytics = Response<{
 }>
 
 export type ConfirmOnboarding = RegisterChannel
+
+export type GetTags = Response<Array<Omit<ITag, 'businessChannelId'>>>

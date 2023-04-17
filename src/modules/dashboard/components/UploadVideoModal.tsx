@@ -33,9 +33,9 @@ const UploadVideoModal: React.FC<UploadVideoModalProps> = ({
 
 	const uploadVideo = useMutation(QUERY_KEYS.UPLOAD_VIDEO, {
 		mutationFn: VideosApi.createVideo,
-		onSuccess(data) {
+		async onSuccess(data) {
+			await queryClient.invalidateQueries(QUERY_KEYS.GET_VIDEOS)
 			toast.success<string>(data.message)
-			queryClient.invalidateQueries(QUERY_KEYS.GET_VIDEOS)
 		},
 		onError(error) {
 			const message = handleError(error)

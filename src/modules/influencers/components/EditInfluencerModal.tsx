@@ -8,10 +8,11 @@ import { useContract } from '../hooks/useContract'
 import { ContractState, Tags } from '../core/types'
 import { getDiff } from '../helpers/getDiff'
 import { useUpdateContract } from '../hooks/useUpdateContract'
-import { UpdateContractData } from '@/api/type'
+import { UpdateContractData, UpdateTagsData } from '@/api/type'
 import { pick } from '../helpers/pick'
 import { useCreateContract } from '../hooks/useCreateContract'
-
+import { useGetTags } from '../hooks/useGetTags'
+import { useUpdateTags } from '../hooks/useUpdateTags'
 interface EditInfluencerModalProps {
 	isOpen: boolean
 	handleClose: () => void
@@ -23,6 +24,22 @@ const EditInfluencerModal: React.FC<EditInfluencerModalProps> = ({
 }) => {
 	const [budget, setBudget] = useState(0)
 	const [tags, setTags] = useState<Tags>([])
+
+	const { data: tagsData } = useGetTags({
+		enabled: !isOpen,
+	})
+	useEffect(() => {
+		if (tagsData) {
+			const data = tagsData?.data?.map((tag) => ({
+				id: `${tag.id}`,
+				text: tag.text,
+				color: tag.color,
+				active: tag.active,
+				new: false,
+			}))
+			setTags(data)
+		}
+	}, [tagsData, isOpen])
 
 	const influencer = useSelector((state: AppState) => {
 		const data = state.influencers.influencer
@@ -97,8 +114,52 @@ const EditInfluencerModal: React.FC<EditInfluencerModalProps> = ({
 		resetData()
 	}
 
+	const updateTags = useUpdateTags()
+
 	const saveTags = async (business_channel_id: number) => {
-		
+		if (!tagsData) return
+
+		const new_tags: UpdateTagsData['new_tags'] = []
+		const old_tags: UpdateTagsData['old_tags'] = []
+
+		const currentTagsMap = new Map()
+		for (const tag of tags) {
+			if (tag.new) {
+				new_tags.push({
+					text: tag.text,
+					color: tag.color,
+					active: tag.active,
+				})
+				continue
+			} else {
+				const id = parseInt(tag.id)
+				old_tags.push({
+					id,
+					text: tag.text,
+					color: tag.color,
+					active: tag.active,
+				})
+			}
+			currentTagsMap.set(tag.id, tag)
+		}
+
+		const delete_tags = tagsData.data.filter(
+			(tag) => !currentTagsMap.has(`${tag.id}`),
+		)
+
+		console.log({
+			old_tags,
+			new_tags,
+			delete_tags,
+		})
+
+		const data: UpdateTagsData = {
+			business_channel_id,
+			new_tags,
+			old_tags,
+			delete_tags,
+		}
+		await updateTags.mutateAsync(data)
 	}
 	async function onSave() {
 		if (!business_channel_id) return

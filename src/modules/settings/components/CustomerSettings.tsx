@@ -136,7 +136,7 @@ const CustomerSettings: React.FC = () => {
 				<div className="flex items-center gap-10">
 					<div className="flex flex-col gap-1">
 						<p className="text-light text-[15px] pl-3">Enter Manually</p>
-						<div className="flex items-center max-w-[150px] w-full gap-2 justify-center px-3 py-2  w-[110px] rounded-xl h-fit bg-[#EAEEF3] ">
+						<div className="flex items-center max-w-[150px] gap-2 justify-center px-3 py-2  w-[110px] rounded-xl h-fit bg-[#EAEEF3] ">
 							<span className="text-[#272830]">%</span>
 							<input
 								value={state?.acrvv ?? 0}

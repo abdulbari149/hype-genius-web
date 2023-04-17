@@ -11,14 +11,14 @@ const montserrat = Montserrat({
 
 const ChannelAnalyticsList = () => {
 	const { data: analytics } = useGetChannelAnalytics()
-
+	console.log({ analytics })
 	return (
 		<div className="flex flex-col">
 			<div className="flex flex-row flex-wrap h-max mb-[20px] flex-shrink gap-y-2 gap-x-3">
 				<AnalyticsCard
 					icon={require('@/assets/icons/3-User.png')}
 					title="Total Uploads"
-					value={analytics?.data.no_of_uploads ?? 0}
+					value={analytics?.data?.no_of_uploads ?? 0}
 					variation={true}
 					changeInPercent={25}
 				/>
@@ -26,7 +26,11 @@ const ChannelAnalyticsList = () => {
 				<AnalyticsCard
 					icon={require('@/assets/icons/eye-icon.png')}
 					title="Views"
-					value={analytics?.data.total_views.toLocaleString('en-US') ?? ''}
+					value={
+						analytics?.data?.total_views
+							? analytics?.data?.total_views.toLocaleString('en-US')
+							: '0'
+					}
 					variation={true}
 					changeInPercent={8}
 				/>
@@ -35,8 +39,8 @@ const ChannelAnalyticsList = () => {
 					icon={require('@/assets/icons/budgeting-icon.png')}
 					title="Total Earned"
 					value={
-						analytics?.data.amount_earned
-							? '$' + analytics.data.amount_earned.toLocaleString('en-US')
+						analytics?.data?.amount_earned
+							? '$' + analytics?.data?.amount_earned.toLocaleString('en-US')
 							: '$0'
 					}
 					variation={true}
@@ -61,8 +65,8 @@ const ChannelAnalyticsList = () => {
 						</div>
 					</div>
 
-					{analytics?.data?.contracts && analytics.data.contracts.length > 0
-						? analytics.data.contracts.map((contract) => {
+					{analytics?.data?.contracts && analytics?.data?.contracts.length > 0
+						? analytics?.data?.contracts.map((contract) => {
 								return (
 									<p
 										key={contract.id}

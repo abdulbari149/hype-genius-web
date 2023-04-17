@@ -20,6 +20,8 @@ export const QUERY_KEYS = {
 	CHANNEL_ANALYTICS: 'channel/analytics',
 	GET_INFLUENCER_ONBOARDINGS: 'influencer-onboardings/get',
 	UPDATE_USER: 'user/update',
+	GET_METRICS: 'metrics/get',
+	GET_TAGS: 'tags/get',
 }
 
 export const MONTHS = [

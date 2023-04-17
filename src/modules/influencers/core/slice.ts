@@ -1,4 +1,4 @@
-import { GetInfluencerData } from '@/api/type'
+import { GetInfluencerData, ITag } from '@/api/type'
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { PanelType } from './types'
 
@@ -48,6 +48,11 @@ const influencersSlice = createSlice({
 				state.influencer.contract = action.payload.contract
 			}
 		},
+		setTags(state: State, action: PayloadAction<{ tags: Array<ITag> }>) {
+			if (state.influencer && action.payload.tags) {
+				state.influencer.tags = action.payload.tags;
+			}
+		},
 	},
 })
 
@@ -58,6 +63,7 @@ export const {
 	setContract,
 	showIsEdit,
 	hideIsEdit,
+	setTags,
 } = influencersSlice.actions
 
 export default influencersSlice

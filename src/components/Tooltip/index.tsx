@@ -1,5 +1,4 @@
-import React, { PropsWithChildren } from 'react'
-
+import React from 'react'
 import MdTooltip, { TooltipProps, tooltipClasses } from '@mui/material/Tooltip'
 import { BsQuestionLg } from 'react-icons/bs'
 import { styled } from '@mui/material'

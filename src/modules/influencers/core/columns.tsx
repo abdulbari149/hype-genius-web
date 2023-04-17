@@ -53,7 +53,7 @@ export const columns: Readonly<Array<Column<ColumnData>>> = [
 			return (
 				<div className="flex flex-row items-center gap-2">
 					{tags.map((tag) => (
-						<Tag text={tag.name} color={tag.color} key={tag.id} />
+						<Tag text={tag.text} color={tag.color} key={tag.id} />
 					))}
 				</div>
 			)

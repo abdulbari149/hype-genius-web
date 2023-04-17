@@ -7,6 +7,8 @@ import {
 	GetReportData,
 	GetBusinessReport,
 	GetBusinessAnalytics,
+	GetMetrics,
+	GetMetricsQuery,
 } from './type'
 import { api } from '@/core/axios'
 import { getAccessToken } from '@/modules/auth/core/utils'
@@ -79,6 +81,28 @@ export class BusinessApi {
 	static async getBusinessAnalytics(): Promise<GetBusinessAnalytics> {
 		const token = getAccessToken()
 		const url = '/business/analytics'
+		const result = await api.get(url, {
+			headers: { Authorization: `Bearer ${token}` },
+		})
+		return result.data
+	}
+
+	static async getMetrics(
+		business_channel_id: number,
+		query: GetMetricsQuery = {},
+	): Promise<GetMetrics> {
+		const token = getAccessToken()
+		const params = []
+		let url = `/business/metrics/${business_channel_id}`
+		if (query?.start_date && typeof query.start_date !== 'undefined') {
+			params.push(`start_date=${query.start_date}`)
+		}
+		if (query?.end_date && typeof query.end_date !== 'undefined') {
+			params.push(`end_date=${query.end_date}`)
+		}
+		if (params.length > 0) {
+			url += '?' + params.join('&')
+		}
 		const result = await api.get(url, {
 			headers: { Authorization: `Bearer ${token}` },
 		})

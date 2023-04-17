@@ -73,7 +73,7 @@ const InfluencerRows: React.FC<Props> = ({ rows, prepareRow }) => {
 const InfluencerTable: React.FC = () => {
 	const { data: influencers } = useGetInfluencers()
 
-	const data = useMemo(() => influencers?.data ?? [], [influencers])
+	const data = useMemo(() => influencers?.data ?? [], [influencers?.data])
 	const columns = useMemo(() => influencersColumns, [])
 	const table = useTable({ columns, data })
 

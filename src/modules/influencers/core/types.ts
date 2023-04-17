@@ -2,10 +2,11 @@ import { ContractUploadFrequency } from '@/api/type'
 import { PaymentStatusType } from '@/modules/settings/components/PaymentStatus'
 
 export interface Tag {
-	id: number
+	id: string
 	active: boolean
 	text: string
 	color: string
+	new: boolean
 }
 export type Tags = Array<Tag>
 

@@ -4,7 +4,7 @@ import { useMutation, useQueryClient } from 'react-query'
 import { useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
 import { setContract, hideIsEdit } from '../core/slice'
-const { UPDATE_CONTRACT, GET_INFLUENCERS } = QUERY_KEYS
+const { UPDATE_CONTRACT, GET_INFLUENCERS, GET_METRICS, GET_ALERTS } = QUERY_KEYS
 
 export const useUpdateContract = () => {
 	const dispatch = useDispatch()
@@ -23,12 +23,18 @@ export const useUpdateContract = () => {
 						deletedAt: data.data.deletedAt,
 						currencyId: data.data.currency_id,
 						uploadFrequency: data.data.upload_frequency,
+						budget: data.data.budget,
 					},
 				}),
 			)
 			await queryClient.invalidateQueries(GET_INFLUENCERS)
+
+			await queryClient.invalidateQueries([
+				GET_INFLUENCERS,
+				GET_METRICS,
+				GET_ALERTS,
+			])
 			dispatch(hideIsEdit())
-			toast.success(data.message)
 		},
 	})
 	return updateContract

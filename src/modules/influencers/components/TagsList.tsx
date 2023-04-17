@@ -4,6 +4,7 @@ import { AiOutlineCheck, AiOutlineClose } from 'react-icons/ai'
 import Image from 'next/image'
 import { SketchPicker } from 'react-color'
 import { Tags } from '../core/types'
+import { v4 as uuid } from 'uuid'
 
 type Props = {
 	tags: Tags
@@ -24,7 +25,7 @@ const TagsList: React.FC<Props> = ({ tags, setTags }) => {
 		setShowColorPicker((prevShow) => !prevShow)
 	}
 
-	const activateTag = (id: number) => {
+	const activateTag = (id: string) => {
 		setTags((tagList) => {
 			return tagList.map((tag) => {
 				if (tag.id === id) {
@@ -41,7 +42,7 @@ const TagsList: React.FC<Props> = ({ tags, setTags }) => {
 		})
 	}
 
-	const removeTag = (id: number) => {
+	const removeTag = (id: string) => {
 		setTags((tagList) => {
 			return tagList.filter((tag) => tag.id !== id)
 		})
@@ -54,8 +55,10 @@ const TagsList: React.FC<Props> = ({ tags, setTags }) => {
 
 		// TODO: add tag
 		setTags((tagList) => {
-			const id = tagList.length === 0 ? 1 : tagList[tagList.length - 1].id + 1
-			return [...tagList, { id, text: tag, color: color, active: false }]
+			return [
+				...tagList,
+				{ id: uuid(), text: tag, color: color, active: false, new: true },
+			]
 		})
 		setTag('')
 		setColor('#EF539E')

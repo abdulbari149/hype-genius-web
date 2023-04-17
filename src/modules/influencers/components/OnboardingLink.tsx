@@ -1,7 +1,32 @@
 import Tooltip from '@/components/Tooltip'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import MdTooltip from '@mui/material/Tooltip'
 
 const OnboardingLink: React.FC<{ url: string }> = ({ url }) => {
+	const [open, setOpen] = useState(false)
+
+	const handleTooltipClose = () => {
+		setOpen(false)
+	}
+	const handleTooltipOpen = () => {
+		setOpen(true)
+		navigator.clipboard.writeText(url)
+	}
+
+	useEffect(() => {
+		let timer: NodeJS.Timeout | undefined = undefined
+		if (open) {
+			timer = setTimeout(() => {
+				setOpen(false)
+			}, 500)
+		}
+		return () => {
+			if (timer && typeof timer !== 'undefined') {
+				clearTimeout(timer)
+			}
+		}
+	}, [open])
+
 	return (
 		<div className="space-y-[10px]">
 			<h3 className="text-[#272830] text-[18px] font-[600] flex gap-3 items-center">
@@ -23,14 +48,24 @@ const OnboardingLink: React.FC<{ url: string }> = ({ url }) => {
 
 			<div className="flex items-center gap-2">
 				<p className="text-[#5C6FFF] w-fit cursor-pointer">{url}</p>
-				<button
-					onClick={() => {
-						navigator.clipboard.writeText(url)
+				<MdTooltip
+					PopperProps={{
+						disablePortal: true,
 					}}
-					className="bg-[#EF539E] px-4 py-1 rounded-xl text-white text-[15px]"
+					onClose={handleTooltipClose}
+					open={open}
+					disableFocusListener
+					disableHoverListener
+					disableTouchListener
+					title="Link Copied"
 				>
-					Copy
-				</button>
+					<button
+						onClick={handleTooltipOpen}
+						className="bg-[#EF539E] px-4 py-1 rounded-xl text-white text-[15px]"
+					>
+						Copy
+					</button>
+				</MdTooltip>
 			</div>
 		</div>
 	)

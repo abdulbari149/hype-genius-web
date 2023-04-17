@@ -39,8 +39,7 @@ const InfluencersDetail: React.FC = () => {
 				perMonth: data?.contract?.uploadFrequency ?? '',
 				perVideo: data?.contract?.amount.toString(10) ?? 0,
 			},
-			tag:
-				tags.length > 0 ? { text: tags[0].name, color: tags[0].color } : null,
+			tag: tags.length > 0 ? { text: tags[0].text, color: tags[0].color } : null,
 			channelLink: data?.channel.link,
 		}
 	})
