@@ -35,10 +35,10 @@ const Metrics = () => {
 			normalized_upload_frequency,
 			normalized_roas,
 		})
-		return Math.round(
-			(0.3 * normalized_upload_frequency + 0.7 * normalized_roas) * 100,
-			2,
-		)
+		const value =
+			(0.3 * normalized_upload_frequency + 0.7 * normalized_roas) * 100
+		return parseFloat(value.toString()).toFixed(2)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [metrics?.data, contract])
 
 	return (
