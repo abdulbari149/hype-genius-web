@@ -17,8 +17,8 @@ export const useGetMetrics = (query: GetMetricsQuery = {}) => {
 			if (!businessChannelId || businessChannelId === null) {
 				throw new Error('Please select an influencer first')
 			}
-			return BusinessApi.getMetrics(businessChannelId)
+			return BusinessApi.getMetrics(businessChannelId, query)
 		},
-		suspense: true,
+		suspense: false,
 	})
 }

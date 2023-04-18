@@ -15,6 +15,7 @@ export const useUser = (options: UseQueryOptions<Me, AxiosError | Error>) => {
 
 	const userQuery = useQuery<Me, AxiosError | Error>('user', {
 		queryFn: AuthApi.me,
+		retry: false,
 		onSuccess(data) {
 			dispatch(setAuthState({ isLoggedIn: true }))
 			dispatch(setUser({ user: data.data.user }))

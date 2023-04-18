@@ -1,14 +1,13 @@
 import { IVideo } from '@/api/type'
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { DateOptionType } from './type'
 
 interface DashboardSliceData {
 	videoId: number | null
 	isDetailsOpen: boolean
 	video: IVideo | null
 	dateFilters: {
-		startDate: DateOptionType
-		endDate: DateOptionType
+		start_date: string
+		end_date: string
 	}
 }
 
@@ -17,8 +16,8 @@ const initialState: DashboardSliceData = {
 	isDetailsOpen: false,
 	video: null,
 	dateFilters: {
-		startDate: 'this-month',
-		endDate: 'this-month',
+		start_date: '',
+		end_date: '',
 	},
 }
 

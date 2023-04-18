@@ -39,7 +39,6 @@ const getDateValuesForOptions = (): Record<
 			'this-month': endOfThisMonth,
 		},
 	}
-	console.log(data)
 	return data
 }
 
@@ -47,6 +46,6 @@ export const useDateValues = () => {
 	return useQuery({
 		queryKey: [DATE_VALUES],
 		cacheTime: 24 * 60 * 60 * 100,
-		queryFn: getDateValuesForOptions,
+		queryFn: () => getDateValuesForOptions(),
 	})
 }

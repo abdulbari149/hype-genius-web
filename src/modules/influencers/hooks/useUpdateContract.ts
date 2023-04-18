@@ -2,7 +2,6 @@ import { ContractApi } from '@/api/ContractApi'
 import { QUERY_KEYS } from '@/core/constants'
 import { useMutation, useQueryClient } from 'react-query'
 import { useDispatch } from 'react-redux'
-import { toast } from 'react-toastify'
 import { setContract, hideIsEdit } from '../core/slice'
 const { UPDATE_CONTRACT, GET_INFLUENCERS, GET_METRICS, GET_ALERTS } = QUERY_KEYS
 

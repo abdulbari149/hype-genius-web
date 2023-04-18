@@ -9,6 +9,7 @@ import {
 	GetBusinessAnalytics,
 	GetMetrics,
 	GetMetricsQuery,
+	CreateFollowUpData,
 } from './type'
 import { api } from '@/core/axios'
 import { getAccessToken } from '@/modules/auth/core/utils'
@@ -104,6 +105,15 @@ export class BusinessApi {
 			url += '?' + params.join('&')
 		}
 		const result = await api.get(url, {
+			headers: { Authorization: `Bearer ${token}` },
+		})
+		return result.data
+	}
+
+	static async craeteFollowUp(data: CreateFollowUpData) {
+		const token = getAccessToken()
+		const url = '/business/followup'
+		const result = await api.post(url, data, {
 			headers: { Authorization: `Bearer ${token}` },
 		})
 		return result.data

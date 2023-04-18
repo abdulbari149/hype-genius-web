@@ -1,8 +1,8 @@
 import React from 'react'
-import Selector from '@/components/Selector'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppState } from '@/store'
 import { setDateFilter } from '../core/slice'
+import DateSelector from '@/components/Selector/DateSelector'
 
 const DashboardDatePicker: React.FC = () => {
 	const dateFilters = useSelector(
@@ -16,34 +16,21 @@ const DashboardDatePicker: React.FC = () => {
 
 	return (
 		<div className="flex items-center gap-3 my-[10px]">
-			<Selector
-				name="startDate"
-				value={dateFilters.startDate}
+			<DateSelector
+				dateFrom="start"
+				name="start_date"
+				value={dateFilters.start_date}
 				onChange={(value) => {
-					if (
-						value === 'prev-month' ||
-						value === 'next-month' ||
-						value === 'this-month'
-					) {
-						updateState({ startDate: value })
-					}
+					updateState({ start_date: value })
 				}}
-				type="time"
 			/>
 			<p className="text-[13px] font-light">Compare to</p>
-			<Selector
-				name="endDate"
-				value={dateFilters.endDate}
+			<DateSelector
+				dateFrom="end"
+				value={dateFilters.end_date}
 				onChange={(value) => {
-					if (
-						value === 'prev-month' ||
-						value === 'next-month' ||
-						value === 'this-month'
-					) {
-						updateState({ endDate: value })
-					}
+					updateState({ end_date: value })
 				}}
-				type="time"
 			/>
 		</div>
 	)

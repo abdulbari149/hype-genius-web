@@ -15,18 +15,16 @@ const Activities = () => {
 		(state) => state.influencers.influencer?.id ?? null,
 	)
 
-	const { data: activityList } = useQuery(
-		`${GET_ACTIVITIES}/${businessChannelId}`,
-		{
-			queryFn: () => {
-				if (!businessChannelId || businessChannelId === null) {
-					throw new Error('Please select an influencer first')
-				}
-				return NotesApi.getActivites(businessChannelId)
-			},
-			suspense: true,
+	const { data: activityList } = useQuery({
+		queryKey: [GET_ACTIVITIES, businessChannelId],
+		queryFn: () => {
+			if (!businessChannelId || businessChannelId === null) {
+				throw new Error('Please select an influencer first')
+			}
+			return NotesApi.getActivites(businessChannelId)
 		},
-	)
+		suspense: true,
+	})
 
 	return (
 		<div className="flex flex-col w-full min-h-[150px] mb-[70px]">

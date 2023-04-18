@@ -39,7 +39,8 @@ const InfluencersDetail: React.FC = () => {
 				perMonth: data?.contract?.uploadFrequency ?? '',
 				perVideo: data?.contract?.amount.toString(10) ?? 0,
 			},
-			tag: tags.length > 0 ? { text: tags[0].text, color: tags[0].color } : null,
+			tag:
+				tags.length > 0 ? { text: tags[0].text, color: tags[0].color } : null,
 			channelLink: data?.channel.link,
 		}
 	})
@@ -68,9 +69,11 @@ const InfluencersDetail: React.FC = () => {
 					Edit Info
 				</button>
 			</InfluencerSidePanel>
-			<Suspense fallback={<Loading />}>
-				<EditInfluencerModal isOpen={isEditOpen} handleClose={closeIsEdit} />
-			</Suspense>
+			{isEditOpen && (
+				<Suspense fallback={<Loading />}>
+					<EditInfluencerModal isOpen={isEditOpen} handleClose={closeIsEdit} />
+				</Suspense>
+			)}
 		</>
 	)
 }

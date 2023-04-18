@@ -22,6 +22,7 @@ export const QUERY_KEYS = {
 	UPDATE_USER: 'user/update',
 	GET_METRICS: 'metrics/get',
 	GET_TAGS: 'tags/get',
+	CREATE_FOLLOWUP: 'followup/create',
 }
 
 export const MONTHS = [

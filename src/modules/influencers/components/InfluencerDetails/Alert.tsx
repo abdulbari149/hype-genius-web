@@ -39,13 +39,14 @@ const Alert = () => {
 				<div key={alert.id} className="flex flex-row items-center mt-2">
 					<Tag
 						text={alert.name
-							.replace('_', ' ')
+							.replaceAll('_', ' ')
 							.split(' ')
 							.map((i) => `${i.charAt(0).toUpperCase()}${i.substring(1)}`)
 							.join(' ')}
 						color={alert.color}
+						className="text-[15px]"
 					/>
-					<p className="font-[600] text-[15px] text-[#272830] ml-6">
+					<p className="font-[600] text-[13px] text-[#272830] ml-6">
 						{alertSubtitles[alert.name]} |{' '}
 						<span
 							className="px-1 text-[#697AFF] cursor-pointer"

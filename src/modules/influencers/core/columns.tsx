@@ -104,7 +104,7 @@ export const columns: Readonly<Array<Column<ColumnData>>> = [
 
 			const data = {
 				text: alert.name
-					.replace('_', ' ')
+					.replaceAll('_', ' ')
 					.split(' ')
 					.map((i) => `${i.charAt(0).toUpperCase()}${i.substring(1)}`)
 					.join(' '),

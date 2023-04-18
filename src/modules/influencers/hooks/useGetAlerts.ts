@@ -29,7 +29,7 @@ export const useGetAlerts = () => {
 					data?.data.map((alert) => ({
 						...alert,
 						text: alert.name
-							.replace('_', ' ')
+							.replaceAll('_', ' ')
 							.split(' ')
 							.map((i) => `${i.charAt(0).toUpperCase()}${i.substring(1)}`)
 							.join(' '),

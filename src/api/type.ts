@@ -215,6 +215,14 @@ export type GetMetricsQuery = {
 	start_date?: string | undefined
 	end_date?: string | undefined
 }
+
+export type CreateFollowUpData = {
+	business_channel_id: number
+	send_to: 'email' | 'phone'
+	info: string
+	schedule_at: string
+}
+
 export type UpdateTagsData = {
 	old_tags: Array<Omit<Tag, 'new' | 'id'> & { id: number }>
 	delete_tags: Array<Omit<Tag, 'new' | 'id'> & { id: number }>

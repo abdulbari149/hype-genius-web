@@ -1,50 +1,57 @@
-import React from 'react'
-import Select, { GroupBase, OptionProps, OptionsOrGroups } from 'react-select'
-import Image from 'next/image'
+import React, { useState } from 'react'
+import { AiOutlineDown } from 'react-icons/ai'
 
-type Option = { label: string; options: string[] }
-
-const IconOption: React.FC<OptionProps<Option, boolean>> = (props) => {
-	const { data, isDisabled } = props
-	return !isDisabled ? (
-		<Image src={require(`@/assets/icons/${data}`)} alt={`icon ${data}`} />
-	) : null
+export type ItemIcon = {
+	label: string
+	value: React.ReactNode
 }
 
-const options: OptionsOrGroups<any, GroupBase<Option>> = [
-	{ label: '', options: ['email-icon.png'] },
-]
+type Props = {
+	selectedIcon: Partial<ItemIcon>
+	setSelectedIcon: React.Dispatch<React.SetStateAction<ItemIcon>>
+	items: ItemIcon[]
+}
 
-const IconSelector = () => {
+const IconSelector: React.FC<Props> = ({
+	selectedIcon,
+	setSelectedIcon,
+	items,
+}) => {
+	const [isOpen, setIsOpen] = useState(false)
 	return (
-		<Select
-			isSearchable={false}
-			isRtl={false}
-			noOptionsMessage={({ inputValue }) => {
-				console.log(inputValue)
-				return (
-					<Image
-						src={require(`@/assets/icons/${inputValue}`)}
-						alt={`icon ${inputValue}`}
-					/>
-				)
-			}}
-			className="border-0"
-			options={options}
-			components={{ Option: IconOption }}
-			isMulti={false}
-			defaultValue={options[0]}
-			styles={{
-				control(base) {
-					return {
-						...base,
-						border: 'none',
-						width: '40px',
-						height: '40px',
-					}
-				},
-			}}
-		/>
+		<div className="relative">
+			<div
+				className="flex items-center"
+				onClick={() => setIsOpen((prevValue) => !prevValue)}
+			>
+				{selectedIcon.value}
+				<AiOutlineDown
+					className={`text-[#27283080] ${
+						isOpen ? 'rotate-180' : 'rotate-0'
+					} transition-all`}
+					size={16}
+				/>
+			</div>
+
+			{isOpen ? (
+				<div className="absolute -translate-x-[15%] mt-1 bg-[#F7F9FB] rounded-md">
+					{items.map((item) => {
+						return (
+							<div
+								onClick={() => {
+									setSelectedIcon(item)
+									setIsOpen(false)
+								}}
+								className="px-1 pt-2 cursor-pointer last:pb-2 hover:bg-[#fff] first:rounded-t-md last:rounded-b-md"
+								key={item.label}
+							>
+								{item.value}
+							</div>
+						)
+					})}
+				</div>
+			) : null}
+		</div>
 	)
 }
 
