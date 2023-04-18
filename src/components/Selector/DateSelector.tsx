@@ -148,6 +148,7 @@ const DateSelector: React.FC<Props> = ({
 			const value = dateValues.data[dateFrom][selectedItem.value]
 			onChange(value, selectedItem)
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [dateValues.data])
 
 	return (

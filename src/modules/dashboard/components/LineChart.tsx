@@ -73,6 +73,7 @@ const LineChart: React.FC<Props> = ({ data }) => {
 		}
 
 		setChartData(data)
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [])
 	return (
 		<Line

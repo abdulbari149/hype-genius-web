@@ -50,7 +50,7 @@ const influencersSlice = createSlice({
 		},
 		setTags(state: State, action: PayloadAction<{ tags: Array<ITag> }>) {
 			if (state.influencer && action.payload.tags) {
-				state.influencer.tags = action.payload.tags;
+				state.influencer.tags = action.payload.tags
 			}
 		},
 	},

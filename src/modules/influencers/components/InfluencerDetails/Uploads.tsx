@@ -82,7 +82,7 @@ const Uploads = () => {
 							setEndDate(new_end_date)
 						}
 						if (option && option.value === 'custom') {
-							console.log(option);
+							console.log(option)
 							setEndDate(value)
 						}
 					}}
