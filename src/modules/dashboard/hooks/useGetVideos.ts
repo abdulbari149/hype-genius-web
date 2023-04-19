@@ -8,7 +8,7 @@ const { GET_VIDEOS } = QUERY_KEYS
 export const useGetVideos = () => {
 	const dateFilters = useSelector((state: AppState) => {
 		const dates = state.dashboard.dateFilters
-		return dates;
+		return dates
 	})
 	return useQuery({
 		queryKey: [GET_VIDEOS, dateFilters],
