@@ -42,7 +42,7 @@ const DashboardCharts = () => {
 
 	return (
 		<Card className="rounded-[25px] max-h-[40%] w-full h-full overflow-hidden">
-			<div className="flex flex-row items-center gap-8 py-4 px-8">
+			<div className="flex flex-row items-center gap-8 px-8 py-4">
 				{tabs.map((tab) => {
 					return (
 						<div
@@ -64,9 +64,9 @@ const DashboardCharts = () => {
 				})}
 			</div>
 
-			<div className="py-2 mt-1 px-8">
+			<div className="px-8 py-2 mt-1">
 				<p className="text-[38px] font-bold">
-					{analytics.data[activeTab].toLocaleString('en-US')}
+					{analytics?.data?[activeTab] ? analytics.data[activeTab].toLocaleString('en-US') : '0'}
 				</p>
 				{/* <p className="text-[13px] bg-[#CAFFA0] px-3 py-1 w-fit rounded-lg ml-2">
 					+25%

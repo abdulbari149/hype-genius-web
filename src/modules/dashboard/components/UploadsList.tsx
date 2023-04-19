@@ -40,7 +40,7 @@ const UploadColumn: React.FC<Props> = ({
 				</p>
 			</div>
 			<p className="max-w-[30%] w-full text-[17px]">
-				{views.toLocaleString('en-US')}
+				{views ? views?.toLocaleString('en-US') : '0'}
 			</p>
 		</div>
 	)
