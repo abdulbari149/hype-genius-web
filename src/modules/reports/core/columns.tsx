@@ -41,7 +41,7 @@ export const columns: ReadonlyArray<Column<ReportsData>> = [
 					{videos.length > 0
 						? videos.map((video) => (
 								<div
-									className="flex flex-1 items-center justify-between w-full"
+									className="flex items-center justify-between flex-1 w-full"
 									key={video.id}
 								>
 									<p className="text-[17px] font-light text-left">
@@ -129,7 +129,7 @@ export const columns: ReadonlyArray<Column<ReportsData>> = [
 										${
 											video.roas < 7
 												? 'bg-[#D7D7D7]'
-												: videos.roas < 10
+												: video.roas < 10
 												? 'bg-[#F3EA02]'
 												: 'bg-[#C87C0A]'
 										} px-2 py-[6px] rounded-xl min-w-[30px] w-fit text-[15px] font-light text-center
