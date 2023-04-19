@@ -9,7 +9,7 @@ export type Response<T extends object> = {
 }
 
 export const api = axios.create({
-	baseURL: `http://localhost:5000/api/v1`,
+	baseURL: `${process.env.NEXT_PUBLIC_API_URL}/api/v1`,
 	headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
 	withCredentials: true,
 })
