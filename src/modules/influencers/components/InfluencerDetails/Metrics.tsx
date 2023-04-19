@@ -15,7 +15,15 @@ const Metrics = () => {
 		start_date: '',
 		end_date: '',
 	})
-	const { data: metrics } = useGetMetrics(values)
+
+	const budget = useSelector(
+		(state: AppState) => state.influencers.influencer?.contract?.budget,
+	)
+
+	const { data: metrics } = useGetMetrics({
+		start_date: values.start_date !== '' ? values.start_date : undefined,
+		end_date: values.end_date !== '' ? values.end_date : undefined,
+	})
 	const contract = useSelector(
 		(state: AppState) => state.influencers.influencer?.contract,
 	)
@@ -112,10 +120,8 @@ const Metrics = () => {
 						</p>
 						<p className="text-[#1C921A] text-[16px]">
 							$
-							{metrics?.data.budget
-								? parseFloat(metrics?.data.budget.toString()).toLocaleString(
-										'en-US',
-								  )
+							{!!budget
+								? parseFloat(budget.toString()).toLocaleString('en-US')
 								: '0'}
 						</p>
 					</div>

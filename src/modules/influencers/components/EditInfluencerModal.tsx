@@ -25,11 +25,10 @@ const EditInfluencerModal: React.FC<EditInfluencerModalProps> = ({
 	const [budget, setBudget] = useState(0)
 	const [tags, setTags] = useState<Tags>([])
 
-	const { data: tagsData } = useGetTags({
-		enabled: !isOpen,
-	})
+	const { data: tagsData } = useGetTags()
 	useEffect(() => {
-		if (tagsData) {
+		if (tagsData && tagsData?.data) {
+			console.log(tagsData)
 			const data = tagsData?.data?.map((tag) => ({
 				id: `${tag.id}`,
 				text: tag.text,
@@ -39,7 +38,7 @@ const EditInfluencerModal: React.FC<EditInfluencerModalProps> = ({
 			}))
 			setTags(data)
 		}
-	}, [tagsData, isOpen])
+	}, [tagsData?.data, isOpen])
 
 	const influencer = useSelector((state: AppState) => {
 		const data = state.influencers.influencer
@@ -96,6 +95,7 @@ const EditInfluencerModal: React.FC<EditInfluencerModalProps> = ({
 				is_one_time: data.is_one_time === 'yes',
 				upload_frequency: data.upload_frequency,
 				budget,
+				note: data.note !== '' ? data.note : undefined,
 			})
 			resetData()
 			return
@@ -117,8 +117,6 @@ const EditInfluencerModal: React.FC<EditInfluencerModalProps> = ({
 	const updateTags = useUpdateTags()
 
 	const saveTags = async (business_channel_id: number) => {
-		if (!tagsData) return
-
 		const new_tags: UpdateTagsData['new_tags'] = []
 		const old_tags: UpdateTagsData['old_tags'] = []
 
@@ -143,25 +141,24 @@ const EditInfluencerModal: React.FC<EditInfluencerModalProps> = ({
 			currentTagsMap.set(tag.id, tag)
 		}
 
-		const delete_tags = tagsData.data.filter(
-			(tag) => !currentTagsMap.has(`${tag.id}`),
-		)
-
-		console.log({
-			old_tags,
-			new_tags,
-			delete_tags,
-		})
-
 		const data: UpdateTagsData = {
 			business_channel_id,
 			new_tags,
 			old_tags,
-			delete_tags,
+			delete_tags: [],
 		}
+		console.log(data)
+		if (tagsData && tagsData.data && Array.isArray(tagsData.data)) {
+			const delete_tags = tagsData.data.filter(
+				(tag) => !currentTagsMap.has(`${tag.id}`),
+			)
+			Object.assign(data, { delete_tags })
+		}
+
 		await updateTags.mutateAsync(data)
 	}
 	async function onSave() {
+		debugger
 		if (!business_channel_id) return
 		await Promise.all([
 			saveContract(business_channel_id),

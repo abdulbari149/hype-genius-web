@@ -25,10 +25,8 @@ export const useCreatePayment = () => {
 			})
 		},
 		async onSuccess() {
-			await queryClient.invalidateQueries([
-				`${GET_ALERTS}/${businessChannelId}`,
-				GET_INFLUENCERS,
-			])
+			await queryClient.invalidateQueries([GET_INFLUENCERS])
+			queryClient.invalidateQueries([GET_ALERTS, businessChannelId])
 			dispatch(showPanel({ panel: 'detail' }))
 		},
 	})

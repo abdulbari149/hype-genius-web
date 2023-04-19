@@ -25,11 +25,9 @@ export const useCreateFollowUp = () => {
 			return BusinessApi.craeteFollowUp({ ...data, business_channel_id })
 		},
 		async onSuccess(data) {
-			await queryClient.invalidateQueries([
-				GET_ALERTS,
-				GET_ACTIVITIES,
-				GET_INFLUENCERS,
-			])
+			queryClient.invalidateQueries([GET_INFLUENCERS])
+			queryClient.invalidateQueries([GET_ALERTS, business_channel_id])
+			queryClient.invalidateQueries([GET_ACTIVITIES, business_channel_id])
 			toast.success(data.message)
 		},
 	})

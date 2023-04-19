@@ -11,7 +11,8 @@ const NotesList = () => {
 		(state) => state.dashboard.videoId,
 	)
 
-	const { data: notes } = useQuery(`${videoId}/${GET_NOTES}`, {
+	const { data: notes } = useQuery({
+		queryKey: [GET_NOTES, videoId],
 		queryFn: () => {
 			if (videoId === null || isNaN(videoId))
 				throw new Error('Invalid video id. Please selecte an uploaded video')

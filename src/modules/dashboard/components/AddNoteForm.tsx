@@ -34,7 +34,9 @@ const AddNoteForm: React.FC<Props> = ({ closeAfterSubmit }) => {
 		},
 		onSuccess(data) {
 			toast.success(data.message)
-			queryClient.invalidateQueries(`${videoId}/${GET_NOTES}`)
+			queryClient.invalidateQueries({
+				queryKey: [GET_NOTES, videoId],
+			})
 		},
 		onError(error) {
 			const message = handleError(error)

@@ -28,9 +28,9 @@ const CreateActivityForm: React.FC<Props> = ({ onHide }) => {
 		},
 		async onSuccess() {
 			onHide()
-			await queryClient.invalidateQueries(
-				`${GET_ACTIVITIES}/${businessChannelId}`,
-			)
+			await queryClient.invalidateQueries({
+				queryKey: [GET_ACTIVITIES, businessChannelId],
+			})
 		},
 	})
 

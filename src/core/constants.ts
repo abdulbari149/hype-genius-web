@@ -4,7 +4,7 @@ export const QUERY_KEYS = {
 	ADD_NOTE: 'note/add',
 	GET_NOTES: 'note/get',
 	GET_INFLUENCERS: 'influencers/get',
-	CREATE_ONBOARING: 'onboarding/create',
+	CREATE_ONBOARDING: 'onboarding/create',
 	UPDATE_ONBOARDING: 'onboarding/update',
 	GET_MY_BUSINESS: 'my-business/get',
 	UPDATE_BUSINESS: 'business/update',

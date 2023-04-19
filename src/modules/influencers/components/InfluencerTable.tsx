@@ -49,12 +49,10 @@ const InfluencerRows: React.FC<Props> = ({ rows, prepareRow }) => {
 								<td
 									className={`${cellClassName} ${
 										row.original.id === influencerId
-											? 'first:border-l-4 last:border-r-4 border-b-4 border-t-4'
+											? `first:border-l-4 last:border-r-4 border-b-4 border-t-4  border-[#3BADFF]`
+											: row.original.alert?.name === Alerts.MISSING_DEAL
+											? `first:border-l-4 last:border-r-4 border-b-4 border-t-4  border-[#FF3434B8]`
 											: 'border-0'
-									} ${
-										row.original.alert?.name === Alerts.MISSING_DEAL
-											? 'border-[#FF3434B8]'
-											: 'border-[#3BADFF]'
 									}`}
 									{...cellProps}
 									key={key}

@@ -4,7 +4,7 @@ import { ChannelApi } from '@/api/ChannelApi'
 import { useState } from 'react'
 import { CreateOnboardingRequest } from '@/api/type'
 
-const { CREATE_ONBOARING } = QUERY_KEYS
+const { CREATE_ONBOARDING } = QUERY_KEYS
 
 export type UseCreateOnboardingOption = Omit<
 	UseQueryOptions<
@@ -22,7 +22,7 @@ export const useCreateOnboarding = (
 	const [enabled, setEnabled] = useState(true)
 
 	return useQuery({
-		queryKey: [CREATE_ONBOARING],
+		queryKey: [CREATE_ONBOARDING],
 		queryFn: ChannelApi.createOnboardingRequest,
 		suspense: true,
 		retry: false,

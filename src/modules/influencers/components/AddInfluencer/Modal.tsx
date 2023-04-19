@@ -11,7 +11,7 @@ import { ChannelApi } from '@/api/ChannelApi'
 import { ContractState, Tags } from '../../core/types'
 import { useContract } from '../../hooks/useContract'
 
-const { UPDATE_ONBOARDING, CREATE_ONBOARING } = QUERY_KEYS
+const { UPDATE_ONBOARDING, CREATE_ONBOARDING } = QUERY_KEYS
 
 interface Props {
 	isOpen: boolean
@@ -52,7 +52,9 @@ const AddInfluencerModal: React.FC<Props> = (props) => {
 		onError() {
 			const message = `Sorry, there was an error setting up the onboarding request. Please try again with a new link.`
 			toast.error(message)
-			queryClient.invalidateQueries(CREATE_ONBOARING)
+			queryClient.invalidateQueries({
+				queryKey: [CREATE_ONBOARDING],
+			})
 			setData(initialData)
 			setTags([])
 		},

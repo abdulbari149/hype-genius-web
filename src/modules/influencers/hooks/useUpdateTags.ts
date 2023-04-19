@@ -26,7 +26,8 @@ export const useUpdateTags = () => {
 		},
 		async onSuccess(data) {
 			if (!business_channel_id) return
-			await queryClient.invalidateQueries([GET_TAGS, GET_INFLUENCERS])
+			await queryClient.invalidateQueries([GET_TAGS, business_channel_id])
+			queryClient.invalidateQueries([GET_INFLUENCERS])
 			dispatch(
 				setTags({
 					tags: data.data

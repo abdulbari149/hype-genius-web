@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux'
 
 const { GET_METRICS } = QUERY_KEYS
 
-export const useGetMetrics = (query: GetMetricsQuery = {}) => {
+export const useGetMetrics = (query: Partial<GetMetricsQuery> = {}) => {
 	const businessChannelId = useSelector<AppState, number | null>(
 		(state) => state.influencers.influencer?.id ?? null,
 	)

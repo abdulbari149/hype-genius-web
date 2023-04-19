@@ -1,12 +1,17 @@
 import { ContractApi } from '@/api/ContractApi'
 import { QUERY_KEYS } from '@/core/constants'
 import { useMutation, useQueryClient } from 'react-query'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setContract, hideIsEdit } from '../core/slice'
+import { AppState } from '@/store'
 const { UPDATE_CONTRACT, GET_INFLUENCERS, GET_METRICS, GET_ALERTS } = QUERY_KEYS
 
 export const useUpdateContract = () => {
 	const dispatch = useDispatch()
+	const businessChannelId = useSelector<AppState, number | null>(
+		(state) => state.influencers.influencer?.id ?? null,
+	)
+
 	const queryClient = useQueryClient()
 	const updateContract = useMutation(UPDATE_CONTRACT, {
 		mutationFn: ContractApi.updateContract,
@@ -28,11 +33,9 @@ export const useUpdateContract = () => {
 			)
 			await queryClient.invalidateQueries(GET_INFLUENCERS)
 
-			await queryClient.invalidateQueries([
-				GET_INFLUENCERS,
-				GET_METRICS,
-				GET_ALERTS,
-			])
+			await queryClient.invalidateQueries([GET_METRICS, businessChannelId])
+			queryClient.invalidateQueries([GET_ALERTS, businessChannelId])
+
 			dispatch(hideIsEdit())
 		},
 	})

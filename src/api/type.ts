@@ -199,7 +199,10 @@ export type UpdateOnboardingRequestData = {
 	note?: string
 	tags: Array<Omit<Tag, 'id' | 'new'>>
 } & NullableContract
-export type CreateContractData = ContractData & { business_channel_id: number }
+export type CreateContractData = ContractData & {
+	business_channel_id: number
+	note?: string | undefined
+}
 export type UpdateContractData = Empty<ContractData> & {
 	business_channel_id: number
 	id: number

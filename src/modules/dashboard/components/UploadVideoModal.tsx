@@ -11,7 +11,7 @@ import { UploadVideoData } from '../core/type'
 import { toast } from 'react-toastify'
 import { handleError } from '@/modules/auth/core/utils'
 import { QUERY_KEYS } from '@/core/constants'
-
+const { GET_VIDEOS, UPLOAD_VIDEO } = QUERY_KEYS
 interface UploadVideoModalProps {
 	isOpen: boolean
 	handleClose: () => void
@@ -31,10 +31,12 @@ const UploadVideoModal: React.FC<UploadVideoModalProps> = ({
 	})
 	const queryClient = useQueryClient()
 
-	const uploadVideo = useMutation(QUERY_KEYS.UPLOAD_VIDEO, {
+	const uploadVideo = useMutation(UPLOAD_VIDEO, {
 		mutationFn: VideosApi.createVideo,
 		async onSuccess(data) {
-			await queryClient.invalidateQueries(QUERY_KEYS.GET_VIDEOS)
+			queryClient.invalidateQueries({
+				queryKey: [GET_VIDEOS],
+			})
 			toast.success<string>(data.message)
 		},
 		onError(error) {

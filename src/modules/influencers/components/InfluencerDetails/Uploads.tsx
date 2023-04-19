@@ -42,7 +42,14 @@ const Uploads = () => {
 		isLoading,
 		isSuccess,
 	} = useVideoUploads(
-		[GET_VIDEOS, businessChannelId, startDate, endDate],
+		[
+			GET_VIDEOS,
+			businessChannelId,
+			{
+				start_date: startDate !== '' ? startDate : undefined,
+				end_date: endDate !== '' ? endDate : undefined,
+			},
+		],
 		{
 			businessChannelId,
 			fields: ['payment'],

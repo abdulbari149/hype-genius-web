@@ -47,41 +47,41 @@ const ChannelAnalyticsList = () => {
 					changeInPercent={16}
 				/>
 			</div>
-			<Card
-				className={
-					'grid auto-cols-fr px-5 py-3 h-fit place-content-center rounded-[20px] min-w-[11rem] xl:max-w-[20rem] lg:max-w-[20rem] w-[100%]'
-				}
-			>
-				<div className="flex flex-col flex-grow w-full">
-					<div className="flex flex-row gap-4">
-						<p className="lg:text-[.8em] md:text-[.65em] font-light -tracking-tight text-[#272830]">
-							Current Deal
-						</p>
-						<div className="self-start w-[30px] h-[30px]">
-							<Image
-								src={require('@/assets/icons/profit-icon.png')}
-								alt={'current deal'}
-							/>
+			{analytics?.data?.contracts && analytics?.data?.contracts.length > 0 ? (
+				<Card
+					className={
+						'grid auto-cols-fr px-5 py-3 h-fit place-content-center rounded-[20px] min-w-[11rem] xl:max-w-[20rem] lg:max-w-[20rem] w-[100%]'
+					}
+				>
+					<div className="flex flex-col flex-grow w-full">
+						<div className="flex flex-row gap-4">
+							<p className="lg:text-[.8em] md:text-[.65em] font-light -tracking-tight text-[#272830]">
+								Current Deal
+							</p>
+							<div className="self-start w-[30px] h-[30px]">
+								<Image
+									src={require('@/assets/icons/profit-icon.png')}
+									alt={'current deal'}
+								/>
+							</div>
 						</div>
-					</div>
 
-					{analytics?.data?.contracts && analytics?.data?.contracts.length > 0
-						? analytics?.data?.contracts.map((contract) => {
-								return (
-									<p
-										key={contract.id}
-										className="text-[26px] md:text-[22px] font-normal p-0 m-0"
-										style={montserrat.style}
-									>
-										<span className="text-[#1C921A]">${contract.amount}</span>
-										<span>USD | {contract.upload_frequency.toUpperCase()}</span>
-										<span className="text-[15px] pl-1"> per month</span>
-									</p>
-								)
-						  })
-						: null}
-				</div>
-			</Card>
+						{analytics?.data?.contracts.map((contract) => {
+							return (
+								<p
+									key={contract.id}
+									className="text-[26px] md:text-[22px] font-normal p-0 m-0"
+									style={montserrat.style}
+								>
+									<span className="text-[#1C921A]">${contract.amount}</span>
+									<span>USD | {contract.upload_frequency.toUpperCase()}</span>
+									<span className="text-[15px] pl-1"> per month</span>
+								</p>
+							)
+						})}
+					</div>
+				</Card>
+			) : null}
 		</div>
 	)
 }
