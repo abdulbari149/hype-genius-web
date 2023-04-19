@@ -55,7 +55,7 @@ const Login: React.FC = () => {
 					<p className="text-lg">
 						Don&apos;t have an account?{' '}
 						<Link
-							href={'/auth/signup-business'}
+							href={'/auth/signup/business'}
 							className="pl-1 text-lg font-bold text-pink-600 cursor-pointer"
 						>
 							Sign up
