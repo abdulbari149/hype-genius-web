@@ -9,7 +9,7 @@
     "lint": "eslint .",
     "precommit": "lint-staged",
     "prettier": "prettier --write .",
-    "serve": "npm run build && "
+    "serve": "pm2 delete hypegenius-frontend && npm run build && pm2 start npm -n hypegenius-frontend -- start"
   },
   "dependencies": {
     "@emotion/cache": "^11.10.7",
