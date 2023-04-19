@@ -5,10 +5,24 @@ import { useGetReport } from '../hooks/useGetReport'
 import { setPage } from '../core/slice'
 import { AppState } from '@/store'
 import { useDispatch, useSelector } from 'react-redux'
+import { GetReportData } from '@/api/type'
 import { useGetBusinessAnalytics } from '@/modules/dashboard/hooks/useGetBusinessAnalytics'
 const ReportsTable = () => {
 	const currentPage = useSelector((state: AppState) => state.report.page)
-	const reportFilters = useSelector((state: AppState) => state.report)
+	const reportFilters: Partial<GetReportData> = useSelector(
+		(state: AppState) => {
+			return {
+				business_channel_id: state.report.business_channel_id,
+				start_date: state.report.start_date,
+				end_date: state.report.end_date,
+				report_for_all: state.report.report_for_all,
+				page: state.report.page,
+				size: state.report.size,
+			}
+		},
+	)
+
+	const dateOption = useSelector((state: AppState) => state.report.date_option)
 
 	const { data: reportList } = useGetReport(reportFilters)
 	const data = useMemo(
@@ -24,7 +38,7 @@ const ReportsTable = () => {
 	const { data: analytics } = useGetBusinessAnalytics()
 
 	return (
-		<div className="bg-white	grid w-full h-full grid-cols-7 py-[20px] shadow-lg rounded-xl">
+		<div className="bg-white relative	grid w-full h-full grid-cols-7 py-[20px] shadow-lg rounded-xl">
 			<div className="flex flex-col h-full col-span-5 overflow-y-hidden">
 				<div className="w-full pl-4 overflow-y-scroll custom-scroll">
 					<table
@@ -60,7 +74,11 @@ const ReportsTable = () => {
 											const { key, ...cellProps } = cell.getCellProps()
 											return (
 												<td
-													className="py-3 align-top text-start"
+													className={`py-3 ${
+														cell.row.original.videos.length > 0
+															? 'align-top'
+															: 'align-center'
+													} text-start h-[1px]`}
 													{...cellProps}
 													key={key}
 												>
@@ -74,7 +92,7 @@ const ReportsTable = () => {
 						</tbody>
 					</table>
 				</div>
-				<div className="flex h-fit mt-auto gap-3 my-[20px] mx-[30px] ">
+				<div className="flex absolute bottom-0 h-fit mt-auto gap-3 my-[20px] mx-[30px] ">
 					<div className="flex gap-3">
 						<p>Pages</p>
 
@@ -102,7 +120,7 @@ const ReportsTable = () => {
 
 				<div className="mx-auto">
 					<p className="mb-[30px] text-[17px] text-[#272830] font-[600]">
-						Total for [This Month]
+						Total for [{dateOption}]
 					</p>
 					<div className="grid grid-cols-3 px-[10px] gap-[40px]">
 						<div className="flex flex-col items-center gap-5">
@@ -119,7 +137,17 @@ const ReportsTable = () => {
 						</div>
 						<div className="flex flex-col items-center gap-2">
 							<p className="text-[16px] text-[#272830] font-[600]">ROAS</p>
-							<p className="py-2 px-3 text-[15px] font-light bg-[#D7D7D7] rounded-xl">
+							<p
+								className={`py-2 px-3 text-[15px] font-light rounded-xl ${
+									!analytics?.data?.roas
+										? 'bg-[#D7D7D7]'
+										: analytics?.data?.roas < 7
+										? 'bg-[#D7D7D7]'
+										: analytics?.data?.roas < 10
+										? 'bg-[#F3EA02]'
+										: 'bg-[#C87C0A]'
+								}`}
+							>
 								{analytics?.data?.roas}
 							</p>
 						</div>

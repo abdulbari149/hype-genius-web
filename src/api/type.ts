@@ -179,7 +179,12 @@ interface LoginApiData extends TokenType {
 
 export type GetReportData = Pick<
 	ReportState,
-	'business_channel_id' | 'page' | 'report_for_all' | 'size'
+	| 'business_channel_id'
+	| 'page'
+	| 'report_for_all'
+	| 'size'
+	| 'start_date'
+	| 'end_date'
 >
 
 export type RegisterBusinessData = Omit<BusinessSignupData, 'passwordAgain'>

@@ -5,6 +5,9 @@ export interface ReportState {
 	page: number
 	size: number
 	business_channel_id: number | null
+	start_date: string
+	end_date: string
+	date_option: string
 }
 
 const initialState: ReportState = {
@@ -12,6 +15,9 @@ const initialState: ReportState = {
 	business_channel_id: null,
 	page: 1,
 	size: 3,
+	start_date: '',
+	end_date: '',
+	date_option: '',
 }
 
 const reportsSlice = createSlice({
@@ -42,8 +48,33 @@ const reportsSlice = createSlice({
 		) {
 			state.size = action.payload.size
 		},
+		setStartDate(
+			state: ReportState,
+			action: PayloadAction<Pick<ReportState, 'start_date'>>,
+		) {
+			state.start_date = action.payload.start_date
+		},
+		setEndDate(
+			state: ReportState,
+			action: PayloadAction<Pick<ReportState, 'end_date'>>,
+		) {
+			state.end_date = action.payload.end_date
+		},
+		setDateOption(
+			state: ReportState,
+			action: PayloadAction<Pick<ReportState, 'date_option'>>,
+		) {
+			state.date_option = action.payload.date_option
+		},
 	},
 })
-export const { setBusinessChannel, setPage, setReportForAll, setSize } =
-	reportsSlice.actions
+export const {
+	setBusinessChannel,
+	setPage,
+	setReportForAll,
+	setSize,
+	setEndDate,
+	setStartDate,
+	setDateOption,
+} = reportsSlice.actions
 export default reportsSlice

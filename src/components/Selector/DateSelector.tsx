@@ -85,6 +85,7 @@ const DateSelector: React.FC<Props> = ({
 		display: 'flex',
 		alignItems: 'center',
 		gap: '10px',
+		borderRadius: '10px',
 	}
 
 	const optionStyles: React.CSSProperties = {}
@@ -96,7 +97,7 @@ const DateSelector: React.FC<Props> = ({
 		Object.assign(optionStyles, style.option)
 	}
 
-	let containerClassName = `bg-[#ffffff] px-4 pr-7 py-2 rounded-t-lg text-[13px] ${
+	let containerClassName = `bg-[#ffffff] z-[100] px-4 pr-7 py-2 rounded-t-lg text-[13px] ${
 		!isOpen ? 'rounded-b-lg' : ''
 	}`
 
@@ -152,7 +153,10 @@ const DateSelector: React.FC<Props> = ({
 	}, [dateValues.data])
 
 	return (
-		<div className="relative bg-white" ref={ref}>
+		<div
+			className={`relative bg-white ${isOpen ? 'rounded-t-lg' : 'rounded-lg'}`}
+			ref={ref}
+		>
 			<div
 				className={containerClassName}
 				style={containerStyles}
@@ -176,7 +180,11 @@ const DateSelector: React.FC<Props> = ({
 
 			{isOpen && (
 				<div
-					className={`bg-[#ffffff] absolute top-8 w-full rounded-b-lg z-[50]`}
+					style={{
+						boxShadow:
+							'0px 2.56939px 37.8367px rgba(50, 50, 71, 0.05), 0px 1.46939px 21.6735px rgba(50, 50, 71, 0.06)',
+					}}
+					className={`bg-[#ffffff] absolute top-[2.1rem] w-full rounded-b-lg z-[50]`}
 				>
 					{options.map((option) => {
 						return (

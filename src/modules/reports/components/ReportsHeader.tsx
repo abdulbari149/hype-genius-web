@@ -3,7 +3,15 @@ import Selector from '@/components/Selector'
 import { useGetInfluencers } from '@/modules/influencers/hooks/useGetInfluencers'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppState } from '@/store'
-import { setBusinessChannel, setReportForAll } from '../core/slice'
+import {
+	setBusinessChannel,
+	setDateOption,
+	setEndDate,
+	setReportForAll,
+	setStartDate,
+} from '../core/slice'
+import DateSelector from '@/components/Selector/DateSelector'
+import moment from 'moment'
 
 const ReportsHeader = () => {
 	const { data: influencers } = useGetInfluencers()
@@ -32,6 +40,8 @@ const ReportsHeader = () => {
 		return [...defaultOptions, ...businessChannelOptions]
 	}, [influencers])
 
+	const startDate = useSelector((state: AppState) => state.report.start_date)
+
 	const handleChange = async (value: string) => {
 		let business_channel_id: number | null = parseInt(value)
 		let report_for_all = false
@@ -58,7 +68,29 @@ const ReportsHeader = () => {
 					value={businessChannel}
 				/>
 				<p className="text-[15px] font-light">From</p>
-				<Selector type="time" />
+				<DateSelector
+					dateFrom="start"
+					value={startDate}
+					onChange={(value, option) => {
+						dispatch(setStartDate({ start_date: value }))
+						dispatch(
+							setDateOption({
+								date_option:
+									option && option?.label ? option?.label : 'This Month',
+							}),
+						)
+						if (option && option?.value !== 'custom') {
+							const new_end_date = moment(value)
+								.endOf('month')
+								.format('YYYY-MM-DD')
+							console.log(new_end_date)
+							dispatch(setEndDate({ end_date: new_end_date }))
+						}
+						if (option && option.value === 'custom') {
+							dispatch(setEndDate({ end_date: value }))
+						}
+					}}
+				/>
 				<button className="text-white bg-[#EF539E] px-3 py-2 shadow-lg rounded-lg text-[13px] ml-3">
 					Export
 				</button>

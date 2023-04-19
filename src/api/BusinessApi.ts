@@ -70,6 +70,12 @@ export class BusinessApi {
 		if (query?.size !== undefined) {
 			params.push(`size=${query.size}`)
 		}
+		if (query?.start_date !== undefined && query?.start_date !== '') {
+			params.push(`start_date=${query.start_date}`)
+		}
+		if (query?.end_date !== undefined && query?.end_date !== '') {
+			params.push(`end_date=${query.end_date}`)
+		}
 		if (params.length > 0) {
 			url += '?' + params.join('&')
 		}

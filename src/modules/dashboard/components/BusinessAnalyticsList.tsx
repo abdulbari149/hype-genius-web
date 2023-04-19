@@ -10,7 +10,11 @@ const BusinessAnalyticsList = () => {
 			<AnalyticsCard
 				icon={require('@/assets/icons/3-User.png')}
 				title="Active Partners"
-				value={analytics?.data.active_partners ?? 0}
+				value={
+					analytics?.data?.active_partners
+						? analytics?.data?.active_partners.toLocaleString('en-US')
+						: 0
+				}
 				variation={true}
 				changeInPercent={25}
 			/>
@@ -18,7 +22,11 @@ const BusinessAnalyticsList = () => {
 			<AnalyticsCard
 				icon={require('@/assets/icons/eye-icon.png')}
 				title="Views"
-				value={analytics?.data.total_views.toLocaleString('en-US') ?? ''}
+				value={
+					analytics?.data?.total_views
+						? analytics?.data?.total_views.toLocaleString('en-US')
+						: '0'
+				}
 				variation={true}
 				changeInPercent={8}
 			/>
@@ -27,12 +35,12 @@ const BusinessAnalyticsList = () => {
 				icon={require('@/assets/icons/budgeting-icon.png')}
 				title="Total Spent"
 				value={
-					analytics?.data.spent
+					analytics?.data?.spent
 						? analytics.data.spent.toLocaleString('en-US', {
 								style: 'currency',
 								currency: 'USD',
 						  })
-						: ''
+						: '0'
 				}
 				variation={true}
 				changeInPercent={16}
@@ -40,7 +48,7 @@ const BusinessAnalyticsList = () => {
 			<AnalyticsCard
 				icon={require('@/assets/icons/profit-icon.png')}
 				title="ROAS"
-				value={analytics?.data.roas ?? ''}
+				value={analytics?.data?.roas ?? ''}
 				variation={false}
 				changeInPercent={8}
 			/>
