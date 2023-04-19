@@ -74,10 +74,11 @@ const ReportsTable = () => {
 											const { key, ...cellProps } = cell.getCellProps()
 											return (
 												<td
-													className={`py-3 ${cell.row.original.videos.length > 0
-														? 'align-top'
-														: 'align-center'
-														} text-start h-[1px]`}
+													className={`py-3 ${
+														cell.row.original.videos.length > 0
+															? 'align-top'
+															: 'align-center'
+													} text-start h-[1px]`}
 													{...cellProps}
 													key={key}
 												>
@@ -102,8 +103,9 @@ const ReportsTable = () => {
 								return (
 									<div
 										onClick={() => dispatch(setPage({ page }))}
-										className={`px-2 py-[2px] h-fit rounded-lg cursor-pointer text-center ${currentPage === page ? 'bg-[#D9D9D9]' : ''
-											}`}
+										className={`px-2 py-[2px] h-fit rounded-lg cursor-pointer text-center ${
+											currentPage === page ? 'bg-[#D9D9D9]' : ''
+										}`}
 										key={page}
 									>
 										{page}
@@ -125,7 +127,8 @@ const ReportsTable = () => {
 							<p className="text-[16px] text-[#272830] font-[600]">View</p>
 							<p className="font-light">
 								{analytics?.data?.total_views
-									? analytics?.data?.total_views.toLocaleString('en-US') : '0'}
+									? analytics?.data?.total_views.toLocaleString('en-US')
+									: '0'}
 							</p>
 						</div>
 						<div className="flex flex-col items-center gap-5">
@@ -133,23 +136,24 @@ const ReportsTable = () => {
 							<p className="font-light">
 								{analytics?.data?.spent
 									? analytics.data.spent.toLocaleString('en-US', {
-										style: 'currency',
-										currency: 'USD',
-									})
+											style: 'currency',
+											currency: 'USD',
+									  })
 									: '0'}
 							</p>
 						</div>
 						<div className="flex flex-col items-center gap-2">
 							<p className="text-[16px] text-[#272830] font-[600]">ROAS</p>
 							<p
-								className={`py-2 px-3 text-[15px] font-light rounded-xl ${!analytics?.data?.roas
-									? 'bg-[#D7D7D7]'
-									: analytics?.data?.roas < 7
+								className={`py-2 px-3 text-[15px] font-light rounded-xl ${
+									!analytics?.data?.roas
+										? 'bg-[#D7D7D7]'
+										: analytics?.data?.roas < 7
 										? 'bg-[#D7D7D7]'
 										: analytics?.data?.roas < 10
-											? 'bg-[#F3EA02]'
-											: 'bg-[#C87C0A]'
-									}`}
+										? 'bg-[#F3EA02]'
+										: 'bg-[#C87C0A]'
+								}`}
 							>
 								{analytics?.data?.roas ?? '0'}
 							</p>
