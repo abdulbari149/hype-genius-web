@@ -51,11 +51,10 @@ const DashboardCharts = () => {
 							onClick={() => setActiveTab(tab.value)}
 						>
 							<p
-								className={`text-[17px] pb-1 ${
-									tab.value === activeTab
+								className={`text-[17px] pb-1 ${tab.value === activeTab
 										? 'opacity-100 border-b-2 border-[#000]'
 										: 'opacity-40'
-								}`}
+									}`}
 							>
 								{tab.label}
 							</p>
@@ -66,7 +65,7 @@ const DashboardCharts = () => {
 
 			<div className="px-8 py-2 mt-1">
 				<p className="text-[38px] font-bold">
-					{analytics?.data?[activeTab] ? analytics.data[activeTab].toLocaleString('en-US') : '0'}
+					{!!analytics?.data  && !!analytics.data[activeTab] ?  analytics.data[activeTab].toLocaleString('en-US') : '0'}
 				</p>
 				{/* <p className="text-[13px] bg-[#CAFFA0] px-3 py-1 w-fit rounded-lg ml-2">
 					+25%
