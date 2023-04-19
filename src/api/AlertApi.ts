@@ -7,7 +7,7 @@ export class AlertApi {
 		businessChannelId: number,
 	): Promise<GetAlerts> {
 		const token = getAccessToken()
-		const url = `/alerts/?business_channel_id=${encodeURIComponent(
+		const url = `/alerts?business_channel_id=${encodeURIComponent(
 			businessChannelId,
 		)}`
 		const result = await api.get(url.toString(), {
