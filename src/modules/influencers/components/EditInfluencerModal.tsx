@@ -38,6 +38,7 @@ const EditInfluencerModal: React.FC<EditInfluencerModalProps> = ({
 			}))
 			setTags(data)
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [tagsData?.data, isOpen])
 
 	const influencer = useSelector((state: AppState) => {
