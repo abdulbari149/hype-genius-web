@@ -2,7 +2,7 @@ import { NotesApi } from '@/api/NotesApi'
 import { AppState } from '@/store'
 import { Formik } from 'formik'
 import React from 'react'
-import { useMutation, useQueryClient } from 'react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useSelector } from 'react-redux'
 import { toFormikValidationSchema } from 'zod-formik-adapter'
 import { CreateActivityData, createActivitySchema } from '../../core/schema'
@@ -19,7 +19,8 @@ const CreateActivityForm: React.FC<Props> = ({ onHide }) => {
 		(state) => state.influencers.influencer?.id ?? null,
 	)
 	const queryClient = useQueryClient()
-	const createActivity = useMutation(ADD_ACTIVITY, {
+	const createActivity = useMutation({
+		mutationKey: [ADD_ACTIVITY],
 		mutationFn: async (data: CreateActivityData) => {
 			if (!businessChannelId || businessChannelId === null) {
 				throw new Error('Please selecteda an influencer before adding note')

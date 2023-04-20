@@ -30,6 +30,7 @@ export const QUERY_KEYS = {
 	UPDATE_TAGS: 'tags/update',
 	CONFIRM_ONBOARDING: 'onboarding/confirm',
 	GET_ALL_BUSINESS: 'business/all',
+	GET_UPLOADS: 'uploads/get',
 }
 
 export const MONTHS = [

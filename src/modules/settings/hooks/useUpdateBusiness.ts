@@ -1,9 +1,11 @@
 import { BusinessApi } from '@/api/BusinessApi'
 import { QUERY_KEYS } from '@/core/constants'
-import { useMutation } from 'react-query'
+import { useMutation } from '@tanstack/react-query'
 
+const { UPDATE_BUSINESS } = QUERY_KEYS
 export const useUpdateBusiness = () => {
-	return useMutation(QUERY_KEYS.UPDATE_BUSINESS, {
+	return useMutation({
+		mutationKey: [UPDATE_BUSINESS],
 		mutationFn: BusinessApi.updateBusiness,
 	})
 }

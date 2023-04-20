@@ -2,7 +2,7 @@ import { TagApi } from '@/api/TagApi'
 import { UpdateTagsData } from '@/api/type'
 import { QUERY_KEYS } from '@/core/constants'
 import { AppState } from '@/store'
-import { useMutation, useQueryClient } from 'react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useDispatch, useSelector } from 'react-redux'
 import { setTags } from '../core/slice'
 

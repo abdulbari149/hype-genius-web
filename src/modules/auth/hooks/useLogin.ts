@@ -17,14 +17,17 @@ export const useLogin = () => {
 		mutationFn: AuthApi.login,
 		onSuccess(data) {
 			try {
+				debugger
 				localStorage.setItem(ACCESS_TOKEN, data.data.access_token)
 				localStorage.setItem(REFRESH_TOKEN, data.data.refresh_token)
 				dispatch(setUser({ user: data.data.user }))
-				toast(data.message, { type: 'success' })
-				if (data.data.user.role === 'business_admin') {
-					router.replace('/dashboard/business')
-				} else if (data.data.user.role === 'influencer') {
-					router.replace('/dashboard/influencer')
+				if (localStorage.getItem(ACCESS_TOKEN)) {
+					toast(data.message, { type: 'success' })
+					if (data.data.user.role === 'business_admin') {
+						router.replace('/dashboard/business')
+					} else if (data.data.user.role === 'influencer') {
+						router.replace('/dashboard/influencer')
+					}
 				}
 			} catch (error) {
 				console.log(error)

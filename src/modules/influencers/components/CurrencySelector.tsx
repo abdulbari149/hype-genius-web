@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { CurrencyApi } from '@/api/CurrencyApi'
 import Selector from '@/components/Selector'
-import { useQuery } from 'react-query'
+import { useQuery } from '@tanstack/react-query'
 import { QUERY_KEYS } from 'src/core/constants'
 const { GET_CURRENCY_LIST } = QUERY_KEYS
 type Props = {
@@ -18,7 +18,8 @@ const CurrencySelector: React.FC<Props> = ({
 	value,
 	handleChange,
 }) => {
-	const { data } = useQuery(GET_CURRENCY_LIST, {
+	const { data } = useQuery({
+		queryKey: [GET_CURRENCY_LIST],
 		queryFn: CurrencyApi.getCurrentList,
 		suspense: true,
 		retry: false,

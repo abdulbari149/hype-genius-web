@@ -58,9 +58,11 @@ function select(data: GetVideos) {
 	}
 }
 
+const { GET_UPLOADS } = QUERY_KEYS
+
 const UploadsList = () => {
 	const { data: uploads } = useVideoUploads(
-		`${QUERY_KEYS.GET_VIDEOS}`,
+		[GET_UPLOADS],
 		{
 			fields: ['influencer'],
 		},

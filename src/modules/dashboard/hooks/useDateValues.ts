@@ -1,6 +1,6 @@
 import moment from 'moment'
 import { DateOptionType } from '../core/type'
-import { useQuery } from 'react-query'
+import { useQuery } from '@tanstack/react-query'
 
 const DATE_VALUES = 'date-values'
 const getDateValuesForOptions = (): Record<

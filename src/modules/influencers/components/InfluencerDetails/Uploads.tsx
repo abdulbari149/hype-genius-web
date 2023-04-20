@@ -8,7 +8,7 @@ import DateSelector from '@/components/Selector/DateSelector'
 import moment from 'moment'
 import Loading from '@/components/Loading'
 
-const { GET_VIDEOS } = QUERY_KEYS
+const { GET_UPLOADS } = QUERY_KEYS
 
 function select(data: GetVideos) {
 	const videos = data.data.map((item) => {
@@ -43,7 +43,7 @@ const Uploads = () => {
 		isSuccess,
 	} = useVideoUploads(
 		[
-			GET_VIDEOS,
+			GET_UPLOADS,
 			businessChannelId,
 			{
 				start_date: startDate !== '' ? startDate : undefined,
