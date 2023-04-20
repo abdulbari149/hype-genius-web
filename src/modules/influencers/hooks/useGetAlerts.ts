@@ -1,5 +1,5 @@
 import { AppState } from '@/store'
-import { useQuery } from 'react-query'
+import { useQuery } from '@tanstack/react-query'
 import { useSelector } from 'react-redux'
 import { QUERY_KEYS } from '@/core/constants'
 import { AlertApi } from '@/api/AlertApi'

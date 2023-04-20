@@ -5,31 +5,22 @@ import startuplogo from '@/assets/icons/start-up.png'
 import vector from '@/assets/icons/vector.png'
 import { AiOutlineArrowRight } from 'react-icons/ai'
 import Image from 'next/image'
-import { useQuery } from 'react-query'
-import { QUERY_KEYS } from '@/core/constants'
-import { AuthApi } from '@/api/AuthApi'
 import { useConfirmOnboarding } from '../hooks/useConfirmOnboarding'
-
-const { GET_INFLUENCER_ONBOARDINGS } = QUERY_KEYS
+import { useGetOnboardingDetails } from '../hooks/useGetOnboardingDetails'
 
 type Props = {
 	token: string
 }
 
 const InfluencerOnboarding: React.FC<Props> = ({ token }) => {
-	const { data } = useQuery(GET_INFLUENCER_ONBOARDINGS, {
-		queryFn: () => {
-			return AuthApi.getInfluncerNewOnboardings(token)
-		},
-		onSuccess(data) {
-			console.log(data)
-		},
-		suspense: true,
-		cacheTime: 15 * 60 * 60,
-	})
 	const confirmOnboarding = useConfirmOnboarding()
+	const { data } = useGetOnboardingDetails({ token })
 	const handleJoin = async () => {
-		confirmOnboarding.mutate(token)
+		try {
+			await confirmOnboarding.mutateAsync(token)
+		} catch (error) {
+			console.log(error)
+		}
 	}
 
 	return (

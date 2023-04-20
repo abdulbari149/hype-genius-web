@@ -1,17 +1,20 @@
 import { useRouter } from 'next/router'
-import { useMutation } from 'react-query'
+import { useMutation } from '@tanstack/react-query'
 import { AuthApi } from '../../../api/AuthApi'
 import { ACCESS_TOKEN, handleError, REFRESH_TOKEN } from '../core/utils'
 import { toast } from 'react-toastify'
 import { useDispatch } from 'react-redux'
 import { setAuthState, setUser } from '../core/slice'
 import { AxiosError } from 'axios'
+import { QUERY_KEYS } from '@/core/constants'
 
+const { REGISTER_CHANNEL } = QUERY_KEYS
 const useRegisterChannel = () => {
 	const router = useRouter()
 	const dispatch = useDispatch()
 
-	const registerChannel = useMutation('register-channel', {
+	const registerChannel = useMutation({
+		mutationKey: [REGISTER_CHANNEL],
 		mutationFn: AuthApi.registerChannel,
 		onSuccess(data) {
 			localStorage.setItem(ACCESS_TOKEN, data.data.access_token)

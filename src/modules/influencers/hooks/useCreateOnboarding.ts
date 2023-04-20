@@ -1,4 +1,4 @@
-import { UseQueryOptions, useQuery } from 'react-query'
+import { UseQueryOptions, useQuery } from '@tanstack/react-query'
 import { QUERY_KEYS } from '@/core/constants'
 import { ChannelApi } from '@/api/ChannelApi'
 import { useState } from 'react'

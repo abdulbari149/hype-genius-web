@@ -1,6 +1,6 @@
 import {
 	GetMyBusiness,
-	GetAllBusineess,
+	GetAllBusiness,
 	GetInfluencers,
 	UpdateBusiness,
 	UpdateBusinessData,
@@ -23,7 +23,7 @@ export class BusinessApi {
 		return result.data
 	}
 
-	static async getAllBusiness(): Promise<GetAllBusineess> {
+	static async getAllBusiness(): Promise<GetAllBusiness> {
 		const token = getAccessToken()
 		const result = await api.get('/business', {
 			headers: { Authorization: `Bearer ${token}` },

@@ -1,17 +1,20 @@
 import { AuthApi } from '@/api/AuthApi'
 import { useRouter } from 'next/router'
-import { useMutation } from 'react-query'
+import { useMutation } from '@tanstack/react-query'
 import { useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
 import { setAuthState, setUser } from '../core/slice'
 import { ACCESS_TOKEN, REFRESH_TOKEN, handleError } from '../core/utils'
+import { QUERY_KEYS } from '@/core/constants'
+
+const { CONFIRM_ONBOARDING } = QUERY_KEYS
 
 export const useConfirmOnboarding = () => {
 	const router = useRouter()
 	const dispatch = useDispatch()
 
 	return useMutation({
-		mutationKey: ['onboarding/confirm'],
+		mutationKey: [CONFIRM_ONBOARDING],
 		mutationFn: AuthApi.confirmOnboarding,
 		onSuccess(data) {
 			localStorage.setItem(ACCESS_TOKEN, data.data.access_token)
@@ -19,7 +22,6 @@ export const useConfirmOnboarding = () => {
 			dispatch(setAuthState({ isLoggedIn: true }))
 			dispatch(setUser({ user: data.data.user }))
 			router.replace('/dashboard/influencer')
-
 			toast(data.message, { type: 'success' })
 		},
 		onError(error) {

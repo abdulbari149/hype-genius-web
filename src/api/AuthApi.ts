@@ -1,7 +1,7 @@
 import { api } from '@/core/axios'
 import { getAccessToken } from '../modules/auth/core/utils'
 import {
-	GetInfluencerOnboarding,
+	GetOnboardingDetails,
 	Login,
 	LoginData,
 	Me,
@@ -50,9 +50,9 @@ export class AuthApi {
 		return result.data
 	}
 
-	static async getInfluncerNewOnboardings(
+	static async getOnboardingDetails(
 		token: string,
-	): Promise<GetInfluencerOnboarding> {
+	): Promise<GetOnboardingDetails> {
 		const result = await api.get(`/auth/onboarding/${token}`)
 		return result.data
 	}

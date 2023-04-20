@@ -2,16 +2,8 @@ import { Formik } from 'formik'
 import React from 'react'
 import { toFormikValidationSchema } from 'zod-formik-adapter'
 import { addNoteSchema } from '../core/schema'
-import { VideosApi } from '@/api/VideosApi'
-import { handleError } from '@/modules/auth/core/utils'
-import { useMutation, useQueryClient } from 'react-query'
-import { toast } from 'react-toastify'
 import { AddNoteData } from '../core/type'
-import { AppState } from '@/store'
-import { useSelector } from 'react-redux'
-import { QUERY_KEYS } from '@/core/constants'
-
-const { ADD_NOTE, GET_NOTES } = QUERY_KEYS
+import { useAddNote } from '../hooks/useAddNote'
 
 const initialState: AddNoteData = { body: '' }
 
@@ -20,35 +12,14 @@ type Props = {
 }
 
 const AddNoteForm: React.FC<Props> = ({ closeAfterSubmit }) => {
-	const videoId = useSelector<AppState, number | null>(
-		(state) => state.dashboard.videoId,
-	)
-
-	const queryClient = useQueryClient()
-
-	const addNoteMutation = useMutation(ADD_NOTE, {
-		mutationFn: (data: AddNoteData) => {
-			if (videoId === null || isNaN(videoId))
-				throw new Error('Invalid video id. Please selecte an uploaded video')
-			return VideosApi.addNote(videoId, data)
-		},
-		onSuccess(data) {
-			toast.success(data.message)
-			queryClient.invalidateQueries({
-				queryKey: [GET_NOTES, videoId],
-			})
-		},
-		onError(error) {
-			const message = handleError(error)
-			toast.error(message)
-		},
+	const addNote = useAddNote({
 		onSettled() {
 			closeAfterSubmit()
 		},
 	})
 
 	const onSubmit = async (values: AddNoteData) => {
-		await addNoteMutation.mutateAsync(values)
+		await addNote.mutateAsync(values)
 	}
 	return (
 		<Formik

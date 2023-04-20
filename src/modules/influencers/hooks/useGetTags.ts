@@ -2,7 +2,7 @@ import { TagApi } from '@/api/TagApi'
 import { GetTags } from '@/api/type'
 import { QUERY_KEYS } from '@/core/constants'
 import { AppState } from '@/store'
-import { UseQueryOptions, useQuery } from 'react-query'
+import { UseQueryOptions, useQuery } from '@tanstack/react-query'
 import { useSelector } from 'react-redux'
 
 const { GET_TAGS } = QUERY_KEYS

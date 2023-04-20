@@ -1,16 +1,20 @@
 import { useRouter } from 'next/router'
-import { useMutation } from 'react-query'
+import { useMutation } from '@tanstack/react-query'
 import { AuthApi } from '../../../api/AuthApi'
 import { ACCESS_TOKEN, handleError, REFRESH_TOKEN } from '../core/utils'
 import { toast } from 'react-toastify'
 import { useDispatch } from 'react-redux'
 import { setAuthState, setUser } from '../core/slice'
+import { QUERY_KEYS } from '@/core/constants'
+
+const { REGISTER_BUSINESS } = QUERY_KEYS
 
 const useRegisterBusiness = () => {
 	const router = useRouter()
 	const dispatch = useDispatch()
 
-	const registerBusiness = useMutation('register-business', {
+	const registerBusiness = useMutation({
+		mutationKey: [REGISTER_BUSINESS],
 		mutationFn: AuthApi.registerBusiness,
 		onSuccess(data) {
 			localStorage.setItem(ACCESS_TOKEN, data.data.access_token)

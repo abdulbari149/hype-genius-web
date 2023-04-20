@@ -8,9 +8,14 @@ const OnboardingLink: React.FC<{ url: string }> = ({ url }) => {
 	const handleTooltipClose = () => {
 		setOpen(false)
 	}
-	const handleTooltipOpen = () => {
-		setOpen(true)
-		navigator.clipboard.writeText(url)
+	const handleTooltipOpen = async () => {
+		try  {
+			await navigator.clipboard.writeText(url)
+			setOpen(true)
+		}catch(error) {
+			console.log(error)
+		}
+		
 	}
 
 	useEffect(() => {

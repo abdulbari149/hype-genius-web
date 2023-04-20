@@ -1,6 +1,6 @@
 import { ContractApi } from '@/api/ContractApi'
 import { QUERY_KEYS } from '@/core/constants'
-import { useMutation, useQueryClient } from 'react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
 import { hideIsEdit, setContract } from '../core/slice'
@@ -15,7 +15,8 @@ export const useCreateContract = () => {
 		(state) => state.influencers.influencer?.id ?? null,
 	)
 
-	const createContract = useMutation(CREATE_CONTRACT, {
+	const createContract = useMutation({
+		mutationKey: [CREATE_CONTRACT],
 		mutationFn: ContractApi.createContract,
 		async onSuccess(data) {
 			dispatch(
@@ -36,15 +37,12 @@ export const useCreateContract = () => {
 			dispatch(hideIsEdit())
 			queryClient.invalidateQueries({
 				queryKey: [GET_INFLUENCERS],
-				exact: false,
 			})
 			queryClient.invalidateQueries({
 				queryKey: [GET_ACTIVITIES, business_channel_id],
-				exact: false,
 			})
 			queryClient.invalidateQueries({
 				queryKey: [GET_METRICS, business_channel_id],
-				exact: false,
 			})
 			toast.success(data.message)
 		},

@@ -6,7 +6,7 @@ import { useMutation, useQueryClient } from 'react-query'
 import { useDispatch, useSelector } from 'react-redux'
 import { setTags } from '../core/slice'
 
-const { GET_TAGS, GET_INFLUENCERS } = QUERY_KEYS
+const { GET_TAGS, GET_INFLUENCERS, UPDATE_TAGS } = QUERY_KEYS
 
 export const useUpdateTags = () => {
 	const business_channel_id = useSelector<AppState, number | null>(
@@ -17,7 +17,8 @@ export const useUpdateTags = () => {
 
 	const queryClient = useQueryClient()
 
-	return useMutation('tags/save', {
+	return useMutation({
+		mutationKey: [UPDATE_TAGS],
 		mutationFn: (data: Omit<UpdateTagsData, 'business_channel_id'>) => {
 			if (!business_channel_id || business_channel_id === null) {
 				throw new Error('Please select an influencer first')

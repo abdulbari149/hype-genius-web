@@ -246,7 +246,7 @@ export type GetMyBusiness = Response<
 	IBusiness & { default_currency: ICurrency }
 >
 export type UpdateBusiness = Response<IBusiness>
-export type GetAllBusineess = Response<IBusiness[]>
+export type GetAllBusiness = Response<IBusiness[]>
 export type GetInfluencers = Response<GetInfluencerData[]>
 export type GetVideos = Response<
 	Array<
@@ -289,7 +289,7 @@ export type GetMetrics = Response<{
 	roas: number
 }>
 
-export type GetInfluencerOnboarding = Response<{
+export type GetOnboardingDetails = Response<{
 	currentPartnerShips: Partnership[]
 	newPartnerShip: Partnership
 }>

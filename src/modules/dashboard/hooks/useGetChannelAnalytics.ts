@@ -1,7 +1,7 @@
 import { ChannelApi } from '@/api/ChannelApi'
 import { GetChannelAnalytics } from '@/api/type'
 import { QUERY_KEYS } from '@/core/constants'
-import { UseQueryResult, useQuery } from 'react-query'
+import { UseQueryResult, useQuery } from '@tanstack/react-query'
 
 type UseGetChannelAnalyticsResult = UseQueryResult<GetChannelAnalytics, unknown>
 export const useGetChannelAnalytics = (): UseGetChannelAnalyticsResult => {

@@ -2,7 +2,7 @@ import { BusinessApi } from '@/api/BusinessApi'
 import { GetMetricsQuery } from '@/api/type'
 import { QUERY_KEYS } from '@/core/constants'
 import { AppState } from '@/store'
-import { useQuery } from 'react-query'
+import { useQuery } from '@tanstack/react-query'
 import { useSelector } from 'react-redux'
 
 const { GET_METRICS } = QUERY_KEYS

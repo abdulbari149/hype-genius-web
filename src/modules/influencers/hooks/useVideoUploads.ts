@@ -1,4 +1,4 @@
-import { QueryKey, UseQueryOptions, useQuery } from 'react-query'
+import { QueryKey, UseQueryOptions, useQuery } from '@tanstack/react-query'
 import { VideosApi } from '@/api/VideosApi'
 import { GetVideos } from '@/api/type'
 

@@ -1,7 +1,7 @@
 import { VideosApi } from '@/api/VideosApi'
 import { QUERY_KEYS } from '@/core/constants'
 import { AppState } from '@/store'
-import { useQuery } from 'react-query'
+import { useQuery } from '@tanstack/react-query'
 import { useSelector } from 'react-redux'
 const { GET_VIDEOS } = QUERY_KEYS
 

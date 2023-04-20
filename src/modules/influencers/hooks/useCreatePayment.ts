@@ -2,7 +2,7 @@ import { PaymentApi } from '@/api/PaymentApi'
 import { CreatePaymentData } from '@/api/type'
 import { QUERY_KEYS } from '@/core/constants'
 import { AppState } from '@/store'
-import { useMutation, useQueryClient } from 'react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useDispatch, useSelector } from 'react-redux'
 import { showPanel } from '../core/slice'
 
@@ -14,7 +14,8 @@ export const useCreatePayment = () => {
 	const businessChannelId = useSelector<AppState, number | null>(
 		(state) => state.influencers.influencer?.id ?? null,
 	)
-	return useMutation(CREATE_PAYMENT, {
+	return useMutation({
+		mutationKey: [CREATE_PAYMENT],
 		mutationFn: (data: Omit<CreatePaymentData, 'business_channel_id'>) => {
 			if (!businessChannelId || businessChannelId === null) {
 				throw new Error('Please select an influencer first')

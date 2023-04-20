@@ -1,17 +1,14 @@
-import { BusinessApi } from '@/api/BusinessApi'
-import { VideosApi } from '@/api/VideosApi'
 import Modal from '@/components/Modal'
 import { Formik, FormikHelpers } from 'formik'
 import Image from 'next/image'
-import React, { useState } from 'react'
-import { useMutation, useQuery, useQueryClient } from 'react-query'
+import React, { useEffect, useState } from 'react'
 import { toFormikValidationSchema } from 'zod-formik-adapter'
 import { uploadVideoSchema } from '../core/schema'
 import { UploadVideoData } from '../core/type'
 import { toast } from 'react-toastify'
-import { handleError } from '@/modules/auth/core/utils'
-import { QUERY_KEYS } from '@/core/constants'
-const { GET_VIDEOS, UPLOAD_VIDEO } = QUERY_KEYS
+import { useGetAllBusiness } from '../hooks/useGetAllBusiness'
+import { useCreateVideo } from '../hooks/useCreateVideo'
+
 interface UploadVideoModalProps {
 	isOpen: boolean
 	handleClose: () => void
@@ -22,39 +19,29 @@ const UploadVideoModal: React.FC<UploadVideoModalProps> = ({
 	handleClose,
 }) => {
 	const [selectedBusiness, setSelectedBusiness] = useState(-1)
+	const { data, isSuccess } = useGetAllBusiness()
 
-	const { data, isSuccess } = useQuery('business/all', {
-		queryFn: BusinessApi.getAllBusiness,
-		onSuccess(data) {
+	useEffect(() => {
+		if (isSuccess && data) {
 			setSelectedBusiness(data.data[0].id)
+		}
+	}, [isSuccess, data])
+
+	const createVideo = useCreateVideo({
+		onSettled() {
+			handleClose()
 		},
 	})
-	const queryClient = useQueryClient()
-
-	const uploadVideo = useMutation(UPLOAD_VIDEO, {
-		mutationFn: VideosApi.createVideo,
-		async onSuccess(data) {
-			queryClient.invalidateQueries({
-				queryKey: [GET_VIDEOS],
-			})
-			toast.success<string>(data.message)
-		},
-		onError(error) {
-			const message = handleError(error)
-			toast.error<string>(message)
-		},
-	})
-
 	async function onSubmit(
 		values: UploadVideoData,
 		formikHelpers: FormikHelpers<UploadVideoData>,
 	) {
 		if (selectedBusiness === -1) {
 			toast.error<string>('select any business from the given list')
+			return
 		}
-		handleClose()
 		formikHelpers.setSubmitting(true)
-		await uploadVideo.mutateAsync({ ...values, businessId: selectedBusiness })
+		await createVideo.mutateAsync({ ...values, businessId: selectedBusiness })
 		formikHelpers.setSubmitting(false)
 	}
 

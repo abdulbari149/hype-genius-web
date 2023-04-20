@@ -1,6 +1,6 @@
 import { ContractApi } from '@/api/ContractApi'
 import { QUERY_KEYS } from '@/core/constants'
-import { useMutation, useQueryClient } from 'react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { useDispatch, useSelector } from 'react-redux'
 import { setContract, hideIsEdit } from '../core/slice'
 import { AppState } from '@/store'
@@ -13,7 +13,8 @@ export const useUpdateContract = () => {
 	)
 
 	const queryClient = useQueryClient()
-	const updateContract = useMutation(UPDATE_CONTRACT, {
+	const updateContract = useMutation({
+		mutationKey: [UPDATE_CONTRACT],
 		mutationFn: ContractApi.updateContract,
 		async onSuccess(data) {
 			dispatch(
@@ -31,11 +32,9 @@ export const useUpdateContract = () => {
 					},
 				}),
 			)
-			await queryClient.invalidateQueries(GET_INFLUENCERS)
-
-			await queryClient.invalidateQueries([GET_METRICS, businessChannelId])
+			queryClient.invalidateQueries([GET_INFLUENCERS])
+			queryClient.invalidateQueries([GET_METRICS, businessChannelId])
 			queryClient.invalidateQueries([GET_ALERTS, businessChannelId])
-
 			dispatch(hideIsEdit())
 		},
 	})
