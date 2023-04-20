@@ -12,6 +12,7 @@ const DashboardLayout: React.FC<PropsWithChildren> = ({ children }) => {
 		if (isError && error) {
 			router.replace('/auth/login')
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [isError, error])
 
 	if (isLoading || isError) {
