@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react'
+import React, { PropsWithChildren, useEffect } from 'react'
 import Sidebar from '../Sidebar'
 import { useUser } from '@/modules/auth/hooks/useUser'
 import { useRouter } from 'next/router'
@@ -6,15 +6,15 @@ import Loading from '../Loading'
 
 const DashboardLayout: React.FC<PropsWithChildren> = ({ children }) => {
 	const router = useRouter()
-	const { isLoading } = useUser({
-		onError(err) {
-			if (err instanceof Error) {
-				router.replace('/auth/login')
-			}
-		},
-	})
+	const { isLoading, isError, error } = useUser({})
 
-	if (isLoading) {
+	useEffect(() => {
+		if (isError && error) {
+			router.replace('/auth/login')
+		}
+	}, [isError, error])
+
+	if (isLoading || isError) {
 		return <Loading />
 	}
 
