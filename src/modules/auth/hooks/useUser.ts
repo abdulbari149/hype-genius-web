@@ -12,7 +12,9 @@ import { ACCESS_TOKEN } from '../core/utils'
 
 const { GET_ME } = QUERY_KEYS
 
-export const useUser = (options: UseQueryOptions<Me, AxiosError | Error>) => {
+export const useUser = (
+	options: UseQueryOptions<Me, AxiosError | Error, Me, string[]>,
+) => {
 	const dispatch = useDispatch()
 	const { onSuccess = undefined, onError = undefined, ...props } = options
 	// const loggedIn = useSelector((state: AppState) => state.auth.isLoggedIn)
