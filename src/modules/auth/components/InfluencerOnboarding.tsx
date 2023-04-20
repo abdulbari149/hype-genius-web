@@ -7,6 +7,7 @@ import { AiOutlineArrowRight } from 'react-icons/ai'
 import Image from 'next/image'
 import { useConfirmOnboarding } from '../hooks/useConfirmOnboarding'
 import { useGetOnboardingDetails } from '../hooks/useGetOnboardingDetails'
+import { Partnership } from '@/api/type'
 
 type Props = {
 	token: string
@@ -39,15 +40,17 @@ const InfluencerOnboarding: React.FC<Props> = ({ token }) => {
 						Would you like to join a second one?
 					</p>
 				</div>
-				{data?.data?.currentPartnerShips?.map((partnerShip) => (
-					<div
-						key={partnerShip.id}
-						className="flex bg-[#DFDFDF]/70 rounded-xl w-fit py-1  px-5 items-center mt-7 cursor-pointer"
-					>
-						<Image src={startuplogo} alt="" width={25} />
-						<p className="text-lg px-2">{partnerShip.name}</p>
-					</div>
-				)) ?? null}
+				{(data?.data?.currentPartnerShips &&
+					data?.data?.currentPartnerShips?.map((partnerShip: Partnership) => (
+						<div
+							key={partnerShip.id}
+							className="flex bg-[#DFDFDF]/70 rounded-xl w-fit py-1  px-5 items-center mt-7 cursor-pointer"
+						>
+							<Image src={startuplogo} alt="" width={25} />
+							<p className="text-lg px-2">{partnerShip.name}</p>
+						</div>
+					))) ??
+					null}
 				<div>
 					<input
 						className="w-[400px] bg-[#F2F6FA]  outline-none focus:outline-none placeholder:text-[10px] mt-2"
