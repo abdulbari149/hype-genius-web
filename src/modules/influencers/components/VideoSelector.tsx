@@ -11,13 +11,15 @@ interface Props extends React.SelectHTMLAttributes<HTMLSelectElement> {
 	value: string | number
 }
 
+const { GET_UPLOADS } = QUERY_KEYS
+
 const VideoSelector: React.FC<Props> = (props) => {
 	const [field, _helpers, meta] = useField(props)
 	const businessChannelId = useSelector(
 		(state: AppState) => state.influencers?.influencer?.id ?? NaN,
 	)
 	const { data } = useVideoUploads(
-		`${QUERY_KEYS.GET_VIDEOS}/${businessChannelId}`,
+		[GET_UPLOADS, businessChannelId],
 		{ is_payment_due: true, businessChannelId },
 		{
 			refetchOnMount: 'always',

@@ -42,7 +42,8 @@ const AddInfluencerModal: React.FC<Props> = (props) => {
 	const [tags, setTags] = useState<Tags>([])
 	const { data, handleChange, setData } = useContract()
 
-	const updateContract = useMutation(UPDATE_ONBOARDING, {
+	const updateContract = useMutation({
+		mutationKey: [UPDATE_ONBOARDING],
 		mutationFn: ChannelApi.updateOnboardingRequest,
 		onSuccess() {
 			handleClose()
