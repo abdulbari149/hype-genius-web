@@ -1,4 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+import { HYDRATE } from 'next-redux-wrapper'
 
 export interface ReportState {
 	report_for_all: boolean
@@ -66,6 +67,14 @@ const reportsSlice = createSlice({
 		) {
 			state.date_option = action.payload.date_option
 		},
+	},
+	extraReducers(builder) {
+		builder.addCase(HYDRATE, (state, action: any) => {
+			return {
+				...state,
+				...action.payload,
+			}
+		})
 	},
 })
 export const {

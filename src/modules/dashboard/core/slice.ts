@@ -1,5 +1,6 @@
 import { IVideo } from '@/api/type'
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
+import { HYDRATE } from 'next-redux-wrapper'
 
 interface DashboardSliceData {
 	videoId: number | null
@@ -42,6 +43,14 @@ const dashboardSlice = createSlice({
 				...action.payload,
 			}
 		},
+	},
+	extraReducers(builder) {
+		builder.addCase(HYDRATE, (state, action: any) => {
+			return {
+				...state,
+				...action.payload,
+			}
+		})
 	},
 })
 

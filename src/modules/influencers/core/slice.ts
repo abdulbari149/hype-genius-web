@@ -1,6 +1,7 @@
 import { GetInfluencerData, ITag } from '@/api/type'
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 import { PanelType } from './types'
+import { HYDRATE } from 'next-redux-wrapper'
 
 interface State {
 	influencer: null | GetInfluencerData
@@ -53,6 +54,14 @@ const influencersSlice = createSlice({
 				state.influencer.tags = action.payload.tags
 			}
 		},
+	},
+	extraReducers(builder) {
+		builder.addCase(HYDRATE, (state, action: any) => {
+			return {
+				...state,
+				...action.payload,
+			}
+		})
 	},
 })
 
