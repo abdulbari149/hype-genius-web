@@ -38,7 +38,12 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({
 		>
 			<div className="bg-[#EF539E] h-[100%] min-h-screen flex flex-col static col-span-2 py-[100px]">
 				<div className="grid flex-1 w-full place-content-center">
-					<Image src={'/next.svg'} alt="ext" width={500} height={500} />
+					<Image
+						src={'/auth-bg-img.svg'}
+						alt="auth background image"
+						width={700}
+						height={700}
+					/>
 				</div>
 
 				<div className="mt-auto mx-auto text-center text-[45px] font-semibold ">
