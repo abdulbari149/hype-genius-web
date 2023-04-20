@@ -5,6 +5,7 @@ import { Poppins } from 'next/font/google'
 import { useUser } from '@/modules/auth/hooks/useUser'
 import { useRouter } from 'next/router'
 import Loading from '../Loading'
+import { Me } from '@/api/type'
 
 const poppins = Poppins({
 	weight: '500',
@@ -22,7 +23,7 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({
 }) => {
 	const router = useRouter()
 	const { isLoading, isSuccess } = useUser({
-		onSuccess(data) {
+		onSuccess(data: Me) {
 			if (data.data.user.role === 'business_admin') {
 				router.replace('/dashboard/business')
 			} else if (data.data.user.role === 'influencer') {
