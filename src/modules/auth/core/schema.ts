@@ -35,4 +35,3 @@ export const channelSignupSchema = signupSchema
 		message: "Passwords don't match",
 		path: ['passwordAgain'],
 	})
-

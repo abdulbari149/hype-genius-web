@@ -2,7 +2,6 @@ import Head from 'next/head'
 import { NextPageWithLayout } from '../_app'
 import { SiteLayout } from '@/components/Layout'
 import { Formik } from 'formik'
-import { Input } from '@mui/material'
 
 const ContactUsPage: NextPageWithLayout = () => {
 	return (
@@ -28,7 +27,7 @@ const ContactUsPage: NextPageWithLayout = () => {
 								subject: '',
 								message: '',
 							}}
-							onSubmit={() => {}}
+							onSubmit={(values) => console.log(values)}
 						>
 							{(formik) => (
 								<div className="bg-[#FFFFFF80]/50 w-[500px]  py-12 flex justify-center shadow-xl mr-28 rounded-lg  ">
