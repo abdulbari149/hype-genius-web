@@ -13,10 +13,7 @@ export const signupSchema = z.object({
 	passwordAgain: z.string(),
 	firstName: z.string(),
 	lastName: z.string(),
-	phoneNumber: z.preprocess(
-		(a) => parseInt(z.string().parse(a), 10),
-		z.number().positive(),
-	),
+	phoneNumber: z.string(),
 })
 
 export const businessSignupSchema = signupSchema
