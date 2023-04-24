@@ -19,7 +19,7 @@ const Header: React.FC = () => {
 				<ul className="flex items-center gap-[4em]">
 					<li className="font-bold cursor-pointer">
 						<button
-							className="flex items-center gap-2 font-bold cursor-pointer"
+							className="flex items-center gap-2 font-bold cursor-pointer hover:text-gray-500"
 							onClick={() => router.push('/#HowItWorks')}
 						>
 							<p>How it works</p>
@@ -32,10 +32,10 @@ const Header: React.FC = () => {
 							/>
 						</button>
 					</li>
-					<li className="font-bold cursor-pointer ">
+					<li className="font-bold cursor-pointer hover:text-gray-500">
 						<Link href={'/'}>Contact us</Link>
 					</li>
-					<li className="font-bold cursor-pointer">
+					<li className="font-bold cursor-pointer hover:text-gray-500">
 						<Link href={'/auth/login'}>Sign in</Link>
 					</li>
 					<button
