@@ -12,7 +12,12 @@ const SidebarWrapper: React.FC<PropsWithChildren> = ({ children }) => {
 	return (
 		<div className="bg-white flex flex-col items-center w-full max-w-[250px] h-full rounded-xl pt-[50px] pb-2 shadow-xl">
 			<div className="mb-[60px]">
-				<Image src={HypeGeniusLogo} alt="hype-genius-logo" />
+				<Image
+					src={HypeGeniusLogo}
+					alt="hype-genius-logo"
+					width={200}
+					height={200}
+				/>
 			</div>
 
 			{children}

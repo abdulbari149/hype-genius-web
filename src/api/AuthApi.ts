@@ -16,7 +16,10 @@ export class AuthApi {
 	static registerBusiness = async (
 		data: RegisterBusinessData,
 	): Promise<RegisterBusiness> => {
-		const result = await api.post('/auth/business', data)
+		const result = await api.post('/auth/business', {
+			...data,
+			phoneNumber: '+' + data.phoneNumber,
+		})
 		return result.data
 	}
 
@@ -24,7 +27,10 @@ export class AuthApi {
 		data: RegisterChannelData,
 	): Promise<RegisterChannel> => {
 		const { token, ...body } = data
-		const result = await api.post(`/auth/channel/${token}`, body)
+		const result = await api.post(`/auth/channel/${token}`, {
+			...body,
+			phoneNumber: '+' + body.phoneNumber,
+		})
 		return result.data
 	}
 
