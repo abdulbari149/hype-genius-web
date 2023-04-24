@@ -65,7 +65,7 @@ const OnboardingLink: React.FC<{ url: string }> = ({ url }) => {
 				>
 					<button
 						onClick={handleTooltipOpen}
-						className="bg-[#EF539E] px-4 py-1 rounded-xl text-white text-[15px]"
+						className="bg-[#EF539E] hover:bg-pink-400 transition-all px-4 py-1 rounded-xl text-white text-[15px]"
 					>
 						Copy
 					</button>

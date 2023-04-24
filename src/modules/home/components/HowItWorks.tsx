@@ -69,12 +69,12 @@ const HowItWorks = () => {
 						</li>
 					</ul>
 					<div className="flex gap-[40px] mt-5">
-						<button className="border-pink-500 px-5 py-2 rounded-2xl border-solid border-[5px] text-[1.3rem] font-extrabold ">
+						<button className="border-pink-500 hover:bg-pink-400 hover:border-pink-400 hover:text-white transition-all px-5 py-2 rounded-2xl border-solid border-[5px] text-[1.3rem] font-extrabold ">
 							Preview Video
 						</button>
 						<button
 							onClick={() => router.push('/auth/signup/business')}
-							className="px-5 py-2 flex items-center gap-3 text-[1.3rem] font-bold text-white bg-pink-500 rounded-2xl"
+							className="px-5 py-2 flex items-center gap-3 text-[1.3rem] font-bold text-white bg-pink-500 hover:bg-pink-400 rounded-2xl"
 						>
 							Book Demo
 							<AiOutlineArrowRight />
@@ -118,7 +118,7 @@ const HowItWorks = () => {
 					</p>
 					<button
 						onClick={() => router.push('/auth/signup/business')}
-						className="px-5 py-3 flex items-center gap-3 self-center bg-pink-500 rounded-2xl  text-[1.3rem] font-bold text-white"
+						className="px-5 py-3 flex items-center gap-3 self-center bg-pink-500 hover:bg-pink-400 transition-all rounded-2xl  text-[1.3rem] font-bold text-white"
 					>
 						Book a Call
 						<AiOutlineArrowRight />

@@ -7,7 +7,7 @@ const UploadVideoBtn: React.FC<UploadVidoBtnProps> = (props) => {
 	return (
 		<button
 			{...props}
-			className="px-3 py-2 flex h-fit items-center text-[13px] w-fit text-white bg-[#EF539E] rounded-xl"
+			className="px-3 py-2 flex h-fit items-center text-[13px] w-fit text-white bg-[#EF539E] hover:bg-pink-400 transition-all rounded-xl"
 		>
 			<AiOutlinePlus size={15} />
 			New Upload

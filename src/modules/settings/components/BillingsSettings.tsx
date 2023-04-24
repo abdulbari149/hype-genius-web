@@ -19,7 +19,7 @@ const BillingsSettings = () => {
 			</p>
 			<button
 				onClick={() => router.push('/settings/subscription')}
-				className="bg-[#EF539E] rounded-xl text-white max-w-fit py-2 px-4"
+				className="bg-[#EF539E] hover:bg-pink-400 transition-all rounded-xl text-white max-w-fit py-2 px-4"
 			>
 				Manage Subscription
 			</button>

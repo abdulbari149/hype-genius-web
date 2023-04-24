@@ -189,7 +189,7 @@ const Payment = () => {
 								formik.handleSubmit()
 							}}
 							type="submit"
-							className="bg-[#EF539E] px-4 py-2 rounded-xl text-white"
+							className="bg-[#EF539E] hover:bg-pink-400  px-4 py-2 rounded-xl text-white"
 						>
 							Payment Confirmed
 						</button>

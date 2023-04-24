@@ -55,9 +55,9 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({
 				</div>
 			</div>
 			<div className="bg-[#F2F6FA] flex flex-col col-span-3 items-center gap-5 h-full justify-center overflow-y-scroll">
-				<div className="">
+				<button className="" onClick={() => router.replace('/')}>
 					<Image src={Logo} width={250} alt="logo" />
-				</div>
+				</button>
 				<p
 					className="text-center font-bold text-[35px] max-w-[560px] break-words"
 					style={{ wordBreak: 'break-word' }}

@@ -91,7 +91,7 @@ const ReportsHeader = () => {
 						}
 					}}
 				/>
-				<button className="text-white bg-[#EF539E] px-3 py-2 shadow-lg rounded-lg text-[13px] ml-3">
+				<button className="text-white bg-[#EF539E] hover:bg-pink-400 transition-all px-3 py-2 shadow-lg rounded-lg text-[13px] ml-3">
 					Export
 				</button>
 			</div>

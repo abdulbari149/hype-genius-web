@@ -121,7 +121,7 @@ const UploadVideoModal: React.FC<UploadVideoModalProps> = ({
 								<button
 									type="submit"
 									onClick={() => formik.handleSubmit()}
-									className="absolute right-[50%] bottom-[20px] px-5 py-2 bg-[#EF539E] text-white rounded-xl"
+									className="absolute right-[50%] bottom-[20px] px-5 py-2 bg-[#EF539E] hover:bg-pink-400 transition-all text-white rounded-xl"
 								>
 									Done
 								</button>

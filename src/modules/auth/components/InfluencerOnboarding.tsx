@@ -70,7 +70,7 @@ const InfluencerOnboarding: React.FC<Props> = ({ token }) => {
 				<button
 					disabled={!data}
 					onClick={() => handleJoin()}
-					className="bg-[#EF539E] flex items-center px-4 py-2 text-[#F2F6FA] font-semibold rounded-xl mt-12"
+					className="bg-[#EF539E] hover:bg-pink-400  flex items-center px-4 py-2 text-[#F2F6FA] font-semibold rounded-xl mt-12"
 				>
 					<p>Yes, Join!</p>
 					<AiOutlineArrowRight color="white" />

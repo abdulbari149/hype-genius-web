@@ -8,7 +8,7 @@ const InfluencersHeader: React.FC<{ openAdd: () => void }> = ({ openAdd }) => {
 		<div className="flex flex-row justify-between w-full px-5 my-5">
 			<button
 				onClick={openAdd}
-				className="px-3 py-2 flex h-fit gap-2 items-center text-[13px] w-fit text-white bg-[#EF539E] rounded-xl"
+				className="px-3 py-2 flex h-fit gap-2 items-center text-[13px] w-fit text-white bg-[#EF539E] hover:bg-pink-400 transition-all rounded-xl"
 			>
 				<AiOutlinePlus size={15} />
 				Add Influencer

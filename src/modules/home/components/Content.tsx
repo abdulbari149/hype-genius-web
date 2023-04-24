@@ -28,7 +28,7 @@ const Content = () => {
 				</p>
 				<button
 					onClick={() => router.push('/auth/signup/business')}
-					className="flex items-center gap-3 px-[30px] py-4 text-lg font-bold text-white bg-pink-500 rounded-2xl "
+					className="flex items-center gap-3 px-[30px] py-4 hover:bg-pink-400 text-lg font-bold text-white bg-pink-500 rounded-2xl "
 				>
 					Book A Call
 					<AiOutlineArrowRight size={25} />

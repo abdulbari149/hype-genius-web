@@ -17,15 +17,20 @@ const Header: React.FC = () => {
 			</div>
 			<nav className="">
 				<ul className="flex items-center gap-[4em]">
-					<li className="flex items-center gap-2 font-bold cursor-pointer">
-						<Link href={'#HowItWorks'}>How it works</Link>
-						<Image
-							src={require('@/assets/home/dpdown.webp')}
-							width={15}
-							height={10}
-							className=""
-							alt="dpdown"
-						/>
+					<li className="font-bold cursor-pointer">
+						<button
+							className="flex items-center gap-2 font-bold cursor-pointer"
+							onClick={() => router.push('/#HowItWorks')}
+						>
+							<p>How it works</p>
+							<Image
+								src={require('@/assets/home/dpdown.webp')}
+								width={15}
+								height={10}
+								className=""
+								alt="dpdown"
+							/>
+						</button>
 					</li>
 					<li className="font-bold cursor-pointer ">
 						<Link href={'/'}>Contact us</Link>

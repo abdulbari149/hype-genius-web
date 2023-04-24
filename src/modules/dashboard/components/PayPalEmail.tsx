@@ -27,7 +27,7 @@ const PayPalEmail = () => {
 						/>
 						<button
 							onClick={() => setEditPaypalEmail(false)}
-							className="px-3 py-2 text-[13px] text-white rounded-xl bg-[#EF539E]"
+							className="px-3 py-2 text-[13px] text-white rounded-xl bg-[#EF539E] hover:bg-pink-400 transition-all"
 						>
 							Submit
 						</button>

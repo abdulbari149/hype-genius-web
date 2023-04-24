@@ -21,7 +21,7 @@ const SubscriptionBilling: React.FC = () => {
 				</p>
 				<p>Next payment on August 29th 2023</p>
 			</div>
-			<button className="bg-[#EF539E] max-w-fit px-4 py-3 rounded-xl mt-[20px] text-white relative">
+			<button className="bg-[#EF539E] hover:bg-pink-400 transition-all max-w-fit px-4 py-3 rounded-xl mt-[20px] text-white relative">
 				Upgrade to Yearly
 				<span className="bg-[#D7D7D7] text-[10px]  text-[#272830] absolute top-0 right-0 translate-x-[30%] -translate-y-[50%] block w-fit px-2 py-1 rounded-lg font-normal">
 					Save 30%

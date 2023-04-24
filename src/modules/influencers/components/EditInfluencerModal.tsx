@@ -286,7 +286,7 @@ const EditInfluencerModal: React.FC<EditInfluencerModalProps> = ({
 
 				<button
 					onClick={onSave}
-					className="bg-[#EF539E] px-4 py-2 w-fit mx-auto rounded-xl text-white"
+					className="bg-[#EF539E] hover:bg-pink-400 transition-all px-4 py-2 w-fit mx-auto rounded-xl text-white"
 				>
 					Save
 				</button>

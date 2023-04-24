@@ -64,7 +64,7 @@ const InfluencersDetail: React.FC = () => {
 				></span>
 				<button
 					onClick={openIsEdit}
-					className="px-3 py-2 text-white bg-[#EF539E] absolute bottom-8 rounded-xl"
+					className="px-3 py-2 text-white bg-[#EF539E] hover:bg-pink-400 transition-all absolute bottom-8 rounded-xl"
 				>
 					Edit Info
 				</button>

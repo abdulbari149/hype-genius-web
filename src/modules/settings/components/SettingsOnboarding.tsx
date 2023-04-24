@@ -54,7 +54,7 @@ const SettingsOnboarding: React.FC = () => {
 					>
 						<button
 							onClick={handleTooltipOpen}
-							className="bg-[#EF539E] w-[60px] h-[31px] rounded-xl px-2 text-white ml-4 "
+							className="bg-[#EF539E] hover:bg-pink-400 transition-all w-[60px] h-[31px] rounded-xl px-2 text-white ml-4 "
 						>
 							Copy
 						</button>
