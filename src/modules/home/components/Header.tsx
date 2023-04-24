@@ -33,7 +33,7 @@ const Header: React.FC = () => {
 						</button>
 					</li>
 					<li className="font-bold cursor-pointer hover:text-gray-500">
-						<Link href={'/'}>Contact us</Link>
+						<Link href={'/contactus'}>Contact us</Link>
 					</li>
 					<li className="font-bold cursor-pointer hover:text-gray-500">
 						<Link href={'/auth/login'}>Sign in</Link>

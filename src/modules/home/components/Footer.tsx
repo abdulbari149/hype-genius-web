@@ -4,7 +4,7 @@ import Logo from '@/assets/home/My project.png'
 
 function Footer() {
 	return (
-		<section className="bg-[#F2F6FA] grid place-content-center grid-cols-[minmax(300px,70vw)] grid-rows-[1fr] w-full h-[25rem]">
+		<section className="bg-[#F2F6FA] grid mt-auto place-content-center grid-cols-[minmax(300px,70vw)] grid-rows-[1fr] w-full h-[25rem]">
 			<div className="flex flex-col w-full h-full pb-[30px]">
 				<div className="flex gap-[10rem] my-auto">
 					<div className="flex flex-col gap-4">
