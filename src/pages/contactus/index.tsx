@@ -1,6 +1,8 @@
 import Head from 'next/head'
 import { NextPageWithLayout } from '../_app'
 import { SiteLayout } from '@/components/Layout'
+import { Formik } from 'formik'
+import { Input } from '@mui/material'
 
 const ContactUsPage: NextPageWithLayout = () => {
 	return (
@@ -12,7 +14,109 @@ const ContactUsPage: NextPageWithLayout = () => {
 				<link rel="icon" href="/hype-genius-logo.png" />
 			</Head>
 			<SiteLayout>
-				<main></main>
+				<main className=" bg-[#F2F6FA]  pt-8 h-[800px]">
+					<div className="flex w-screen justify-center flex-col items-center py-6">
+						<p className="text-3xl font-medium">Contact Us</p>
+						<p className="text-md ">Do you have any questions or concerns?</p>
+						<p className="text-md "> Don’t hesitate to contact us!</p>
+					</div>
+					<div className="flex justify-center w-screen mt-10  ">
+						<Formik
+							initialValues={{
+								name: '',
+								email: '',
+								subject: '',
+								message: '',
+							}}
+							onSubmit={() => {}}
+						>
+							{(formik) => (
+								<div className="bg-[#FFFFFF80]/50 w-[500px]  py-12 flex justify-center shadow-xl mr-28 rounded-lg  ">
+									<form className="flex flex-col">
+										<div className="flex gap-4">
+											<div className="flex flex-col items-start">
+												<label
+													htmlFor="Name"
+													className="text-left mb-2 font-medium pt-2"
+												>
+													Your Name
+												</label>
+												<input
+													type="text"
+													name="name"
+													className=" border rounded-lg py-1 px-1 shadow-sm focus:outline-none"
+													value={formik.values.name}
+													onChange={formik.handleChange}
+												/>
+											</div>
+											<div className="flex flex-col items-start">
+												<label
+													htmlFor="Email"
+													className=" text-left font-medium mb-2 pt-2"
+												>
+													Your Email
+												</label>
+												<input
+													type="text"
+													name="email"
+													className=" border rounded-lg py-1 px-1 shadow-sm focus:outline-none"
+													value={formik.values.email}
+													onChange={formik.handleChange}
+												/>
+											</div>
+										</div>
+										<div className="flex flex-col items-start">
+											<label
+												htmlFor="Email"
+												className=" text-left font-medium mb-2 pt-2"
+											>
+												Subject
+											</label>
+											<input
+												type="text"
+												name="subject"
+												className=" border rounded-lg py-1 shadow-sm w-full  focus:outline-none"
+												value={formik.values.subject}
+												onChange={formik.handleChange}
+											/>
+										</div>
+										<div className="flex flex-col items-start">
+											<label
+												htmlFor="message"
+												className="text-left font-medium mb-2 pt-2"
+											>
+												Message
+											</label>
+											<textarea
+												name="message"
+												rows={5}
+												className="border rounded-lg py-1 shadow-sm w-full focus:outline-none resize-none"
+												value={formik.values.message}
+												onChange={formik.handleChange}
+											/>
+										</div>
+									</form>
+								</div>
+							)}
+						</Formik>
+						<div className="flex flex-col mt-20  w-[17%] mr-28  ">
+							<p className="text-3xl font-medium py-2">How can we help?</p>
+							<p className=" font-medium">
+								Simply provide your name, email as well as a brief descripton of
+								what the issue may be.
+							</p>
+							<p className="text-3xl font-medium pt-6 py-2">
+								Contact us directly{' '}
+							</p>
+							<p className=" font-medium">
+								If you wish to contact us directly, do so at{' '}
+								<span className="text-[#EF539E] cursor-pointer">
+									hello@hypegenius.co
+								</span>
+							</p>
+						</div>
+					</div>
+				</main>
 			</SiteLayout>
 		</>
 	)
