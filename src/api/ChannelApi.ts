@@ -5,6 +5,7 @@ import {
 	UpdateOnboardingRequestData,
 	UpdateOnboardingRequest,
 	GetChannelAnalytics,
+	GetChannelAnalyticsQuery,
 } from './type'
 
 export class ChannelApi {
@@ -30,9 +31,23 @@ export class ChannelApi {
 		return result.data
 	}
 
-	static async getChannelAnalytics(): Promise<GetChannelAnalytics> {
+	static async getChannelAnalytics(
+		query: GetChannelAnalyticsQuery,
+	): Promise<GetChannelAnalytics> {
 		const token = getAccessToken()
-		const result = await api.get('/channels/analytics', {
+		let url = '/channels/analytics'
+		console.log(token)
+		const params = []
+		if (query.start_date) {
+			params.push(`start_date=${query.start_date}`)
+		}
+		if (query?.end_date) {
+			params.push(`end_date=${query.end_date}`)
+		}
+		if (params.length > 0) {
+			url += '?' + params.join('&')
+		}
+		const result = await api.get(url, {
 			headers: { Authorization: `Bearer ${token}` },
 		})
 		return result.data

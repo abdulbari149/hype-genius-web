@@ -26,7 +26,9 @@ const SidebarWrapper: React.FC<PropsWithChildren> = ({ children }) => {
 				<button
 					onClick={() => router.replace('/settings')}
 					className={`flex items-start  px-4 py-3 rounded-xl ${
-						router.route.startsWith('/settings') ? 'bg-[#EEF2F7]' : ''
+						router.route.startsWith('/settings')
+							? 'bg-[#EEF2F7]'
+							: 'hover:bg-[#f0ebeb]'
 					}`}
 				>
 					<Image
@@ -35,12 +37,12 @@ const SidebarWrapper: React.FC<PropsWithChildren> = ({ children }) => {
 					/>
 					<p className="text-[17px] text-[#1E2875] pl-3">Settings</p>
 				</button>
-				<button className="w-[25px] h-[25px]">
+				{/* <button className="w-[25px] h-[25px]">
 					<Image
 						src={require('@/assets/icons/night-mode-icon.png')}
 						alt="night mode"
 					/>
-				</button>
+				</button> */}
 			</div>
 		</div>
 	)

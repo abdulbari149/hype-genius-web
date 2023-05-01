@@ -55,7 +55,7 @@ const AuthLayout: React.FC<AuthLayoutProps> = ({
 				</div>
 			</div>
 			<div className="bg-[#F2F6FA] flex flex-col col-span-3 items-center gap-5 h-full justify-center overflow-y-scroll">
-				<button className="" onClick={() => router.replace('/')}>
+				<button className="mt-3" onClick={() => router.replace('/')}>
 					<Image src={Logo} width={250} alt="logo" />
 				</button>
 				<p

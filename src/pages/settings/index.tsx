@@ -6,6 +6,7 @@ import {
 	SettingsOnboarding,
 	CustomerSettings,
 	BillingsSettings,
+	Logout,
 } from '@/modules/settings'
 import AccountSettings from '@/modules/settings/components/AccountSettings'
 import Loading from '@/components/Loading'
@@ -31,6 +32,7 @@ const SettingsPage: NextPage = () => {
 							)}
 							<AccountSettings />
 							<BillingsSettings />
+							<Logout />
 						</div>
 						{user?.data.user.role === 'business_admin' && (
 							<div>

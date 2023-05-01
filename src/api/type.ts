@@ -224,6 +224,11 @@ export type GetMetricsQuery = {
 	end_date?: string | undefined
 }
 
+export type GetChannelAnalyticsQuery = Pick<
+	GetMetricsQuery,
+	'start_date' | 'end_date'
+>
+
 export type CreateFollowUpData = {
 	business_channel_id: number
 	send_to: 'email' | 'phone'

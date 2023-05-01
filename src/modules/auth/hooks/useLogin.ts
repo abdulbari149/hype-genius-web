@@ -17,7 +17,6 @@ export const useLogin = () => {
 		mutationFn: AuthApi.login,
 		onSuccess(data) {
 			try {
-				debugger
 				localStorage.setItem(ACCESS_TOKEN, data.data.access_token)
 				localStorage.setItem(REFRESH_TOKEN, data.data.refresh_token)
 				dispatch(setUser({ user: data.data.user }))

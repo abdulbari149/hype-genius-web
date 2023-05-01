@@ -19,11 +19,14 @@ export const columns: ReadonlyArray<Column<IVideo>> = [
 	{
 		id: 'title',
 		Header: <Header title="Video Title" />,
-		Cell: (props: CellProps<IVideo>) => (
-			<p className="pl-3 text-[17px] max-w-[300px] w-fit text-[#272830] opacity-75 font-normal">
-				{props.data[props.row.index].title}
-			</p>
-		),
+		Cell: (props: CellProps<IVideo>) => {
+			const title = props.data[props.row.index].title
+			return (
+				<p className="pl-3 text-[17px] max-w-[300px] w-fit text-[#272830] opacity-75 font-normal">
+					{title.length > 30 ? title.slice(0, 30).trim() + '...' : title}
+				</p>
+			)
+		},
 	},
 	{
 		id: 'view',

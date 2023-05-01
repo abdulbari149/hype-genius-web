@@ -23,6 +23,11 @@ const DashboardDatePicker: React.FC = () => {
 				onChange={(value) => {
 					updateState({ start_date: value })
 				}}
+				className={{
+					container(prev) {
+						return `${prev} hover:bg-[#fafafa]`
+					},
+				}}
 			/>
 			<p className="text-[13px] font-light">Compare to</p>
 			<DateSelector
@@ -30,6 +35,16 @@ const DashboardDatePicker: React.FC = () => {
 				value={dateFilters.end_date}
 				onChange={(value) => {
 					updateState({ end_date: value })
+				}}
+				style={{
+					calendarContainer: {
+						right: '0px',
+					},
+				}}
+				className={{
+					container(prev) {
+						return `${prev} hover:bg-[#fafafa]`
+					},
 				}}
 			/>
 		</div>

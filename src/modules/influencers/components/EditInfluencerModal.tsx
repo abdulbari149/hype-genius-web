@@ -159,7 +159,6 @@ const EditInfluencerModal: React.FC<EditInfluencerModalProps> = ({
 		await updateTags.mutateAsync(data)
 	}
 	async function onSave() {
-		debugger
 		if (!business_channel_id) return
 		await Promise.all([
 			saveContract(business_channel_id),

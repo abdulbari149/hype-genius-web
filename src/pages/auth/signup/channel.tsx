@@ -1,16 +1,19 @@
 import { AuthLayout } from '@/components/Layout'
+import { Response, api } from '@/core/axios'
 import { ChannelSignup } from '@/modules/auth'
 import type { GetServerSideProps, NextPage } from 'next'
 import Head from 'next/head'
 
-const title = (
+const title = (name: string) => (
 	<>
-		Join <span className="text-[#EF539E]">TraderEdge&apos;s</span> Partner
-		Program!
+		Join <span className="text-[#EF539E]">{name}&apos;s</span> Partner Program!
 	</>
 )
 
-const SignupChannel: NextPage<{ token: string }> = ({ token }) => {
+const SignupChannel: NextPage<{ token: string; business: string }> = ({
+	token,
+	business,
+}) => {
 	return (
 		<>
 			<Head>
@@ -19,7 +22,10 @@ const SignupChannel: NextPage<{ token: string }> = ({ token }) => {
 				<meta name="viewport" content="width=device-width, initial-scale=1" />
 				<link rel="icon" href={'/hype-genius-logo.png'} />
 			</Head>
-			<AuthLayout title={title} subTitle={`Fill out the information below :)`}>
+			<AuthLayout
+				title={title(business)}
+				subTitle={`Fill out the information below :)`}
+			>
 				<ChannelSignup token={token} />
 			</AuthLayout>
 		</>
@@ -32,8 +38,21 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
 		return {
 			redirect: { destination: '/', permanent: true },
 		}
-	return {
-		props: { token },
+	try {
+		const result = await api.get<Response<{ name: string }>>(
+			`/auth/channel/${token}/verify`,
+		)
+		const data = result.data
+		if (result.status !== 200) {
+			throw new Error('Invalid Token')
+		}
+		return {
+			props: { token, business: data.data.name },
+		}
+	} catch (error) {
+		return {
+			redirect: { destination: '/', permanent: true },
+		}
 	}
 }
 

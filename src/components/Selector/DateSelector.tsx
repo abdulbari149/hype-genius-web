@@ -49,6 +49,7 @@ interface Props
 	style?: {
 		container?: React.CSSProperties
 		option?: React.CSSProperties
+		calendarContainer?: React.CSSProperties
 	}
 }
 
@@ -207,6 +208,7 @@ const DateSelector: React.FC<Props> = ({
 					style={{
 						boxShadow:
 							'0px 1.46939px 37.8367px rgba(50, 50, 71, 0.01), 0px 1.46939px 21.6735px rgba(50, 50, 71, 0.06)',
+						...(style?.calendarContainer ?? {}),
 					}}
 				>
 					<DateCalendar

@@ -11,7 +11,6 @@ const montserrat = Montserrat({
 
 const ChannelAnalyticsList = () => {
 	const { data: analytics } = useGetChannelAnalytics()
-	console.log({ analytics })
 	return (
 		<div className="flex flex-col">
 			<div className="flex flex-row flex-wrap h-max mb-[20px] flex-shrink gap-y-2 gap-x-3">

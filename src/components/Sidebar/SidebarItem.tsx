@@ -15,7 +15,9 @@ const SidebarItem: React.FC<SidebarItemProps> = ({ href, text, icon }) => {
 		<button
 			onClick={() => router.replace(href)}
 			className={`flex items-start w-[190px] px-6 py-4 mb-3 ${
-				router.route.startsWith(href) ? 'bg-[#EEF2F7] rounded-lg shadow-xs' : ''
+				router.route.startsWith(href)
+					? 'bg-[#EEF2F7] rounded-lg shadow-xs'
+					: 'hover:bg-[#f8f8f8] hover:rounded-lg'
 			}`}
 		>
 			<Image src={icon} alt={text.toLowerCase()} />

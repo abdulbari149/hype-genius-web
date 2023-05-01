@@ -3,6 +3,7 @@ import {
 	QueryClient,
 	QueryClientProvider,
 	useQueryErrorResetBoundary,
+	Hydrate,
 } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { ReactElement, ReactNode, useState } from 'react'
@@ -59,23 +60,25 @@ function App({
 
 	return (
 		<QueryClientProvider client={queryClient}>
-			<CacheProvider value={emotionCache}>
-				<LocalizationProvider dateAdapter={AdapterMoment}>
-					<ThemeProvider theme={theme}>
-						<Provider store={store}>
-							<ErrorBoundary
-								fallbackRender={ErrorFallback}
-								onReset={() => reset()}
-							>
-								{getLayout(<Component {...pageProps} />)}
-								<ReactQueryDevtools initialIsOpen={false} />
-								<ToastContainer autoClose={2000} />
-								<CssBaseline />
-							</ErrorBoundary>
-						</Provider>
-					</ThemeProvider>
-				</LocalizationProvider>
-			</CacheProvider>
+			<Hydrate state={pageProps.dehydratedState}>
+				<CacheProvider value={emotionCache}>
+					<LocalizationProvider dateAdapter={AdapterMoment}>
+						<ThemeProvider theme={theme}>
+							<Provider store={store}>
+								<ErrorBoundary
+									fallbackRender={ErrorFallback}
+									onReset={() => reset()}
+								>
+									{getLayout(<Component {...pageProps} />)}
+									<ReactQueryDevtools initialIsOpen={false} />
+									<ToastContainer autoClose={2000} />
+									<CssBaseline />
+								</ErrorBoundary>
+							</Provider>
+						</ThemeProvider>
+					</LocalizationProvider>
+				</CacheProvider>
+			</Hydrate>
 		</QueryClientProvider>
 	)
 }
