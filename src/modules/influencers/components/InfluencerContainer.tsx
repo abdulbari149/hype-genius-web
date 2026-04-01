@@ -1,0 +1,61 @@
+import React, { Suspense, useState } from 'react'
+import InfluencersHeader from './InfluencerHeader'
+import AddInfluencerModal from './AddInfluencer/Modal'
+import InfluencerTable from './InfluencerTable'
+import Loading from '@/components/Loading'
+import { useSelector } from 'react-redux'
+import { AppState } from '@/store'
+
+const InfluencerContainer: React.FC = () => {
+	const [isAddOpen, setIsAddOpen] = useState(false)
+	const isInfluencerSelected = useSelector<AppState, boolean>(
+		(state) => state.influencers.influencer !== null,
+	)
+	// const [currentPage, setCurrentPage] = useState(1);
+
+	function closeAdd() {
+		setIsAddOpen(false)
+	}
+
+	function openAdd() {
+		setIsAddOpen(true)
+	}
+
+	return (
+		<div
+			className={`h-screen w-full flex flex-col overflow-hidden ${
+				isInfluencerSelected ? `col-span-5` : `col-span-full`
+			}`}
+		>
+			<InfluencersHeader openAdd={openAdd} />
+			<div className="w-full overflow-y-scroll custom-scroll px-[10px]">
+				<Suspense fallback={<Loading />}>
+					<InfluencerTable />
+				</Suspense>
+			</div>
+			{/* <div className="flex items-center gap-4 min-h-[50px] mb-[15px] mr-[10px] ml-auto">
+				<p>Pages</p>
+
+				{Array(3)
+					.fill(0)
+					.map((p, i) => i + 1)
+					.map((page, index) => {
+						return (
+							<div
+								onClick={() => setCurrentPage(page)}
+								className={`px-2 py-[2px] rounded-lg cursor-pointer text-center ${
+									currentPage === page ? "bg-[#D9D9D9]" : ""
+								}`}
+								key={page}
+							>
+								{page}
+							</div>
+						);
+					})}
+			</div> */}
+			<AddInfluencerModal isOpen={isAddOpen} handleClose={closeAdd} />
+		</div>
+	)
+}
+
+export default InfluencerContainer
