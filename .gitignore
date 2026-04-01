@@ -25,7 +25,10 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# local env files
+# env files (never commit secrets; copy from .env.example locally)
+.env
+.env.development
+.env.production
 .env*.local
 
 # vercel
